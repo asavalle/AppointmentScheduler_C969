@@ -33,5 +33,7 @@ namespace AppointmentScheduler_C969.Views
             login login = new login();
             login.Show();
         }
+
+        
     }
 }
