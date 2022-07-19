@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AppointmentScheduler_C969
+namespace AppointmentScheduler_C969.Views
 {
-    public partial class Form1 : Form
+    public partial class AddCustomer : Form
     {
-        public Form1()
+        public AddCustomer()
         {
             InitializeComponent();
         }
-
     }
 }
