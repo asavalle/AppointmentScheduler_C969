@@ -15,11 +15,7 @@ namespace AppointmentScheduler_C969.Views
             InitializeComponent();
         }
 
-        private void btn_AddApt_Click(object sender, EventArgs e)
-        {
-            AddAppointment newApt = new AddAppointment();
-            newApt.Show();
-        }
+        
 
         private void btn_AddCustomer_Click(object sender, EventArgs e)
         {
@@ -34,6 +30,10 @@ namespace AppointmentScheduler_C969.Views
             login.Show();
         }
 
-        
+        private void btn_AddApt_Click(object sender, EventArgs e)
+        {
+            AddAppointment newAppointment = new AddAppointment();
+            newAppointment.Show();
+        }
     }
 }
