@@ -18,8 +18,24 @@ namespace AppointmentScheduler_C969
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Dashboard()); //change back to login() when designing is complete
+            login login = new login();
 
+            //Creates new dashboard after successful login and allows for a loop of logins after logout of dashboard
+            // until the Cancel button is clicked on login screen.
+            while(!login.cancelClicked)
+            {
+                if (login.ShowDialog() == DialogResult.OK)
+                {
+                    Dashboard dash = new Dashboard();
+                    Application.Run(dash);
+                }               
+            }
+            Application.Exit();
+            
+           
+            
+            
+            
         }
     }
 }

@@ -13,6 +13,8 @@ namespace AppointmentScheduler_C969.Views
         public Dashboard()
         {
             InitializeComponent();
+            lb_user.Text = DataAccess.loggedInUser + " is logged in.";
+
         }
 
         
@@ -24,10 +26,8 @@ namespace AppointmentScheduler_C969.Views
         }
 
         private void btn_Logout_Click(object sender, EventArgs e)
-        {
+        {        
             this.Close();
-            login login = new login();
-            login.Show();
         }
 
         private void btn_AddApt_Click(object sender, EventArgs e)

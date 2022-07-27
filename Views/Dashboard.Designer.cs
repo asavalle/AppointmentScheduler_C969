@@ -261,7 +261,7 @@ namespace AppointmentScheduler_C969.Views
             // lb_user
             // 
             this.lb_user.AutoSize = true;
-            this.lb_user.Location = new System.Drawing.Point(1235, 49);
+            this.lb_user.Location = new System.Drawing.Point(1223, 49);
             this.lb_user.Name = "lb_user";
             this.lb_user.Size = new System.Drawing.Size(82, 15);
             this.lb_user.TabIndex = 3;
@@ -278,6 +278,7 @@ namespace AppointmentScheduler_C969.Views
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dashTabControl);
             this.Name = "Dashboard";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Appointment Scheduler Dashboard";
             this.dashTabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -316,7 +317,6 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Button btn_showByMonth;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lb_aptID;
-        private System.Windows.Forms.Label lb_user;
         private System.Windows.Forms.ComboBox cb_customer;
         private System.Windows.Forms.Label lb_aptTitle;
         private System.Windows.Forms.Label lb_aptDesc;
@@ -334,5 +334,6 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label lb_aptURL;
         private System.Windows.Forms.TextBox textBox3;
+        public System.Windows.Forms.Label lb_user;
     }
 }
