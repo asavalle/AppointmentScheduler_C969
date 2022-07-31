@@ -1,7 +1,9 @@
 using AppointmentScheduler_C969.Views;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,9 +17,17 @@ namespace AppointmentScheduler_C969
         [STAThread]
         static void Main()
         {
+            //Localization code - sets the current thread cultural info to the CurrentCulture of the system.
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.CurrentCulture;
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CurrentCulture;
+
+
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            
+
             login login = new login();
 
             //Creates new dashboard after successful login and allows for a loop of logins after logout of dashboard

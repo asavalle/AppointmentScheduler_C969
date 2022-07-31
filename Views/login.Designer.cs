@@ -47,7 +47,6 @@ namespace AppointmentScheduler_C969
             resources.ApplyResources(this.lb_userName, "lb_userName");
             this.lb_userName.ForeColor = System.Drawing.Color.AliceBlue;
             this.lb_userName.Name = "lb_userName";
-            this.lb_userName.Click += new System.EventHandler(this.lb_userName_Click);
             // 
             // lb_password
             // 

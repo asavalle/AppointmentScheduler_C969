@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
+using System.Threading;
 
 namespace AppointmentScheduler_C969
 {
@@ -40,9 +42,6 @@ namespace AppointmentScheduler_C969
             this.Close();
         }
 
-        private void lb_userName_Click(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }
