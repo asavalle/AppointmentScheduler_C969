@@ -4,8 +4,7 @@ using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using AppointmentScheduler_C969.Views;
-
-
+using System.Globalization;
 
 namespace AppointmentScheduler_C969
 {
@@ -24,7 +23,7 @@ namespace AppointmentScheduler_C969
                 try
                 {
                     //Check that the Username and Password fields are not empty
-                    if (userName != null && password != null)
+                    if (userName != "" && password != "")
                     {
                         cnn.Open();
                         using var uname_cmd = new MySqlCommand("select userName from client_schedule.user;", cnn);
@@ -40,13 +39,32 @@ namespace AppointmentScheduler_C969
                         }
                         else
                         {
-                            MessageBox.Show("Username or Password does not match.");
+                            if(CultureInfo.CurrentCulture.Name == "en-US")
+                            {
+                                MessageBox.Show("Username or Password does not match.");
+                                
+                            }
+                            else if(CultureInfo.CurrentCulture.Name == "es-ES")
+                            {
+                                MessageBox.Show("El nombre de usuario o la contraseña no coinciden.");
+
+                            }
                             loginSuccessful = false;
+
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Connection Failed.");
+                        if (CultureInfo.CurrentCulture.Name == "en-US")
+                        {
+                            MessageBox.Show("Username or Password cannot be empty. Connection Failed.");
+
+                        }
+                        else if (CultureInfo.CurrentCulture.Name == "es-ES")
+                        {
+                            MessageBox.Show("El nombre de usuario o la contraseña no pueden estar vacíos. La conexión falló.");
+
+                        }
                     }
 
                     cnn.Close();
