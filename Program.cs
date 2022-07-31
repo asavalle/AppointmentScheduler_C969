@@ -22,13 +22,18 @@ namespace AppointmentScheduler_C969
 
             //Creates new dashboard after successful login and allows for a loop of logins after logout of dashboard
             // until the Cancel button is clicked on login screen.
-            while(!login.cancelClicked)
+            while(!login.cancelClicked && !login.IsDisposed)
             {
                 if (login.ShowDialog() == DialogResult.OK)
                 {
                     Dashboard dash = new Dashboard();
                     Application.Run(dash);
-                }               
+                }
+                else
+                {
+                    login.Close();
+                    Application.Exit();
+                }
             }
             Application.Exit();
             
