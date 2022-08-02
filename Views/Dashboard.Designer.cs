@@ -30,35 +30,51 @@ namespace AppointmentScheduler_C969.Views
         private void InitializeComponent()
         {
             this.dashTabControl = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tab_Appointments = new System.Windows.Forms.TabPage();
             this.btn_AddApt = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btn_showAll = new System.Windows.Forms.Button();
             this.btn_showByWeek = new System.Windows.Forms.Button();
             this.btn_showByMonth = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgv_Appointments = new System.Windows.Forms.DataGridView();
             this.btn_DelApt = new System.Windows.Forms.Button();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tab_Customers = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgv_Customers = new System.Windows.Forms.DataGridView();
             this.btn_DelCustomer = new System.Windows.Forms.Button();
             this.btn_AddCustomer = new System.Windows.Forms.Button();
+            this.tab_Tools = new System.Windows.Forms.TabPage();
+            this.gb_Reports = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btn_loginLogs = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btn_aptTypesMonth = new System.Windows.Forms.Button();
+            this.btn_sheduleByUser = new System.Windows.Forms.Button();
+            this.btn_AddUser = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Logout = new System.Windows.Forms.Button();
             this.lb_user = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.dashTabControl.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tab_Appointments.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Appointments)).BeginInit();
+            this.tab_Customers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Customers)).BeginInit();
+            this.tab_Tools.SuspendLayout();
+            this.gb_Reports.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dashTabControl
             // 
-            this.dashTabControl.Controls.Add(this.tabPage1);
-            this.dashTabControl.Controls.Add(this.tabPage3);
+            this.dashTabControl.Controls.Add(this.tab_Appointments);
+            this.dashTabControl.Controls.Add(this.tab_Customers);
+            this.dashTabControl.Controls.Add(this.tab_Tools);
             this.dashTabControl.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.dashTabControl.Location = new System.Drawing.Point(2, 67);
             this.dashTabControl.Name = "dashTabControl";
@@ -66,20 +82,20 @@ namespace AppointmentScheduler_C969.Views
             this.dashTabControl.Size = new System.Drawing.Size(1318, 748);
             this.dashTabControl.TabIndex = 0;
             // 
-            // tabPage1
+            // tab_Appointments
             // 
-            this.tabPage1.Controls.Add(this.btn_AddApt);
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.dataGridView2);
-            this.tabPage1.Controls.Add(this.btn_DelApt);
-            this.tabPage1.Location = new System.Drawing.Point(4, 23);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1310, 721);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Appointments";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tab_Appointments.Controls.Add(this.btn_AddApt);
+            this.tab_Appointments.Controls.Add(this.groupBox1);
+            this.tab_Appointments.Controls.Add(this.label3);
+            this.tab_Appointments.Controls.Add(this.dgv_Appointments);
+            this.tab_Appointments.Controls.Add(this.btn_DelApt);
+            this.tab_Appointments.Location = new System.Drawing.Point(4, 23);
+            this.tab_Appointments.Name = "tab_Appointments";
+            this.tab_Appointments.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_Appointments.Size = new System.Drawing.Size(1310, 721);
+            this.tab_Appointments.TabIndex = 0;
+            this.tab_Appointments.Text = "Appointments";
+            this.tab_Appointments.UseVisualStyleBackColor = true;
             // 
             // btn_AddApt
             // 
@@ -152,20 +168,24 @@ namespace AppointmentScheduler_C969.Views
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 56);
+            this.label3.Location = new System.Drawing.Point(7, 60);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(154, 14);
             this.label3.TabIndex = 6;
             this.label3.Text = "Appointments Scheduled";
             // 
-            // dataGridView2
+            // dgv_Appointments
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(7, 77);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 25;
-            this.dataGridView2.Size = new System.Drawing.Size(1297, 511);
-            this.dataGridView2.TabIndex = 3;
+            this.dgv_Appointments.AllowUserToResizeColumns = false;
+            this.dgv_Appointments.AllowUserToResizeRows = false;
+            this.dgv_Appointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Appointments.Location = new System.Drawing.Point(7, 77);
+            this.dgv_Appointments.MultiSelect = false;
+            this.dgv_Appointments.Name = "dgv_Appointments";
+            this.dgv_Appointments.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgv_Appointments.RowTemplate.Height = 25;
+            this.dgv_Appointments.Size = new System.Drawing.Size(1297, 511);
+            this.dgv_Appointments.TabIndex = 3;
             // 
             // btn_DelApt
             // 
@@ -180,41 +200,45 @@ namespace AppointmentScheduler_C969.Views
             this.btn_DelApt.Text = "Delete";
             this.btn_DelApt.UseVisualStyleBackColor = false;
             // 
-            // tabPage3
+            // tab_Customers
             // 
-            this.tabPage3.Controls.Add(this.label2);
-            this.tabPage3.Controls.Add(this.dataGridView1);
-            this.tabPage3.Controls.Add(this.btn_DelCustomer);
-            this.tabPage3.Controls.Add(this.btn_AddCustomer);
-            this.tabPage3.Location = new System.Drawing.Point(4, 23);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1310, 721);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Customers";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tab_Customers.Controls.Add(this.label2);
+            this.tab_Customers.Controls.Add(this.dgv_Customers);
+            this.tab_Customers.Controls.Add(this.btn_DelCustomer);
+            this.tab_Customers.Controls.Add(this.btn_AddCustomer);
+            this.tab_Customers.Location = new System.Drawing.Point(4, 23);
+            this.tab_Customers.Name = "tab_Customers";
+            this.tab_Customers.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_Customers.Size = new System.Drawing.Size(1310, 721);
+            this.tab_Customers.TabIndex = 2;
+            this.tab_Customers.Text = "Customers";
+            this.tab_Customers.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(29, 19);
+            this.label2.Location = new System.Drawing.Point(7, 59);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 15);
             this.label2.TabIndex = 3;
             this.label2.Text = "Customers";
             // 
-            // dataGridView1
+            // dgv_Customers
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(19, 77);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(1249, 511);
-            this.dataGridView1.TabIndex = 2;
+            this.dgv_Customers.AllowUserToAddRows = false;
+            this.dgv_Customers.AllowUserToDeleteRows = false;
+            this.dgv_Customers.AllowUserToResizeColumns = false;
+            this.dgv_Customers.AllowUserToResizeRows = false;
+            this.dgv_Customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Customers.Location = new System.Drawing.Point(7, 77);
+            this.dgv_Customers.MultiSelect = false;
+            this.dgv_Customers.Name = "dgv_Customers";
+            this.dgv_Customers.ReadOnly = true;
+            this.dgv_Customers.RowTemplate.Height = 25;
+            this.dgv_Customers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_Customers.Size = new System.Drawing.Size(1297, 511);
+            this.dgv_Customers.TabIndex = 2;
             // 
             // btn_DelCustomer
             // 
@@ -234,6 +258,101 @@ namespace AppointmentScheduler_C969.Views
             this.btn_AddCustomer.Text = "Add New";
             this.btn_AddCustomer.UseVisualStyleBackColor = true;
             this.btn_AddCustomer.Click += new System.EventHandler(this.btn_AddCustomer_Click);
+            // 
+            // tab_Tools
+            // 
+            this.tab_Tools.Controls.Add(this.groupBox2);
+            this.tab_Tools.Controls.Add(this.gb_Reports);
+            this.tab_Tools.Location = new System.Drawing.Point(4, 23);
+            this.tab_Tools.Name = "tab_Tools";
+            this.tab_Tools.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_Tools.Size = new System.Drawing.Size(1310, 721);
+            this.tab_Tools.TabIndex = 3;
+            this.tab_Tools.Text = "Tools";
+            this.tab_Tools.UseVisualStyleBackColor = true;
+            // 
+            // gb_Reports
+            // 
+            this.gb_Reports.BackColor = System.Drawing.Color.AliceBlue;
+            this.gb_Reports.Controls.Add(this.label6);
+            this.gb_Reports.Controls.Add(this.btn_loginLogs);
+            this.gb_Reports.Controls.Add(this.label5);
+            this.gb_Reports.Controls.Add(this.label4);
+            this.gb_Reports.Controls.Add(this.btn_aptTypesMonth);
+            this.gb_Reports.Controls.Add(this.btn_sheduleByUser);
+            this.gb_Reports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gb_Reports.Location = new System.Drawing.Point(918, 24);
+            this.gb_Reports.Name = "gb_Reports";
+            this.gb_Reports.Size = new System.Drawing.Size(381, 326);
+            this.gb_Reports.TabIndex = 3;
+            this.gb_Reports.TabStop = false;
+            this.gb_Reports.Text = "Reports";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(77, 239);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(176, 18);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Login Report by User";
+            // 
+            // btn_loginLogs
+            // 
+            this.btn_loginLogs.Location = new System.Drawing.Point(272, 230);
+            this.btn_loginLogs.Name = "btn_loginLogs";
+            this.btn_loginLogs.Size = new System.Drawing.Size(103, 41);
+            this.btn_loginLogs.TabIndex = 5;
+            this.btn_loginLogs.Text = "Report";
+            this.btn_loginLogs.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(6, 149);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(247, 18);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Schedule by User / Consultant";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(15, 54);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(238, 18);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Appointment Types by Month";
+            // 
+            // btn_aptTypesMonth
+            // 
+            this.btn_aptTypesMonth.Location = new System.Drawing.Point(272, 45);
+            this.btn_aptTypesMonth.Name = "btn_aptTypesMonth";
+            this.btn_aptTypesMonth.Size = new System.Drawing.Size(103, 41);
+            this.btn_aptTypesMonth.TabIndex = 1;
+            this.btn_aptTypesMonth.Text = "Report";
+            this.btn_aptTypesMonth.UseVisualStyleBackColor = true;
+            // 
+            // btn_sheduleByUser
+            // 
+            this.btn_sheduleByUser.Location = new System.Drawing.Point(272, 140);
+            this.btn_sheduleByUser.Name = "btn_sheduleByUser";
+            this.btn_sheduleByUser.Size = new System.Drawing.Size(103, 41);
+            this.btn_sheduleByUser.TabIndex = 2;
+            this.btn_sheduleByUser.Text = "Report";
+            this.btn_sheduleByUser.UseVisualStyleBackColor = true;
+            // 
+            // btn_AddUser
+            // 
+            this.btn_AddUser.Location = new System.Drawing.Point(6, 44);
+            this.btn_AddUser.Name = "btn_AddUser";
+            this.btn_AddUser.Size = new System.Drawing.Size(103, 41);
+            this.btn_AddUser.TabIndex = 0;
+            this.btn_AddUser.Text = "Add User";
+            this.btn_AddUser.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -267,6 +386,38 @@ namespace AppointmentScheduler_C969.Views
             this.lb_user.TabIndex = 3;
             this.lb_user.Text = "logged in user";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.BackColor = System.Drawing.Color.AliceBlue;
+            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.button2);
+            this.groupBox2.Controls.Add(this.btn_AddUser);
+            this.groupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.groupBox2.Location = new System.Drawing.Point(43, 45);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(381, 305);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "User / Consultant Management";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(6, 119);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(103, 41);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Modify User";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(6, 195);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(103, 41);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "Delete User";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -281,13 +432,17 @@ namespace AppointmentScheduler_C969.Views
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Appointment Scheduler Dashboard";
             this.dashTabControl.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tab_Appointments.ResumeLayout(false);
+            this.tab_Appointments.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Appointments)).EndInit();
+            this.tab_Customers.ResumeLayout(false);
+            this.tab_Customers.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Customers)).EndInit();
+            this.tab_Tools.ResumeLayout(false);
+            this.gb_Reports.ResumeLayout(false);
+            this.gb_Reports.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,15 +451,15 @@ namespace AppointmentScheduler_C969.Views
         #endregion
 
         private System.Windows.Forms.TabControl dashTabControl;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tab_Appointments;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tab_Customers;
         private System.Windows.Forms.Button btn_AddCustomer;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgv_Customers;
         private System.Windows.Forms.Button btn_DelCustomer;
         private System.Windows.Forms.Button btn_DelApt;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgv_Appointments;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btn_Logout;
         private System.Windows.Forms.GroupBox gb_addAptForm;
@@ -335,5 +490,16 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Label lb_aptURL;
         private System.Windows.Forms.TextBox textBox3;
         public System.Windows.Forms.Label lb_user;
+        private System.Windows.Forms.TabPage tab_Tools;
+        private System.Windows.Forms.Button btn_sheduleByUser;
+        private System.Windows.Forms.Button btn_aptTypesMonth;
+        private System.Windows.Forms.Button btn_AddUser;
+        private System.Windows.Forms.GroupBox gb_Reports;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btn_loginLogs;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
     }
 }

@@ -15,9 +15,15 @@ namespace AppointmentScheduler_C969.Views
             InitializeComponent();
             lb_user.Text = DataAccess.loggedInUser + " is logged in.";
 
-        }
+            dgv_Appointments.DataSource = DataAccess.GetAppoitments();
+            dgv_Customers.DataSource = DataAccess.GetCustomers();
+            dgv_Customers.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgv_Customers.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgv_Customers.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgv_Customers.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-        
+
+        }
 
         private void btn_AddCustomer_Click(object sender, EventArgs e)
         {

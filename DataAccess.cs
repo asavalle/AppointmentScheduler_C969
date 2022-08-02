@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using AppointmentScheduler_C969.Views;
 using System.Globalization;
+using System.Data;
 
 namespace AppointmentScheduler_C969
 {
@@ -12,11 +13,11 @@ namespace AppointmentScheduler_C969
     {
         public static string loggedInUser { get; set; }
         public static bool loginSuccessful;
+        public static string dbConnStr = @"server=localhost; database=client_schedule;uid=sqlUser;pwd=passw0rd!;";
 
 
         public static void Login(string userName, string password)
         {
-            string dbConnStr = "server=localhost; database=client_schedule;uid=sqlUser;pwd=passw0rd!;";
 
             using (var cnn = new MySqlConnection(dbConnStr))
             {
@@ -78,6 +79,55 @@ namespace AppointmentScheduler_C969
 
         }
 
-        
+        public static DataTable GetAppoitments()
+        {
+            DataTable aptTable = new DataTable();
+            try
+            {
+                using (var cnn = new MySqlConnection(dbConnStr))
+            {
+               
+                    cnn.Open();
+                    using (var getAptCmd = new MySqlCommand("select * from client_schedule.appointment", cnn))
+                    {
+                        MySqlDataReader reader = getAptCmd.ExecuteReader();
+                        aptTable.Load(reader);
+                    }
+                   
+                }
+                
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return aptTable;
+        }
+
+        public static DataTable GetCustomers()
+        {
+            DataTable custTable = new DataTable();
+            try
+            {
+                using (var cnn = new MySqlConnection(dbConnStr))
+                {
+
+                    cnn.Open();
+                    using (var getAptCmd = new MySqlCommand("SELECT customer.customerId as Customer_ID, customer.customerName as Name, address.address as Address, city.city as City, address.postalCode as Zip, address.phone as Phone FROM((customer INNER JOIN address on address.addressId = customer.addressId) INNER JOIN city ON address.cityId = city.cityId)", cnn))
+                    {
+                        MySqlDataReader reader = getAptCmd.ExecuteReader();
+                        custTable.Load(reader);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return custTable;
+        }
+
     }
 }
