@@ -19,8 +19,7 @@ namespace AppointmentScheduler_C969
         public login()
         {
             InitializeComponent();
-            
-
+            lb_userName.Select(); //removes focus from TextBox so placeholder text can be revealed.
         }
 
         private void btn_login_Click(object sender, EventArgs e)

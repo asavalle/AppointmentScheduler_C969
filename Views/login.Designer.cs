@@ -38,6 +38,7 @@ namespace AppointmentScheduler_C969
             this.tb_userPwd = new System.Windows.Forms.TextBox();
             this.btn_login = new System.Windows.Forms.Button();
             this.btn_cancelLogin = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.pan_uname.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -56,10 +57,10 @@ namespace AppointmentScheduler_C969
             // 
             // pan_uname
             // 
-            resources.ApplyResources(this.pan_uname, "pan_uname");
             this.pan_uname.BackColor = System.Drawing.SystemColors.Window;
             this.pan_uname.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pan_uname.Controls.Add(this.tb_UserName);
+            resources.ApplyResources(this.pan_uname, "pan_uname");
             this.pan_uname.Name = "pan_uname";
             // 
             // tb_UserName
@@ -70,10 +71,10 @@ namespace AppointmentScheduler_C969
             // 
             // panel2
             // 
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.BackColor = System.Drawing.SystemColors.Window;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.tb_userPwd);
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
             // tb_userPwd
@@ -84,9 +85,9 @@ namespace AppointmentScheduler_C969
             // 
             // btn_login
             // 
-            resources.ApplyResources(this.btn_login, "btn_login");
             this.btn_login.BackColor = System.Drawing.Color.SteelBlue;
             this.btn_login.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.btn_login, "btn_login");
             this.btn_login.ForeColor = System.Drawing.Color.AliceBlue;
             this.btn_login.Name = "btn_login";
             this.btn_login.UseVisualStyleBackColor = false;
@@ -94,19 +95,28 @@ namespace AppointmentScheduler_C969
             // 
             // btn_cancelLogin
             // 
-            resources.ApplyResources(this.btn_cancelLogin, "btn_cancelLogin");
             this.btn_cancelLogin.BackColor = System.Drawing.Color.SteelBlue;
             this.btn_cancelLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.btn_cancelLogin, "btn_cancelLogin");
             this.btn_cancelLogin.ForeColor = System.Drawing.Color.Firebrick;
             this.btn_cancelLogin.Name = "btn_cancelLogin";
             this.btn_cancelLogin.UseVisualStyleBackColor = false;
             this.btn_cancelLogin.Click += new System.EventHandler(this.btn_cancelLogin_Click);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.BackColor = System.Drawing.Color.SlateGray;
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label1.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.label1.Name = "label1";
             // 
             // login
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SlateGray;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_cancelLogin);
             this.Controls.Add(this.btn_login);
             this.Controls.Add(this.panel2);
@@ -133,6 +143,7 @@ namespace AppointmentScheduler_C969
         private System.Windows.Forms.TextBox tb_userPwd;
         public System.Windows.Forms.Button btn_login;
         public System.Windows.Forms.Button btn_cancelLogin;
+        private System.Windows.Forms.Label label1;
     }
 }
 

@@ -129,5 +129,28 @@ namespace AppointmentScheduler_C969
             return custTable;
         }
 
+        public static DataTable GetUsers() 
+        { 
+            DataTable usersTable = new DataTable();
+            try
+            {
+                using (var cnn = new MySqlConnection(dbConnStr))
+                {
+
+                    cnn.Open();
+                    using (var getAptCmd = new MySqlCommand("SELECT * FROM client_schedule.user", cnn))
+                    {
+                        MySqlDataReader reader = getAptCmd.ExecuteReader();
+                        usersTable.Load(reader);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return usersTable;
+        }
     }
 }
