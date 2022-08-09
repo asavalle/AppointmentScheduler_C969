@@ -15,7 +15,11 @@ namespace AppointmentScheduler_C969
         public static bool loginSuccessful;
         public static string dbConnStr = @"server=localhost; database=client_schedule;uid=sqlUser;pwd=passw0rd!;";
 
+    /*
+    * Query's the database to validate and populate DataGridViews.
+    */
 
+        //Function to validate user login
         public static void Login(string userName, string password)
         {
 
@@ -79,13 +83,14 @@ namespace AppointmentScheduler_C969
 
         }
 
+        //Function to populate Appointments table from database
         public static DataTable GetAppoitments()
         {
             DataTable aptTable = new DataTable();
             try
             {
                 using (var cnn = new MySqlConnection(dbConnStr))
-            {
+                {
                
                     cnn.Open();
                     using (var getAptCmd = new MySqlCommand("select * from client_schedule.appointment", cnn))
@@ -93,7 +98,7 @@ namespace AppointmentScheduler_C969
                         MySqlDataReader reader = getAptCmd.ExecuteReader();
                         aptTable.Load(reader);
                     }
-                   
+                    cnn.Close();
                 }
                 
             }
@@ -105,6 +110,7 @@ namespace AppointmentScheduler_C969
             return aptTable;
         }
 
+        //Function to populate Customer table from database
         public static DataTable GetCustomers()
         {
             DataTable custTable = new DataTable();
@@ -119,6 +125,7 @@ namespace AppointmentScheduler_C969
                         MySqlDataReader reader = getAptCmd.ExecuteReader();
                         custTable.Load(reader);
                     }
+                    cnn.Close();
                 }
             }
             catch (Exception e)
@@ -129,6 +136,7 @@ namespace AppointmentScheduler_C969
             return custTable;
         }
 
+        //Function to populate Users table from database
         public static DataTable GetUsers() 
         { 
             DataTable usersTable = new DataTable();
@@ -143,6 +151,7 @@ namespace AppointmentScheduler_C969
                         MySqlDataReader reader = getAptCmd.ExecuteReader();
                         usersTable.Load(reader);
                     }
+                    cnn.Close();
                 }
             }
             catch (Exception e)
@@ -152,5 +161,10 @@ namespace AppointmentScheduler_C969
 
             return usersTable;
         }
+
+
+
+
+
     }
 }

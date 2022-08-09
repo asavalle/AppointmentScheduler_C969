@@ -21,9 +21,23 @@ namespace AppointmentScheduler_C969.Models
         public DateTime LastUpdate { get; set; }
         public string LastUpdateBy { get; set; }
 
-        public Appointment()
+        //new Appointment constructor
+        public Appointment() { }
+        public Appointment(string title, string description, string location, string contact, string type, string url, DateTime start, 
+                            DateTime end, DateTime createDate,string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
-
+            this.Title = title;
+            this.Description = description;
+            this.Location = location;
+            this.Contact = contact;
+            this.Type = type;
+            this.URL = url;
+            this.StartTime = start;
+            this.EndTime = end;
+            this.CreateDate = createDate;
+            this.CreatedBy = createdBy;
+            this.LastUpdate = lastUpdate;
+            this.LastUpdateBy = lastUpdateBy;
         }
 
 
