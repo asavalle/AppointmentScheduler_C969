@@ -30,6 +30,8 @@ namespace AppointmentScheduler_C969.Views
         private void InitializeComponent()
         {
             this.gb_addAptForm = new System.Windows.Forms.GroupBox();
+            this.lb_contact = new System.Windows.Forms.Label();
+            this.tb_aptContact = new System.Windows.Forms.TextBox();
             this.lb_aptURL = new System.Windows.Forms.Label();
             this.tb_aptURL = new System.Windows.Forms.TextBox();
             this.lb_aptLocation = new System.Windows.Forms.Label();
@@ -48,12 +50,8 @@ namespace AppointmentScheduler_C969.Views
             this.lb_aptTitle = new System.Windows.Forms.Label();
             this.cb_customer = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.lb_aptID = new System.Windows.Forms.Label();
             this.tb_aptDesc = new System.Windows.Forms.TextBox();
             this.tb_aptTitle = new System.Windows.Forms.TextBox();
-            this.tb_aptID = new System.Windows.Forms.TextBox();
-            this.lb_contact = new System.Windows.Forms.Label();
-            this.tb_aptContact = new System.Windows.Forms.TextBox();
             this.gb_addAptForm.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,10 +78,8 @@ namespace AppointmentScheduler_C969.Views
             this.gb_addAptForm.Controls.Add(this.lb_aptTitle);
             this.gb_addAptForm.Controls.Add(this.cb_customer);
             this.gb_addAptForm.Controls.Add(this.label5);
-            this.gb_addAptForm.Controls.Add(this.lb_aptID);
             this.gb_addAptForm.Controls.Add(this.tb_aptDesc);
             this.gb_addAptForm.Controls.Add(this.tb_aptTitle);
-            this.gb_addAptForm.Controls.Add(this.tb_aptID);
             this.gb_addAptForm.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.gb_addAptForm.Location = new System.Drawing.Point(12, 12);
             this.gb_addAptForm.Name = "gb_addAptForm";
@@ -92,10 +88,26 @@ namespace AppointmentScheduler_C969.Views
             this.gb_addAptForm.TabStop = false;
             this.gb_addAptForm.Text = "Add New Appointment";
             // 
+            // lb_contact
+            // 
+            this.lb_contact.AutoSize = true;
+            this.lb_contact.Location = new System.Drawing.Point(26, 87);
+            this.lb_contact.Name = "lb_contact";
+            this.lb_contact.Size = new System.Drawing.Size(49, 15);
+            this.lb_contact.TabIndex = 26;
+            this.lb_contact.Text = "Contact";
+            // 
+            // tb_aptContact
+            // 
+            this.tb_aptContact.Location = new System.Drawing.Point(26, 104);
+            this.tb_aptContact.Name = "tb_aptContact";
+            this.tb_aptContact.Size = new System.Drawing.Size(349, 23);
+            this.tb_aptContact.TabIndex = 25;
+            // 
             // lb_aptURL
             // 
             this.lb_aptURL.AutoSize = true;
-            this.lb_aptURL.Location = new System.Drawing.Point(26, 522);
+            this.lb_aptURL.Location = new System.Drawing.Point(26, 479);
             this.lb_aptURL.Name = "lb_aptURL";
             this.lb_aptURL.Size = new System.Drawing.Size(28, 15);
             this.lb_aptURL.TabIndex = 24;
@@ -103,7 +115,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             // tb_aptURL
             // 
-            this.tb_aptURL.Location = new System.Drawing.Point(26, 539);
+            this.tb_aptURL.Location = new System.Drawing.Point(26, 496);
             this.tb_aptURL.Name = "tb_aptURL";
             this.tb_aptURL.Size = new System.Drawing.Size(349, 23);
             this.tb_aptURL.TabIndex = 23;
@@ -111,7 +123,7 @@ namespace AppointmentScheduler_C969.Views
             // lb_aptLocation
             // 
             this.lb_aptLocation.AutoSize = true;
-            this.lb_aptLocation.Location = new System.Drawing.Point(26, 477);
+            this.lb_aptLocation.Location = new System.Drawing.Point(26, 434);
             this.lb_aptLocation.Name = "lb_aptLocation";
             this.lb_aptLocation.Size = new System.Drawing.Size(53, 15);
             this.lb_aptLocation.TabIndex = 22;
@@ -119,7 +131,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             // tb_aptLocation
             // 
-            this.tb_aptLocation.Location = new System.Drawing.Point(26, 494);
+            this.tb_aptLocation.Location = new System.Drawing.Point(26, 451);
             this.tb_aptLocation.Name = "tb_aptLocation";
             this.tb_aptLocation.Size = new System.Drawing.Size(349, 23);
             this.tb_aptLocation.TabIndex = 21;
@@ -168,7 +180,7 @@ namespace AppointmentScheduler_C969.Views
             // cb_endTime
             // 
             this.cb_endTime.FormattingEnabled = true;
-            this.cb_endTime.Location = new System.Drawing.Point(149, 388);
+            this.cb_endTime.Location = new System.Drawing.Point(149, 399);
             this.cb_endTime.Name = "cb_endTime";
             this.cb_endTime.Size = new System.Drawing.Size(108, 23);
             this.cb_endTime.TabIndex = 16;
@@ -176,7 +188,7 @@ namespace AppointmentScheduler_C969.Views
             // lb_endTime
             // 
             this.lb_endTime.AutoSize = true;
-            this.lb_endTime.Location = new System.Drawing.Point(149, 372);
+            this.lb_endTime.Location = new System.Drawing.Point(149, 383);
             this.lb_endTime.Name = "lb_endTime";
             this.lb_endTime.Size = new System.Drawing.Size(56, 15);
             this.lb_endTime.TabIndex = 15;
@@ -185,7 +197,7 @@ namespace AppointmentScheduler_C969.Views
             // lb_startTime
             // 
             this.lb_startTime.AutoSize = true;
-            this.lb_startTime.Location = new System.Drawing.Point(26, 371);
+            this.lb_startTime.Location = new System.Drawing.Point(26, 382);
             this.lb_startTime.Name = "lb_startTime";
             this.lb_startTime.Size = new System.Drawing.Size(60, 15);
             this.lb_startTime.TabIndex = 14;
@@ -194,14 +206,14 @@ namespace AppointmentScheduler_C969.Views
             // cb_startTime
             // 
             this.cb_startTime.FormattingEnabled = true;
-            this.cb_startTime.Location = new System.Drawing.Point(26, 388);
+            this.cb_startTime.Location = new System.Drawing.Point(26, 399);
             this.cb_startTime.Name = "cb_startTime";
             this.cb_startTime.Size = new System.Drawing.Size(108, 23);
             this.cb_startTime.TabIndex = 13;
             // 
             // dtp_createDate
             // 
-            this.dtp_createDate.Location = new System.Drawing.Point(26, 443);
+            this.dtp_createDate.Location = new System.Drawing.Point(26, 347);
             this.dtp_createDate.Name = "dtp_createDate";
             this.dtp_createDate.Size = new System.Drawing.Size(246, 23);
             this.dtp_createDate.TabIndex = 10;
@@ -209,7 +221,7 @@ namespace AppointmentScheduler_C969.Views
             // lb_aptDate
             // 
             this.lb_aptDate.AutoSize = true;
-            this.lb_aptDate.Location = new System.Drawing.Point(26, 426);
+            this.lb_aptDate.Location = new System.Drawing.Point(26, 330);
             this.lb_aptDate.Name = "lb_aptDate";
             this.lb_aptDate.Size = new System.Drawing.Size(105, 15);
             this.lb_aptDate.TabIndex = 9;
@@ -236,7 +248,7 @@ namespace AppointmentScheduler_C969.Views
             // cb_customer
             // 
             this.cb_customer.FormattingEnabled = true;
-            this.cb_customer.Location = new System.Drawing.Point(105, 51);
+            this.cb_customer.Location = new System.Drawing.Point(26, 52);
             this.cb_customer.Name = "cb_customer";
             this.cb_customer.Size = new System.Drawing.Size(270, 23);
             this.cb_customer.TabIndex = 6;
@@ -244,20 +256,11 @@ namespace AppointmentScheduler_C969.Views
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(105, 30);
+            this.label5.Location = new System.Drawing.Point(26, 31);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 15);
             this.label5.TabIndex = 5;
             this.label5.Text = "Customer";
-            // 
-            // lb_aptID
-            // 
-            this.lb_aptID.AutoSize = true;
-            this.lb_aptID.Location = new System.Drawing.Point(26, 30);
-            this.lb_aptID.Name = "lb_aptID";
-            this.lb_aptID.Size = new System.Drawing.Size(43, 15);
-            this.lb_aptID.TabIndex = 4;
-            this.lb_aptID.Text = "Apt. ID";
             // 
             // tb_aptDesc
             // 
@@ -266,7 +269,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_aptDesc.MaxLength = 250;
             this.tb_aptDesc.Multiline = true;
             this.tb_aptDesc.Name = "tb_aptDesc";
-            this.tb_aptDesc.Size = new System.Drawing.Size(349, 110);
+            this.tb_aptDesc.Size = new System.Drawing.Size(349, 69);
             this.tb_aptDesc.TabIndex = 2;
             // 
             // tb_aptTitle
@@ -275,29 +278,6 @@ namespace AppointmentScheduler_C969.Views
             this.tb_aptTitle.Name = "tb_aptTitle";
             this.tb_aptTitle.Size = new System.Drawing.Size(349, 23);
             this.tb_aptTitle.TabIndex = 1;
-            // 
-            // tb_aptID
-            // 
-            this.tb_aptID.Location = new System.Drawing.Point(26, 51);
-            this.tb_aptID.Name = "tb_aptID";
-            this.tb_aptID.Size = new System.Drawing.Size(51, 23);
-            this.tb_aptID.TabIndex = 0;
-            // 
-            // lb_contact
-            // 
-            this.lb_contact.AutoSize = true;
-            this.lb_contact.Location = new System.Drawing.Point(26, 87);
-            this.lb_contact.Name = "lb_contact";
-            this.lb_contact.Size = new System.Drawing.Size(49, 15);
-            this.lb_contact.TabIndex = 26;
-            this.lb_contact.Text = "Contact";
-            // 
-            // tb_aptContact
-            // 
-            this.tb_aptContact.Location = new System.Drawing.Point(26, 104);
-            this.tb_aptContact.Name = "tb_aptContact";
-            this.tb_aptContact.Size = new System.Drawing.Size(349, 23);
-            this.tb_aptContact.TabIndex = 25;
             // 
             // AddAppointment
             // 
@@ -335,10 +315,8 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Label lb_aptTitle;
         private System.Windows.Forms.ComboBox cb_customer;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label lb_aptID;
         private System.Windows.Forms.TextBox tb_aptDesc;
         private System.Windows.Forms.TextBox tb_aptTitle;
-        private System.Windows.Forms.TextBox tb_aptID;
         private System.Windows.Forms.Button btn_Create;
         private System.Windows.Forms.Label lb_contact;
         private System.Windows.Forms.TextBox tb_aptContact;

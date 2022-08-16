@@ -26,6 +26,7 @@ namespace AppointmentScheduler_C969.Views
             dgv_Users.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgv_Users.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgv_Users.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            DataAccess.CloseConnection();
         }
 
         private void btn_AddCustomer_Click(object sender, EventArgs e)
