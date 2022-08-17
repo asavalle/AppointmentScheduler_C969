@@ -31,5 +31,7 @@ namespace AppointmentScheduler_C969.Models
             this.LastUpdate = lastUpdate;
             this.LastUpdateBy = lastUpdateBy;
         }
+
+
     }
 }

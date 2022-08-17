@@ -18,7 +18,7 @@ namespace AppointmentScheduler_C969.Controllers
                             DateTime end, DateTime createDate, string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
             Appointment newAppt = new Appointment();
-            newAppt.
+            newAppt.Customer = customer ;
             newAppt.Title = title;
             newAppt.Description = description;
             newAppt.Location = location;

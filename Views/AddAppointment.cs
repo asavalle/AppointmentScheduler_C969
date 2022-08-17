@@ -20,7 +20,7 @@ namespace AppointmentScheduler_C969.Views
             Appointment.GenerateTimes();
             cb_startTime.DataSource = Appointment.StartTimes;
             cb_endTime.DataSource = Appointment.EndTimes;
-
+            cb_customer.DataSource = GetCustomerList();
         }
 
         private void btn_Create_Click(object sender, EventArgs e)
@@ -56,6 +56,15 @@ namespace AppointmentScheduler_C969.Views
 
 
         }
-
+        public List<string> GetCustomerList()
+        {
+            DataTable dt = new DataTable();
+            dt = DataAccess.GetCustomers();
+            List<string> customers = new List<string>();
+            foreach(DataRow row in dt.Rows) {
+                customers.Add(row.ItemArray.ToString());
+            }
+            return customers;
+        }
     }
 }
