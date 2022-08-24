@@ -5,12 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using AppointmentScheduler_C969.Controllers;
 
 namespace AppointmentScheduler_C969.Views
 {
     public partial class Dashboard : Form
     {
-        
+        public static DataGridViewSelectedRowCollection selectedRow;
         public Dashboard()
         {
             InitializeComponent();
@@ -56,6 +57,12 @@ namespace AppointmentScheduler_C969.Views
         private void Dashboard_Activated(object sender, EventArgs e)
         {
             ReloadAppointments();
+        }
+
+        private void btn_DelApt_Click(object sender, EventArgs e)
+        {
+            selectedRow = dgv_Appointments.SelectedRows;
+            AppointmentsController.DeleteAppointment(selectedRow);
         }
     }
 }

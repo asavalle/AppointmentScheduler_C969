@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Models
 {
@@ -74,13 +75,37 @@ namespace AppointmentScheduler_C969.Models
                 DataAccess.OpenConnection();               
             }            
                 var insert_cmd = new MySqlCommand($"INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES({apt.CustomerId},{userId},'{apt.Title}','{apt.Description}','{apt.Location}','{apt.Contact}','{apt.Type}','{apt.URL}','{formatSDate}','{formatEDate}','{formatCreateDate}','{apt.CreatedBy}','{formatLastUpDate}','{apt.LastUpdateBy}')", DataAccess.conn);
-                var insert = insert_cmd.ExecuteNonQuery();
-           
-            
-
-
+                var insert = insert_cmd.ExecuteNonQuery();                    
         }
 
+        public static void DeleteAppointment(int aptId)
+        {
+            if (!DataAccess.isConnOpen)
+            {
+                DataAccess.OpenConnection();
+            }
+            if (aptId >= 0)
+            {
+                try
+                {
+                    var del_cmd = new MySqlCommand($"DELETE FROM client_schedule.appointment WHERE appointmentId = {aptId};",DataAccess.conn);
+                    var delete = del_cmd.ExecuteNonQuery();
+                    MessageBox.Show($"Appointment {aptId} was deleted.");
+
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString());
+                }
+
+
+
+            }
+            else
+            {
+                MessageBox.Show("No record was selected.");
+            }
+        }
 
     }
 }

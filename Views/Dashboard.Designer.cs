@@ -223,6 +223,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_DelApt.TabIndex = 2;
             this.btn_DelApt.Text = "Delete";
             this.btn_DelApt.UseVisualStyleBackColor = false;
+            this.btn_DelApt.Click += new System.EventHandler(this.btn_DelApt_Click);
             // 
             // tab_Customers
             // 

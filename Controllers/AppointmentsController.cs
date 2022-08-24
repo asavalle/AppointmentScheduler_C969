@@ -51,11 +51,23 @@ namespace AppointmentScheduler_C969.Controllers
                             newAppt.CreateDate + "\n CreatedBy: " +
                             newAppt.CreatedBy + "\n LastUpdate: " +
                             newAppt.LastUpdate + "\n LastUpdatedBy:     " +
-                            newAppt.LastUpdateBy, "Appointment Created") ;
-
-            
+                            newAppt.LastUpdateBy, "Appointment Created") ;           
         }
 
+        public static void DeleteAppointment(DataGridViewSelectedRowCollection row)
+        {
+
+            int appointmentIDValue =-1;
+            
+            foreach(DataGridViewRow r in row)
+            {
+                appointmentIDValue = Convert.ToInt32(r.Cells[0].Value);
+                //MessageBox.Show(r.Cells[0].Value.ToString()) ;
+            }
+            Appointment.DeleteAppointment(appointmentIDValue);
+
+          
+        }
 
 
     }
