@@ -14,11 +14,14 @@ namespace AppointmentScheduler_C969.Controllers
     class AppointmentsController
     {
 
-        public static void CreateNewAppointment(string customer,string title, string description, string location, string contact, string type, string url, DateTime start,
+        public static void CreateNewAppointment(string customerName, string title, string description, string location, string contact, string type, string url, DateTime start,
                             DateTime end, DateTime createDate, string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
+            
+
             Appointment newAppt = new Appointment();
-            newAppt.Customer = customer ;
+            newAppt.CustomerId = Customer.GetCustomerId(customerName);
+            newAppt.CustomerName = customerName;
             newAppt.Title = title;
             newAppt.Description = description;
             newAppt.Location = location;
@@ -32,21 +35,25 @@ namespace AppointmentScheduler_C969.Controllers
             newAppt.LastUpdate = DateTime.Now;
             newAppt.LastUpdateBy = DataAccess.loggedInUser;
 
-            //Appointment.InsertRecord();
+            Appointment.InsertAppointment(newAppt);
 
             MessageBox.Show(
-                            newAppt.Title + "\n" +
-                            newAppt.Description + "\n" +
-                            newAppt.Location + "\n" +
-                            newAppt.Contact + "\n" +
-                            newAppt.Type + "\n" +
-                            newAppt.URL + "\n" +
-                            newAppt.StartTime + "\n" +
-                            newAppt.EndTime + "\n" +
-                            newAppt.CreateDate + "\n" +
-                            newAppt.CreatedBy + "\n" +
-                            newAppt.LastUpdate + "\n" +
-                            newAppt.LastUpdateBy) ;
+                            "Customer ID " + newAppt.CustomerId + "\n Customer: " +
+                            newAppt.CustomerName + "\n Title: " +
+                            newAppt.Title + "\n Description: " +
+                            newAppt.Description + " \n Location: " +
+                            newAppt.Location + " \n Contact: " +
+                            newAppt.Contact + "\n Type: " +
+                            newAppt.Type + "\n URL: " +
+                            newAppt.URL + "\n StartTime: " +
+                            newAppt.StartTime + "\n EndTime: " +
+                            newAppt.EndTime + "\n CreateDate: " +
+                            newAppt.CreateDate + "\n CreatedBy: " +
+                            newAppt.CreatedBy + "\n LastUpdate: " +
+                            newAppt.LastUpdate + "\n LastUpdatedBy:     " +
+                            newAppt.LastUpdateBy, "Appointment Created") ;
+
+            
         }
 
 

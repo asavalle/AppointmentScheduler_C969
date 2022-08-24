@@ -10,11 +10,13 @@ namespace AppointmentScheduler_C969.Views
 {
     public partial class Dashboard : Form
     {
+        
         public Dashboard()
         {
             InitializeComponent();
-            lb_user.Text = DataAccess.loggedInUser + " is logged in.";
-
+            
+            lb_user.Text = DataAccess.loggedInUser + " is logged in.";          
+            
             dgv_Appointments.DataSource = DataAccess.GetAppoitments();
             dgv_Customers.DataSource = DataAccess.GetCustomers();
             dgv_Customers.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -29,6 +31,7 @@ namespace AppointmentScheduler_C969.Views
             DataAccess.CloseConnection();
         }
 
+       
         private void btn_AddCustomer_Click(object sender, EventArgs e)
         {
             AddCustomer newCustomer = new AddCustomer();
@@ -41,9 +44,18 @@ namespace AppointmentScheduler_C969.Views
         }
 
         private void btn_AddApt_Click(object sender, EventArgs e)
-        {
-            AddAppointment newAppointment = new AddAppointment();
+        {            
+            AddAppointment newAppointment = new AddAppointment();          
             newAppointment.Show();
+        }
+        private void ReloadAppointments()
+        {
+            dgv_Appointments.DataSource = DataAccess.GetAppoitments() ;
+        }
+
+        private void Dashboard_Activated(object sender, EventArgs e)
+        {
+            ReloadAppointments();
         }
     }
 }

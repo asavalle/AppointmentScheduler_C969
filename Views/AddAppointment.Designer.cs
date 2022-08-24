@@ -30,6 +30,7 @@ namespace AppointmentScheduler_C969.Views
         private void InitializeComponent()
         {
             this.gb_addAptForm = new System.Windows.Forms.GroupBox();
+            this.linkLabel_cancel = new System.Windows.Forms.LinkLabel();
             this.lb_contact = new System.Windows.Forms.Label();
             this.tb_aptContact = new System.Windows.Forms.TextBox();
             this.lb_aptURL = new System.Windows.Forms.Label();
@@ -58,6 +59,7 @@ namespace AppointmentScheduler_C969.Views
             // gb_addAptForm
             // 
             this.gb_addAptForm.BackColor = System.Drawing.Color.AliceBlue;
+            this.gb_addAptForm.Controls.Add(this.linkLabel_cancel);
             this.gb_addAptForm.Controls.Add(this.lb_contact);
             this.gb_addAptForm.Controls.Add(this.tb_aptContact);
             this.gb_addAptForm.Controls.Add(this.lb_aptURL);
@@ -87,6 +89,22 @@ namespace AppointmentScheduler_C969.Views
             this.gb_addAptForm.TabIndex = 10;
             this.gb_addAptForm.TabStop = false;
             this.gb_addAptForm.Text = "Add New Appointment";
+            // 
+            // linkLabel_cancel
+            // 
+            this.linkLabel_cancel.AutoSize = true;
+            this.linkLabel_cancel.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.linkLabel_cancel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.linkLabel_cancel.DisabledLinkColor = System.Drawing.Color.Red;
+            this.linkLabel_cancel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.linkLabel_cancel.LinkColor = System.Drawing.Color.Red;
+            this.linkLabel_cancel.Location = new System.Drawing.Point(232, 590);
+            this.linkLabel_cancel.Name = "linkLabel_cancel";
+            this.linkLabel_cancel.Size = new System.Drawing.Size(66, 20);
+            this.linkLabel_cancel.TabIndex = 27;
+            this.linkLabel_cancel.TabStop = true;
+            this.linkLabel_cancel.Text = "Cancel";
+            this.linkLabel_cancel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_cancel_LinkClicked);
             // 
             // lb_contact
             // 
@@ -156,7 +174,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.button1.BackColor = System.Drawing.Color.AliceBlue;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(330, 581);
+            this.button1.Location = new System.Drawing.Point(11, 581);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 37);
             this.button1.TabIndex = 18;
@@ -169,7 +187,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_Create.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_Create.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_Create.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.btn_Create.Location = new System.Drawing.Point(229, 581);
+            this.btn_Create.Location = new System.Drawing.Point(321, 581);
             this.btn_Create.Name = "btn_Create";
             this.btn_Create.Size = new System.Drawing.Size(84, 37);
             this.btn_Create.TabIndex = 17;
@@ -288,6 +306,7 @@ namespace AppointmentScheduler_C969.Views
             this.Name = "AddAppointment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "New Appointment";
+            //this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddAppointment_FormClosed);
             this.gb_addAptForm.ResumeLayout(false);
             this.gb_addAptForm.PerformLayout();
             this.ResumeLayout(false);
@@ -320,5 +339,6 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Button btn_Create;
         private System.Windows.Forms.Label lb_contact;
         private System.Windows.Forms.TextBox tb_aptContact;
+        private System.Windows.Forms.LinkLabel linkLabel_cancel;
     }
 }

@@ -1,13 +1,16 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
+using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Models
 {
     class Customer
     {
         public int CustomerId { get; set; }
-        public List<string> CustomerName { get; set; } = new List<string>();
+        public static List<string> CustomerName { get; set; } = new List<string>();
         public int AddressId { get; set; }
         public bool Active { get; set; }
         public DateTime CreateDate { get; set; }
@@ -24,7 +27,8 @@ namespace AppointmentScheduler_C969.Models
         public Customer(int customerId, string customerName, int addressId, bool active, DateTime createDate, 
             string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
-            this.CustomerName = CustomerName;
+            //this.CustomerId = customerId;
+            CustomerName = CustomerName;
             this.AddressId = addressId;
             this.Active = active;
             this.CreateDate = createDate;
@@ -32,6 +36,23 @@ namespace AppointmentScheduler_C969.Models
             this.LastUpdateBy = lastUpdateBy;
         }
 
+        public static int GetCustomerId(string name)
+        {
+
+            if (!DataAccess.isConnOpen)
+            {
+                DataAccess.OpenConnection();          
+            }
+
+            var getId_cmd = new MySqlCommand($"select customerId from client_schedule.customer where customerName = '{name}'", DataAccess.conn);
+            var custId = getId_cmd.ExecuteReader();
+            custId.Read();
+            int id = Convert.ToInt32(custId.GetValue(0));
+            custId.Close();
+            DataAccess.CloseConnection();
+            return id;
+
+        }
 
     }
 }

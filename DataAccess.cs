@@ -16,6 +16,7 @@ namespace AppointmentScheduler_C969
         public static bool loginSuccessful;
         private static string dbConnStr = ConfigurationManager.ConnectionStrings["database"].ConnectionString;
         public static MySqlConnection conn = new MySqlConnection(dbConnStr);
+        public static bool isConnOpen = false;
 
         /*
         * Query's the database to validate and populate DataGridViews.
@@ -26,11 +27,11 @@ namespace AppointmentScheduler_C969
             try
             {
                 conn.Open();
-                //MessageBox.Show("Connection successful!");
+                isConnOpen = true;
             }
-            catch (Exception e)
+            catch 
             {
-                MessageBox.Show(e.Message);
+                
             }
         }
         public static void CloseConnection()
@@ -40,6 +41,7 @@ namespace AppointmentScheduler_C969
                 using (var cnn = new MySqlConnection(dbConnStr))
                 {                   
                     cnn.Close();
+                    isConnOpen = false;
                 }
             }
             catch (Exception e)
@@ -58,9 +60,13 @@ namespace AppointmentScheduler_C969
                 //Check that the Username and Password fields are not empty
                 if (userName != "" && password != "")
                 {
-                    OpenConnection();
-                    using var uname_cmd = new MySqlCommand("select userName from client_schedule.user;", conn);
-                    using var pass_cmd = new MySqlCommand("select password from client_schedule.user;", conn);
+                    if (!isConnOpen)
+                    {
+                        OpenConnection();
+                    }
+
+                    using var uname_cmd = new MySqlCommand($"select userName from client_schedule.user;", conn);
+                    using var pass_cmd = new MySqlCommand($"select password from client_schedule.user WHERE userName = '{userName}';", conn);
                     string uname = uname_cmd.ExecuteScalar().ToString();
                     string pass = pass_cmd.ExecuteScalar().ToString();
 
@@ -87,6 +93,8 @@ namespace AppointmentScheduler_C969
                         loginSuccessful = false;
 
                     }
+                    
+                    
                 }
                 else
                 {

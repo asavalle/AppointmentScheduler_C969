@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -32,5 +33,20 @@ namespace AppointmentScheduler_C969.Models
             return userData;
         }
 
+        public static int GetUserId()
+        {
+            if (!DataAccess.isConnOpen)
+            {
+                DataAccess.OpenConnection();
+            }
+
+            var getUserId_cmd = new MySqlCommand($"select userId from client_schedule.user where userName = '{DataAccess.loggedInUser}'",DataAccess.conn);
+            var userId = getUserId_cmd.ExecuteReader();
+            userId.Read();
+            int id = Convert.ToInt32(userId.GetValue(0));
+            userId.Close();
+
+            return id;
+        }
     }
 }

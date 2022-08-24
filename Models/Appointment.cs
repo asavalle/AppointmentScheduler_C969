@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,8 +8,9 @@ namespace AppointmentScheduler_C969.Models
     class Appointment
     {
 
-        public int AppointmentId { get; set; } //autoincrements on the database side
-        public string Customer { get; set; }
+        public int AppointmentId { get; } //autoincrements on the database side
+        public int CustomerId { get; set; }
+        public string CustomerName { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
@@ -27,10 +29,11 @@ namespace AppointmentScheduler_C969.Models
 
         //new Appointment constructor
         public Appointment() { }
-        public Appointment(string customer,string title, string description, string location, string contact, string type, string url, DateTime start, 
+        public Appointment(int customerId, string customerName, string title, string description, string location, string contact, string type, string url, DateTime start, 
                             DateTime end, DateTime createDate,string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
-            this.Customer = customer;
+            this.CustomerId = customerId;
+            this.CustomerName = customerName;
             this.Title = title;
             this.Description = description;
             this.Location = location;
@@ -58,11 +61,24 @@ namespace AppointmentScheduler_C969.Models
             
 
         }
-        public static void InsertRecord()
+        public static void InsertAppointment(Appointment apt)
         {
-            //db logic insert
-            DataAccess.OpenConnection();
+            int userId = User.GetUserId();
+            var formatSDate = apt.StartTime.ToString("yyyy-MM-dd hh:mm:ss");
+            var formatEDate = apt.EndTime.ToString("yyyy-MM-dd hh:mm:ss");
+            var formatCreateDate = apt.CreateDate.ToString("yyyy-MM-dd hh:mm:ss");
+            var formatLastUpDate = apt.LastUpdate.ToString("yyyy-MM-dd hh:mm:ss");
+
+            if (!DataAccess.isConnOpen)
+            {
+                DataAccess.OpenConnection();               
+            }            
+                var insert_cmd = new MySqlCommand($"INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES({apt.CustomerId},{userId},'{apt.Title}','{apt.Description}','{apt.Location}','{apt.Contact}','{apt.Type}','{apt.URL}','{formatSDate}','{formatEDate}','{formatCreateDate}','{apt.CreatedBy}','{formatLastUpDate}','{apt.LastUpdateBy}')", DataAccess.conn);
+                var insert = insert_cmd.ExecuteNonQuery();
+           
             
+
+
         }
 
 

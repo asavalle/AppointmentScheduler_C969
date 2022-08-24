@@ -20,51 +20,56 @@ namespace AppointmentScheduler_C969.Views
             Appointment.GenerateTimes();
             cb_startTime.DataSource = Appointment.StartTimes;
             cb_endTime.DataSource = Appointment.EndTimes;
-            cb_customer.DataSource = GetCustomerList();
+            GetCustomerList();
+            cb_customer.DataSource = Customer.CustomerName;
         }
 
         private void btn_Create_Click(object sender, EventArgs e)
         {
-            BuildAppointmentDate();
-            AppointmentsController.CreateNewAppointment(cb_customer.Text, tb_aptTitle.Text,tb_aptDesc.Text,tb_aptLocation.Text,tb_aptContact.Text,tb_aptType.Text,
+            BuildAppointmentDate(); 
+            AppointmentsController.CreateNewAppointment(cb_customer.SelectedItem.ToString(), tb_aptTitle.Text,tb_aptDesc.Text,tb_aptLocation.Text,tb_aptContact.Text,tb_aptType.Text,
                                                         tb_aptURL.Text, startTime,endTime,DateTime.Now,DataAccess.loggedInUser,DateTime.Now,
                                                         DataAccess.loggedInUser);
-            
 
+            this.Close();
         }
 
 
         public void BuildAppointmentDate()
-        {
-           
-            
+        {                  
+            /*Creates a new DateTime object, assigns it the value from the DateTimePicker control. Then it takes that new object and assigns
+             * it to the aptData variable and applies the ToShortDateString method to grab only the date portion. 
+             * After that, the Start and End times are retrieved from the appropriate combobox and then appeneded to the aptData to create a complete
+             * start and end date/time variable. Lastly, those variables are parsed into new DateTime objects.
+             */
             DateTime date = new DateTime();
 
             date = dtp_createDate.Value;
             var aptData = date.ToShortDateString();
             string startT = cb_startTime.SelectedItem.ToString();
             string endT = cb_endTime.SelectedItem.ToString();
-
             var startDateTime = aptData +" " + startT.ToString();
-            var endDateTime = aptData + " " + endT.ToString();
-
-            startTime = DateTime.Parse(startDateTime); //use for query
-            endTime = DateTime.Parse(endDateTime); //use for query
-
-            
-            MessageBox.Show("Start Date/Time " + startDateTime + "\n End Date/Time " + endDateTime);
-
-
+            var endDateTime = aptData + " " + endT.ToString();        
+            startTime = DateTime.Parse(startDateTime);         
+            endTime = DateTime.Parse(endDateTime);              
         }
-        public List<string> GetCustomerList()
-        {
-            DataTable dt = new DataTable();
-            dt = DataAccess.GetCustomers();
-            List<string> customers = new List<string>();
-            foreach(DataRow row in dt.Rows) {
-                customers.Add(row.ItemArray.ToString());
+        public void GetCustomerList()
+        {          
+           DataTable dt = DataAccess.GetCustomers();
+           
+            foreach (DataRow row in dt.Rows) 
+            {
+                
+                Customer.CustomerName.Add(row.Field<string>("Name"));
+                
             }
-            return customers;
         }
+
+        private void linkLabel_cancel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Close();
+        }
+
+        
     }
 }
