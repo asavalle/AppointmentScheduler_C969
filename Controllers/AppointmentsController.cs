@@ -69,6 +69,12 @@ namespace AppointmentScheduler_C969.Controllers
           
         }
 
+        public static void ModifyAppointment()
+        {
+            //Take in data passed from Appointment class and construct it into usable object to pass to view.
 
+            Appointment.ModifyAppointment();
+
+        }
     }
 }

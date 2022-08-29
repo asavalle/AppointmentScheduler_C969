@@ -54,5 +54,32 @@ namespace AppointmentScheduler_C969.Models
 
         }
 
+        public static string GetCustomerName(int id)
+        {
+            if (!DataAccess.isConnOpen)
+            {
+                DataAccess.OpenConnection();
+            }
+            var getName_cmd = new MySqlCommand($"select customerName from client_schedule.customer where customerId = '{id}'", DataAccess.conn);
+            var custName = getName_cmd.ExecuteReader();
+            custName.Read();
+            string name = custName.GetString(0);
+            custName.Close();
+            DataAccess.CloseConnection();
+            return name;
+        }
+
+        public static void GetCustomerList()
+        {
+            DataTable dt = DataAccess.GetCustomers();
+
+            foreach (DataRow row in dt.Rows)
+            {
+
+                Customer.CustomerName.Add(row.Field<string>("Name"));
+
+            }
+        }
+
     }
 }

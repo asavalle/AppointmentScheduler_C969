@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using AppointmentScheduler_C969.Views;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,8 +9,8 @@ namespace AppointmentScheduler_C969.Models
 {
     class Appointment
     {
-
-        public int AppointmentId { get; } //autoincrements on the database side
+        public static int selectedAppointmentId { get; set; }
+        public int AppointmentId { get; set; } //autoincrements on the database side
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
         public string Title { get; set; }
@@ -58,9 +59,7 @@ namespace AppointmentScheduler_C969.Models
                 DateTime date = new DateTime(1, 1, 1, i, 00, 00);
                 StartTimes.Add(date.ToShortTimeString());
                 EndTimes.Add(date.ToShortTimeString());
-            }
-            
-
+            }            
         }
         public static void InsertAppointment(Appointment apt)
         {
@@ -88,18 +87,17 @@ namespace AppointmentScheduler_C969.Models
             {
                 try
                 {
-                    var del_cmd = new MySqlCommand($"DELETE FROM client_schedule.appointment WHERE appointmentId = {aptId};",DataAccess.conn);
-                    var delete = del_cmd.ExecuteNonQuery();
-                    MessageBox.Show($"Appointment {aptId} was deleted.");
-
+                    DialogResult deleteConfirm = MessageBox.Show($"Do you want to delete Appointment {aptId}", "Delete Confirmation.", MessageBoxButtons.YesNo);
+                    if(deleteConfirm == DialogResult.Yes)
+                    {
+                        var del_cmd = new MySqlCommand($"DELETE FROM client_schedule.appointment WHERE appointmentId = {aptId};",DataAccess.conn);
+                        var delete = del_cmd.ExecuteNonQuery();                       
+                    }                    
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show(e.ToString());
                 }
-
-
-
             }
             else
             {
@@ -107,5 +105,11 @@ namespace AppointmentScheduler_C969.Models
             }
         }
 
+        public static void ModifyAppointment()
+        {
+
+            //pull selected data from database. Pass to controller.
+            MessageBox.Show("Modifying Appointment underway....");
+        }
     }
 }

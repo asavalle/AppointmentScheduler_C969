@@ -115,6 +115,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_ModAppt.TabIndex = 10;
             this.btn_ModAppt.Text = "Modify";
             this.btn_ModAppt.UseVisualStyleBackColor = false;
+            this.btn_ModAppt.Click += new System.EventHandler(this.btn_ModAppt_Click);
             // 
             // btn_AddApt
             // 
@@ -210,6 +211,7 @@ namespace AppointmentScheduler_C969.Views
             this.dgv_Appointments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_Appointments.Size = new System.Drawing.Size(1297, 511);
             this.dgv_Appointments.TabIndex = 3;
+            this.dgv_Appointments.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Appointments_CellClick);
             // 
             // btn_DelApt
             // 

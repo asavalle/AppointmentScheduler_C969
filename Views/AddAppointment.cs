@@ -20,7 +20,7 @@ namespace AppointmentScheduler_C969.Views
             Appointment.GenerateTimes();
             cb_startTime.DataSource = Appointment.StartTimes;
             cb_endTime.DataSource = Appointment.EndTimes;
-            GetCustomerList();
+            Customer.GetCustomerList();
             cb_customer.DataSource = Customer.CustomerName;
         }
 
@@ -30,8 +30,8 @@ namespace AppointmentScheduler_C969.Views
             AppointmentsController.CreateNewAppointment(cb_customer.SelectedItem.ToString(), tb_aptTitle.Text,tb_aptDesc.Text,tb_aptLocation.Text,tb_aptContact.Text,tb_aptType.Text,
                                                         tb_aptURL.Text, startTime,endTime,DateTime.Now,DataAccess.loggedInUser,DateTime.Now,
                                                         DataAccess.loggedInUser);
-
             this.Close();
+            
         }
 
 
@@ -53,17 +53,17 @@ namespace AppointmentScheduler_C969.Views
             startTime = DateTime.Parse(startDateTime);         
             endTime = DateTime.Parse(endDateTime);              
         }
-        public void GetCustomerList()
-        {          
-           DataTable dt = DataAccess.GetCustomers();
+        //public void GetCustomerList()
+        //{          
+        //   DataTable dt = DataAccess.GetCustomers();
            
-            foreach (DataRow row in dt.Rows) 
-            {
+        //    foreach (DataRow row in dt.Rows) 
+        //    {
                 
-                Customer.CustomerName.Add(row.Field<string>("Name"));
+        //        Customer.CustomerName.Add(row.Field<string>("Name"));
                 
-            }
-        }
+        //    }
+        //}
 
         private void linkLabel_cancel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
