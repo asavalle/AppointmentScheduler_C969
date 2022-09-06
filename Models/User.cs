@@ -1,7 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
+using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Models
 {
@@ -26,6 +28,28 @@ namespace AppointmentScheduler_C969.Models
             this.active = Active;
             this.createdBy = CreatedBy;
         }
+        //Function to populate Users table from database
+        public static DataTable GetUsers()
+        {
+            DataTable usersTable = new DataTable();
+            try
+            {
+
+                using (var getAptCmd = new MySqlCommand("SELECT * FROM client_schedule.user", DataAccess.conn))
+                {
+                    MySqlDataReader reader = getAptCmd.ExecuteReader();
+                    usersTable.Load(reader);
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return usersTable;
+        }
 
         public List<User> getAllUserInfo() {
             //Add code to retrieve data from the database and add it to the list
@@ -40,7 +64,7 @@ namespace AppointmentScheduler_C969.Models
                 DataAccess.OpenConnection();
             }
 
-            var getUserId_cmd = new MySqlCommand($"select userId from client_schedule.user where userName = '{DataAccess.loggedInUser}'",DataAccess.conn);
+            var getUserId_cmd = new MySqlCommand($"select userId from client_schedule.user where userName = '{DataAccess.LoggedInUser}'",DataAccess.conn);
             var userId = getUserId_cmd.ExecuteReader();
             userId.Read();
             int id = Convert.ToInt32(userId.GetValue(0));

@@ -13,53 +13,88 @@ namespace AppointmentScheduler_C969.Views
 {
     public partial class ModifyAppointment : Form
     {
+        Appointment tempApptObj = new Appointment();
+            
         public ModifyAppointment()
         {
             InitializeComponent();
-            DataTable aptTable = DataAccess.GetAppoitments();
-            var selectedApt = aptTable.AsEnumerable().Where(x => x.Field<int>("appointmentId") == Appointment.selectedAppointmentId).FirstOrDefault();
-            
-            //set the Customer Name list
-            Customer.GetCustomerList();
-            Appointment.GenerateTimes();
-
+                                  
+            cb_modSTime.DataSource = Appointment.StartTimes;
+            cb_modETime.DataSource = Appointment.EndTimes;
             cb_modCustomer.DataSource = Customer.CustomerName;
+        }
+
+        private void ModifyAppointment_Load(object sender, EventArgs e)
+        {
             
-
-
-            //set the Customer name to the selected name of the appointment
-            cb_modCustomer.SelectedItem = Customer.GetCustomerName(selectedApt.Field<int>("customerId"));
-            tb_modContact.Text = selectedApt.Field<string>("contact");
-            tb_modTitle.Text = selectedApt.Field<string>("title");
-            tb_modType.Text = selectedApt.Field<string>("type");
-            tb_modDescription.Text = selectedApt.Field<string>("description");
-            dtp_modDate.Value = selectedApt.Field<DateTime>("start");
-            cb_modSTime.Text = selectedApt.Field<DateTime>("start").ToShortTimeString();
-            cb_modETime.Text = selectedApt.Field<DateTime>("end").ToShortTimeString();
-            tb_modLocation.Text = selectedApt.Field<string>("location");
-            tb_modURL.Text = selectedApt.Field<string>("url");
+            //Convert Appointments DataTable to an Enumerable to be able to access fields.
+            DataTable aptTable = Appointment.GetAppoitments();
+            var selectedApt = aptTable.AsEnumerable().Where(x => x.Field<int>("appointmentId") == Appointment.selectedAppointmentId).FirstOrDefault();
+            try
+            {
+                //Populate form fields from selected row's data.
+                cb_modCustomer.SelectedItem = Customer.GetCustomerName(selectedApt.Field<int>("customerId"));
+                tb_modContact.Text = selectedApt.Field<string>("contact");
+                tb_modTitle.Text = selectedApt.Field<string>("title");
+                tb_modType.Text = selectedApt.Field<string>("type");
+                tb_modDescription.Text = selectedApt.Field<string>("description");
+                dtp_modDate.Value = selectedApt.Field<DateTime>("start");
+                cb_modSTime.Text = selectedApt.Field<DateTime>("start").ToShortTimeString();
+                cb_modETime.Text = selectedApt.Field<DateTime>("end").ToShortTimeString();
+                tb_modLocation.Text = selectedApt.Field<string>("location");
+                tb_modURL.Text = selectedApt.Field<string>("url");
+            }
+            catch
+            {
+                MessageBox.Show("Please select an appointment to modify.");
+            }
             
-
         }
 
         private void btn_editApt_Click(object sender, EventArgs e)
         {
+            var currentStartTime = cb_modSTime.Text;
+            var currentEndTime = cb_modETime.Text;
+
             //Set's all the child controls of the form to enabled
             foreach(Control c in this.gb_modAptForm.Controls)
             {
                 c.Enabled = true;
-            }
-            cb_modSTime.DataSource = Appointment.StartTimes;
-            cb_modETime.DataSource = Appointment.EndTimes;
+            }            
+
+            cb_modSTime.SelectedItem = currentStartTime;
+            cb_modETime.SelectedItem = currentEndTime;
             btn_Save.Visible = true;
-
-
-            AppointmentsController.ModifyAppointment();
+    
         }
 
         private void linkLabel_modCancel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            
             this.Close();
         }
+
+        private void btn_Save_Click(object sender, EventArgs e)
+        {
+            var newStart = DateTime.Parse(cb_modSTime.Text);
+            var newEnd = DateTime.Parse(cb_modETime.Text);
+
+            tempApptObj.CustomerName = cb_modCustomer.SelectedItem.ToString();
+            tempApptObj.Contact = tb_modContact.Text;
+            tempApptObj.Title = tb_modTitle.Text;
+            tempApptObj.Type = tb_modType.Text;
+            tempApptObj.Description = tb_modDescription.Text;
+            tempApptObj.CreateDate = dtp_modDate.Value;
+            tempApptObj.LastUpdate = DateTime.Now;
+            tempApptObj.StartTime = newStart;
+            tempApptObj.EndTime = newEnd;
+            tempApptObj.Location = tb_modLocation.Text;
+            tempApptObj.URL = tb_modURL.Text;
+
+
+            AppointmentsController.ModifyAppointment(tempApptObj);
+        }
+
+        
     }
 }

@@ -2,8 +2,11 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 
 namespace AppointmentScheduler_C969.Models
 {
@@ -49,7 +52,31 @@ namespace AppointmentScheduler_C969.Models
             this.LastUpdate = lastUpdate;
             this.LastUpdateBy = lastUpdateBy;
         }
+        //Function to populate Appointments table from database
+        public static DataTable GetAppoitments()
+        {                
+            DataTable aptTable = new DataTable();
 
+            try
+            {
+
+                var getAptCmd = new MySqlCommand("SELECT appointmentId, customer.customerName, appointment.location, appointment.contact, appointment.type, " +
+                    "appointment.start, appointment.end, appointment.start as Date FROM client_schedule.appointment " +
+                    "inner join customer where customer.customerId = appointment.customerId; ", DataAccess.conn);
+
+
+                MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getAptCmd);
+
+                
+                sqlAdp.Fill(aptTable);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            
+            return aptTable;
+        }
         public static void GenerateTimes()
         {
             var culture = new System.Globalization.CultureInfo("en-Us");
@@ -64,7 +91,7 @@ namespace AppointmentScheduler_C969.Models
         public static void InsertAppointment(Appointment apt)
         {
             int userId = User.GetUserId();
-            var formatSDate = apt.StartTime.ToString("yyyy-MM-dd hh:mm:ss");
+            var formatSDate = apt.StartTime.ToString("yyyy-MM-dd hh:mm:ss"); 
             var formatEDate = apt.EndTime.ToString("yyyy-MM-dd hh:mm:ss");
             var formatCreateDate = apt.CreateDate.ToString("yyyy-MM-dd hh:mm:ss");
             var formatLastUpDate = apt.LastUpdate.ToString("yyyy-MM-dd hh:mm:ss");
@@ -105,11 +132,24 @@ namespace AppointmentScheduler_C969.Models
             }
         }
 
-        public static void ModifyAppointment()
+        public static Appointment UpdateAppointment(Appointment apt)
         {
-
+            
             //pull selected data from database. Pass to controller.
-            MessageBox.Show("Modifying Appointment underway....");
+            MessageBox.Show(
+                apt.CustomerName + "\n" +
+                apt.Contact + "\n" +
+                apt.Title + "\n" +
+                apt.Type + "\n" +
+                apt.Description + "\n"+
+                apt.CreateDate + "\n" +
+                apt.StartTime + "\n" +
+                apt.EndTime + "\n" +
+                apt.Location + "\n" +
+                apt.URL + "\n"
+                );
+
+            return apt;
         }
     }
 }

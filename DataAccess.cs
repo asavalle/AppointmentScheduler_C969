@@ -12,9 +12,9 @@ namespace AppointmentScheduler_C969
 {
     public static class DataAccess
     {
-        public static string loggedInUser { get; set; }
+        public static string LoggedInUser { get; set; }
         public static bool loginSuccessful;
-        private static string dbConnStr = ConfigurationManager.ConnectionStrings["database"].ConnectionString;
+        private static readonly string dbConnStr = ConfigurationManager.ConnectionStrings["database"].ConnectionString;
         public static MySqlConnection conn = new MySqlConnection(dbConnStr);
         public static bool isConnOpen = false;
 
@@ -73,7 +73,7 @@ namespace AppointmentScheduler_C969
                     //compare entered username and password to database values
                     if (userName == uname.ToString() && password == pass.ToString())
                     {
-                        loggedInUser = uname;
+                        LoggedInUser = uname;
                         loginSuccessful = true;
                     }
                     else
@@ -119,78 +119,8 @@ namespace AppointmentScheduler_C969
 
         }
 
-        //Function to populate Appointments table from database
-        public static DataTable GetAppoitments()
-        {
-            DataTable aptTable = new DataTable();
-            try
-            {   
-                
-                using (var getAptCmd = new MySqlCommand("select * from client_schedule.appointment", conn))
-                {
-                    MySqlDataReader reader = getAptCmd.ExecuteReader();
-                    aptTable.Load(reader);
-                }                                             
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
+        
 
-            return aptTable;
-        }
-
-        //Function to populate Customer table from database
-        public static DataTable GetCustomers()
-        {
-            DataTable custTable = new DataTable();
-            try
-            {               
-                
-                using (var getAptCmd = new MySqlCommand("SELECT customer.customerId as Customer_ID, customer.customerName as Name, " +
-                    "address.address as Address, city.city as City, address.postalCode as Zip, " +
-                    "address.phone as Phone FROM((customer INNER JOIN address on address.addressId = customer.addressId) " +
-                    "INNER JOIN city ON address.cityId = city.cityId)", conn))
-                {
-                    MySqlDataReader reader = getAptCmd.ExecuteReader();
-                    custTable.Load(reader);
-                }
-                
-                
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-
-            return custTable;
-        }
-
-        //Function to populate Users table from database
-        public static DataTable GetUsers() 
-        { 
-            DataTable usersTable = new DataTable();
-            try
-            {               
-                
-                using (var getAptCmd = new MySqlCommand("SELECT * FROM client_schedule.user", conn))
-                {
-                    MySqlDataReader reader = getAptCmd.ExecuteReader();
-                    usersTable.Load(reader);
-                }
-                
-                
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-
-            return usersTable;
-        }
-
-       
- 
 
 
     }

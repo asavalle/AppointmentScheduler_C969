@@ -117,6 +117,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_Save.Text = "Save";
             this.btn_Save.UseVisualStyleBackColor = false;
             this.btn_Save.Visible = false;
+            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
             // btn_editApt
             // 
@@ -316,6 +317,7 @@ namespace AppointmentScheduler_C969.Views
             this.Controls.Add(this.gb_modAptForm);
             this.Name = "ModifyAppointment";
             this.Text = "ModifyAppointment";
+            this.Load += new System.EventHandler(this.ModifyAppointment_Load);
             this.gb_modAptForm.ResumeLayout(false);
             this.gb_modAptForm.PerformLayout();
             this.ResumeLayout(false);
@@ -325,10 +327,6 @@ namespace AppointmentScheduler_C969.Views
         #endregion
 
         private System.Windows.Forms.GroupBox gb_modAptForm;
-        private System.Windows.Forms.TextBox tb_modContact;
-        private System.Windows.Forms.ComboBox cb_modCustomer;
-        private System.Windows.Forms.TextBox tb_modType;
-        private System.Windows.Forms.TextBox tb_modTitle;
         private System.Windows.Forms.TextBox tb_modDescription;
         private System.Windows.Forms.DateTimePicker dtp_modDate;
         private System.Windows.Forms.ComboBox cb_modETime;
@@ -348,5 +346,9 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Button btn_editApt;
         private System.Windows.Forms.Button btn_Save;
         private System.Windows.Forms.LinkLabel linkLabel_modCancel;
+        public System.Windows.Forms.TextBox tb_modContact;
+        public System.Windows.Forms.ComboBox cb_modCustomer;
+        public System.Windows.Forms.TextBox tb_modType;
+        public System.Windows.Forms.TextBox tb_modTitle;
     }
 }

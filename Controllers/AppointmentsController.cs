@@ -31,9 +31,9 @@ namespace AppointmentScheduler_C969.Controllers
             newAppt.StartTime = start;
             newAppt.EndTime = end;
             newAppt.CreateDate = DateTime.Now;
-            newAppt.CreatedBy = DataAccess.loggedInUser;
+            newAppt.CreatedBy = DataAccess.LoggedInUser;
             newAppt.LastUpdate = DateTime.Now;
-            newAppt.LastUpdateBy = DataAccess.loggedInUser;
+            newAppt.LastUpdateBy = DataAccess.LoggedInUser;
 
             Appointment.InsertAppointment(newAppt);
 
@@ -69,12 +69,19 @@ namespace AppointmentScheduler_C969.Controllers
           
         }
 
-        public static void ModifyAppointment()
+        public static Appointment ModifyAppointment(Appointment updatedApt)
         {
-            //Take in data passed from Appointment class and construct it into usable object to pass to view.
+            //Take in data passed from View and format it into usable object to pass to Database via the Appointment class. 
+            //Then return the modified Appointment to view.
 
-            Appointment.ModifyAppointment();
+            var startTimeOnly = updatedApt.StartTime.ToShortTimeString();
+            var endTimeOnly = updatedApt.EndTime.ToShortTimeString();
 
+            MessageBox.Show("StartTimeOnly = " + startTimeOnly + "\n" + "EndTimeOnly = " + endTimeOnly);
+
+            Appointment.UpdateAppointment(updatedApt);
+
+            return updatedApt;
         }
     }
 }

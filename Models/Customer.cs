@@ -35,7 +35,31 @@ namespace AppointmentScheduler_C969.Models
             this.LastUpdate = lastUpdate;
             this.LastUpdateBy = lastUpdateBy;
         }
+        //Function to populate Customer table from database
+        public static DataTable GetCustomers()
+        {
+            DataTable custTable = new DataTable();
+            try
+            {
 
+                using (var getAptCmd = new MySqlCommand("SELECT customer.customerId as Customer_ID, customer.customerName as Name, " +
+                    "address.address as Address, city.city as City, address.postalCode as Zip, " +
+                    "address.phone as Phone FROM((customer INNER JOIN address on address.addressId = customer.addressId) " +
+                    "INNER JOIN city ON address.cityId = city.cityId)", DataAccess.conn))
+                {
+                    MySqlDataAdapter sqlAdpt = new MySqlDataAdapter(getAptCmd);
+                    sqlAdpt.Fill(custTable);
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return custTable;
+        }
         public static int GetCustomerId(string name)
         {
 
@@ -71,7 +95,7 @@ namespace AppointmentScheduler_C969.Models
 
         public static void GetCustomerList()
         {
-            DataTable dt = DataAccess.GetCustomers();
+            DataTable dt = Customer.GetCustomers();
 
             foreach (DataRow row in dt.Rows)
             {

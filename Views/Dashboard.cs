@@ -14,25 +14,40 @@ namespace AppointmentScheduler_C969.Views
     {
         public static DataGridViewSelectedRowCollection selectedRow;
         Appointment tempApt = new Appointment();
-
+        private BindingSource bsAppointments = new BindingSource();
 
         public Dashboard()
         {
             InitializeComponent();
-            lb_user.Text = DataAccess.loggedInUser + " is logged in.";
+            lb_user.Text = DataAccess.LoggedInUser + " is logged in.";
 
-            dgv_Appointments.DataSource = DataAccess.GetAppoitments();
-            dgv_Customers.DataSource = DataAccess.GetCustomers();
+            bsAppointments.DataSource = Appointment.GetAppoitments();
+            dgv_Appointments.DataSource = bsAppointments;
+            dgv_Appointments.Sort(dgv_Appointments.Columns["appointmentId"], ListSortDirection.Ascending);
+            dgv_Appointments.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgv_Appointments.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgv_Appointments.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgv_Appointments.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgv_Appointments.Columns["start"].DefaultCellStyle.Format = "hh:mm tt";
+            dgv_Appointments.Columns["end"].DefaultCellStyle.Format = "hh:mm tt";
+            dgv_Appointments.Columns["Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
+
+
+            dgv_Customers.DataSource = Customer.GetCustomers();
+            dgv_Users.DataSource = User.GetUsers();
             dgv_Customers.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dgv_Customers.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgv_Customers.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgv_Customers.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgv_Users.DataSource = DataAccess.GetUsers();
+
             dgv_Users.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dgv_Users.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgv_Users.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgv_Users.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             DataAccess.CloseConnection();
+
+            Customer.GetCustomerList();
+            Appointment.GenerateTimes();
         }
         private void Dashboard_Activated(object sender, EventArgs e)
         {
@@ -40,7 +55,7 @@ namespace AppointmentScheduler_C969.Views
         }
         public void ReloadAppointments()
         {
-            dgv_Appointments.DataSource = DataAccess.GetAppoitments();
+            dgv_Appointments.DataSource = Appointment.GetAppoitments();
         }
         private void btn_Logout_Click(object sender, EventArgs e)
         {
@@ -62,10 +77,7 @@ namespace AppointmentScheduler_C969.Views
         private void btn_ModAppt_Click(object sender, EventArgs e)
         {
             ModifyAppointment modifyApt = new ModifyAppointment();
-            modifyApt.Show();
-
-            //TODO: Get selected row of data
-            
+            modifyApt.Show();           
 
         }
 
@@ -84,7 +96,6 @@ namespace AppointmentScheduler_C969.Views
                 Appointment.selectedAppointmentId = Convert.ToInt32(row.Cells[0].Value.ToString());
 
             }
-            //MessageBox.Show("The current Appointment ID is " + Appointment.selectedAppointmentId );
         }
     }
 }
