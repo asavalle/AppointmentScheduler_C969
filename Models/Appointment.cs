@@ -60,9 +60,9 @@ namespace AppointmentScheduler_C969.Models
             try
             {
 
-                var getAptCmd = new MySqlCommand("SELECT appointmentId, customer.customerName, appointment.location, appointment.contact, appointment.type, " +
-                    "appointment.start, appointment.end, appointment.start as Date FROM client_schedule.appointment " +
-                    "inner join customer where customer.customerId = appointment.customerId; ", DataAccess.conn);
+                var getAptCmd = new MySqlCommand("SELECT appointmentId, customer.customerName,appointment.title,appointment.description, appointment.contact, " +
+                    "appointment.type, appointment.start, appointment.end, appointment.start as appointment_Date,appointment.location, appointment.url " +
+                    "FROM client_schedule.appointment inner join customer where customer.customerId = appointment.customerId; ", DataAccess.conn);
 
 
                 MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getAptCmd);

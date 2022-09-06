@@ -33,7 +33,7 @@ namespace AppointmentScheduler_C969.Views
             try
             {
                 //Populate form fields from selected row's data.
-                cb_modCustomer.SelectedItem = Customer.GetCustomerName(selectedApt.Field<int>("customerId"));
+                cb_modCustomer.SelectedItem = selectedApt.Field<string>("customerName");
                 tb_modContact.Text = selectedApt.Field<string>("contact");
                 tb_modTitle.Text = selectedApt.Field<string>("title");
                 tb_modType.Text = selectedApt.Field<string>("type");
@@ -44,9 +44,9 @@ namespace AppointmentScheduler_C969.Views
                 tb_modLocation.Text = selectedApt.Field<string>("location");
                 tb_modURL.Text = selectedApt.Field<string>("url");
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Please select an appointment to modify.");
+                MessageBox.Show(ex.Message);
             }
             
         }

@@ -30,7 +30,7 @@ namespace AppointmentScheduler_C969.Views
             dgv_Appointments.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgv_Appointments.Columns["start"].DefaultCellStyle.Format = "hh:mm tt";
             dgv_Appointments.Columns["end"].DefaultCellStyle.Format = "hh:mm tt";
-            dgv_Appointments.Columns["Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
+            dgv_Appointments.Columns["appointment_Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
 
 
             dgv_Customers.DataSource = Customer.GetCustomers();
