@@ -53,11 +53,15 @@ namespace AppointmentScheduler_C969.Views
             this.tb_modTitle = new System.Windows.Forms.TextBox();
             this.tb_modContact = new System.Windows.Forms.TextBox();
             this.cb_modCustomer = new System.Windows.Forms.ComboBox();
+            this.tb_aptID = new System.Windows.Forms.TextBox();
+            this.lb_aptIdLabel = new System.Windows.Forms.Label();
             this.gb_modAptForm.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb_modAptForm
             // 
+            this.gb_modAptForm.Controls.Add(this.lb_aptIdLabel);
+            this.gb_modAptForm.Controls.Add(this.tb_aptID);
             this.gb_modAptForm.Controls.Add(this.linkLabel_modCancel);
             this.gb_modAptForm.Controls.Add(this.btn_Save);
             this.gb_modAptForm.Controls.Add(this.btn_editApt);
@@ -113,7 +117,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_Save.Location = new System.Drawing.Point(116, 586);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(84, 37);
-            this.btn_Save.TabIndex = 37;
+            this.btn_Save.TabIndex = 10;
             this.btn_Save.Text = "Save";
             this.btn_Save.UseVisualStyleBackColor = false;
             this.btn_Save.Visible = false;
@@ -136,7 +140,7 @@ namespace AppointmentScheduler_C969.Views
             // lb_modURL
             // 
             this.lb_modURL.AutoSize = true;
-            this.lb_modURL.Location = new System.Drawing.Point(78, 503);
+            this.lb_modURL.Location = new System.Drawing.Point(78, 540);
             this.lb_modURL.Name = "lb_modURL";
             this.lb_modURL.Size = new System.Drawing.Size(28, 15);
             this.lb_modURL.TabIndex = 35;
@@ -145,7 +149,7 @@ namespace AppointmentScheduler_C969.Views
             // lb_modLocation
             // 
             this.lb_modLocation.AutoSize = true;
-            this.lb_modLocation.Location = new System.Drawing.Point(53, 465);
+            this.lb_modLocation.Location = new System.Drawing.Point(53, 502);
             this.lb_modLocation.Name = "lb_modLocation";
             this.lb_modLocation.Size = new System.Drawing.Size(53, 15);
             this.lb_modLocation.TabIndex = 34;
@@ -154,7 +158,7 @@ namespace AppointmentScheduler_C969.Views
             // lb_modETime
             // 
             this.lb_modETime.AutoSize = true;
-            this.lb_modETime.Location = new System.Drawing.Point(50, 433);
+            this.lb_modETime.Location = new System.Drawing.Point(50, 470);
             this.lb_modETime.Name = "lb_modETime";
             this.lb_modETime.Size = new System.Drawing.Size(56, 15);
             this.lb_modETime.TabIndex = 33;
@@ -163,7 +167,7 @@ namespace AppointmentScheduler_C969.Views
             // lb_modSTime
             // 
             this.lb_modSTime.AutoSize = true;
-            this.lb_modSTime.Location = new System.Drawing.Point(46, 404);
+            this.lb_modSTime.Location = new System.Drawing.Point(46, 441);
             this.lb_modSTime.Name = "lb_modSTime";
             this.lb_modSTime.Size = new System.Drawing.Size(60, 15);
             this.lb_modSTime.TabIndex = 32;
@@ -172,7 +176,7 @@ namespace AppointmentScheduler_C969.Views
             // lb_modDate
             // 
             this.lb_modDate.AutoSize = true;
-            this.lb_modDate.Location = new System.Drawing.Point(1, 364);
+            this.lb_modDate.Location = new System.Drawing.Point(1, 401);
             this.lb_modDate.Name = "lb_modDate";
             this.lb_modDate.Size = new System.Drawing.Size(105, 15);
             this.lb_modDate.TabIndex = 31;
@@ -181,7 +185,7 @@ namespace AppointmentScheduler_C969.Views
             // lb_modDesc
             // 
             this.lb_modDesc.AutoSize = true;
-            this.lb_modDesc.Location = new System.Drawing.Point(39, 231);
+            this.lb_modDesc.Location = new System.Drawing.Point(39, 268);
             this.lb_modDesc.Name = "lb_modDesc";
             this.lb_modDesc.Size = new System.Drawing.Size(67, 15);
             this.lb_modDesc.TabIndex = 30;
@@ -190,7 +194,7 @@ namespace AppointmentScheduler_C969.Views
             // lb_modType
             // 
             this.lb_modType.AutoSize = true;
-            this.lb_modType.Location = new System.Drawing.Point(75, 179);
+            this.lb_modType.Location = new System.Drawing.Point(75, 216);
             this.lb_modType.Name = "lb_modType";
             this.lb_modType.Size = new System.Drawing.Size(31, 15);
             this.lb_modType.TabIndex = 29;
@@ -199,7 +203,7 @@ namespace AppointmentScheduler_C969.Views
             // lb_modTitle
             // 
             this.lb_modTitle.AutoSize = true;
-            this.lb_modTitle.Location = new System.Drawing.Point(77, 134);
+            this.lb_modTitle.Location = new System.Drawing.Point(77, 171);
             this.lb_modTitle.Name = "lb_modTitle";
             this.lb_modTitle.Size = new System.Drawing.Size(29, 15);
             this.lb_modTitle.TabIndex = 28;
@@ -208,7 +212,7 @@ namespace AppointmentScheduler_C969.Views
             // lb_modContact
             // 
             this.lb_modContact.AutoSize = true;
-            this.lb_modContact.Location = new System.Drawing.Point(57, 93);
+            this.lb_modContact.Location = new System.Drawing.Point(57, 130);
             this.lb_modContact.Name = "lb_modContact";
             this.lb_modContact.Size = new System.Drawing.Size(49, 15);
             this.lb_modContact.TabIndex = 27;
@@ -217,7 +221,7 @@ namespace AppointmentScheduler_C969.Views
             // lb_modCustomer
             // 
             this.lb_modCustomer.AutoSize = true;
-            this.lb_modCustomer.Location = new System.Drawing.Point(47, 53);
+            this.lb_modCustomer.Location = new System.Drawing.Point(47, 90);
             this.lb_modCustomer.Name = "lb_modCustomer";
             this.lb_modCustomer.Size = new System.Drawing.Size(59, 15);
             this.lb_modCustomer.TabIndex = 25;
@@ -226,50 +230,50 @@ namespace AppointmentScheduler_C969.Views
             // tb_modURL
             // 
             this.tb_modURL.Enabled = false;
-            this.tb_modURL.Location = new System.Drawing.Point(116, 500);
+            this.tb_modURL.Location = new System.Drawing.Point(116, 537);
             this.tb_modURL.Name = "tb_modURL";
             this.tb_modURL.Size = new System.Drawing.Size(289, 23);
-            this.tb_modURL.TabIndex = 24;
+            this.tb_modURL.TabIndex = 9;
             // 
             // tb_modLocation
             // 
             this.tb_modLocation.Enabled = false;
-            this.tb_modLocation.Location = new System.Drawing.Point(116, 462);
+            this.tb_modLocation.Location = new System.Drawing.Point(116, 499);
             this.tb_modLocation.Name = "tb_modLocation";
             this.tb_modLocation.Size = new System.Drawing.Size(246, 23);
-            this.tb_modLocation.TabIndex = 22;
+            this.tb_modLocation.TabIndex = 8;
             // 
             // cb_modETime
             // 
             this.cb_modETime.Enabled = false;
             this.cb_modETime.FormattingEnabled = true;
-            this.cb_modETime.Location = new System.Drawing.Point(116, 430);
+            this.cb_modETime.Location = new System.Drawing.Point(116, 467);
             this.cb_modETime.Name = "cb_modETime";
             this.cb_modETime.Size = new System.Drawing.Size(108, 23);
-            this.cb_modETime.TabIndex = 15;
+            this.cb_modETime.TabIndex = 7;
             // 
             // cb_modSTime
             // 
             this.cb_modSTime.Enabled = false;
             this.cb_modSTime.FormattingEnabled = true;
-            this.cb_modSTime.Location = new System.Drawing.Point(116, 401);
+            this.cb_modSTime.Location = new System.Drawing.Point(116, 438);
             this.cb_modSTime.Name = "cb_modSTime";
             this.cb_modSTime.Size = new System.Drawing.Size(108, 23);
-            this.cb_modSTime.TabIndex = 14;
+            this.cb_modSTime.TabIndex = 6;
             // 
             // dtp_modDate
             // 
             this.dtp_modDate.Enabled = false;
             this.dtp_modDate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dtp_modDate.Location = new System.Drawing.Point(116, 358);
+            this.dtp_modDate.Location = new System.Drawing.Point(116, 395);
             this.dtp_modDate.Name = "dtp_modDate";
             this.dtp_modDate.Size = new System.Drawing.Size(246, 23);
-            this.dtp_modDate.TabIndex = 11;
+            this.dtp_modDate.TabIndex = 5;
             // 
             // tb_modDescription
             // 
             this.tb_modDescription.Enabled = false;
-            this.tb_modDescription.Location = new System.Drawing.Point(116, 228);
+            this.tb_modDescription.Location = new System.Drawing.Point(116, 265);
             this.tb_modDescription.Multiline = true;
             this.tb_modDescription.Name = "tb_modDescription";
             this.tb_modDescription.Size = new System.Drawing.Size(246, 115);
@@ -278,7 +282,7 @@ namespace AppointmentScheduler_C969.Views
             // tb_modType
             // 
             this.tb_modType.Enabled = false;
-            this.tb_modType.Location = new System.Drawing.Point(116, 176);
+            this.tb_modType.Location = new System.Drawing.Point(116, 213);
             this.tb_modType.Name = "tb_modType";
             this.tb_modType.Size = new System.Drawing.Size(246, 23);
             this.tb_modType.TabIndex = 3;
@@ -286,7 +290,7 @@ namespace AppointmentScheduler_C969.Views
             // tb_modTitle
             // 
             this.tb_modTitle.Enabled = false;
-            this.tb_modTitle.Location = new System.Drawing.Point(116, 131);
+            this.tb_modTitle.Location = new System.Drawing.Point(116, 168);
             this.tb_modTitle.Name = "tb_modTitle";
             this.tb_modTitle.Size = new System.Drawing.Size(246, 23);
             this.tb_modTitle.TabIndex = 2;
@@ -294,7 +298,7 @@ namespace AppointmentScheduler_C969.Views
             // tb_modContact
             // 
             this.tb_modContact.Enabled = false;
-            this.tb_modContact.Location = new System.Drawing.Point(116, 90);
+            this.tb_modContact.Location = new System.Drawing.Point(116, 127);
             this.tb_modContact.Name = "tb_modContact";
             this.tb_modContact.Size = new System.Drawing.Size(246, 23);
             this.tb_modContact.TabIndex = 1;
@@ -303,11 +307,29 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.cb_modCustomer.Enabled = false;
             this.cb_modCustomer.FormattingEnabled = true;
-            this.cb_modCustomer.Location = new System.Drawing.Point(116, 50);
+            this.cb_modCustomer.Location = new System.Drawing.Point(116, 87);
             this.cb_modCustomer.Name = "cb_modCustomer";
             this.cb_modCustomer.Size = new System.Drawing.Size(246, 23);
             this.cb_modCustomer.Sorted = true;
             this.cb_modCustomer.TabIndex = 0;
+            // 
+            // tb_aptID
+            // 
+            this.tb_aptID.Enabled = false;
+            this.tb_aptID.Location = new System.Drawing.Point(116, 45);
+            this.tb_aptID.Name = "tb_aptID";
+            this.tb_aptID.ReadOnly = true;
+            this.tb_aptID.Size = new System.Drawing.Size(84, 23);
+            this.tb_aptID.TabIndex = 39;
+            // 
+            // lb_aptIdLabel
+            // 
+            this.lb_aptIdLabel.AutoSize = true;
+            this.lb_aptIdLabel.Location = new System.Drawing.Point(14, 48);
+            this.lb_aptIdLabel.Name = "lb_aptIdLabel";
+            this.lb_aptIdLabel.Size = new System.Drawing.Size(92, 15);
+            this.lb_aptIdLabel.TabIndex = 40;
+            this.lb_aptIdLabel.Text = "Appointment ID";
             // 
             // ModifyAppointment
             // 
@@ -350,5 +372,7 @@ namespace AppointmentScheduler_C969.Views
         public System.Windows.Forms.ComboBox cb_modCustomer;
         public System.Windows.Forms.TextBox tb_modType;
         public System.Windows.Forms.TextBox tb_modTitle;
+        private System.Windows.Forms.Label lb_aptIdLabel;
+        public System.Windows.Forms.TextBox tb_aptID;
     }
 }

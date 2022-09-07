@@ -123,7 +123,7 @@ namespace AppointmentScheduler_C969.Models
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.ToString());
+                    MessageBox.Show(e.Message);
                 }
             }
             else
@@ -132,8 +132,33 @@ namespace AppointmentScheduler_C969.Models
             }
         }
 
-        public static Appointment UpdateAppointment(Appointment apt)
+        public static void UpdateAppointment(Appointment apt)
         {
+            int userId = User.GetUserId();
+            var formatSDate = apt.StartTime.ToString("yyyy-MM-dd hh:mm:ss");
+            var formatEDate = apt.EndTime.ToString("yyyy-MM-dd hh:mm:ss");
+            var formatCreateDate = apt.CreateDate.ToString("yyyy-MM-dd hh:mm:ss");
+            var formatLastUpDate = apt.LastUpdate.ToString("yyyy-MM-dd hh:mm:ss");
+            var now = DateTime.Now;
+
+            if (!DataAccess.isConnOpen)
+            {
+                DataAccess.OpenConnection();
+            }
+            try
+            {
+                //TODO: DOESN'T PROPERLY UPDATE/FORMAT APPOINTMENT DATE, 
+            var update_cmd = new MySqlCommand($"UPDATE client_schedule.appointment SET appointment.customerId = {apt.CustomerId}, appointment.title = '{apt.Title}', appointment.contact = '{apt.Contact}', appointment.type = '{apt.Type}', appointment.start = '{formatSDate}', appointment.end = '{formatEDate}',appointment.createDate= '{formatCreateDate}', appointment.lastUpdate = '{formatLastUpDate}' WHERE appointment.appointmentId = {apt.AppointmentId}; ", DataAccess.conn);
+            var update = update_cmd.ExecuteNonQuery();
+                DataAccess.CloseConnection();
+
+            }
+            catch(MySqlException exsql)
+            {
+                MessageBox.Show(exsql.Message);
+            }
+            
+           
             
             //pull selected data from database. Pass to controller.
             MessageBox.Show(
@@ -149,7 +174,6 @@ namespace AppointmentScheduler_C969.Models
                 apt.URL + "\n"
                 );
 
-            return apt;
         }
     }
 }

@@ -69,19 +69,13 @@ namespace AppointmentScheduler_C969.Controllers
           
         }
 
-        public static Appointment ModifyAppointment(Appointment updatedApt)
+        public static void ModifyAppointment(Appointment updatedApt)
         {
             //Take in data passed from View and format it into usable object to pass to Database via the Appointment class. 
             //Then return the modified Appointment to view.
 
-            var startTimeOnly = updatedApt.StartTime.ToShortTimeString();
-            var endTimeOnly = updatedApt.EndTime.ToShortTimeString();
-
-            MessageBox.Show("StartTimeOnly = " + startTimeOnly + "\n" + "EndTimeOnly = " + endTimeOnly);
-
             Appointment.UpdateAppointment(updatedApt);
 
-            return updatedApt;
         }
     }
 }

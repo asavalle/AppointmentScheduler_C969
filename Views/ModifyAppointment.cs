@@ -33,6 +33,7 @@ namespace AppointmentScheduler_C969.Views
             try
             {
                 //Populate form fields from selected row's data.
+                tb_aptID.Text = selectedApt.Field<int>("appointmentId").ToString();
                 cb_modCustomer.SelectedItem = selectedApt.Field<string>("customerName");
                 tb_modContact.Text = selectedApt.Field<string>("contact");
                 tb_modTitle.Text = selectedApt.Field<string>("title");
@@ -79,7 +80,9 @@ namespace AppointmentScheduler_C969.Views
             var newStart = DateTime.Parse(cb_modSTime.Text);
             var newEnd = DateTime.Parse(cb_modETime.Text);
 
+            tempApptObj.AppointmentId = Appointment.selectedAppointmentId;
             tempApptObj.CustomerName = cb_modCustomer.SelectedItem.ToString();
+            tempApptObj.CustomerId = Customer.GetCustomerId(tempApptObj.CustomerName);
             tempApptObj.Contact = tb_modContact.Text;
             tempApptObj.Title = tb_modTitle.Text;
             tempApptObj.Type = tb_modType.Text;
@@ -93,6 +96,11 @@ namespace AppointmentScheduler_C969.Views
 
 
             AppointmentsController.ModifyAppointment(tempApptObj);
+            foreach (Control c in this.gb_modAptForm.Controls)
+            {
+                c.Enabled = false;
+            }
+            this.Close();
         }
 
         
