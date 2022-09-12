@@ -16,7 +16,6 @@ namespace AppointmentScheduler_C969
         public static bool loginSuccessful;
         private static readonly string dbConnStr = ConfigurationManager.ConnectionStrings["database"].ConnectionString;
         public static MySqlConnection conn = new MySqlConnection(dbConnStr);
-        public static bool isConnOpen = false;
 
         /*
         * Query's the database to validate and populate DataGridViews.
@@ -26,12 +25,19 @@ namespace AppointmentScheduler_C969
         {
             try
             {
-                conn.Open();
-                isConnOpen = true;
-            }
-            catch 
-            {
+                using(var cnn = new MySqlConnection(dbConnStr))
+                {
+                    if(DataAccess.conn.State is ConnectionState.Closed)
+                    {
+                         conn.Open();
+
+                    }
+                }
                 
+            }
+            catch(MySqlException err) 
+            {
+                MessageBox.Show(err.Message);
             }
         }
         public static void CloseConnection()
@@ -41,7 +47,6 @@ namespace AppointmentScheduler_C969
                 using (var cnn = new MySqlConnection(dbConnStr))
                 {                   
                     cnn.Close();
-                    isConnOpen = false;
                 }
             }
             catch (Exception e)
@@ -60,7 +65,7 @@ namespace AppointmentScheduler_C969
                 //Check that the Username and Password fields are not empty
                 if (userName != "" && password != "")
                 {
-                    if (!isConnOpen)
+                    if (conn.State is ConnectionState.Closed)
                     {
                         OpenConnection();
                     }
@@ -92,9 +97,7 @@ namespace AppointmentScheduler_C969
                         }
                         loginSuccessful = false;
 
-                    }
-                    
-                    
+                    }                                      
                 }
                 else
                 {
@@ -116,7 +119,10 @@ namespace AppointmentScheduler_C969
             {
                 MessageBox.Show(e.Message);
             }
-
+            finally
+            {
+                CloseConnection();
+            }
         }
 
         

@@ -14,7 +14,8 @@ namespace AppointmentScheduler_C969.Views
     public partial class ModifyAppointment : Form
     {
         Appointment tempApptObj = new Appointment();
-            
+        
+
         public ModifyAppointment()
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace AppointmentScheduler_C969.Views
             cb_modSTime.DataSource = Appointment.StartTimes;
             cb_modETime.DataSource = Appointment.EndTimes;
             cb_modCustomer.DataSource = Customer.CustomerName;
+
         }
 
         private void ModifyAppointment_Load(object sender, EventArgs e)
@@ -30,6 +32,9 @@ namespace AppointmentScheduler_C969.Views
             //Convert Appointments DataTable to an Enumerable to be able to access fields.
             DataTable aptTable = Appointment.GetAppoitments();
             var selectedApt = aptTable.AsEnumerable().Where(x => x.Field<int>("appointmentId") == Appointment.selectedAppointmentId).FirstOrDefault();
+            Appointment currentApt = Appointment.GetCurrentAppointment(selectedApt.Field<int>("appointmentId"));
+
+     
             try
             {
                 //Populate form fields from selected row's data.
@@ -39,7 +44,7 @@ namespace AppointmentScheduler_C969.Views
                 tb_modTitle.Text = selectedApt.Field<string>("title");
                 tb_modType.Text = selectedApt.Field<string>("type");
                 tb_modDescription.Text = selectedApt.Field<string>("description");
-                dtp_modDate.Value = selectedApt.Field<DateTime>("start");
+                dtp_modDate.Value = Appointment.selectedAppointmentDateCreated;
                 cb_modSTime.Text = selectedApt.Field<DateTime>("start").ToShortTimeString();
                 cb_modETime.Text = selectedApt.Field<DateTime>("end").ToShortTimeString();
                 tb_modLocation.Text = selectedApt.Field<string>("location");
@@ -77,9 +82,8 @@ namespace AppointmentScheduler_C969.Views
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-            var newStart = DateTime.Parse(cb_modSTime.Text);
-            var newEnd = DateTime.Parse(cb_modETime.Text);
 
+            Date.BuildAppointmentDate(dtp_modDate.Value, cb_modSTime.SelectedItem.ToString(), cb_modETime.SelectedItem.ToString());
             tempApptObj.AppointmentId = Appointment.selectedAppointmentId;
             tempApptObj.CustomerName = cb_modCustomer.SelectedItem.ToString();
             tempApptObj.CustomerId = Customer.GetCustomerId(tempApptObj.CustomerName);
@@ -87,10 +91,10 @@ namespace AppointmentScheduler_C969.Views
             tempApptObj.Title = tb_modTitle.Text;
             tempApptObj.Type = tb_modType.Text;
             tempApptObj.Description = tb_modDescription.Text;
-            tempApptObj.CreateDate = dtp_modDate.Value;
+            tempApptObj.CreateDate = Appointment.selectedAppointmentDateCreated;
             tempApptObj.LastUpdate = DateTime.Now;
-            tempApptObj.StartTime = newStart;
-            tempApptObj.EndTime = newEnd;
+            tempApptObj.StartTime = Date.startTime;
+            tempApptObj.EndTime = Date.endTime;
             tempApptObj.Location = tb_modLocation.Text;
             tempApptObj.URL = tb_modURL.Text;
 

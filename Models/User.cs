@@ -59,7 +59,7 @@ namespace AppointmentScheduler_C969.Models
 
         public static int GetUserId()
         {
-            if (!DataAccess.isConnOpen)
+            if (DataAccess.conn.State is ConnectionState.Closed)
             {
                 DataAccess.OpenConnection();
             }

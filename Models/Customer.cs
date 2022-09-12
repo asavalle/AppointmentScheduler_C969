@@ -62,35 +62,60 @@ namespace AppointmentScheduler_C969.Models
         }
         public static int GetCustomerId(string name)
         {
-
-            if (!DataAccess.isConnOpen)
+            int id = -1;
+            if (DataAccess.conn.State is ConnectionState.Closed)
             {
                 DataAccess.OpenConnection();          
             }
+            
+           
+                using (var getId_cmd = new MySqlCommand($"select customerId from client_schedule.customer where customerName = '{name}'", DataAccess.conn)) 
+                {
+                    MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getId_cmd);
+                
+                
+                MySqlDataReader custId = getId_cmd.ExecuteReader();
+                while (custId.Read())
+                {
+                    id = Convert.ToInt32(custId.GetValue(0));
+                }
+                    
+                    custId.Close();
+                }
+                                
+                
+                DataAccess.CloseConnection();
+           
 
-            var getId_cmd = new MySqlCommand($"select customerId from client_schedule.customer where customerName = '{name}'", DataAccess.conn);
-            var custId = getId_cmd.ExecuteReader();
-            custId.Read();
-            int id = Convert.ToInt32(custId.GetValue(0));
-            custId.Close();
-            DataAccess.CloseConnection();
+            
             return id;
 
         }
 
         public static string GetCustomerName(int id)
         {
-            if (!DataAccess.isConnOpen)
+            string name ="";
+            if (DataAccess.conn.State is ConnectionState.Closed)
             {
                 DataAccess.OpenConnection();
             }
-            var getName_cmd = new MySqlCommand($"select customerName from client_schedule.customer where customerId = '{id}'", DataAccess.conn);
-            var custName = getName_cmd.ExecuteReader();
-            custName.Read();
-            string name = custName.GetString(0);
-            custName.Close();
-            DataAccess.CloseConnection();
+            using (var getName_cmd = new MySqlCommand($"select customerName from client_schedule.customer where customerId = '{id}'", DataAccess.conn))
+            {
+                MySqlDataReader custName = getName_cmd.ExecuteReader();
+                while (custName.Read())
+                {
+                    name = custName.GetString(0);
+                }
+                
+                custName.Close();
+             DataAccess.CloseConnection();
+            
+            }
+            
             return name;
+
+            
+           
         }
 
         public static void GetCustomerList()
