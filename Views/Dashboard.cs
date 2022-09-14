@@ -56,7 +56,7 @@ namespace AppointmentScheduler_C969.Views
             DateTime currentTime = DateTime.Now;
             DateTime aptTime = new DateTime();
             
-
+            //TODO: Need to determine if appointment date is current date, and if any appointments are withing 15 minutes of current time.
             foreach (DataGridViewRow aptRow in dgv_Appointments.Rows)
             {
                 aptTime = (DateTime)aptRow.Cells[6].Value;
