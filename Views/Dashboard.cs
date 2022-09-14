@@ -23,7 +23,7 @@ namespace AppointmentScheduler_C969.Views
 
             bsAppointments.DataSource = Appointment.GetAppoitments();
             dgv_Appointments.DataSource = bsAppointments;
-            dgv_Appointments.Sort(dgv_Appointments.Columns["appointmentId"], ListSortDirection.Ascending);
+            //dgv_Appointments.Sort(dgv_Appointments.Columns["appointmentId"], ListSortDirection.Descending);
             dgv_Appointments.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dgv_Appointments.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgv_Appointments.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -32,6 +32,7 @@ namespace AppointmentScheduler_C969.Views
             dgv_Appointments.Columns["end"].DefaultCellStyle.Format = "hh:mm tt";
             dgv_Appointments.Columns["appointment_Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
 
+            CheckForUpcomingAppointments();
 
             dgv_Customers.DataSource = Customer.GetCustomers();
             dgv_Users.DataSource = User.GetUsers();
@@ -48,6 +49,24 @@ namespace AppointmentScheduler_C969.Views
 
             Customer.GetCustomerList();
             Appointment.GenerateTimes();
+        }
+
+        private void CheckForUpcomingAppointments()
+        {
+            DateTime currentTime = DateTime.Now;
+            DateTime aptTime = new DateTime();
+            
+
+            foreach (DataGridViewRow aptRow in dgv_Appointments.Rows)
+            {
+                aptTime = (DateTime)aptRow.Cells[6].Value;
+                DateTime timeIn15mins = aptTime.AddMinutes(15);
+                if (currentTime < aptTime && aptTime < currentTime.AddMinutes(15) )
+                {
+                    MessageBox.Show("Your Appointment scheduled at "+ aptTime.TimeOfDay.ToString() + " is within the next 15 mins:" );
+
+                }
+            }
         }
         private void Dashboard_Activated(object sender, EventArgs e)
         {

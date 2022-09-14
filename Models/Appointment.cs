@@ -125,7 +125,8 @@ namespace AppointmentScheduler_C969.Models
                         currentAppointment.URL = select.GetFieldValue<string>("url");
                     }
                     selectedAppointmentDateCreated = currentAppointment.CreateDate;
-                    select.Dispose();
+                    select.Close();
+                    currentAppointment.CustomerName = Customer.GetCustomerName(currentAppointment.CustomerId);
                 }
                     
                 DataAccess.CloseConnection();
@@ -142,8 +143,8 @@ namespace AppointmentScheduler_C969.Models
         public static void InsertAppointment(Appointment apt)
         {
             int userId = User.GetUserId();
-            var formatSDate = apt.StartTime.ToString("yyyy-MM-dd hh:mm:ss"); 
-            var formatEDate = apt.EndTime.ToString("yyyy-MM-dd hh:mm:ss");
+            var formatSDate = apt.StartTime.ToString("yyyy-MM-dd HH:mm:ss"); 
+            var formatEDate = apt.EndTime.ToString("yyyy-MM-dd HH:mm:ss");
             var formatCreateDate = apt.CreateDate.ToString("yyyy-MM-dd hh:mm:ss");
             var formatLastUpDate = apt.LastUpdate.ToString("yyyy-MM-dd hh:mm:ss");
 
@@ -193,10 +194,10 @@ namespace AppointmentScheduler_C969.Models
         public static void UpdateAppointment(Appointment apt)
         {
             int userId = User.GetUserId();
-            var formatSDate = apt.StartTime.ToString("yyyy-MM-dd hh:mm:ss");
-            var formatEDate = apt.EndTime.ToString("yyyy-MM-dd hh:mm:ss");
-            var formatCreateDate = apt.CreateDate.ToString("yyyy-MM-dd hh:mm:ss");
-            var formatLastUpDate = apt.LastUpdate.ToString("yyyy-MM-dd hh:mm:ss");
+            var formatSDate = apt.StartTime.ToString("yyyy-MM-dd HH:mm:ss");
+            var formatEDate = apt.EndTime.ToString("yyyy-MM-dd HH:mm:ss");
+            var formatCreateDate = apt.CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
+            var formatLastUpDate = apt.LastUpdate.ToString("yyyy-MM-dd HH:mm:ss");
             var now = DateTime.Now;
 
             if (DataAccess.conn.State is ConnectionState.Closed)

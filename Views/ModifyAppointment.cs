@@ -31,24 +31,26 @@ namespace AppointmentScheduler_C969.Views
             
             //Convert Appointments DataTable to an Enumerable to be able to access fields.
             DataTable aptTable = Appointment.GetAppoitments();
+            //Get selected appointment's ID
             var selectedApt = aptTable.AsEnumerable().Where(x => x.Field<int>("appointmentId") == Appointment.selectedAppointmentId).FirstOrDefault();
+            //Pass ID to the GetCurrentAppointment method to retreive all the values from the DB.
             Appointment currentApt = Appointment.GetCurrentAppointment(selectedApt.Field<int>("appointmentId"));
 
      
             try
             {
                 //Populate form fields from selected row's data.
-                tb_aptID.Text = selectedApt.Field<int>("appointmentId").ToString();
-                cb_modCustomer.SelectedItem = selectedApt.Field<string>("customerName");
-                tb_modContact.Text = selectedApt.Field<string>("contact");
-                tb_modTitle.Text = selectedApt.Field<string>("title");
-                tb_modType.Text = selectedApt.Field<string>("type");
-                tb_modDescription.Text = selectedApt.Field<string>("description");
-                dtp_modDate.Value = Appointment.selectedAppointmentDateCreated;
-                cb_modSTime.Text = selectedApt.Field<DateTime>("start").ToShortTimeString();
-                cb_modETime.Text = selectedApt.Field<DateTime>("end").ToShortTimeString();
-                tb_modLocation.Text = selectedApt.Field<string>("location");
-                tb_modURL.Text = selectedApt.Field<string>("url");
+                tb_aptID.Text = currentApt.AppointmentId.ToString();
+                cb_modCustomer.SelectedItem = currentApt.CustomerName;
+                tb_modContact.Text = currentApt.Contact;
+                tb_modTitle.Text = currentApt.Title;
+                tb_modType.Text = currentApt.Title;
+                tb_modDescription.Text = currentApt.Description;
+                dtp_modDate.Value = currentApt.CreateDate;
+                cb_modSTime.Text = currentApt.StartTime.ToShortTimeString();
+                cb_modETime.Text = currentApt.EndTime.ToShortTimeString();
+                tb_modLocation.Text = currentApt.Location;
+                tb_modURL.Text = currentApt.URL;
             }
             catch(Exception ex)
             {
@@ -82,21 +84,27 @@ namespace AppointmentScheduler_C969.Views
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-
-            Date.BuildAppointmentDate(dtp_modDate.Value, cb_modSTime.SelectedItem.ToString(), cb_modETime.SelectedItem.ToString());
-            tempApptObj.AppointmentId = Appointment.selectedAppointmentId;
-            tempApptObj.CustomerName = cb_modCustomer.SelectedItem.ToString();
-            tempApptObj.CustomerId = Customer.GetCustomerId(tempApptObj.CustomerName);
-            tempApptObj.Contact = tb_modContact.Text;
-            tempApptObj.Title = tb_modTitle.Text;
-            tempApptObj.Type = tb_modType.Text;
-            tempApptObj.Description = tb_modDescription.Text;
-            tempApptObj.CreateDate = Appointment.selectedAppointmentDateCreated;
-            tempApptObj.LastUpdate = DateTime.Now;
-            tempApptObj.StartTime = Date.startTime;
-            tempApptObj.EndTime = Date.endTime;
-            tempApptObj.Location = tb_modLocation.Text;
-            tempApptObj.URL = tb_modURL.Text;
+            try
+            {
+                Date.BuildAppointmentDate(dtp_modDate.Value, cb_modSTime.SelectedItem.ToString(), cb_modETime.SelectedItem.ToString());
+                tempApptObj.AppointmentId = Appointment.selectedAppointmentId;
+                tempApptObj.CustomerName = cb_modCustomer.SelectedItem.ToString();
+                tempApptObj.CustomerId = Customer.GetCustomerId(tempApptObj.CustomerName);
+                tempApptObj.Contact = tb_modContact.Text;
+                tempApptObj.Title = tb_modTitle.Text;
+                tempApptObj.Type = tb_modType.Text;
+                tempApptObj.Description = tb_modDescription.Text;
+                tempApptObj.CreateDate = Appointment.selectedAppointmentDateCreated;
+                tempApptObj.LastUpdate = DateTime.Now;
+                tempApptObj.StartTime = Date.startTime;
+                tempApptObj.EndTime = Date.endTime;
+                tempApptObj.Location = tb_modLocation.Text;
+                tempApptObj.URL = tb_modURL.Text;
+            }
+            catch(Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
 
 
             AppointmentsController.ModifyAppointment(tempApptObj);
