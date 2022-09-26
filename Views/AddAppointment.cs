@@ -16,9 +16,13 @@ namespace AppointmentScheduler_C969.Views
         public AddAppointment()
         {
             InitializeComponent();
-            cb_startTime.DataSource = Appointment.StartTimes;
-            cb_endTime.DataSource = Appointment.EndTimes;
+            cb_startTime.Visible = false;
+            cb_endTime.Visible = false;
+            lb_startTime.Visible = false;
+            lb_endTime.Visible = false;
+            
             cb_customer.DataSource = Customer.CustomerName;
+            
         }
 
         private void btn_Create_Click(object sender, EventArgs e)
@@ -28,7 +32,8 @@ namespace AppointmentScheduler_C969.Views
                                                         tb_aptURL.Text, Date.startTime, Date.endTime,DateTime.Now,DataAccess.LoggedInUser,DateTime.Now,
                                                         DataAccess.LoggedInUser);
             this.Close();
-            
+            Appointment.StartTimes.Clear();
+            Appointment.EndTimes.Clear();
         }
 
 
@@ -40,6 +45,19 @@ namespace AppointmentScheduler_C969.Views
             this.Close();
         }
 
-        
+        private void dtp_createDate_ValueChanged(object sender, EventArgs e)
+        {
+            var date = Convert.ToDateTime(dtp_createDate.Value.ToShortDateString());
+
+            Appointment.GenerateTimes(date);
+
+            cb_startTime.DataSource = Appointment.StartTimes;
+            cb_endTime.DataSource = Appointment.EndTimes;
+            lb_startTime.Visible = true;
+            lb_endTime.Visible = true;
+            cb_startTime.Visible = true;
+            cb_endTime.Visible = true;
+
+        }
     }
 }

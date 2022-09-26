@@ -12,8 +12,8 @@ namespace AppointmentScheduler_C969.Models
 {
     class Appointment
     {
-        public static int selectedAppointmentId { get; set; }
-        public static DateTime selectedAppointmentDateCreated { get; set; }
+        public static int SelectedAppointmentId { get; set; }
+        public static DateTime SelectedAppointmentDateCreated { get; set; }
         public int AppointmentId { get; set; } //autoincrements on the database side
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
@@ -53,7 +53,33 @@ namespace AppointmentScheduler_C969.Models
             this.LastUpdate = lastUpdate;
             this.LastUpdateBy = lastUpdateBy;
         }
-        //Function to populate Appointments table from database
+
+        /***********************************************************************
+         *************** Function to build list of available times *************
+         **********************************************************************/
+        public static void GenerateTimes(DateTime aptDate)
+        {
+            var culture = new System.Globalization.CultureInfo("en-Us");
+
+            DateTime date = new DateTime(aptDate.Year, aptDate.Month, aptDate.Day, 05, 0, 0);
+            var hours = 25;
+            while (hours > 0)
+            {
+
+                StartTimes.Add(date.ToShortTimeString());
+                EndTimes.Add(date.ToShortTimeString());
+
+                date = date.AddMinutes(30);
+                hours--;
+            }
+
+        }
+
+
+
+        /***********************************************************************
+        *************** Functions to Query Database ****************************
+        ***********************************************************************/
         public static DataTable GetAppoitments()
         {                
             DataTable aptTable = new DataTable();
@@ -71,8 +97,8 @@ namespace AppointmentScheduler_C969.Models
 
                 MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getAptCmd);
 
-                
                 sqlAdp.Fill(aptTable);
+
             }
             catch (Exception e)
             {
@@ -81,18 +107,8 @@ namespace AppointmentScheduler_C969.Models
             
             return aptTable;
         }
-        public static void GenerateTimes()
-        {
-            var culture = new System.Globalization.CultureInfo("en-Us");
-            
-            for (int i = 5; i <= 17; i++) //from 5am to 5pm
-            {
-                DateTime date = new DateTime(1, 1, 1, i, 00, 00);
-                StartTimes.Add(date.ToShortTimeString());
-                EndTimes.Add(date.ToShortTimeString());
-            }            
-        }
-
+        
+       
         public static Appointment GetCurrentAppointment(int ID) {
 
             Appointment currentAppointment = new Appointment();
@@ -124,7 +140,7 @@ namespace AppointmentScheduler_C969.Models
                         currentAppointment.LastUpdateBy = select.GetFieldValue<string>("lastUpdateBy");
                         currentAppointment.URL = select.GetFieldValue<string>("url");
                     }
-                    selectedAppointmentDateCreated = currentAppointment.CreateDate;
+                    SelectedAppointmentDateCreated = currentAppointment.CreateDate;
                     select.Close();
                     currentAppointment.CustomerName = Customer.GetCustomerName(currentAppointment.CustomerId);
                 }
@@ -140,13 +156,81 @@ namespace AppointmentScheduler_C969.Models
             return currentAppointment;
 
         }
+       
+        public static DataTable GetAppointmensByWeek() {
+
+            DataTable aptsByWeek = new DataTable();
+            if (DataAccess.conn.State is ConnectionState.Closed)
+            {
+                DataAccess.OpenConnection();
+            }
+            try
+            {
+
+                var getWeekAptsCmd = new MySqlCommand(
+                    "SELECT appointment.appointmentId, customer.customerName, appointment.title, " +
+                    "appointment.description, appointment.contact, appointment.location, appointment.type, " +
+                    "appointment.start, appointment.end,appointment.start as appointment_Date, appointment.url " +
+                    "FROM client_schedule.appointment, client_schedule.customer " +
+                    "where yearweek(start, 0) = yearweek(curdate(), 0) and appointment.customerId = customer.customerId; ", DataAccess.conn);
+
+
+                MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getWeekAptsCmd);
+
+                sqlAdp.Fill(aptsByWeek);
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return aptsByWeek;
+
+        }
+
+        public static DataTable GetAppointmentsByMonth()
+        {
+            DataTable aptsByMonth = new DataTable();
+            if (DataAccess.conn.State is ConnectionState.Closed)
+            {
+                DataAccess.OpenConnection();
+            }
+            try
+            {
+
+                var getMonthAptsCmd = new MySqlCommand(
+                    "SELECT appointment.appointmentId, customer.customerName, appointment.title, " +
+                    "appointment.description, appointment.contact, appointment.location, appointment.type, " +
+                    "appointment.start, appointment.end,appointment.start as appointment_Date, appointment.url " +
+                    "FROM client_schedule.appointment, client_schedule.customer " +
+                    "WHERE MONTH(start) = MONTH(now()) and appointment.customerId = customer.customerId; ", DataAccess.conn);
+
+
+                MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getMonthAptsCmd);
+
+                sqlAdp.Fill(aptsByMonth);
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return aptsByMonth;
+        }
+
+
+        /***********************************************************************
+         *************** Functions Create/Update/Delete appointments ***********
+         **********************************************************************/
         public static void InsertAppointment(Appointment apt)
         {
             int userId = User.GetUserId();
-            var formatSDate = apt.StartTime.ToString("yyyy-MM-dd HH:mm:ss"); 
-            var formatEDate = apt.EndTime.ToString("yyyy-MM-dd HH:mm:ss");
-            var formatCreateDate = apt.CreateDate.ToString("yyyy-MM-dd hh:mm:ss");
-            var formatLastUpDate = apt.LastUpdate.ToString("yyyy-MM-dd hh:mm:ss");
+            var formatSDate = apt.StartTime.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
+            var formatEDate = apt.EndTime.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
+            var formatCreateDate = apt.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
+            var formatLastUpDate = apt.LastUpdate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
 
             if (DataAccess.conn.State is ConnectionState.Closed)
             {
@@ -157,10 +241,10 @@ namespace AppointmentScheduler_C969.Models
                 var insert_cmd = new MySqlCommand($"INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES({apt.CustomerId},{userId},'{apt.Title}','{apt.Description}','{apt.Location}','{apt.Contact}','{apt.Type}','{apt.URL}','{formatSDate}','{formatEDate}','{formatCreateDate}','{apt.CreatedBy}','{formatLastUpDate}','{apt.LastUpdateBy}')", DataAccess.conn);
                 var insert = insert_cmd.ExecuteNonQuery();
             }
-            catch(MySqlException ex) 
-            { 
-                MessageBox.Show(ex.Message); 
-            }                                  
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public static void DeleteAppointment(int aptId)
@@ -174,11 +258,11 @@ namespace AppointmentScheduler_C969.Models
                 try
                 {
                     DialogResult deleteConfirm = MessageBox.Show($"Do you want to delete Appointment {aptId}", "Delete Confirmation.", MessageBoxButtons.YesNo);
-                    if(deleteConfirm == DialogResult.Yes)
+                    if (deleteConfirm == DialogResult.Yes)
                     {
-                        var del_cmd = new MySqlCommand($"DELETE FROM client_schedule.appointment WHERE appointmentId = {aptId};",DataAccess.conn);
-                        var delete = del_cmd.ExecuteNonQuery();                       
-                    }                    
+                        var del_cmd = new MySqlCommand($"DELETE FROM client_schedule.appointment WHERE appointmentId = {aptId};", DataAccess.conn);
+                        var delete = del_cmd.ExecuteNonQuery();
+                    }
                 }
                 catch (Exception e)
                 {
@@ -194,10 +278,10 @@ namespace AppointmentScheduler_C969.Models
         public static void UpdateAppointment(Appointment apt)
         {
             int userId = User.GetUserId();
-            var formatSDate = apt.StartTime.ToString("yyyy-MM-dd HH:mm:ss");
-            var formatEDate = apt.EndTime.ToString("yyyy-MM-dd HH:mm:ss");
-            var formatCreateDate = apt.CreateDate.ToString("yyyy-MM-dd HH:mm:ss");
-            var formatLastUpDate = apt.LastUpdate.ToString("yyyy-MM-dd HH:mm:ss");
+            var formatSDate = apt.StartTime.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
+            var formatEDate = apt.EndTime.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
+            var formatCreateDate = apt.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
+            var formatLastUpDate = apt.LastUpdate.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
             var now = DateTime.Now;
 
             if (DataAccess.conn.State is ConnectionState.Closed)
@@ -206,25 +290,25 @@ namespace AppointmentScheduler_C969.Models
             }
             try
             {
-            var update_cmd = new MySqlCommand($"UPDATE client_schedule.appointment SET appointment.customerId = {apt.CustomerId}, appointment.title = '{apt.Title}', appointment.contact = '{apt.Contact}', appointment.type = '{apt.Type}', appointment.start = '{formatSDate}', appointment.end = '{formatEDate}',appointment.createDate= '{formatCreateDate}', appointment.lastUpdate = '{formatLastUpDate}' WHERE appointment.appointmentId = {apt.AppointmentId}; ", DataAccess.conn);
-            var update = update_cmd.ExecuteNonQuery();
-            DataAccess.CloseConnection();
+                var update_cmd = new MySqlCommand($"UPDATE client_schedule.appointment SET appointment.customerId = {apt.CustomerId}, appointment.title = '{apt.Title}', appointment.contact = '{apt.Contact}', appointment.type = '{apt.Type}', appointment.start = '{formatSDate}', appointment.end = '{formatEDate}',appointment.createDate= '{formatCreateDate}', appointment.lastUpdate = '{formatLastUpDate}' WHERE appointment.appointmentId = {apt.AppointmentId}; ", DataAccess.conn);
+                var update = update_cmd.ExecuteNonQuery();
+                DataAccess.CloseConnection();
 
             }
-            catch(MySqlException exsql)
+            catch (MySqlException exsql)
             {
                 MessageBox.Show(exsql.Message);
             }
-            
-           
-            
+
+
+
             //pull selected data from database. Pass to controller.
             MessageBox.Show(
                 apt.CustomerName + "\n" +
                 apt.Contact + "\n" +
                 apt.Title + "\n" +
                 apt.Type + "\n" +
-                apt.Description + "\n"+
+                apt.Description + "\n" +
                 apt.CreateDate + "\n" +
                 apt.StartTime + "\n" +
                 apt.EndTime + "\n" +
@@ -233,5 +317,7 @@ namespace AppointmentScheduler_C969.Models
                 );
 
         }
+
+
     }
 }

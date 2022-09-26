@@ -157,6 +157,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_showAll.TabIndex = 8;
             this.btn_showAll.Text = "All";
             this.btn_showAll.UseVisualStyleBackColor = false;
+            this.btn_showAll.Click += new System.EventHandler(this.btn_showAll_Click);
             // 
             // btn_showByWeek
             // 
@@ -170,6 +171,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_showByWeek.TabIndex = 7;
             this.btn_showByWeek.Text = "Week";
             this.btn_showByWeek.UseVisualStyleBackColor = false;
+            this.btn_showByWeek.Click += new System.EventHandler(this.btn_showByWeek_Click);
             // 
             // btn_showByMonth
             // 
@@ -184,6 +186,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_showByMonth.TabIndex = 6;
             this.btn_showByMonth.Text = "Month";
             this.btn_showByMonth.UseVisualStyleBackColor = false;
+            this.btn_showByMonth.Click += new System.EventHandler(this.btn_showByMonth_Click);
             // 
             // lb_Appointments
             // 

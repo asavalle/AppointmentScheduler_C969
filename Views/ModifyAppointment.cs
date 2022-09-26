@@ -28,17 +28,19 @@ namespace AppointmentScheduler_C969.Views
 
         private void ModifyAppointment_Load(object sender, EventArgs e)
         {
-            
+            try
+            { 
             //Convert Appointments DataTable to an Enumerable to be able to access fields.
             DataTable aptTable = Appointment.GetAppoitments();
             //Get selected appointment's ID
-            var selectedApt = aptTable.AsEnumerable().Where(x => x.Field<int>("appointmentId") == Appointment.selectedAppointmentId).FirstOrDefault();
+            var selectedApt = aptTable.AsEnumerable().Where(x => x.Field<int>("appointmentId") == Appointment.SelectedAppointmentId).FirstOrDefault();
+            
+            
             //Pass ID to the GetCurrentAppointment method to retreive all the values from the DB.
             Appointment currentApt = Appointment.GetCurrentAppointment(selectedApt.Field<int>("appointmentId"));
 
      
-            try
-            {
+           
                 //Populate form fields from selected row's data.
                 tb_aptID.Text = currentApt.AppointmentId.ToString();
                 cb_modCustomer.SelectedItem = currentApt.CustomerName;
@@ -54,7 +56,7 @@ namespace AppointmentScheduler_C969.Views
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("A row must be selected.");
             }
             
         }
@@ -86,15 +88,17 @@ namespace AppointmentScheduler_C969.Views
         {
             try
             {
-                Date.BuildAppointmentDate(dtp_modDate.Value, cb_modSTime.SelectedItem.ToString(), cb_modETime.SelectedItem.ToString());
-                tempApptObj.AppointmentId = Appointment.selectedAppointmentId;
+
+
+                //Date.BuildAppointmentDate(dtp_modDate.Value, cb_modSTime.SelectedItem.ToString(), cb_modETime.SelectedItem.ToString());
+                tempApptObj.AppointmentId = Appointment.SelectedAppointmentId;
                 tempApptObj.CustomerName = cb_modCustomer.SelectedItem.ToString();
                 tempApptObj.CustomerId = Customer.GetCustomerId(tempApptObj.CustomerName);
                 tempApptObj.Contact = tb_modContact.Text;
                 tempApptObj.Title = tb_modTitle.Text;
                 tempApptObj.Type = tb_modType.Text;
                 tempApptObj.Description = tb_modDescription.Text;
-                tempApptObj.CreateDate = Appointment.selectedAppointmentDateCreated;
+                tempApptObj.CreateDate = Appointment.SelectedAppointmentDateCreated;
                 tempApptObj.LastUpdate = DateTime.Now;
                 tempApptObj.StartTime = Date.startTime;
                 tempApptObj.EndTime = Date.endTime;

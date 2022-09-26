@@ -27,5 +27,16 @@ namespace AppointmentScheduler_C969.Models
             startTime = DateTime.Parse(startDateTime);
             endTime = DateTime.Parse(endDateTime);
         }
+
+        public static DateTime GetStartOfWeek(DateTime dt, DayOfWeek startOfWeek)
+        {
+            int diff = dt.DayOfWeek - startOfWeek;
+
+            if(diff < 0)
+            {
+                diff += 7;
+            }
+            return dt.AddDays(-1 * diff).Date;
+        }
     }
 }
