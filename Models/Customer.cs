@@ -7,10 +7,19 @@ using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Models
 {
+    /*
+     This class is responsible for all the database query/communication for the CustomerController class. The controller formats data
+    as necessary for this class to utilize in it's queries.
+     */
+
+
     class Customer
     {
+        public static int SelectedCustomerID;
         public int CustomerId { get; set; }
-        public static List<string> CustomerName { get; set; } = new List<string>();
+        public string CustomerName { get; set; }
+        public int CityId { get; set; }
+        public static List<string> Names { get; set; } = new List<string>();
         public int AddressId { get; set; }
         public bool Active { get; set; }
         public DateTime CreateDate { get; set; }
@@ -21,17 +30,18 @@ namespace AppointmentScheduler_C969.Models
 
         public Customer()
         {
-            
+
         }
 
-        public Customer(int customerId, string customerName, int addressId, bool active, DateTime createDate, 
+        public Customer(string customerName, int addressId, bool active, DateTime createDate,
             string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
             //this.CustomerId = customerId;
-            CustomerName = CustomerName;
+            this.CustomerName = customerName;
             this.AddressId = addressId;
             this.Active = active;
             this.CreateDate = createDate;
+            this.CreatedBy = DataAccess.LoggedInUser;
             this.LastUpdate = lastUpdate;
             this.LastUpdateBy = lastUpdateBy;
         }
@@ -43,9 +53,11 @@ namespace AppointmentScheduler_C969.Models
             {
 
                 using (var getAptCmd = new MySqlCommand("SELECT customer.customerId as Customer_ID, customer.customerName as Name, " +
-                    "address.address as Address, city.city as City, address.postalCode as Zip, " +
-                    "address.phone as Phone FROM((customer INNER JOIN address on address.addressId = customer.addressId) " +
-                    "INNER JOIN city ON address.cityId = city.cityId)", DataAccess.conn))
+                    "address.address as Address, city.city as City, country.country, " +
+                    "address.phone as Phone, customer.active " +
+                    "FROM((customer INNER JOIN address on address.addressId = customer.addressId) " +
+                    "INNER JOIN city ON address.cityId = city.cityId)" +
+                    "INNER JOIN country ON city.countryId = country.countryId", DataAccess.conn))
                 {
                     MySqlDataAdapter sqlAdpt = new MySqlDataAdapter(getAptCmd);
                     sqlAdpt.Fill(custTable);
@@ -60,6 +72,20 @@ namespace AppointmentScheduler_C969.Models
 
             return custTable;
         }
+
+
+        public static void InsertCustomerRecord() { }
+       
+
+        public static void DeleteCustomerRecord() { }
+
+        public static void UpdateCustomerRecord() 
+        {
+        
+        }
+
+
+
         public static int GetCustomerId(string name)
         {
             int id = -1;
@@ -125,7 +151,7 @@ namespace AppointmentScheduler_C969.Models
             foreach (DataRow row in dt.Rows)
             {
 
-                Customer.CustomerName.Add(row.Field<string>("Name"));
+                Customer.Names.Add(row.Field<string>("Name"));
 
             }
         }

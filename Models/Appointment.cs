@@ -10,6 +10,10 @@ using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Models
 {
+    /*
+     This class is responsible for all the database query/communication for the AppointmentController class. The controller formats data
+    as necessary for this class to utilize in it's queries.
+     */
     class Appointment
     {
         public static int SelectedAppointmentId { get; set; }
@@ -224,7 +228,7 @@ namespace AppointmentScheduler_C969.Models
         /***********************************************************************
          *************** Functions Create/Update/Delete appointments ***********
          **********************************************************************/
-        public static void InsertAppointment(Appointment apt)
+        public static void InsertAppointmentRecord(Appointment apt)
         {
             int userId = User.GetUserId();
             var formatSDate = apt.StartTime.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
@@ -247,7 +251,7 @@ namespace AppointmentScheduler_C969.Models
             }
         }
 
-        public static void DeleteAppointment(int aptId)
+        public static void DeleteAppointmentRecord(int aptId)
         {
             if (DataAccess.conn.State is ConnectionState.Closed)
             {
@@ -275,7 +279,7 @@ namespace AppointmentScheduler_C969.Models
             }
         }
 
-        public static void UpdateAppointment(Appointment apt)
+        public static void UpdateAppointmentRecord(Appointment apt)
         {
             int userId = User.GetUserId();
             var formatSDate = apt.StartTime.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
@@ -290,7 +294,7 @@ namespace AppointmentScheduler_C969.Models
             }
             try
             {
-                var update_cmd = new MySqlCommand($"UPDATE client_schedule.appointment SET appointment.customerId = {apt.CustomerId}, appointment.title = '{apt.Title}', appointment.contact = '{apt.Contact}', appointment.type = '{apt.Type}', appointment.start = '{formatSDate}', appointment.end = '{formatEDate}',appointment.createDate= '{formatCreateDate}', appointment.lastUpdate = '{formatLastUpDate}' WHERE appointment.appointmentId = {apt.AppointmentId}; ", DataAccess.conn);
+                var update_cmd = new MySqlCommand($"UPDATE client_schedule.appointment SET appointment.customerId = {apt.CustomerId}, appointment.title = '{apt.Title}', appointment.description= '{apt.Description}', appointment.contact = '{apt.Contact}', appointment.type = '{apt.Type}', appointment.start = '{formatSDate}', appointment.end = '{formatEDate}',appointment.createDate= '{formatCreateDate}', appointment.lastUpdate = '{formatLastUpDate}' WHERE appointment.appointmentId = {apt.AppointmentId}; ", DataAccess.conn);
                 var update = update_cmd.ExecuteNonQuery();
                 DataAccess.CloseConnection();
 

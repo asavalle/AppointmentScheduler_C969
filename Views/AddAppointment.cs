@@ -21,7 +21,7 @@ namespace AppointmentScheduler_C969.Views
             lb_startTime.Visible = false;
             lb_endTime.Visible = false;
             
-            cb_customer.DataSource = Customer.CustomerName;
+            cb_customer.DataSource = Customer.Names;
             
         }
 

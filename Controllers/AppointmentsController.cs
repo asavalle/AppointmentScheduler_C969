@@ -9,7 +9,8 @@ namespace AppointmentScheduler_C969.Controllers
 {
     /*
     * This Class handles communication between the user (AddAppointments.cs view) and the database, 
-    * utilizing the data model (Appointment.cs).
+    * utilizing the data model (Appointment.cs). It is responsible for formatting data into a usable format for the Appointment class
+    * to use in it's queries.
     */
     class AppointmentsController
     {
@@ -35,7 +36,7 @@ namespace AppointmentScheduler_C969.Controllers
             newAppt.LastUpdate = DateTime.Now;
             newAppt.LastUpdateBy = DataAccess.LoggedInUser;
 
-            Appointment.InsertAppointment(newAppt);
+            Appointment.InsertAppointmentRecord(newAppt);
 
             MessageBox.Show(
                             "Customer ID " + newAppt.CustomerId + "\n Customer: " +
@@ -62,9 +63,8 @@ namespace AppointmentScheduler_C969.Controllers
             foreach(DataGridViewRow r in row)
             {
                 appointmentIDValue = Convert.ToInt32(r.Cells[0].Value);
-                //MessageBox.Show(r.Cells[0].Value.ToString()) ;
             }
-            Appointment.DeleteAppointment(appointmentIDValue);
+            Appointment.DeleteAppointmentRecord(appointmentIDValue);
 
           
         }
@@ -74,7 +74,7 @@ namespace AppointmentScheduler_C969.Controllers
             //Take in data passed from View and format it into usable object to pass to Database via the Appointment class. 
             //Then return the modified Appointment to view.
 
-            Appointment.UpdateAppointment(updatedApt);
+            Appointment.UpdateAppointmentRecord(updatedApt);
 
         }
     }

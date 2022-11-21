@@ -94,7 +94,21 @@ namespace AppointmentScheduler_C969.Views
             this.Close();
         }
 
-        /* Appointments*/
+
+        /* 
+         * Appointments
+         */
+        private void dgv_Appointments_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            selectedRow = dgv_Appointments.SelectedRows;
+            foreach (DataGridViewRow row in selectedRow)
+            {
+                Appointment.SelectedAppointmentId = Convert.ToInt32(row.Cells[0].Value.ToString());
+
+            }
+        }
+
+
         private void btn_AddApt_Click(object sender, EventArgs e)
         {
             AddAppointment newAppointment = new AddAppointment();
@@ -102,18 +116,33 @@ namespace AppointmentScheduler_C969.Views
         }
         private void btn_DelApt_Click(object sender, EventArgs e)
         {
-            selectedRow = dgv_Appointments.SelectedRows;
-            AppointmentsController.DeleteAppointment(selectedRow);
+            if(selectedRow != null)
+            {
+                AppointmentsController.DeleteAppointment(selectedRow);
+
+            }
+            else
+            {
+                MessageBox.Show("No record selected. Please select a record.");
+            }
             ReloadAppointments();
         }
         private void btn_ModAppt_Click(object sender, EventArgs e)
         {
-            ModifyAppointment modifyApt = new ModifyAppointment();
-            modifyApt.Show();           
+            if(selectedRow != null) { 
+                ModifyAppointment modifyApt = new ModifyAppointment();
+                modifyApt.Show();           
+
+            }
+            else
+            {
+                MessageBox.Show("No record selected. Please select a record.");
+            }
 
         }
         public void ReloadAppointments()
         {
+            selectedRow = null;
             dgv_Appointments.DataSource = Appointment.GetAppoitments();
             dgv_Appointments.Sort(dgv_Appointments.Columns["appointmentId"], System.ComponentModel.ListSortDirection.Ascending);
         }
@@ -135,28 +164,29 @@ namespace AppointmentScheduler_C969.Views
         }
         private void btn_showAll_Click(object sender, EventArgs e)
         {
-            //ReloadAppointments();
             dgv_Appointments.DataSource = Appointment.GetAppoitments();
 
         }
 
-        /*Customers*/
+
+        /*
+         * Customers
+         */
+        
+        private void dgv_Customers_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            selectedRow = dgv_Customers.SelectedRows;
+            foreach(DataGridViewRow row in selectedRow)
+            {
+                Customer.SelectedCustomerID = Convert.ToInt32(row.Cells[0].Value);
+            }
+        }
+
         private void btn_AddCustomer_Click(object sender, EventArgs e)
         {
             AddCustomer newCustomer = new AddCustomer();
             newCustomer.Show();
+
         }
-
-        private void dgv_Appointments_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            DataGridViewSelectedRowCollection selectedRow = dgv_Appointments.SelectedRows;
-            foreach(DataGridViewRow row in selectedRow)
-            {
-                Appointment.SelectedAppointmentId = Convert.ToInt32(row.Cells[0].Value.ToString());
-
-            }
-        }
-
-        
     }
 }
