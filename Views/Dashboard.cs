@@ -112,7 +112,7 @@ namespace AppointmentScheduler_C969.Views
         private void btn_AddApt_Click(object sender, EventArgs e)
         {
             AddAppointment newAppointment = new AddAppointment();
-            newAppointment.Show();
+            newAppointment.ShowDialog();
         }
         private void btn_DelApt_Click(object sender, EventArgs e)
         {
@@ -131,7 +131,7 @@ namespace AppointmentScheduler_C969.Views
         {
             if(selectedRow != null) { 
                 ModifyAppointment modifyApt = new ModifyAppointment();
-                modifyApt.Show();           
+                modifyApt.ShowDialog();           
 
             }
             else
@@ -185,7 +185,7 @@ namespace AppointmentScheduler_C969.Views
         private void btn_AddCustomer_Click(object sender, EventArgs e)
         {
             AddCustomer newCustomer = new AddCustomer();
-            newCustomer.Show();
+            newCustomer.ShowDialog();
 
         }
     }

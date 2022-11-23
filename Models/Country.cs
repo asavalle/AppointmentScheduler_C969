@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -16,6 +17,7 @@ namespace AppointmentScheduler_C969.Models
         public string CreatedBy { get; set; }
         public DateTime LastUpdate { get; set; }
         public string LastUpdateBy { get; set; }
+        public static List<string> listOfCountries { get; set; } = new List<string>();
 
         public Country()
         {
@@ -53,5 +55,32 @@ namespace AppointmentScheduler_C969.Models
             CurrentCountryId = country.CountryId;
         }
 
+        public static void UpdateListOfCountries()
+        {
+            DataTable countryTable = new DataTable();
+            try
+            {
+
+                using (var getAptCmd = new MySqlCommand("SELECT * FROM client_schedule.country;", DataAccess.conn))
+                {
+                    MySqlDataAdapter sqlAdpt = new MySqlDataAdapter(getAptCmd);
+                    sqlAdpt.Fill(countryTable);
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            foreach (DataRow row in countryTable.Rows)
+            {
+                listOfCountries.Add(row.Field<string>("country"));
+            }
+
+            
+
+        }
     }
 }

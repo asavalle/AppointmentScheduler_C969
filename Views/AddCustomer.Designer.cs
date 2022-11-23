@@ -30,12 +30,14 @@ namespace AppointmentScheduler_C969.Views
         private void InitializeComponent()
         {
             this.gb_addCustomerForm = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btn_addCity = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cb_newActiveCust = new System.Windows.Forms.CheckBox();
             this.linkLabel_cancel = new System.Windows.Forms.LinkLabel();
             this.btn_CreateCustomer = new System.Windows.Forms.Button();
             this.tb_newCustPhone = new System.Windows.Forms.TextBox();
-            this.tb_newCustCountry = new System.Windows.Forms.TextBox();
             this.tb_newCustZip = new System.Windows.Forms.TextBox();
-            this.tb_newCustCity = new System.Windows.Forms.TextBox();
             this.tb_newCustAddress2 = new System.Windows.Forms.TextBox();
             this.tb_newCustAddress = new System.Windows.Forms.TextBox();
             this.tb_newCustName = new System.Windows.Forms.TextBox();
@@ -47,20 +49,20 @@ namespace AppointmentScheduler_C969.Views
             this.lbl_newCustAddress = new System.Windows.Forms.Label();
             this.lbl_active = new System.Windows.Forms.Label();
             this.lbl_custName = new System.Windows.Forms.Label();
-            this.cb_newActiveCust = new System.Windows.Forms.CheckBox();
             this.gb_addCustomerForm.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb_addCustomerForm
             // 
             this.gb_addCustomerForm.BackColor = System.Drawing.Color.AliceBlue;
+            this.gb_addCustomerForm.Controls.Add(this.textBox1);
+            this.gb_addCustomerForm.Controls.Add(this.btn_addCity);
+            this.gb_addCustomerForm.Controls.Add(this.comboBox1);
             this.gb_addCustomerForm.Controls.Add(this.cb_newActiveCust);
             this.gb_addCustomerForm.Controls.Add(this.linkLabel_cancel);
             this.gb_addCustomerForm.Controls.Add(this.btn_CreateCustomer);
             this.gb_addCustomerForm.Controls.Add(this.tb_newCustPhone);
-            this.gb_addCustomerForm.Controls.Add(this.tb_newCustCountry);
             this.gb_addCustomerForm.Controls.Add(this.tb_newCustZip);
-            this.gb_addCustomerForm.Controls.Add(this.tb_newCustCity);
             this.gb_addCustomerForm.Controls.Add(this.tb_newCustAddress2);
             this.gb_addCustomerForm.Controls.Add(this.tb_newCustAddress);
             this.gb_addCustomerForm.Controls.Add(this.tb_newCustName);
@@ -78,6 +80,44 @@ namespace AppointmentScheduler_C969.Views
             this.gb_addCustomerForm.TabIndex = 0;
             this.gb_addCustomerForm.TabStop = false;
             this.gb_addCustomerForm.Text = "Add Customer";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(149, 348);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(164, 23);
+            this.textBox1.TabIndex = 22;
+            // 
+            // btn_addCity
+            // 
+            this.btn_addCity.BackColor = System.Drawing.Color.Lavender;
+            this.btn_addCity.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_addCity.Location = new System.Drawing.Point(306, 295);
+            this.btn_addCity.Name = "btn_addCity";
+            this.btn_addCity.Size = new System.Drawing.Size(39, 23);
+            this.btn_addCity.TabIndex = 21;
+            this.btn_addCity.Text = "Add";
+            this.btn_addCity.UseVisualStyleBackColor = false;
+            this.btn_addCity.Click += new System.EventHandler(this.btn_addCity_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(149, 295);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(137, 23);
+            this.comboBox1.TabIndex = 19;
+            // 
+            // cb_newActiveCust
+            // 
+            this.cb_newActiveCust.AutoSize = true;
+            this.cb_newActiveCust.Location = new System.Drawing.Point(152, 87);
+            this.cb_newActiveCust.Name = "cb_newActiveCust";
+            this.cb_newActiveCust.Size = new System.Drawing.Size(48, 19);
+            this.cb_newActiveCust.TabIndex = 18;
+            this.cb_newActiveCust.Text = "True";
+            this.cb_newActiveCust.UseVisualStyleBackColor = true;
             // 
             // linkLabel_cancel
             // 
@@ -110,31 +150,17 @@ namespace AppointmentScheduler_C969.Views
             // 
             // tb_newCustPhone
             // 
-            this.tb_newCustPhone.Location = new System.Drawing.Point(152, 415);
+            this.tb_newCustPhone.Location = new System.Drawing.Point(149, 415);
             this.tb_newCustPhone.Name = "tb_newCustPhone";
             this.tb_newCustPhone.Size = new System.Drawing.Size(240, 23);
             this.tb_newCustPhone.TabIndex = 8;
             // 
-            // tb_newCustCountry
-            // 
-            this.tb_newCustCountry.Location = new System.Drawing.Point(152, 359);
-            this.tb_newCustCountry.Name = "tb_newCustCountry";
-            this.tb_newCustCountry.Size = new System.Drawing.Size(240, 23);
-            this.tb_newCustCountry.TabIndex = 7;
-            // 
             // tb_newCustZip
             // 
-            this.tb_newCustZip.Location = new System.Drawing.Point(152, 303);
+            this.tb_newCustZip.Location = new System.Drawing.Point(152, 240);
             this.tb_newCustZip.Name = "tb_newCustZip";
             this.tb_newCustZip.Size = new System.Drawing.Size(93, 23);
             this.tb_newCustZip.TabIndex = 6;
-            // 
-            // tb_newCustCity
-            // 
-            this.tb_newCustCity.Location = new System.Drawing.Point(152, 247);
-            this.tb_newCustCity.Name = "tb_newCustCity";
-            this.tb_newCustCity.Size = new System.Drawing.Size(240, 23);
-            this.tb_newCustCity.TabIndex = 5;
             // 
             // tb_newCustAddress2
             // 
@@ -160,7 +186,7 @@ namespace AppointmentScheduler_C969.Views
             // lbl_newCustPhone
             // 
             this.lbl_newCustPhone.AutoSize = true;
-            this.lbl_newCustPhone.Location = new System.Drawing.Point(80, 423);
+            this.lbl_newCustPhone.Location = new System.Drawing.Point(80, 418);
             this.lbl_newCustPhone.Name = "lbl_newCustPhone";
             this.lbl_newCustPhone.Size = new System.Drawing.Size(41, 15);
             this.lbl_newCustPhone.TabIndex = 7;
@@ -178,7 +204,7 @@ namespace AppointmentScheduler_C969.Views
             // lbl_newCustCountry
             // 
             this.lbl_newCustCountry.AutoSize = true;
-            this.lbl_newCustCountry.Location = new System.Drawing.Point(71, 367);
+            this.lbl_newCustCountry.Location = new System.Drawing.Point(71, 351);
             this.lbl_newCustCountry.Name = "lbl_newCustCountry";
             this.lbl_newCustCountry.Size = new System.Drawing.Size(50, 15);
             this.lbl_newCustCountry.TabIndex = 5;
@@ -187,7 +213,7 @@ namespace AppointmentScheduler_C969.Views
             // lbl_newCustZip
             // 
             this.lbl_newCustZip.AutoSize = true;
-            this.lbl_newCustZip.Location = new System.Drawing.Point(66, 311);
+            this.lbl_newCustZip.Location = new System.Drawing.Point(66, 248);
             this.lbl_newCustZip.Name = "lbl_newCustZip";
             this.lbl_newCustZip.Size = new System.Drawing.Size(55, 15);
             this.lbl_newCustZip.TabIndex = 4;
@@ -196,7 +222,7 @@ namespace AppointmentScheduler_C969.Views
             // lbl_newCustCity
             // 
             this.lbl_newCustCity.AutoSize = true;
-            this.lbl_newCustCity.Location = new System.Drawing.Point(93, 255);
+            this.lbl_newCustCity.Location = new System.Drawing.Point(93, 298);
             this.lbl_newCustCity.Name = "lbl_newCustCity";
             this.lbl_newCustCity.Size = new System.Drawing.Size(28, 15);
             this.lbl_newCustCity.TabIndex = 3;
@@ -223,21 +249,11 @@ namespace AppointmentScheduler_C969.Views
             // lbl_custName
             // 
             this.lbl_custName.AutoSize = true;
-            this.lbl_custName.Location = new System.Drawing.Point(27, 31);
+            this.lbl_custName.Location = new System.Drawing.Point(5, 34);
             this.lbl_custName.Name = "lbl_custName";
-            this.lbl_custName.Size = new System.Drawing.Size(94, 15);
+            this.lbl_custName.Size = new System.Drawing.Size(116, 15);
             this.lbl_custName.TabIndex = 0;
-            this.lbl_custName.Text = "Customer Name";
-            // 
-            // cb_newActiveCust
-            // 
-            this.cb_newActiveCust.AutoSize = true;
-            this.cb_newActiveCust.Location = new System.Drawing.Point(152, 87);
-            this.cb_newActiveCust.Name = "cb_newActiveCust";
-            this.cb_newActiveCust.Size = new System.Drawing.Size(48, 19);
-            this.cb_newActiveCust.TabIndex = 18;
-            this.cb_newActiveCust.Text = "True";
-            this.cb_newActiveCust.UseVisualStyleBackColor = true;
+            this.lbl_custName.Text = "Customer Full Name";
             // 
             // AddCustomer
             // 
@@ -260,19 +276,20 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Label lbl_custName;
         private System.Windows.Forms.Label lbl_newCustCountry;
         private System.Windows.Forms.Label lbl_newCustZip;
-        private System.Windows.Forms.Label lbl_newCustCity;
         private System.Windows.Forms.Label lbl_newCustAddress;
         private System.Windows.Forms.Label lbl_newCustPhone;
         private System.Windows.Forms.Label lbl_newCustAdd2;
         private System.Windows.Forms.TextBox tb_newCustName;
         private System.Windows.Forms.TextBox tb_newCustPhone;
-        private System.Windows.Forms.TextBox tb_newCustCountry;
         private System.Windows.Forms.TextBox tb_newCustZip;
-        private System.Windows.Forms.TextBox tb_newCustCity;
         private System.Windows.Forms.TextBox tb_newCustAddress2;
         private System.Windows.Forms.TextBox tb_newCustAddress;
         private System.Windows.Forms.Button btn_CreateCustomer;
         private System.Windows.Forms.LinkLabel linkLabel_cancel;
         private System.Windows.Forms.CheckBox cb_newActiveCust;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label lbl_newCustCity;
+        private System.Windows.Forms.Button btn_addCity;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
