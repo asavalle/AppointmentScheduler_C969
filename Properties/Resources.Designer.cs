@@ -59,5 +59,15 @@ namespace AppointmentScheduler_C969.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap add_plus {
+            get {
+                object obj = ResourceManager.GetObject("add_plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

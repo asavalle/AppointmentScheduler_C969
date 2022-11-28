@@ -23,9 +23,8 @@ namespace AppointmentScheduler_C969.Models
         {
 
         }
-        public Country(int countryId, string countryName, DateTime createdDate, string createdBy, DateTime lastUpdate, string lastUpdateBy)
+        public Country( string countryName, DateTime createdDate, string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
-            this.CountryId = countryId;
             this.CountryName = countryName;
             this.CreateDate = createdDate;
             this.CreatedBy = createdBy;
@@ -43,8 +42,13 @@ namespace AppointmentScheduler_C969.Models
                 DataAccess.OpenConnection();
             }
             try
-            { //TODO: Need to figure out how to validate country before sending to DB
-                var insert_cmd = new MySqlCommand($"INSERT IGNORE into client_schedule.country (country, createDate,createdBy,lastUpdate,lastUpdateBy) VALUES('{country.CountryName}','{country.CreateDate}','{country.CreatedBy}','{country.LastUpdate}','{country.LastUpdateBy}') ", DataAccess.conn);
+            { 
+                //TODO: Need to figure out how to validate country before sending to DB
+
+                var formatCreateDate = country.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
+                var formatLastUpDate = country.LastUpdate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
+
+                var insert_cmd = new MySqlCommand($"INSERT IGNORE INTO client_schedule.country VALUES(null,'{country.CountryName}','{formatCreateDate}','{country.CreatedBy}','{formatLastUpDate}','{country.LastUpdateBy}') ", DataAccess.conn);
                 var insert = insert_cmd.ExecuteNonQuery();
                 DataAccess.CloseConnection();
 
@@ -53,7 +57,7 @@ namespace AppointmentScheduler_C969.Models
             {
                 MessageBox.Show(exsql.Message);
             }
-            CurrentCountryId = country.CountryId;
+            //UpdateListOfCountries();
         }
 
         public static void UpdateListOfCountries()
@@ -61,7 +65,7 @@ namespace AppointmentScheduler_C969.Models
             DataTable countryTable = new DataTable();
             try
             {
-
+                listOfCountries.Clear();
                 using (var getAptCmd = new MySqlCommand("SELECT * FROM client_schedule.country;", DataAccess.conn))
                 {
                     MySqlDataAdapter sqlAdpt = new MySqlDataAdapter(getAptCmd);

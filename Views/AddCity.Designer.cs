@@ -30,6 +30,9 @@ namespace AppointmentScheduler_C969.Views
         private void InitializeComponent()
         {
             this.gb_newCity = new System.Windows.Forms.GroupBox();
+            this.btn_createNewCntry = new System.Windows.Forms.Button();
+            this.lb_addNewCntry = new System.Windows.Forms.Label();
+            this.tb_addNewCntry = new System.Windows.Forms.TextBox();
             this.ll_cancel = new System.Windows.Forms.LinkLabel();
             this.btn_addCity = new System.Windows.Forms.Button();
             this.btn_addCountry = new System.Windows.Forms.Button();
@@ -43,6 +46,9 @@ namespace AppointmentScheduler_C969.Views
             // gb_newCity
             // 
             this.gb_newCity.BackColor = System.Drawing.Color.AliceBlue;
+            this.gb_newCity.Controls.Add(this.btn_createNewCntry);
+            this.gb_newCity.Controls.Add(this.lb_addNewCntry);
+            this.gb_newCity.Controls.Add(this.tb_addNewCntry);
             this.gb_newCity.Controls.Add(this.ll_cancel);
             this.gb_newCity.Controls.Add(this.btn_addCity);
             this.gb_newCity.Controls.Add(this.btn_addCountry);
@@ -56,6 +62,39 @@ namespace AppointmentScheduler_C969.Views
             this.gb_newCity.TabIndex = 0;
             this.gb_newCity.TabStop = false;
             this.gb_newCity.Text = "Add New City";
+            // 
+            // btn_createNewCntry
+            // 
+            this.btn_createNewCntry.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btn_createNewCntry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_createNewCntry.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_createNewCntry.Location = new System.Drawing.Point(327, 164);
+            this.btn_createNewCntry.Name = "btn_createNewCntry";
+            this.btn_createNewCntry.Size = new System.Drawing.Size(67, 23);
+            this.btn_createNewCntry.TabIndex = 9;
+            this.btn_createNewCntry.Text = "Create";
+            this.btn_createNewCntry.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn_createNewCntry.UseVisualStyleBackColor = false;
+            this.btn_createNewCntry.Visible = false;
+            this.btn_createNewCntry.Click += new System.EventHandler(this.btn_createNewCntry_Click);
+            // 
+            // lb_addNewCntry
+            // 
+            this.lb_addNewCntry.AutoSize = true;
+            this.lb_addNewCntry.Location = new System.Drawing.Point(55, 167);
+            this.lb_addNewCntry.Name = "lb_addNewCntry";
+            this.lb_addNewCntry.Size = new System.Drawing.Size(75, 15);
+            this.lb_addNewCntry.TabIndex = 8;
+            this.lb_addNewCntry.Text = "Add Country";
+            this.lb_addNewCntry.Visible = false;
+            // 
+            // tb_addNewCntry
+            // 
+            this.tb_addNewCntry.Location = new System.Drawing.Point(135, 164);
+            this.tb_addNewCntry.Name = "tb_addNewCntry";
+            this.tb_addNewCntry.Size = new System.Drawing.Size(170, 23);
+            this.tb_addNewCntry.TabIndex = 7;
+            this.tb_addNewCntry.Visible = false;
             // 
             // ll_cancel
             // 
@@ -88,7 +127,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_addCountry.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btn_addCountry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_addCountry.Location = new System.Drawing.Point(330, 118);
+            this.btn_addCountry.Location = new System.Drawing.Point(327, 95);
             this.btn_addCountry.Name = "btn_addCountry";
             this.btn_addCountry.Size = new System.Drawing.Size(46, 23);
             this.btn_addCountry.TabIndex = 4;
@@ -106,7 +145,7 @@ namespace AppointmentScheduler_C969.Views
             // cb_countryList
             // 
             this.cb_countryList.FormattingEnabled = true;
-            this.cb_countryList.Location = new System.Drawing.Point(135, 118);
+            this.cb_countryList.Location = new System.Drawing.Point(135, 95);
             this.cb_countryList.Name = "cb_countryList";
             this.cb_countryList.Size = new System.Drawing.Size(172, 23);
             this.cb_countryList.TabIndex = 2;
@@ -114,7 +153,7 @@ namespace AppointmentScheduler_C969.Views
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(55, 118);
+            this.label1.Location = new System.Drawing.Point(68, 98);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 15);
             this.label1.TabIndex = 1;
@@ -153,5 +192,8 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.ComboBox cb_countryList;
         private System.Windows.Forms.Button btn_addCity;
         private System.Windows.Forms.LinkLabel ll_cancel;
+        private System.Windows.Forms.Label lb_addNewCntry;
+        private System.Windows.Forms.TextBox tb_addNewCntry;
+        private System.Windows.Forms.Button btn_createNewCntry;
     }
 }

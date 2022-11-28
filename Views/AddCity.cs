@@ -1,4 +1,5 @@
 ﻿using AppointmentScheduler_C969.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,8 @@ namespace AppointmentScheduler_C969.Views
             InitializeComponent();
             Country.UpdateListOfCountries();
             cb_countryList.DataSource = Country.listOfCountries;
+            
+
         }
 
 
@@ -27,13 +30,9 @@ namespace AppointmentScheduler_C969.Views
 
         private void btn_addCountry_Click(object sender, EventArgs e)
         {
-            //Country newCountry = new Country();
-
-            //newCountry.CountryId = null;
-            //newCountry.CountryName = 
-
-
-            //Country.InsertCountryRecord(newCountry);
+            lb_addNewCntry.Visible = true;
+            tb_addNewCntry.Visible = true;
+            btn_createNewCntry.Visible = true;
         }
 
         private void btn_addCity_Click(object sender, EventArgs e)
@@ -48,6 +47,15 @@ namespace AppointmentScheduler_C969.Views
             newCity.LastUpdateBy = DataAccess.LoggedInUser;
 
             City.InsertCityRecord(newCity);
+
+        }
+
+        private void btn_createNewCntry_Click(object sender, EventArgs e)
+        {
+            Country newCountry = new Country(tb_addNewCntry.Text, DateTime.Now, DataAccess.LoggedInUser, DateTime.Now, DataAccess.LoggedInUser);
+            Country.InsertCountryRecord(newCountry);
+            Country.UpdateListOfCountries();
+
         }
     }
 }
