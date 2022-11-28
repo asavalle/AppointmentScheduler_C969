@@ -1,11 +1,15 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
+using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Models
 {
     class Address
     {
+        public static int LastInsertedId;
         public int AddressId { get; set; }
         public string StreetAddress { get; set; }
         public string StreetAddress2 { get; set; }
@@ -22,6 +26,7 @@ namespace AppointmentScheduler_C969.Models
 
         public Address(string address, string address2, int cityId, int zip, string phone,DateTime createDate, string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
+
             this.StreetAddress = address;
             this.StreetAddress2 = address2;
             this.CityId = cityId;
@@ -35,8 +40,30 @@ namespace AppointmentScheduler_C969.Models
         }
 
 
-        public static void InsertAddressRecord() { }
+        public static void InsertAddressRecord(Address newAddress) 
+        {
+            if (DataAccess.conn.State is ConnectionState.Closed)
+            {
+                DataAccess.OpenConnection();
+            }
+            try
+            {
+                var formatCreateDate = newAddress.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
+                var formatLastUpDate = newAddress.LastUpdate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
 
+                var insert_cmd = new MySqlCommand($"INSERT INTO client_schedule.address VALUES(null,'{newAddress.StreetAddress}','{newAddress.StreetAddress2}','{newAddress.CityId}','{newAddress.PostalCode}','{newAddress.Phone}','{formatCreateDate}','{newAddress.CreatedBy}','{formatLastUpDate}','{newAddress.LastUpdateBy}')", DataAccess.conn);
+                var insert = insert_cmd.ExecuteNonQuery();
+                LastInsertedId = (int)insert_cmd.LastInsertedId;
+                
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("In Address Class: "+ ex.Message);
+            }
+
+
+        }
 
     }
 }

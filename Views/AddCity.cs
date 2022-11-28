@@ -24,5 +24,30 @@ namespace AppointmentScheduler_C969.Views
         {
             this.Close();
         }
+
+        private void btn_addCountry_Click(object sender, EventArgs e)
+        {
+            //Country newCountry = new Country();
+
+            //newCountry.CountryId = null;
+            //newCountry.CountryName = 
+
+
+            //Country.InsertCountryRecord(newCountry);
+        }
+
+        private void btn_addCity_Click(object sender, EventArgs e)
+        {
+            City newCity = new City();
+
+            newCity.CityName = tb_cityName.Text;
+            newCity.CountryId = Country.GetCountryIdFromName(cb_countryList.SelectedItem.ToString());
+            newCity.CreateDate = DateTime.Now;
+            newCity.CreatedBy = DataAccess.LoggedInUser;
+            newCity.LastUpdate = DateTime.Now;
+            newCity.LastUpdateBy = DataAccess.LoggedInUser;
+
+            City.InsertCityRecord(newCity);
+        }
     }
 }

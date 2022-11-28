@@ -30,13 +30,13 @@ namespace AppointmentScheduler_C969.Views
         private void InitializeComponent()
         {
             this.gb_newCity = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ll_cancel = new System.Windows.Forms.LinkLabel();
+            this.btn_addCity = new System.Windows.Forms.Button();
+            this.btn_addCountry = new System.Windows.Forms.Button();
             this.tb_cityName = new System.Windows.Forms.TextBox();
             this.cb_countryList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lb_newCityName = new System.Windows.Forms.Label();
-            this.btn_addCity = new System.Windows.Forms.Button();
-            this.ll_cancel = new System.Windows.Forms.LinkLabel();
             this.gb_newCity.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,7 +45,7 @@ namespace AppointmentScheduler_C969.Views
             this.gb_newCity.BackColor = System.Drawing.Color.AliceBlue;
             this.gb_newCity.Controls.Add(this.ll_cancel);
             this.gb_newCity.Controls.Add(this.btn_addCity);
-            this.gb_newCity.Controls.Add(this.button1);
+            this.gb_newCity.Controls.Add(this.btn_addCountry);
             this.gb_newCity.Controls.Add(this.tb_cityName);
             this.gb_newCity.Controls.Add(this.cb_countryList);
             this.gb_newCity.Controls.Add(this.label1);
@@ -57,16 +57,44 @@ namespace AppointmentScheduler_C969.Views
             this.gb_newCity.TabStop = false;
             this.gb_newCity.Text = "Add New City";
             // 
-            // button1
+            // ll_cancel
             // 
-            this.button1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(330, 118);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(46, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = false;
+            this.ll_cancel.AutoSize = true;
+            this.ll_cancel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ll_cancel.LinkColor = System.Drawing.Color.Red;
+            this.ll_cancel.Location = new System.Drawing.Point(380, 220);
+            this.ll_cancel.Name = "ll_cancel";
+            this.ll_cancel.Size = new System.Drawing.Size(64, 18);
+            this.ll_cancel.TabIndex = 6;
+            this.ll_cancel.TabStop = true;
+            this.ll_cancel.Text = "Cancel";
+            this.ll_cancel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ll_cancel_LinkClicked);
+            // 
+            // btn_addCity
+            // 
+            this.btn_addCity.BackColor = System.Drawing.Color.LightBlue;
+            this.btn_addCity.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_addCity.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_addCity.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.btn_addCity.Location = new System.Drawing.Point(6, 211);
+            this.btn_addCity.Name = "btn_addCity";
+            this.btn_addCity.Size = new System.Drawing.Size(84, 37);
+            this.btn_addCity.TabIndex = 5;
+            this.btn_addCity.Text = "Add";
+            this.btn_addCity.UseVisualStyleBackColor = false;
+            this.btn_addCity.Click += new System.EventHandler(this.btn_addCity_Click);
+            // 
+            // btn_addCountry
+            // 
+            this.btn_addCountry.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btn_addCountry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_addCountry.Location = new System.Drawing.Point(330, 118);
+            this.btn_addCountry.Name = "btn_addCountry";
+            this.btn_addCountry.Size = new System.Drawing.Size(46, 23);
+            this.btn_addCountry.TabIndex = 4;
+            this.btn_addCountry.Text = "Add";
+            this.btn_addCountry.UseVisualStyleBackColor = false;
+            this.btn_addCountry.Click += new System.EventHandler(this.btn_addCountry_Click);
             // 
             // tb_cityName
             // 
@@ -101,32 +129,6 @@ namespace AppointmentScheduler_C969.Views
             this.lb_newCityName.TabIndex = 0;
             this.lb_newCityName.Text = "City Name";
             // 
-            // btn_addCity
-            // 
-            this.btn_addCity.BackColor = System.Drawing.Color.LightBlue;
-            this.btn_addCity.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_addCity.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn_addCity.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.btn_addCity.Location = new System.Drawing.Point(6, 211);
-            this.btn_addCity.Name = "btn_addCity";
-            this.btn_addCity.Size = new System.Drawing.Size(84, 37);
-            this.btn_addCity.TabIndex = 5;
-            this.btn_addCity.Text = "Add";
-            this.btn_addCity.UseVisualStyleBackColor = false;
-            // 
-            // ll_cancel
-            // 
-            this.ll_cancel.AutoSize = true;
-            this.ll_cancel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ll_cancel.LinkColor = System.Drawing.Color.Red;
-            this.ll_cancel.Location = new System.Drawing.Point(380, 220);
-            this.ll_cancel.Name = "ll_cancel";
-            this.ll_cancel.Size = new System.Drawing.Size(64, 18);
-            this.ll_cancel.TabIndex = 6;
-            this.ll_cancel.TabStop = true;
-            this.ll_cancel.Text = "Cancel";
-            this.ll_cancel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ll_cancel_LinkClicked);
-            // 
             // AddCity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -146,7 +148,7 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.GroupBox gb_newCity;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lb_newCityName;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_addCountry;
         private System.Windows.Forms.TextBox tb_cityName;
         private System.Windows.Forms.ComboBox cb_countryList;
         private System.Windows.Forms.Button btn_addCity;

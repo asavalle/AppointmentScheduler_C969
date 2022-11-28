@@ -30,9 +30,9 @@ namespace AppointmentScheduler_C969.Views
         private void InitializeComponent()
         {
             this.gb_addCustomerForm = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tb_countryName = new System.Windows.Forms.TextBox();
             this.btn_addCity = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cb_citiesList = new System.Windows.Forms.ComboBox();
             this.cb_newActiveCust = new System.Windows.Forms.CheckBox();
             this.linkLabel_cancel = new System.Windows.Forms.LinkLabel();
             this.btn_CreateCustomer = new System.Windows.Forms.Button();
@@ -55,9 +55,9 @@ namespace AppointmentScheduler_C969.Views
             // gb_addCustomerForm
             // 
             this.gb_addCustomerForm.BackColor = System.Drawing.Color.AliceBlue;
-            this.gb_addCustomerForm.Controls.Add(this.textBox1);
+            this.gb_addCustomerForm.Controls.Add(this.tb_countryName);
             this.gb_addCustomerForm.Controls.Add(this.btn_addCity);
-            this.gb_addCustomerForm.Controls.Add(this.comboBox1);
+            this.gb_addCustomerForm.Controls.Add(this.cb_citiesList);
             this.gb_addCustomerForm.Controls.Add(this.cb_newActiveCust);
             this.gb_addCustomerForm.Controls.Add(this.linkLabel_cancel);
             this.gb_addCustomerForm.Controls.Add(this.btn_CreateCustomer);
@@ -81,13 +81,13 @@ namespace AppointmentScheduler_C969.Views
             this.gb_addCustomerForm.TabStop = false;
             this.gb_addCustomerForm.Text = "Add Customer";
             // 
-            // textBox1
+            // tb_countryName
             // 
-            this.textBox1.Location = new System.Drawing.Point(149, 348);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(164, 23);
-            this.textBox1.TabIndex = 22;
+            this.tb_countryName.Location = new System.Drawing.Point(149, 348);
+            this.tb_countryName.Name = "tb_countryName";
+            this.tb_countryName.ReadOnly = true;
+            this.tb_countryName.Size = new System.Drawing.Size(164, 23);
+            this.tb_countryName.TabIndex = 22;
             // 
             // btn_addCity
             // 
@@ -101,13 +101,14 @@ namespace AppointmentScheduler_C969.Views
             this.btn_addCity.UseVisualStyleBackColor = false;
             this.btn_addCity.Click += new System.EventHandler(this.btn_addCity_Click);
             // 
-            // comboBox1
+            // cb_citiesList
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(149, 295);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(137, 23);
-            this.comboBox1.TabIndex = 19;
+            this.cb_citiesList.FormattingEnabled = true;
+            this.cb_citiesList.Location = new System.Drawing.Point(149, 295);
+            this.cb_citiesList.Name = "cb_citiesList";
+            this.cb_citiesList.Size = new System.Drawing.Size(137, 23);
+            this.cb_citiesList.TabIndex = 19;
+            this.cb_citiesList.SelectedIndexChanged += new System.EventHandler(this.cb_citiesList_SelectedIndexChanged);
             // 
             // cb_newActiveCust
             // 
@@ -287,9 +288,9 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Button btn_CreateCustomer;
         private System.Windows.Forms.LinkLabel linkLabel_cancel;
         private System.Windows.Forms.CheckBox cb_newActiveCust;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cb_citiesList;
         private System.Windows.Forms.Label lbl_newCustCity;
         private System.Windows.Forms.Button btn_addCity;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tb_countryName;
     }
 }

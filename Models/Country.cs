@@ -23,8 +23,9 @@ namespace AppointmentScheduler_C969.Models
         {
 
         }
-        public Country(string countryName, DateTime createdDate, string createdBy, DateTime lastUpdate, string lastUpdateBy)
+        public Country(int countryId, string countryName, DateTime createdDate, string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
+            this.CountryId = countryId;
             this.CountryName = countryName;
             this.CreateDate = createdDate;
             this.CreatedBy = createdBy;
@@ -82,5 +83,59 @@ namespace AppointmentScheduler_C969.Models
             
 
         }
+
+        public static int GetCountryIdFromName(string countryName)
+        {
+            if (DataAccess.conn.State is ConnectionState.Closed)
+            {
+                DataAccess.OpenConnection();
+            }
+            try
+            {
+                var selectCmd = new MySqlCommand($"SELECT countryId FROM client_schedule.country WHERE country = '{countryName}';",DataAccess.conn);
+                MySqlDataReader select = selectCmd.ExecuteReader();
+
+                int id = -1;
+                while (select.Read())
+                {
+                    id = select.GetInt32(0);
+                }
+                select.Close();
+                return id;
+            }
+            catch (MySqlException s)
+            {
+                MessageBox.Show(s.Message);
+                return -1;
+            }
+        }
+
+        public static string GetCountryNameFromCity(string cityName)
+        {
+            if (DataAccess.conn.State is ConnectionState.Closed)
+            {
+                DataAccess.OpenConnection();
+            }
+            try
+            {
+                var selectCmd = new MySqlCommand($"SELECT country.country FROM client_schedule.country, client_schedule.city WHERE city.city = '{cityName}' AND city.countryId = country.countryId;", DataAccess.conn);
+                MySqlDataReader select = selectCmd.ExecuteReader();
+
+                string countryName = "";
+                while (select.Read())
+                {
+                    countryName = select.GetString(0);
+                }
+                select.Close();
+                return countryName;
+            }
+            catch (MySqlException s)
+            {
+                MessageBox.Show(s.Message);
+                return null;
+            }
+
+        }
+
     }
 }

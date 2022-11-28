@@ -18,12 +18,12 @@ namespace AppointmentScheduler_C969.Controllers
 
         public static void CreateCustomer(Customer customer) 
         {
-            Customer.InsertCustomerRecord();
+            Customer.InsertCustomerRecord(customer);
         }
 
         public static void CreateCity(City city)
         {
-            City.InsertCityRecord();
+            //City.InsertCityRecord();
         }
 
         public static void CreateCountry(Country country)
@@ -33,7 +33,8 @@ namespace AppointmentScheduler_C969.Controllers
 
         public static void CreateAddress(Address address)
         {
-            Address.InsertAddressRecord();
+            Address.InsertAddressRecord(address);
+
         }
 
 

@@ -21,11 +21,12 @@ namespace AppointmentScheduler_C969.Views
         Customer newCustomer = new Customer();
         Address newCustAddress = new Address();
         
-
         public AddCustomer()
         {           
 
             InitializeComponent();
+            City.UpdateListOfCities();
+            cb_citiesList.DataSource = City.listOfCities;
 
         }
 
@@ -36,46 +37,60 @@ namespace AppointmentScheduler_C969.Views
 
         private void btn_CreateCustomer_Click(object sender, EventArgs e)
         {
+            int activeStatus;
+            if (cb_newActiveCust.Checked)
+            {
+                activeStatus = 1;
+
+            }
+            else
+            {
+                activeStatus = 0;
+            }
+
+            try
+            {
+                var selectedCityId = City.GetCityIdFromName(cb_citiesList.SelectedItem.ToString());
+                Address newAddress = new Address(tb_newCustAddress.Text,
+                                           tb_newCustAddress2.Text,
+                                           selectedCityId,
+                                           Convert.ToInt32(tb_newCustZip.Text),
+                                           tb_newCustPhone.Text,
+                                           DateTime.Now,
+                                           DataAccess.LoggedInUser,
+                                           DateTime.Now,
+                                           DataAccess.LoggedInUser);
+                CustomersController.CreateAddress(newAddress);
+
+                Customer newCust = new Customer(tb_newCustName.Text,
+                                            Address.LastInsertedId,
+                                            activeStatus,
+                                            DateTime.Now,
+                                            DataAccess.LoggedInUser,
+                                            DateTime.Now,
+                                            DataAccess.LoggedInUser);
+                CustomersController.CreateCustomer(newCust);
 
 
-            //country
-            //newCustCountry.CountryName = tb_newCustCountry.Text;
-            //newCustCountry.CreateDate = DateTime.Now;
-            //newCustCountry.CreatedBy = DataAccess.LoggedInUser;
-            //newCustCountry.LastUpdate = DateTime.Now;
-            //newCustCountry.LastUpdateBy = DataAccess.LoggedInUser;
-            //CustomersController.CreateCountry(newCustCountry);
 
-            //city
-            //newCustCity.CityName = tb_newCustCity.Text;
-            //newCustCity.CountryId = Country.CurrentCountryId;
-            //newCustCity.CreateDate = DateTime.Now;
-            //newCustCity.CreatedBy = DataAccess.LoggedInUser;
-            //newCustCity.LastUpdate = DateTime.Now;
-            //newCustCity.LastUpdateBy = DataAccess.LoggedInUser;
-            //CustomersController.CreateCity(newCustCity);
 
-            //address
-            //newCustAddress.PostalCode = Convert.ToInt32(tb_newCustZip.Text);
-            //newCustAddress.CityId = newCustCity.CityId;
-            //newCustAddress.Phone = tb_newCustPhone.Text;
-            //newCustAddress.CreateDate = DateTime.Now;
-            //newCustAddress.CreatedBy = DataAccess.LoggedInUser;
-            //newCustAddress.LastUpdate = DateTime.Now;
-            //newCustAddress.LastUpdateBy = DataAccess.LoggedInUser;
-            //CustomersController.CreateAddress(newCustAddress);
+                
+            }
+            catch(Exception x)
+            {
+                MessageBox.Show("There was an error: " + x.Message);
+            }
 
-            //customer
-            //newCustomer.CustomerName = tb_newCustName.Text;
-            //newCustomer.Active = cb_newActiveCust.Checked;
-            //newCustomer.CreateDate = DateTime.Now;
-            //newCustomer.CreatedBy = DataAccess.LoggedInUser;
-            //newCustomer.LastUpdate = DateTime.Now;
-            //newCustomer.LastUpdateBy = DataAccess.LoggedInUser;
-            //newCustomer.AddressId = newCustAddress.AddressId;
-            //newCustomer.CityId = newCustCity.CityId;
-            //CustomersController.CreateCustomer(newCustomer);
+            MessageBox.Show("The following Customer information was added: \n" +
+                                "Customer Name: " + tb_newCustName.Text + "\n" +
+                                "City" + City.GetCityIdFromName(cb_citiesList.SelectedItem.ToString()) + "\n" +
+                                "Active? " + activeStatus + "\n" +
+                                "Created Date:" + DateTime.Now.ToUniversalTime() + "\n" +
+                                "Created By:" + DataAccess.LoggedInUser + "\n" +
+                                "Last Updated Date: " + DateTime.Now.ToUniversalTime() + "\n" +
+                                "Last Updated By: " + DataAccess.LoggedInUser);
 
+            this.Close();
         }
 
         private void cb_newActiveCust_CheckedChanged(object sender, EventArgs e)
@@ -93,10 +108,19 @@ namespace AppointmentScheduler_C969.Views
 
                 
             }
-            catch
+            catch(Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
+        }
+
+
+        private void cb_citiesList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+             tb_countryName.Text = Country.GetCountryNameFromCity(cb_citiesList.SelectedItem.ToString());
+
+            
         }
     }
 }

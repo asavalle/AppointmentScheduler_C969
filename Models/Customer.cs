@@ -21,7 +21,7 @@ namespace AppointmentScheduler_C969.Models
         public int CityId { get; set; }
         public static List<string> Names { get; set; } = new List<string>();
         public int AddressId { get; set; }
-        public bool Active { get; set; }
+        public int Active { get; set; }
         public DateTime CreateDate { get; set; }
         public string CreatedBy { get; set; }
         public DateTime LastUpdate { get; set; }
@@ -33,7 +33,7 @@ namespace AppointmentScheduler_C969.Models
 
         }
 
-        public Customer(string customerName, int addressId, bool active, DateTime createDate,
+        public Customer(string customerName, int addressId, int active, DateTime createDate,
             string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
             //this.CustomerId = customerId;
@@ -74,8 +74,27 @@ namespace AppointmentScheduler_C969.Models
         }
 
 
-        public static void InsertCustomerRecord() { }
-       
+        public static void InsertCustomerRecord(Customer cust) 
+        {
+            //TODO: INSERT INTO customer VALUES(...)
+            if (DataAccess.conn.State is ConnectionState.Closed)
+            {
+                DataAccess.OpenConnection();
+            }
+            try
+            {
+                var formatCreateDate = cust.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
+                var formatLastUpDate = cust.LastUpdate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
+
+                var insert_cmd = new MySqlCommand($"INSERT INTO customer VALUES(null,'{cust.CustomerName}','{cust.AddressId}','{cust.Active}','{formatCreateDate}','{cust.CreatedBy}','{formatLastUpDate}','{cust.LastUpdateBy}')", DataAccess.conn);
+                var insert = insert_cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("In Customer Class: " + ex.Message);
+            }
+        }
+
 
         public static void DeleteCustomerRecord() { }
 
