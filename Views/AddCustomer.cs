@@ -26,7 +26,13 @@ namespace AppointmentScheduler_C969.Views
 
             InitializeComponent();
             City.UpdateListOfCities();
-            cb_citiesList.DataSource = City.listOfCities;
+            BindingSource allCities = new BindingSource();
+
+            allCities.DataSource = City.dtCities;
+            cb_citiesList.DataSource = City.dtCities;
+            cb_citiesList.DisplayMember = "city";
+            cb_citiesList.ValueMember = "city";
+            
 
         }
 
@@ -50,7 +56,7 @@ namespace AppointmentScheduler_C969.Views
 
             try
             {
-                var selectedCityId = City.GetCityIdFromName(cb_citiesList.SelectedItem.ToString());
+                var selectedCityId = City.GetCityIdFromName(cb_citiesList.Text.ToString());
                 Address newAddress = new Address(tb_newCustAddress.Text,
                                            tb_newCustAddress2.Text,
                                            selectedCityId,
@@ -71,7 +77,7 @@ namespace AppointmentScheduler_C969.Views
                                             DataAccess.LoggedInUser);
                 CustomersController.CreateCustomer(newCust);
 
-
+                
 
 
                 
@@ -105,22 +111,30 @@ namespace AppointmentScheduler_C969.Views
             {                
                 AddCity city = new AddCity();                                
                 city.ShowDialog();
-
+                
                 
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
         }
 
 
         private void cb_citiesList_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
-             tb_countryName.Text = Country.GetCountryNameFromCity(cb_citiesList.SelectedItem.ToString());
+           if(cb_citiesList.Text != null)
+            {
+                //MessageBox.Show(cb_citiesList.Text.ToString());
+                tb_countryName.Text = Country.GetCountryNameFromCity(cb_citiesList.Text.ToString());
 
-            
+            }
+            else
+            {
+                cb_citiesList.SelectedItem = "";
+            }
+
         }
     }
 }

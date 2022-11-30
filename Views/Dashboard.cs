@@ -58,6 +58,7 @@ namespace AppointmentScheduler_C969.Views
             //CheckForUpcomingAppointments();
             
             ReloadAppointments();
+            ReloadCustomers();
             ConvertToLocalTime();
         }
         private void ConvertToLocalTime()
@@ -146,7 +147,7 @@ namespace AppointmentScheduler_C969.Views
             dgv_Appointments.DataSource = Appointment.GetAppoitments();
             dgv_Appointments.Sort(dgv_Appointments.Columns["appointmentId"], System.ComponentModel.ListSortDirection.Ascending);
         }
-        
+       
         //Sort Appointments by current month
         private void btn_showByMonth_Click(object sender, EventArgs e)
         {
@@ -172,7 +173,16 @@ namespace AppointmentScheduler_C969.Views
         /*
          * Customers
          */
-        
+        public void ReloadCustomers()
+        {
+            dgv_Customers.DataSource = null;
+            dgv_Customers.DataSource = Customer.GetCustomers();
+            for(int i = 0; i < dgv_Customers.Rows.Count; i++)
+            {
+                dgv_Customers.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            }
+        }
         private void dgv_Customers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             selectedRow = dgv_Customers.SelectedRows;

@@ -15,13 +15,14 @@ namespace AppointmentScheduler_C969.Views
         public AddCity()
         {
             InitializeComponent();
-            Country.UpdateListOfCountries();
-            cb_countryList.DataSource = Country.listOfCountries;
             
 
         }
-
-
+        private void AddCity_Load(object sender, EventArgs e)
+        {
+            Country.UpdateListOfCountries();
+            cb_countryList.DataSource = Country.listOfCountries;
+        }
 
         private void ll_cancel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -47,7 +48,8 @@ namespace AppointmentScheduler_C969.Views
             newCity.LastUpdateBy = DataAccess.LoggedInUser;
 
             City.InsertCityRecord(newCity);
-
+            City.dtCities.Clear();
+            City.UpdateListOfCities();
         }
 
         private void btn_createNewCntry_Click(object sender, EventArgs e)
@@ -55,7 +57,10 @@ namespace AppointmentScheduler_C969.Views
             Country newCountry = new Country(tb_addNewCntry.Text, DateTime.Now, DataAccess.LoggedInUser, DateTime.Now, DataAccess.LoggedInUser);
             Country.InsertCountryRecord(newCountry);
             Country.UpdateListOfCountries();
-
+            cb_countryList.DataSource = null;
+            cb_countryList.DataSource = Country.listOfCountries;
         }
+
+        
     }
 }

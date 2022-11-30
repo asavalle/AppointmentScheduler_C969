@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
@@ -18,8 +19,8 @@ namespace AppointmentScheduler_C969.Models
         public DateTime LastUpdate { get; set; }
         public string LastUpdateBy { get; set; }
 
-        public static List<string> listOfCities { get; set; } = new List<string>();
-
+        //public static BindingList<City> listOfCities { get; set; } = new BindingList<City>();
+        public static DataTable dtCities = new DataTable();
         public City() {  }
 
         public City(int id, string cName, int countryId,DateTime createDate, string createdBy, DateTime lastUpdate, string lastUpdatedBy)
@@ -35,14 +36,15 @@ namespace AppointmentScheduler_C969.Models
         
         public static void UpdateListOfCities() 
         {
-            DataTable cityTable = new DataTable();
+            dtCities.Clear();
             try
             {
 
                 using (var getAptCmd = new MySqlCommand("SELECT * FROM client_schedule.city;", DataAccess.conn))
                 {
                     MySqlDataAdapter sqlAdpt = new MySqlDataAdapter(getAptCmd);
-                    sqlAdpt.Fill(cityTable);
+                    sqlAdpt.Fill(dtCities);
+
                 }
 
 
@@ -52,11 +54,7 @@ namespace AppointmentScheduler_C969.Models
                 MessageBox.Show(e.Message);
             }
 
-            foreach (DataRow row in cityTable.Rows)
-            {
-                listOfCities.Add(row.Field<string>("city"));
-            }
-
+          
         }
 
 

@@ -136,7 +136,7 @@ namespace AppointmentScheduler_C969.Models
             catch (MySqlException s)
             {
                 MessageBox.Show(s.Message);
-                return null;
+                return "Failed";
             }
 
         }

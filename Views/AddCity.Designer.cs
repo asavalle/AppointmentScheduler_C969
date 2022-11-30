@@ -176,6 +176,7 @@ namespace AppointmentScheduler_C969.Views
             this.Controls.Add(this.gb_newCity);
             this.Name = "AddCity";
             this.Text = "AddCity";
+            this.Load += new System.EventHandler(this.AddCity_Load);
             this.gb_newCity.ResumeLayout(false);
             this.gb_newCity.PerformLayout();
             this.ResumeLayout(false);
