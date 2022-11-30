@@ -1,4 +1,5 @@
-﻿using AppointmentScheduler_C969.Models;
+﻿using AppointmentScheduler_C969.Controllers;
+using AppointmentScheduler_C969.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -47,7 +48,7 @@ namespace AppointmentScheduler_C969.Views
             newCity.LastUpdate = DateTime.Now;
             newCity.LastUpdateBy = DataAccess.LoggedInUser;
 
-            City.InsertCityRecord(newCity);
+            CustomersController.CreateCity(newCity);
             City.dtCities.Clear();
             City.UpdateListOfCities();
         }

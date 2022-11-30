@@ -23,7 +23,7 @@ namespace AppointmentScheduler_C969.Controllers
 
         public static void CreateCity(City city)
         {
-            //City.InsertCityRecord();
+            City.InsertCityRecord(city);
         }
 
         public static void CreateCountry(Country country)

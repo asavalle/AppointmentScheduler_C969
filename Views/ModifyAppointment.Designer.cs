@@ -60,6 +60,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             // gb_modAptForm
             // 
+            this.gb_modAptForm.BackColor = System.Drawing.Color.AliceBlue;
             this.gb_modAptForm.Controls.Add(this.lb_aptIdLabel);
             this.gb_modAptForm.Controls.Add(this.tb_aptID);
             this.gb_modAptForm.Controls.Add(this.linkLabel_modCancel);
@@ -278,7 +279,6 @@ namespace AppointmentScheduler_C969.Views
             this.cb_modSTime.Name = "cb_modSTime";
             this.cb_modSTime.Size = new System.Drawing.Size(108, 23);
             this.cb_modSTime.TabIndex = 6;
-            //this.cb_modSTime.DropDown += new System.EventHandler(this.cb_modSTime_DropDown);
             // 
             // dtp_modDate
             // 

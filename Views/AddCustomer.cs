@@ -126,7 +126,6 @@ namespace AppointmentScheduler_C969.Views
         {
            if(cb_citiesList.Text != null)
             {
-                //MessageBox.Show(cb_citiesList.Text.ToString());
                 tb_countryName.Text = Country.GetCountryNameFromCity(cb_citiesList.Text.ToString());
 
             }

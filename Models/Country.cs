@@ -19,10 +19,7 @@ namespace AppointmentScheduler_C969.Models
         public string LastUpdateBy { get; set; }
         public static List<string> listOfCountries { get; set; } = new List<string>();
 
-        public Country()
-        {
-
-        }
+        public Country(){ }
         public Country( string countryName, DateTime createdDate, string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
             this.CountryName = countryName;
@@ -35,7 +32,6 @@ namespace AppointmentScheduler_C969.Models
 
         public static void InsertCountryRecord(Country country)
         {
-            //return country ID to property in AddCustomer's form.
 
             if (DataAccess.conn.State is ConnectionState.Closed)
             {
@@ -43,7 +39,6 @@ namespace AppointmentScheduler_C969.Models
             }
             try
             { 
-                //TODO: Need to figure out how to validate country before sending to DB
 
                 var formatCreateDate = country.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
                 var formatLastUpDate = country.LastUpdate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
@@ -57,7 +52,6 @@ namespace AppointmentScheduler_C969.Models
             {
                 MessageBox.Show(exsql.Message);
             }
-            //UpdateListOfCountries();
         }
 
         public static void UpdateListOfCountries()

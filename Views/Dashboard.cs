@@ -189,6 +189,8 @@ namespace AppointmentScheduler_C969.Views
             foreach(DataGridViewRow row in selectedRow)
             {
                 Customer.SelectedCustomerID = Convert.ToInt32(row.Cells[0].Value);
+                Customer.SelectedCustomerAddressId = Address.GetAddressIdFromCustomerId(Customer.SelectedCustomerID);
+                Customer.SelectedCustomerCityId = City.GetCityIdFromAddressId(Customer.SelectedCustomerAddressId);
             }
         }
 
@@ -197,6 +199,12 @@ namespace AppointmentScheduler_C969.Views
             AddCustomer newCustomer = new AddCustomer();
             newCustomer.ShowDialog();
 
+        }
+
+        private void btn_ModCustomer_Click(object sender, EventArgs e)
+        {
+            ModifyCustomer modCust = new ModifyCustomer();
+            modCust.ShowDialog();
         }
     }
 }

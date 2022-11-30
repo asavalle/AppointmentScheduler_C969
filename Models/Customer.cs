@@ -16,16 +16,19 @@ namespace AppointmentScheduler_C969.Models
     class Customer
     {
         public static int SelectedCustomerID;
+        public static int SelectedCustomerAddressId;
+        public static int SelectedCustomerCityId;
+
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
         public int CityId { get; set; }
-        public static List<string> Names { get; set; } = new List<string>();
         public int AddressId { get; set; }
         public int Active { get; set; }
         public DateTime CreateDate { get; set; }
         public string CreatedBy { get; set; }
         public DateTime LastUpdate { get; set; }
         public string LastUpdateBy { get; set; }
+        public static List<string> Names { get; set; } = new List<string>();
 
 
         public Customer()
@@ -36,7 +39,6 @@ namespace AppointmentScheduler_C969.Models
         public Customer(string customerName, int addressId, int active, DateTime createDate,
             string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
-            //this.CustomerId = customerId;
             this.CustomerName = customerName;
             this.AddressId = addressId;
             this.Active = active;
@@ -76,7 +78,6 @@ namespace AppointmentScheduler_C969.Models
 
         public static void InsertCustomerRecord(Customer cust) 
         {
-            //TODO: INSERT INTO customer VALUES(...)
             if (DataAccess.conn.State is ConnectionState.Closed)
             {
                 DataAccess.OpenConnection();

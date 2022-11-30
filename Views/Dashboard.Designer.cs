@@ -270,6 +270,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_ModCustomer.TabIndex = 11;
             this.btn_ModCustomer.Text = "Modify";
             this.btn_ModCustomer.UseVisualStyleBackColor = false;
+            this.btn_ModCustomer.Click += new System.EventHandler(this.btn_ModCustomer_Click);
             // 
             // btn_AddCustomer
             // 

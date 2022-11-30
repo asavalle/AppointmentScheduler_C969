@@ -39,6 +39,30 @@ namespace AppointmentScheduler_C969.Models
 
         }
 
+        public static DataTable GetAddresses()
+        {
+            DataTable addrTable = new DataTable();
+            if (DataAccess.conn.State is ConnectionState.Closed)
+            {
+                DataAccess.OpenConnection();
+            }
+            try
+            {
+                using (var getAddrCmd = new MySqlCommand("SELECT * FROM address", DataAccess.conn))
+                {
+                    MySqlDataAdapter sqlAdpt = new MySqlDataAdapter(getAddrCmd);
+                    sqlAdpt.Fill(addrTable);
+
+                }
+
+            }
+            catch (MySqlException myEx)
+            {
+                MessageBox.Show(myEx.Message);
+            }
+
+            return addrTable;
+        }
 
         public static void InsertAddressRecord(Address newAddress) 
         {
@@ -64,6 +88,29 @@ namespace AppointmentScheduler_C969.Models
 
 
         }
+
+        public static int GetAddressIdFromCustomerId(int custId)
+        {
+            if (DataAccess.conn.State is ConnectionState.Closed)
+            {
+                DataAccess.OpenConnection();
+            }
+            try
+            {
+                var get_cmd = new MySqlCommand($"SELECT addressId FROM customer WHERE customerId = {custId}", DataAccess.conn);
+                var adrId = get_cmd.ExecuteReader();
+                adrId.Read();
+                int id = Convert.ToInt32(adrId.GetValue(0));
+                adrId.Close();
+                return id;
+            }
+            catch(MySqlException myEx)
+            {
+                MessageBox.Show(myEx.Message);
+            }
+            return -1;
+        }
+
 
     }
 }
