@@ -70,7 +70,7 @@ namespace AppointmentScheduler_C969
                         OpenConnection();
                     }
 
-                    using var uname_cmd = new MySqlCommand($"select userName from client_schedule.user;", conn);
+                    using var uname_cmd = new MySqlCommand($"select userName from client_schedule.user where userName = '{userName}';", conn);
                     using var pass_cmd = new MySqlCommand($"select password from client_schedule.user WHERE userName = '{userName}';", conn);
                     string uname = uname_cmd.ExecuteScalar().ToString();
                     string pass = pass_cmd.ExecuteScalar().ToString();
