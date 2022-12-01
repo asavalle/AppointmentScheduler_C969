@@ -491,9 +491,13 @@ namespace AppointmentScheduler_C969.Views
             // lb_user
             // 
             this.lb_user.AutoSize = true;
-            this.lb_user.Location = new System.Drawing.Point(1223, 49);
+            this.lb_user.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lb_user.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lb_user.ForeColor = System.Drawing.Color.DarkOrange;
+            this.lb_user.Location = new System.Drawing.Point(1114, 67);
             this.lb_user.Name = "lb_user";
-            this.lb_user.Size = new System.Drawing.Size(82, 15);
+            this.lb_user.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lb_user.Size = new System.Drawing.Size(98, 15);
             this.lb_user.TabIndex = 3;
             this.lb_user.Text = "logged in user";
             // 
