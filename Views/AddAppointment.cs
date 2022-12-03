@@ -34,6 +34,7 @@ namespace AppointmentScheduler_C969.Views
             this.Close();
             Appointment.StartTimes.Clear();
             Appointment.EndTimes.Clear();
+            cb_customer.DataBindings.Clear();
         }
 
 
@@ -43,6 +44,8 @@ namespace AppointmentScheduler_C969.Views
         private void linkLabel_cancel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Close();
+            cb_customer.DataBindings.Clear();
+
         }
 
         private void dtp_createDate_ValueChanged(object sender, EventArgs e)

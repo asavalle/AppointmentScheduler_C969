@@ -104,7 +104,40 @@ namespace AppointmentScheduler_C969.Models
         
         }
 
+        public static void UpdateCustomerName(string name) 
+        {
+            if (DataAccess.conn.State is ConnectionState.Closed)
+            {
+                DataAccess.OpenConnection();
+            }
+            try
+            {
+                using var update_cmd = new MySqlCommand($"UPDATE client_schedule.customer SET customerName = '{name}' WHERE customerId = '{Customer.SelectedCustomerID}'", DataAccess.conn);
+                var update = update_cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+        public static void UpdateCustomerAddress(string address, string address2,string city, string zip, string phone)
+        {
+            int newCityId = City.GetCityIdFromName(city);
 
+            if (DataAccess.conn.State is ConnectionState.Closed)
+            {
+                DataAccess.OpenConnection();
+            }
+            try
+            {
+                using var update_cmd = new MySqlCommand($"UPDATE client_schedule.address SET address = '{address}', address2 = '{address2}',cityId = {newCityId}, postalCode = '{zip}', phone = '{phone}',createDate = NOW(), createdBy ='{DataAccess.LoggedInUser}', lastUpdate= NOW(), lastUpdateBy = '{DataAccess.LoggedInUser}' WHERE addressId = {Customer.SelectedCustomerAddressId}", DataAccess.conn);
+                var update = update_cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
 
         public static int GetCustomerId(string name)
         {

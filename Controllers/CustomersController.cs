@@ -43,9 +43,13 @@ namespace AppointmentScheduler_C969.Controllers
         
         }
 
-        public static void ModifyCustomer(DataGridViewSelectedRowCollection selectedRow)
+        public static void ModifyCustomerName(string name)
         {
-
+            Customer.UpdateCustomerName(name);
+        }
+        public static void ModifyCustomerAddress(string address, string address2, string city, string zip, string phone) 
+        {
+            Customer.UpdateCustomerAddress( address,  address2,  city,  zip,  phone);
         }
 
     }

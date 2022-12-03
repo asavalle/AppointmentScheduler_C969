@@ -20,7 +20,7 @@ namespace AppointmentScheduler_C969.Views
         public Dashboard()
         {
             InitializeComponent();
-            lb_user.Text = DataAccess.LoggedInUser + " is logged in.";
+            lb_user.Text = DataAccess.LoggedInUser + " is logged in";
 
             bsAppointments.DataSource = Appointment.GetAppoitments();
             dgv_Appointments.DataSource = bsAppointments;
@@ -203,8 +203,17 @@ namespace AppointmentScheduler_C969.Views
 
         private void btn_ModCustomer_Click(object sender, EventArgs e)
         {
-            ModifyCustomer modCust = new ModifyCustomer();
-            modCust.ShowDialog();
+            try
+            {
+                ModifyCustomer modCust = new ModifyCustomer();
+                modCust.ShowDialog();
+            }
+            catch
+            {
+
+            }
+
+
         }
     }
 }

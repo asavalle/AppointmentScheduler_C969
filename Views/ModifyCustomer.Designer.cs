@@ -141,6 +141,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_updateName.Text = "Update";
             this.btn_updateName.UseVisualStyleBackColor = false;
             this.btn_updateName.Visible = false;
+            this.btn_updateName.Click += new System.EventHandler(this.btn_updateName_Click);
             // 
             // tb_custName
             // 
@@ -188,6 +189,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_countryName.Enabled = false;
             this.tb_countryName.Location = new System.Drawing.Point(95, 211);
             this.tb_countryName.Name = "tb_countryName";
+            this.tb_countryName.ReadOnly = true;
             this.tb_countryName.Size = new System.Drawing.Size(100, 23);
             this.tb_countryName.TabIndex = 14;
             // 
@@ -213,6 +215,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_updateAddr.Text = "Update";
             this.btn_updateAddr.UseVisualStyleBackColor = false;
             this.btn_updateAddr.Visible = false;
+            this.btn_updateAddr.Click += new System.EventHandler(this.btn_updateAddr_Click);
             // 
             // btn_modCustomerAddCity
             // 
@@ -322,6 +325,7 @@ namespace AppointmentScheduler_C969.Views
             this.ClientSize = new System.Drawing.Size(434, 650);
             this.Controls.Add(this.gb_ModCustomer);
             this.Name = "ModifyCustomer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ModifyCustomer";
             this.gb_ModCustomer.ResumeLayout(false);
             this.gb_ModCustomer.PerformLayout();
