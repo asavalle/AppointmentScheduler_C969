@@ -55,7 +55,7 @@ namespace AppointmentScheduler_C969.Models
             try
             {
 
-                using (var getAptCmd = new MySqlCommand("SELECT customer.customerId as Customer_ID, customer.customerName as Name, " +
+                using (var getAptCmd = new MySqlCommand("SELECT customer.customerId as Customer_ID, customer.customerName as Name, address.addressId as AddressID, " +
                     "address.address as Address, city.city as City, country.country, " +
                     "address.phone as Phone, customer.active " +
                     "FROM((customer INNER JOIN address on address.addressId = customer.addressId) " +

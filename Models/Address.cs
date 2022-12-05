@@ -10,6 +10,7 @@ namespace AppointmentScheduler_C969.Models
     class Address
     {
         public static int LastInsertedId;
+        public static int SelectedAddressID;
         public int AddressId { get; set; }
         public string StreetAddress { get; set; }
         public string StreetAddress2 { get; set; }
@@ -111,6 +112,23 @@ namespace AppointmentScheduler_C969.Models
             return -1;
         }
 
+        public static void DeleteCustomerAddress(int customerAddressId)
+        {
+            if (DataAccess.conn.State is ConnectionState.Closed)
+            {
+                DataAccess.OpenConnection();
+            }
+            try
+            {
+                using var delAdd_cmd = new MySqlCommand($"DELETE FROM address WHERE addressId = {customerAddressId}", DataAccess.conn);
+                var update = delAdd_cmd.ExecuteNonQuery();
+
+            }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
 
     }
 }

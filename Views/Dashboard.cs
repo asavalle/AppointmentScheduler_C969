@@ -48,6 +48,8 @@ namespace AppointmentScheduler_C969.Views
             dgv_Users.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             DataAccess.CloseConnection();            
             Customer.GetCustomerList();
+
+            dgv_addresses.DataSource = Address.GetAddresses();
             
         }
         
@@ -59,6 +61,7 @@ namespace AppointmentScheduler_C969.Views
             
             ReloadAppointments();
             ReloadCustomers();
+            ReloadAddresses();
             ConvertToLocalTime();
         }
         private void ConvertToLocalTime()
@@ -170,14 +173,15 @@ namespace AppointmentScheduler_C969.Views
         }
 
 
-        /*
-         * Customers
-         */
+        /*************************
+         * *******Customers*******
+         ************************/
         public void ReloadCustomers()
         {
             dgv_Customers.DataSource = null;
             dgv_Customers.DataSource = Customer.GetCustomers();
-            for(int i = 0; i < dgv_Customers.Rows.Count; i++)
+            //dgv_Customers.Refresh();
+            for (int i = 0; i < dgv_Customers.Columns.Count; i++)
             {
                 dgv_Customers.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
@@ -244,14 +248,83 @@ namespace AppointmentScheduler_C969.Views
                         MessageBox.Show($"{custNameToDelete} has been deleted.");
 
                     }
+                    DialogResult deleteAddress = MessageBox.Show($"Would you like to delete {custNameToDelete}'s address from the system?", "Delete Address?", MessageBoxButtons.YesNo);
+                    if(deleteAddress == DialogResult.Yes)
+                    {
+                        Address.DeleteCustomerAddress(Customer.SelectedCustomerAddressId);
+                    }
                 }
-                
-                
 
             }
             catch
             {
                 
+            }
+        }
+
+
+
+
+
+        /*************************
+         * *******Addresses*******
+         ************************/
+        public void ReloadAddresses()
+        {
+            dgv_addresses.DataSource = null;
+            dgv_addresses.DataSource = Address.GetAddresses();
+            //dgv_addresses.Refresh();
+            for (int i = 0; i < dgv_addresses.Columns.Count; i++)
+            {
+                dgv_addresses.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+        }
+
+        private void btn_delAddress_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                bool addressFound = false;
+
+                //verify customer is not associated with an appointment
+                foreach (DataGridViewRow row in dgv_Customers.Rows)
+                {
+                    if (Convert.ToInt32(row.Cells[2].Value) == Address.SelectedAddressID)
+                    {
+                        addressFound = true;
+                        MessageBox.Show($"This address has customer record {row.Cells[0].Value} associated with it and cannot be deleted. Delete the customer record before proceeding.");
+                    }
+
+                }
+                if (!addressFound)
+                {
+                    var addressToDelete = Address.SelectedAddressID;
+
+                    DialogResult confirmDelete = MessageBox.Show($"Do you want to delete address?", "Confirm Delete", MessageBoxButtons.YesNo);
+                    if (confirmDelete == DialogResult.Yes)
+                    {
+                        Address.DeleteCustomerAddress(Address.SelectedAddressID);
+
+                        MessageBox.Show($"Address deleted");
+
+                    }
+
+                }
+
+            }
+            catch(Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+        }
+
+        private void dgv_addresses_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            selectedRow = dgv_addresses.SelectedRows;
+            foreach (DataGridViewRow row in selectedRow)
+            {
+                Address.SelectedAddressID = Convert.ToInt32(row.Cells[0].Value);
+
             }
         }
     }
