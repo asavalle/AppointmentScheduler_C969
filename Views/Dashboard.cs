@@ -33,7 +33,7 @@ namespace AppointmentScheduler_C969.Views
             dgv_Appointments.Columns["appointment_Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
 
            
-            CheckForUpcomingAppointments();
+            //CheckForUpcomingAppointments();
 
             dgv_Customers.DataSource = Customer.GetCustomers();
             dgv_Users.DataSource = User.GetUsers();
@@ -57,7 +57,6 @@ namespace AppointmentScheduler_C969.Views
 
         private void Dashboard_Activated(object sender, EventArgs e)
         {
-            //CheckForUpcomingAppointments();
             
             ReloadAppointments();
             ReloadCustomers();

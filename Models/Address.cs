@@ -49,7 +49,7 @@ namespace AppointmentScheduler_C969.Models
             }
             try
             {
-                using (var getAddrCmd = new MySqlCommand("SELECT * FROM address", DataAccess.conn))
+                using (var getAddrCmd = new MySqlCommand("SELECT address.addressId, address.address, address.address2,address.cityId,city.city,address.postalCode FROM address, city where address.cityId = city.cityId ORDER BY address.addressId asc;", DataAccess.conn))
                 {
                     MySqlDataAdapter sqlAdpt = new MySqlDataAdapter(getAddrCmd);
                     sqlAdpt.Fill(addrTable);
