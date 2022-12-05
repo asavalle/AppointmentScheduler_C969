@@ -21,7 +21,7 @@ namespace AppointmentScheduler_C969.Controllers
             
 
             Appointment newAppt = new Appointment();
-            newAppt.CustomerId = Customer.GetCustomerId(customerName);
+            newAppt.CustomerId = Customer.GetCustomerIdByName(customerName);
             newAppt.CustomerName = customerName;
             newAppt.Title = title;
             newAppt.Description = description;

@@ -95,7 +95,7 @@ namespace AppointmentScheduler_C969.Views
                 //Date.BuildAppointmentDate(dtp_modDate.Value, cb_modSTime.SelectedItem.ToString(), cb_modETime.SelectedItem.ToString());
                 tempApptObj.AppointmentId = Appointment.SelectedAppointmentId;
                 tempApptObj.CustomerName = cb_modCustomer.SelectedItem.ToString();
-                tempApptObj.CustomerId = Customer.GetCustomerId(tempApptObj.CustomerName);
+                tempApptObj.CustomerId = Customer.GetCustomerIdByName(tempApptObj.CustomerName);
                 tempApptObj.Contact = tb_modContact.Text;
                 tempApptObj.Title = tb_modTitle.Text;
                 tempApptObj.Type = tb_modType.Text;

@@ -208,12 +208,51 @@ namespace AppointmentScheduler_C969.Views
                 ModifyCustomer modCust = new ModifyCustomer();
                 modCust.ShowDialog();
             }
-            catch
+            catch(Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
 
 
+        }
+
+        private void btn_DelCustomer_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                bool appointmentFound = false;
+
+                //verify customer is not associated with an appointment
+                foreach (DataGridViewRow row in dgv_Appointments.Rows)
+                {
+                    if (Customer.GetCustomerIdByName(row.Cells[1].Value.ToString()) == Customer.SelectedCustomerID)
+                    {
+                        appointmentFound = true;
+                        MessageBox.Show($"This customer has an associated appointment, ID {row.Cells[0].Value}, and cannot be deleted. \n" +
+                            $"Please delete associated appointment before proceeding.");
+                    }                    
+
+                }
+                if (!appointmentFound)
+                {
+                    var custNameToDelete = Customer.GetCustomerNameById(Customer.SelectedCustomerID);
+
+                    DialogResult confirmDelete = MessageBox.Show($"Do you want to delete customer {custNameToDelete}?", "Confirm Delete", MessageBoxButtons.YesNo);
+                    if (confirmDelete == DialogResult.Yes)
+                    {
+                        Customer.DeleteCustomerRecord(Customer.SelectedCustomerID);
+                        MessageBox.Show($"{custNameToDelete} has been deleted.");
+
+                    }
+                }
+                
+                
+
+            }
+            catch
+            {
+                
+            }
         }
     }
 }

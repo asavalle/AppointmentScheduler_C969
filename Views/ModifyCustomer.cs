@@ -26,17 +26,25 @@ namespace AppointmentScheduler_C969.Views
                 DataTable cityTable = City.GetCities(); //Creates a table of all cities.
                 var selectedAddr = addressTable.AsEnumerable().Where(x => x.Field<int>("addressId") == Customer.SelectedCustomerAddressId).FirstOrDefault();
                 var selectedCity = cityTable.AsEnumerable().Where(x => x.Field<int>("cityId") == Customer.SelectedCustomerCityId).FirstOrDefault();
-
+                var selectedCustomer = customersTable.AsEnumerable().Where(x => x.Field<int>("Customer_ID") == Customer.SelectedCustomerID).FirstOrDefault();
                 allCities.DataSource = City.dtCities;
                 cb_modCustCityList.DataSource = allCities;
                 cb_modCustCityList.ValueMember = "city";
+                chk_ActiveUser.Checked = selectedCustomer.Field<bool>("active");
+                tb_custName.Text = Customer.GetCustomerNameById(Customer.SelectedCustomerID);
+                
+                   
 
-                tb_custName.Text = Customer.GetCustomerName(Customer.SelectedCustomerID);
+                
+                
+
                 tb_custAddr1.Text = selectedAddr.Field<string>("address");
                 tb_custAddr2.Text = selectedAddr.Field<string>("address2");
                 cb_modCustCityList.SelectedValue = selectedCity.Field<string>("city").ToString();
                 tb_countryName.Text = Country.GetCountryNameFromCity(selectedCity.Field<string>("city"));
-                tb_postCode.Text = selectedAddr.Field<string>("phone");
+                tb_postCode.Text = selectedAddr.Field<string>("postalCode");
+                tb_phoneNum.Text = selectedAddr.Field<string>("phone");
+
             }
             catch(ArgumentNullException n)
             {
@@ -47,10 +55,6 @@ namespace AppointmentScheduler_C969.Views
 
         }
 
-        private void ModifyCustomers_Load(Object sender, EventArgs e)
-        {
-            
-        }
 
         private void btn_modCustomerAddCity_Click(object sender, EventArgs e)
         {
@@ -71,9 +75,10 @@ namespace AppointmentScheduler_C969.Views
             tb_custName.Enabled = true;
             cb_modCustCityList.Enabled = true;
             btn_updateName.Visible = true;
-            btn_saveCustMods.Visible = true;
             btn_updateAddr.Visible = true;
             btn_modCustomerAddCity.Visible = true;
+            chk_ActiveUser.Enabled = true;
+
         }
 
         private void ll_modCustCancel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -84,7 +89,7 @@ namespace AppointmentScheduler_C969.Views
         private void btn_updateName_Click(object sender, EventArgs e)
         {
             CustomersController.ModifyCustomerName(tb_custName.Text);
-
+            Customer.UpdateActiveCustomerRecord(chk_ActiveUser.Checked);
            DialogResult updated = MessageBox.Show($"Customer's name has been updated to {tb_custName.Text}. Would you like exit?","Continue Updating?",MessageBoxButtons.YesNo);
             if (updated == DialogResult.Yes)
             {
@@ -100,6 +105,17 @@ namespace AppointmentScheduler_C969.Views
             {
                 this.Close();
             }
+        }
+
+        private void cb_modCustCityList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tb_countryName.Text = Country.GetCountryNameFromCity(cb_modCustCityList.Text);
+
+        }
+
+        private void chk_ActiveUser_CheckStateChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

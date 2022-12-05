@@ -146,7 +146,7 @@ namespace AppointmentScheduler_C969.Models
                     }
                     SelectedAppointmentDateCreated = currentAppointment.CreateDate;
                     select.Close();
-                    currentAppointment.CustomerName = Customer.GetCustomerName(currentAppointment.CustomerId);
+                    currentAppointment.CustomerName = Customer.GetCustomerNameById(currentAppointment.CustomerId);
                 }
                     
                 DataAccess.CloseConnection();

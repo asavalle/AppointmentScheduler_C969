@@ -30,10 +30,10 @@ namespace AppointmentScheduler_C969.Views
         private void InitializeComponent()
         {
             this.gb_ModCustomer = new System.Windows.Forms.GroupBox();
-            this.btn_saveCustMods = new System.Windows.Forms.Button();
             this.ll_modCustCancel = new System.Windows.Forms.LinkLabel();
             this.btn_editModCust = new System.Windows.Forms.Button();
             this.gb_updateName = new System.Windows.Forms.GroupBox();
+            this.chk_ActiveUser = new System.Windows.Forms.CheckBox();
             this.btn_updateName = new System.Windows.Forms.Button();
             this.tb_custName = new System.Windows.Forms.TextBox();
             this.lb_custName = new System.Windows.Forms.Label();
@@ -60,7 +60,6 @@ namespace AppointmentScheduler_C969.Views
             // gb_ModCustomer
             // 
             this.gb_ModCustomer.BackColor = System.Drawing.Color.AliceBlue;
-            this.gb_ModCustomer.Controls.Add(this.btn_saveCustMods);
             this.gb_ModCustomer.Controls.Add(this.ll_modCustCancel);
             this.gb_ModCustomer.Controls.Add(this.btn_editModCust);
             this.gb_ModCustomer.Controls.Add(this.gb_updateName);
@@ -71,20 +70,6 @@ namespace AppointmentScheduler_C969.Views
             this.gb_ModCustomer.TabIndex = 0;
             this.gb_ModCustomer.TabStop = false;
             this.gb_ModCustomer.Text = "Modify Customer";
-            // 
-            // btn_saveCustMods
-            // 
-            this.btn_saveCustMods.BackColor = System.Drawing.Color.LightBlue;
-            this.btn_saveCustMods.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_saveCustMods.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn_saveCustMods.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.btn_saveCustMods.Location = new System.Drawing.Point(117, 586);
-            this.btn_saveCustMods.Name = "btn_saveCustMods";
-            this.btn_saveCustMods.Size = new System.Drawing.Size(84, 37);
-            this.btn_saveCustMods.TabIndex = 40;
-            this.btn_saveCustMods.Text = "Save";
-            this.btn_saveCustMods.UseVisualStyleBackColor = false;
-            this.btn_saveCustMods.Visible = false;
             // 
             // ll_modCustCancel
             // 
@@ -118,6 +103,7 @@ namespace AppointmentScheduler_C969.Views
             // gb_updateName
             // 
             this.gb_updateName.BackColor = System.Drawing.Color.Transparent;
+            this.gb_updateName.Controls.Add(this.chk_ActiveUser);
             this.gb_updateName.Controls.Add(this.btn_updateName);
             this.gb_updateName.Controls.Add(this.tb_custName);
             this.gb_updateName.Controls.Add(this.lb_custName);
@@ -128,6 +114,18 @@ namespace AppointmentScheduler_C969.Views
             this.gb_updateName.TabStop = false;
             this.gb_updateName.Text = "Update Name";
             // 
+            // chk_ActiveUser
+            // 
+            this.chk_ActiveUser.AutoSize = true;
+            this.chk_ActiveUser.Enabled = false;
+            this.chk_ActiveUser.Location = new System.Drawing.Point(61, 66);
+            this.chk_ActiveUser.Name = "chk_ActiveUser";
+            this.chk_ActiveUser.Size = new System.Drawing.Size(59, 19);
+            this.chk_ActiveUser.TabIndex = 2;
+            this.chk_ActiveUser.Text = "Active";
+            this.chk_ActiveUser.UseVisualStyleBackColor = true;
+            this.chk_ActiveUser.CheckStateChanged += new System.EventHandler(this.chk_ActiveUser_CheckStateChanged);
+            // 
             // btn_updateName
             // 
             this.btn_updateName.BackColor = System.Drawing.Color.LightBlue;
@@ -137,7 +135,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_updateName.Location = new System.Drawing.Point(318, 66);
             this.btn_updateName.Name = "btn_updateName";
             this.btn_updateName.Size = new System.Drawing.Size(75, 28);
-            this.btn_updateName.TabIndex = 5;
+            this.btn_updateName.TabIndex = 3;
             this.btn_updateName.Text = "Update";
             this.btn_updateName.UseVisualStyleBackColor = false;
             this.btn_updateName.Visible = false;
@@ -211,7 +209,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_updateAddr.Location = new System.Drawing.Point(318, 369);
             this.btn_updateAddr.Name = "btn_updateAddr";
             this.btn_updateAddr.Size = new System.Drawing.Size(75, 28);
-            this.btn_updateAddr.TabIndex = 4;
+            this.btn_updateAddr.TabIndex = 10;
             this.btn_updateAddr.Text = "Update";
             this.btn_updateAddr.UseVisualStyleBackColor = false;
             this.btn_updateAddr.Visible = false;
@@ -226,7 +224,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_modCustomerAddCity.Location = new System.Drawing.Point(284, 154);
             this.btn_modCustomerAddCity.Name = "btn_modCustomerAddCity";
             this.btn_modCustomerAddCity.Size = new System.Drawing.Size(53, 23);
-            this.btn_modCustomerAddCity.TabIndex = 12;
+            this.btn_modCustomerAddCity.TabIndex = 7;
             this.btn_modCustomerAddCity.Text = "Add";
             this.btn_modCustomerAddCity.UseVisualStyleBackColor = false;
             this.btn_modCustomerAddCity.Visible = false;
@@ -236,10 +234,12 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.cb_modCustCityList.Enabled = false;
             this.cb_modCustCityList.FormattingEnabled = true;
+            this.cb_modCustCityList.ItemHeight = 15;
             this.cb_modCustCityList.Location = new System.Drawing.Point(95, 154);
             this.cb_modCustCityList.Name = "cb_modCustCityList";
             this.cb_modCustCityList.Size = new System.Drawing.Size(165, 23);
             this.cb_modCustCityList.TabIndex = 11;
+            this.cb_modCustCityList.SelectedIndexChanged += new System.EventHandler(this.cb_modCustCityList_SelectedIndexChanged);
             // 
             // tb_phoneNum
             // 
@@ -247,7 +247,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_phoneNum.Location = new System.Drawing.Point(95, 325);
             this.tb_phoneNum.Name = "tb_phoneNum";
             this.tb_phoneNum.Size = new System.Drawing.Size(165, 23);
-            this.tb_phoneNum.TabIndex = 10;
+            this.tb_phoneNum.TabIndex = 9;
             // 
             // tb_postCode
             // 
@@ -255,7 +255,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_postCode.Location = new System.Drawing.Point(95, 268);
             this.tb_postCode.Name = "tb_postCode";
             this.tb_postCode.Size = new System.Drawing.Size(100, 23);
-            this.tb_postCode.TabIndex = 9;
+            this.tb_postCode.TabIndex = 8;
             // 
             // tb_custAddr2
             // 
@@ -263,7 +263,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_custAddr2.Location = new System.Drawing.Point(95, 97);
             this.tb_custAddr2.Name = "tb_custAddr2";
             this.tb_custAddr2.Size = new System.Drawing.Size(242, 23);
-            this.tb_custAddr2.TabIndex = 7;
+            this.tb_custAddr2.TabIndex = 5;
             // 
             // tb_custAddr1
             // 
@@ -271,7 +271,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_custAddr1.Location = new System.Drawing.Point(95, 40);
             this.tb_custAddr1.Name = "tb_custAddr1";
             this.tb_custAddr1.Size = new System.Drawing.Size(242, 23);
-            this.tb_custAddr1.TabIndex = 6;
+            this.tb_custAddr1.TabIndex = 4;
             // 
             // label6
             // 
@@ -361,9 +361,9 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btn_editModCust;
         private System.Windows.Forms.LinkLabel ll_modCustCancel;
-        private System.Windows.Forms.Button btn_saveCustMods;
         private System.Windows.Forms.Button tb_updateName;
         private System.Windows.Forms.Button btn_updateName;
         private System.Windows.Forms.Button btn_updateAddr;
+        private System.Windows.Forms.CheckBox chk_ActiveUser;
     }
 }
