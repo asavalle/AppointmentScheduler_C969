@@ -99,7 +99,7 @@ namespace AppointmentScheduler_C969.Views
                 {
                     if (aptTime >= currentTime && aptTime <= currentTime.AddMinutes(15)) //Determine if the apt time is between current time and current time plus 15 mins.
                     {
-                        MessageBox.Show($"Appointment {row.Field<int>("appointmentId")} is upcoming at : " + aptTime.ToLocalTime() );
+                        MessageBox.Show($"Appointment {row.Field<int>("appointmentId")} is upcoming at : " + aptTime.ToLocalTime(),"Alert!" );
 
                     }
                 }
@@ -342,4 +342,5 @@ namespace AppointmentScheduler_C969.Views
             }
         }
     }
+
 }

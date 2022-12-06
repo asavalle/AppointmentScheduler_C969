@@ -40,13 +40,14 @@ namespace AppointmentScheduler_C969.Views
                Appointment.GenerateTimes(Convert.ToDateTime(currentApt.StartTime.ToShortDateString()));
                 cb_modSTime.DataSource = Appointment.StartTimes;
                 cb_modETime.DataSource = Appointment.EndTimes;
+                cb_modAptType.DataSource = Appointment.AppointmentTypes;
 
                 //Populate form fields from selected row's data.
                 tb_aptID.Text = currentApt.AppointmentId.ToString();
                 cb_modCustomer.SelectedItem = currentApt.CustomerName;
                 tb_modContact.Text = currentApt.Contact;
                 tb_modTitle.Text = currentApt.Title;
-                tb_modType.Text = currentApt.Title;
+                cb_modAptType.Text = currentApt.Type;
                 tb_modDescription.Text = currentApt.Description;
                 dtp_modDate.Value = currentApt.CreateDate;
                 cb_modSTime.SelectedItem = currentApt.StartTime.ToLocalTime().ToShortTimeString();
@@ -98,7 +99,7 @@ namespace AppointmentScheduler_C969.Views
                 tempApptObj.CustomerId = Customer.GetCustomerIdByName(tempApptObj.CustomerName);
                 tempApptObj.Contact = tb_modContact.Text;
                 tempApptObj.Title = tb_modTitle.Text;
-                tempApptObj.Type = tb_modType.Text;
+                tempApptObj.Type = cb_modAptType.Text;
                 tempApptObj.Description = tb_modDescription.Text;
                 tempApptObj.CreateDate = Appointment.SelectedAppointmentDateCreated;
                 tempApptObj.LastUpdate = DateTime.Now;

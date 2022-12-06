@@ -51,16 +51,17 @@ namespace AppointmentScheduler_C969.Views
             this.cb_modSTime = new System.Windows.Forms.ComboBox();
             this.dtp_modDate = new System.Windows.Forms.DateTimePicker();
             this.tb_modDescription = new System.Windows.Forms.TextBox();
-            this.tb_modType = new System.Windows.Forms.TextBox();
             this.tb_modTitle = new System.Windows.Forms.TextBox();
             this.tb_modContact = new System.Windows.Forms.TextBox();
             this.cb_modCustomer = new System.Windows.Forms.ComboBox();
+            this.cb_modAptType = new System.Windows.Forms.ComboBox();
             this.gb_modAptForm.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb_modAptForm
             // 
             this.gb_modAptForm.BackColor = System.Drawing.Color.AliceBlue;
+            this.gb_modAptForm.Controls.Add(this.cb_modAptType);
             this.gb_modAptForm.Controls.Add(this.lb_aptIdLabel);
             this.gb_modAptForm.Controls.Add(this.tb_aptID);
             this.gb_modAptForm.Controls.Add(this.linkLabel_modCancel);
@@ -82,7 +83,6 @@ namespace AppointmentScheduler_C969.Views
             this.gb_modAptForm.Controls.Add(this.cb_modSTime);
             this.gb_modAptForm.Controls.Add(this.dtp_modDate);
             this.gb_modAptForm.Controls.Add(this.tb_modDescription);
-            this.gb_modAptForm.Controls.Add(this.tb_modType);
             this.gb_modAptForm.Controls.Add(this.tb_modTitle);
             this.gb_modAptForm.Controls.Add(this.tb_modContact);
             this.gb_modAptForm.Controls.Add(this.cb_modCustomer);
@@ -298,14 +298,6 @@ namespace AppointmentScheduler_C969.Views
             this.tb_modDescription.Size = new System.Drawing.Size(246, 115);
             this.tb_modDescription.TabIndex = 4;
             // 
-            // tb_modType
-            // 
-            this.tb_modType.Enabled = false;
-            this.tb_modType.Location = new System.Drawing.Point(116, 213);
-            this.tb_modType.Name = "tb_modType";
-            this.tb_modType.Size = new System.Drawing.Size(246, 23);
-            this.tb_modType.TabIndex = 3;
-            // 
             // tb_modTitle
             // 
             this.tb_modTitle.Enabled = false;
@@ -331,6 +323,15 @@ namespace AppointmentScheduler_C969.Views
             this.cb_modCustomer.Size = new System.Drawing.Size(246, 23);
             this.cb_modCustomer.Sorted = true;
             this.cb_modCustomer.TabIndex = 0;
+            // 
+            // cb_modAptType
+            // 
+            this.cb_modAptType.Enabled = false;
+            this.cb_modAptType.FormattingEnabled = true;
+            this.cb_modAptType.Location = new System.Drawing.Point(116, 216);
+            this.cb_modAptType.Name = "cb_modAptType";
+            this.cb_modAptType.Size = new System.Drawing.Size(172, 23);
+            this.cb_modAptType.TabIndex = 41;
             // 
             // ModifyAppointment
             // 
@@ -371,9 +372,9 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.LinkLabel linkLabel_modCancel;
         public System.Windows.Forms.TextBox tb_modContact;
         public System.Windows.Forms.ComboBox cb_modCustomer;
-        public System.Windows.Forms.TextBox tb_modType;
         public System.Windows.Forms.TextBox tb_modTitle;
         private System.Windows.Forms.Label lb_aptIdLabel;
         public System.Windows.Forms.TextBox tb_aptID;
+        private System.Windows.Forms.ComboBox cb_modAptType;
     }
 }

@@ -36,6 +36,18 @@ namespace AppointmentScheduler_C969.Models
         public string CreatedBy { get; set; }
         public DateTime LastUpdate { get; set; }
         public string LastUpdateBy { get; set; }
+        public static List<string> AppointmentTypes = new List<string>
+        {
+            "Meeting",
+            "Interview",
+            "Review",
+            "Quality",
+            "Standard",
+            "Consultation",
+            "Other"
+        };
+
+
 
         //new Appointment constructor
         public Appointment() { }

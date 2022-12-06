@@ -22,13 +22,13 @@ namespace AppointmentScheduler_C969.Views
             lb_endTime.Visible = false;
             
             cb_customer.DataSource = Customer.Names;
-            
+            cb_aptType.DataSource = Appointment.AppointmentTypes;
         }
 
         private void btn_Create_Click(object sender, EventArgs e)
         {
             Date.BuildAppointmentDate(dtp_createDate.Value, cb_startTime.SelectedItem.ToString(), cb_endTime.SelectedItem.ToString()); 
-            AppointmentsController.CreateNewAppointment(cb_customer.SelectedItem.ToString(), tb_aptTitle.Text,tb_aptDesc.Text,tb_aptLocation.Text,tb_aptContact.Text,tb_aptType.Text,
+            AppointmentsController.CreateNewAppointment(cb_customer.SelectedItem.ToString(), tb_aptTitle.Text,tb_aptDesc.Text,tb_aptLocation.Text,tb_aptContact.Text,cb_aptType.Text,
                                                         tb_aptURL.Text, Date.startTime, Date.endTime,DateTime.Now,DataAccess.LoggedInUser,DateTime.Now,
                                                         DataAccess.LoggedInUser);
             this.Close();

@@ -38,7 +38,6 @@ namespace AppointmentScheduler_C969.Views
             this.lb_aptLocation = new System.Windows.Forms.Label();
             this.tb_aptLocation = new System.Windows.Forms.TextBox();
             this.lb_aptType = new System.Windows.Forms.Label();
-            this.tb_aptType = new System.Windows.Forms.TextBox();
             this.btn_Create = new System.Windows.Forms.Button();
             this.cb_endTime = new System.Windows.Forms.ComboBox();
             this.lb_endTime = new System.Windows.Forms.Label();
@@ -52,12 +51,14 @@ namespace AppointmentScheduler_C969.Views
             this.label5 = new System.Windows.Forms.Label();
             this.tb_aptDesc = new System.Windows.Forms.TextBox();
             this.tb_aptTitle = new System.Windows.Forms.TextBox();
+            this.cb_aptType = new System.Windows.Forms.ComboBox();
             this.gb_addAptForm.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb_addAptForm
             // 
             this.gb_addAptForm.BackColor = System.Drawing.Color.AliceBlue;
+            this.gb_addAptForm.Controls.Add(this.cb_aptType);
             this.gb_addAptForm.Controls.Add(this.linkLabel_cancel);
             this.gb_addAptForm.Controls.Add(this.lb_contact);
             this.gb_addAptForm.Controls.Add(this.tb_aptContact);
@@ -66,7 +67,6 @@ namespace AppointmentScheduler_C969.Views
             this.gb_addAptForm.Controls.Add(this.lb_aptLocation);
             this.gb_addAptForm.Controls.Add(this.tb_aptLocation);
             this.gb_addAptForm.Controls.Add(this.lb_aptType);
-            this.gb_addAptForm.Controls.Add(this.tb_aptType);
             this.gb_addAptForm.Controls.Add(this.btn_Create);
             this.gb_addAptForm.Controls.Add(this.cb_endTime);
             this.gb_addAptForm.Controls.Add(this.lb_endTime);
@@ -159,13 +159,6 @@ namespace AppointmentScheduler_C969.Views
             this.lb_aptType.Size = new System.Drawing.Size(31, 15);
             this.lb_aptType.TabIndex = 20;
             this.lb_aptType.Text = "Type";
-            // 
-            // tb_aptType
-            // 
-            this.tb_aptType.Location = new System.Drawing.Point(118, 177);
-            this.tb_aptType.Name = "tb_aptType";
-            this.tb_aptType.Size = new System.Drawing.Size(246, 23);
-            this.tb_aptType.TabIndex = 4;
             // 
             // btn_Create
             // 
@@ -284,6 +277,14 @@ namespace AppointmentScheduler_C969.Views
             this.tb_aptTitle.Size = new System.Drawing.Size(246, 23);
             this.tb_aptTitle.TabIndex = 3;
             // 
+            // cb_aptType
+            // 
+            this.cb_aptType.FormattingEnabled = true;
+            this.cb_aptType.Location = new System.Drawing.Point(120, 180);
+            this.cb_aptType.Name = "cb_aptType";
+            this.cb_aptType.Size = new System.Drawing.Size(181, 23);
+            this.cb_aptType.TabIndex = 27;
+            // 
             // AddAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -307,7 +308,6 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Label lb_aptLocation;
         private System.Windows.Forms.TextBox tb_aptLocation;
         private System.Windows.Forms.Label lb_aptType;
-        private System.Windows.Forms.TextBox tb_aptType;
         private System.Windows.Forms.Button btn_AddApt;
         private System.Windows.Forms.ComboBox cb_endTime;
         private System.Windows.Forms.Label lb_endTime;
@@ -325,5 +325,6 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Label lb_contact;
         private System.Windows.Forms.TextBox tb_aptContact;
         private System.Windows.Forms.LinkLabel linkLabel_cancel;
+        private System.Windows.Forms.ComboBox cb_aptType;
     }
 }
