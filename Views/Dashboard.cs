@@ -32,8 +32,8 @@ namespace AppointmentScheduler_C969.Views
             dgv_Appointments.Columns["end"].DefaultCellStyle.Format = "hh:mm tt";
             dgv_Appointments.Columns["appointment_Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
 
-           
-            //CheckForUpcomingAppointments();
+
+            CheckForUpcomingAppointments();
 
             dgv_Customers.DataSource = Customer.GetCustomers();
             dgv_Users.DataSource = User.GetUsers();
@@ -82,14 +82,29 @@ namespace AppointmentScheduler_C969.Views
             }
         }
 
-        //TODO: CHECKING FOR UPCOMING APPTS NOT WORKING-NEED TO FIX
         private void CheckForUpcomingAppointments()
         {
             DateTime currentTime = DateTime.Now;
+            DateTime currentDate = DateTime.Now.Date;
             DateTime aptTime = new DateTime();
+            DateTime aptDate = new DateTime();
 
-            //TODO: Need to determine if appointment date is current date, and if any appointments are withing 15 minutes of current time.
+            foreach(DataRow row in Appointment.GetAppoitments().Rows) 
+            {
 
+                aptTime = row.Field<DateTime>("start").ToLocalTime();
+                aptDate = aptTime.Date;
+
+                if (aptDate == currentDate) //Determine if appointment date matches current date.
+                {
+                    if (aptTime >= currentTime && aptTime <= currentTime.AddMinutes(15)) //Determine if the apt time is between current time and current time plus 15 mins.
+                    {
+                        MessageBox.Show($"Appointment {row.Field<int>("appointmentId")} is upcoming at : " + aptTime.ToLocalTime() );
+
+                    }
+                }
+
+            }
         }
         private void btn_Logout_Click(object sender, EventArgs e)
         {

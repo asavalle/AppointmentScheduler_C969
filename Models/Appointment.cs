@@ -66,14 +66,14 @@ namespace AppointmentScheduler_C969.Models
             var culture = new System.Globalization.CultureInfo("en-Us");
 
             DateTime date = new DateTime(aptDate.Year, aptDate.Month, aptDate.Day, 05, 0, 0);
-            var hours = 25;
+            var hours = 49;
             while (hours > 0)
             {
 
                 StartTimes.Add(date.ToShortTimeString());
                 EndTimes.Add(date.ToShortTimeString());
 
-                date = date.AddMinutes(30);
+                date = date.AddMinutes(15);
                 hours--;
             }
 
