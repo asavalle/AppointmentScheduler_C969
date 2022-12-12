@@ -240,7 +240,7 @@ namespace AppointmentScheduler_C969.Models
         public static void GetCustomerList()
         {
             DataTable dt = Customer.GetCustomers();
-
+            Customer.Names.Clear();
             foreach (DataRow row in dt.Rows)
             {
 

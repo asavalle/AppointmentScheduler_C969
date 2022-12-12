@@ -228,7 +228,7 @@ namespace AppointmentScheduler_C969.Views
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Dashboard: " + ex.Message);
             }
 
 

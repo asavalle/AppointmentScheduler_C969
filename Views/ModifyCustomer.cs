@@ -24,6 +24,7 @@ namespace AppointmentScheduler_C969.Views
                 DataTable customersTable = Customer.GetCustomers(); //creates a table of all customers to allow access to fields.
                 DataTable addressTable = Address.GetAddresses(); //creates a table of all addresses.
                 DataTable cityTable = City.GetCities(); //Creates a table of all cities.
+
                 var selectedAddr = addressTable.AsEnumerable().Where(x => x.Field<int>("addressId") == Customer.SelectedCustomerAddressId).FirstOrDefault();
                 var selectedCity = cityTable.AsEnumerable().Where(x => x.Field<int>("cityId") == Customer.SelectedCustomerCityId).FirstOrDefault();
                 var selectedCustomer = customersTable.AsEnumerable().Where(x => x.Field<int>("Customer_ID") == Customer.SelectedCustomerID).FirstOrDefault();
@@ -34,16 +35,14 @@ namespace AppointmentScheduler_C969.Views
                 tb_custName.Text = Customer.GetCustomerNameById(Customer.SelectedCustomerID);
                 
                    
-
-                
-                
+     
 
                 tb_custAddr1.Text = selectedAddr.Field<string>("address");
                 tb_custAddr2.Text = selectedAddr.Field<string>("address2");
                 cb_modCustCityList.SelectedValue = selectedCity.Field<string>("city").ToString();
                 tb_countryName.Text = Country.GetCountryNameFromCity(selectedCity.Field<string>("city"));
                 tb_postCode.Text = selectedAddr.Field<string>("postalCode");
-                tb_phoneNum.Text = selectedAddr.Field<string>("phone");
+                tb_phoneNum.Text = selectedCustomer.Field<string>("phone");
 
             }
             catch(ArgumentNullException n)

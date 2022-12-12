@@ -51,6 +51,8 @@ namespace AppointmentScheduler_C969.Views
             CustomersController.CreateCity(newCity);
             City.dtCities.Clear();
             City.UpdateListOfCities();
+
+            this.Close();
         }
 
         private void btn_createNewCntry_Click(object sender, EventArgs e)
@@ -60,8 +62,12 @@ namespace AppointmentScheduler_C969.Views
             Country.UpdateListOfCountries();
             cb_countryList.DataSource = null;
             cb_countryList.DataSource = Country.listOfCountries;
+
+            lb_addNewCntry.Visible = false;
+            tb_addNewCntry.Visible = false;
+            btn_createNewCntry.Visible = false;
         }
 
-        
+       
     }
 }

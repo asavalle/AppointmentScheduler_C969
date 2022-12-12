@@ -16,28 +16,63 @@ namespace AppointmentScheduler_C969.Views
         public AddAppointment()
         {
             InitializeComponent();
+            Customer.GetCustomerList();
             cb_startTime.Visible = false;
             cb_endTime.Visible = false;
             lb_startTime.Visible = false;
             lb_endTime.Visible = false;
-            
             cb_customer.DataSource = Customer.Names;
+
             cb_aptType.DataSource = Appointment.AppointmentTypes;
         }
 
         private void btn_Create_Click(object sender, EventArgs e)
         {
-            Date.BuildAppointmentDate(dtp_createDate.Value, cb_startTime.SelectedItem.ToString(), cb_endTime.SelectedItem.ToString()); 
-            AppointmentsController.CreateNewAppointment(cb_customer.SelectedItem.ToString(), tb_aptTitle.Text,tb_aptDesc.Text,tb_aptLocation.Text,tb_aptContact.Text,cb_aptType.Text,
-                                                        tb_aptURL.Text, Date.startTime, Date.endTime,DateTime.Now,DataAccess.LoggedInUser,DateTime.Now,
-                                                        DataAccess.LoggedInUser);
-            this.Close();
-            Appointment.StartTimes.Clear();
-            Appointment.EndTimes.Clear();
-            cb_customer.DataBindings.Clear();
+            try
+            {
+                foreach (Control control in gb_addAptForm.Controls)
+                {
+                    // Set focus on control
+                    control.Focus();
+                    // Validate causes the control's Validating event to be fired,
+                    // if CausesValidation is True
+                    if (!Validate())
+                    {
+                        DialogResult = DialogResult.None;
+                        return;
+                    }
+                }
+                if (dtp_createDate.Value != null && cb_startTime.SelectedValue != null && cb_endTime.SelectedValue != null)
+                {
+                    Date.BuildAppointmentDate(dtp_createDate.Value, cb_startTime.SelectedItem.ToString(), cb_endTime.SelectedItem.ToString());
+                    AppointmentsController.CreateNewAppointment(cb_customer.SelectedItem.ToString(), tb_aptTitle.Text, tb_aptDesc.Text, tb_aptLocation.Text, tb_aptContact.Text, cb_aptType.Text,
+                                                            tb_aptURL.Text, Date.startTime, Date.endTime, DateTime.Now, DataAccess.LoggedInUser, DateTime.Now,
+                                                            DataAccess.LoggedInUser);
+                    this.Close();
+                    Appointment.StartTimes.Clear();
+                    Appointment.EndTimes.Clear();
+                    cb_customer.DataBindings.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("The Date was not properly selected for the appointment.");
+                }
+
+
+
+            }
+            catch (System.NullReferenceException nullEx)
+            {
+                MessageBox.Show(nullEx.Message);
+            }
+
+            
+            
+
+
         }
 
-
+       
         
         
 
@@ -61,6 +96,75 @@ namespace AppointmentScheduler_C969.Views
             cb_startTime.Visible = true;
             cb_endTime.Visible = true;
 
+        }
+
+        private void cb_customer_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (cb_customer.Text.Length == 0)
+            {
+                error = "Please enter a name";
+                e.Cancel = true;
+            }
+            errPr_appts.SetError((Control)sender, error);
+        }
+
+        private void tb_aptContact_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (tb_aptContact.Text.Length == 0)
+            {
+                error = "Please enter contact information.";
+                e.Cancel = true;
+            }
+            errPr_appts.SetError((Control)sender, error);
+        }
+
+        private void tb_aptTitle_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (tb_aptTitle.Text.Length == 0)
+            {
+                error = "Please enter a appointment Title.";
+                e.Cancel = true;
+            }
+            errPr_appts.SetError((Control)sender, error);
+        }
+
+        private void cb_aptType_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (cb_aptType.Text.Length == 0)
+            {
+                error = "Please select an appointment Type.";
+                e.Cancel = true;
+            }
+            errPr_appts.SetError((Control)sender, error);
+        }
+
+        private void dtp_createDate_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if(dtp_createDate.Value.Date < DateTime.Now.Date || dtp_createDate.Value == null)
+            {
+                error = "Please use the dropdown to select a date greater than or equal to today's date.";
+                e.Cancel = true;
+            }
+            errPr_appts.SetError((Control)sender, error);
+        }
+
+        private void cb_endTime_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            var startTime = DateTime.Parse(cb_startTime.Text);
+            var endTime = DateTime.Parse(cb_endTime.Text);
+
+            if (startTime > endTime)
+            {
+                error = "Start time cannot be after end time.";
+                e.Cancel = true;
+            }
+            errPr_appts.SetError((Control)sender, error);
         }
     }
 }
