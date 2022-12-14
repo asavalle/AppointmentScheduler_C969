@@ -76,11 +76,7 @@ namespace AppointmentScheduler_C969.Views
                                             DateTime.Now,
                                             DataAccess.LoggedInUser);
                 CustomersController.CreateCustomer(newCust);
-
-                
-
-
-                
+              
             }
             catch(Exception x)
             {
@@ -134,6 +130,47 @@ namespace AppointmentScheduler_C969.Views
                 cb_citiesList.SelectedItem = "";
             }
 
+        }
+
+
+
+
+        //Validating methods
+        private void tb_newCustName_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (tb_newCustName.Text.Length == 0)
+            {
+                error = "Please enter a name";
+                e.Cancel = true;
+            }
+            errPr_addCustomer.SetError((Control)sender, error);
+        }
+
+        private void tb_newCustAddress_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (tb_newCustAddress.Text.Length == 0)
+            {
+                error = "Please enter an address for customer.";
+                e.Cancel = true;
+            }
+            errPr_addCustomer.SetError((Control)sender, error);
+        }
+
+        private void tb_newCustAddress2_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void tb_newCustZip_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void cb_citiesList_Validating(object sender, CancelEventArgs e)
+        {
+            
         }
     }
 }

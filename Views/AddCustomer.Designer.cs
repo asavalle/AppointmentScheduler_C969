@@ -29,6 +29,7 @@ namespace AppointmentScheduler_C969.Views
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gb_addCustomerForm = new System.Windows.Forms.GroupBox();
             this.tb_countryName = new System.Windows.Forms.TextBox();
             this.btn_addCity = new System.Windows.Forms.Button();
@@ -49,12 +50,16 @@ namespace AppointmentScheduler_C969.Views
             this.lbl_newCustAddress = new System.Windows.Forms.Label();
             this.lbl_active = new System.Windows.Forms.Label();
             this.lbl_custName = new System.Windows.Forms.Label();
+            this.addCityNoteLabel = new System.Windows.Forms.Label();
+            this.errPr_addCustomer = new System.Windows.Forms.ErrorProvider(this.components);
             this.gb_addCustomerForm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errPr_addCustomer)).BeginInit();
             this.SuspendLayout();
             // 
             // gb_addCustomerForm
             // 
             this.gb_addCustomerForm.BackColor = System.Drawing.Color.AliceBlue;
+            this.gb_addCustomerForm.Controls.Add(this.addCityNoteLabel);
             this.gb_addCustomerForm.Controls.Add(this.tb_countryName);
             this.gb_addCustomerForm.Controls.Add(this.btn_addCity);
             this.gb_addCustomerForm.Controls.Add(this.cb_citiesList);
@@ -83,7 +88,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             // tb_countryName
             // 
-            this.tb_countryName.Location = new System.Drawing.Point(149, 348);
+            this.tb_countryName.Location = new System.Drawing.Point(149, 384);
             this.tb_countryName.Name = "tb_countryName";
             this.tb_countryName.ReadOnly = true;
             this.tb_countryName.Size = new System.Drawing.Size(164, 23);
@@ -93,7 +98,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_addCity.BackColor = System.Drawing.Color.Lavender;
             this.btn_addCity.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_addCity.Location = new System.Drawing.Point(306, 295);
+            this.btn_addCity.Location = new System.Drawing.Point(292, 329);
             this.btn_addCity.Name = "btn_addCity";
             this.btn_addCity.Size = new System.Drawing.Size(39, 23);
             this.btn_addCity.TabIndex = 21;
@@ -104,16 +109,17 @@ namespace AppointmentScheduler_C969.Views
             // cb_citiesList
             // 
             this.cb_citiesList.FormattingEnabled = true;
-            this.cb_citiesList.Location = new System.Drawing.Point(149, 295);
+            this.cb_citiesList.Location = new System.Drawing.Point(149, 329);
             this.cb_citiesList.Name = "cb_citiesList";
             this.cb_citiesList.Size = new System.Drawing.Size(137, 23);
             this.cb_citiesList.TabIndex = 19;
             this.cb_citiesList.SelectedIndexChanged += new System.EventHandler(this.cb_citiesList_SelectedIndexChanged);
+            this.cb_citiesList.Validating += new System.ComponentModel.CancelEventHandler(this.cb_citiesList_Validating);
             // 
             // cb_newActiveCust
             // 
             this.cb_newActiveCust.AutoSize = true;
-            this.cb_newActiveCust.Location = new System.Drawing.Point(152, 87);
+            this.cb_newActiveCust.Location = new System.Drawing.Point(152, 113);
             this.cb_newActiveCust.Name = "cb_newActiveCust";
             this.cb_newActiveCust.Size = new System.Drawing.Size(48, 19);
             this.cb_newActiveCust.TabIndex = 18;
@@ -151,43 +157,47 @@ namespace AppointmentScheduler_C969.Views
             // 
             // tb_newCustPhone
             // 
-            this.tb_newCustPhone.Location = new System.Drawing.Point(149, 415);
+            this.tb_newCustPhone.Location = new System.Drawing.Point(149, 439);
             this.tb_newCustPhone.Name = "tb_newCustPhone";
             this.tb_newCustPhone.Size = new System.Drawing.Size(240, 23);
             this.tb_newCustPhone.TabIndex = 8;
             // 
             // tb_newCustZip
             // 
-            this.tb_newCustZip.Location = new System.Drawing.Point(152, 240);
+            this.tb_newCustZip.Location = new System.Drawing.Point(152, 274);
             this.tb_newCustZip.Name = "tb_newCustZip";
             this.tb_newCustZip.Size = new System.Drawing.Size(93, 23);
             this.tb_newCustZip.TabIndex = 6;
+            this.tb_newCustZip.Validating += new System.ComponentModel.CancelEventHandler(this.tb_newCustZip_Validating);
             // 
             // tb_newCustAddress2
             // 
-            this.tb_newCustAddress2.Location = new System.Drawing.Point(152, 191);
+            this.tb_newCustAddress2.Location = new System.Drawing.Point(152, 219);
             this.tb_newCustAddress2.Name = "tb_newCustAddress2";
             this.tb_newCustAddress2.Size = new System.Drawing.Size(240, 23);
             this.tb_newCustAddress2.TabIndex = 4;
+            this.tb_newCustAddress2.Validating += new System.ComponentModel.CancelEventHandler(this.tb_newCustAddress2_Validating);
             // 
             // tb_newCustAddress
             // 
-            this.tb_newCustAddress.Location = new System.Drawing.Point(152, 135);
+            this.tb_newCustAddress.Location = new System.Drawing.Point(152, 164);
             this.tb_newCustAddress.Name = "tb_newCustAddress";
             this.tb_newCustAddress.Size = new System.Drawing.Size(240, 23);
             this.tb_newCustAddress.TabIndex = 3;
+            this.tb_newCustAddress.Validating += new System.ComponentModel.CancelEventHandler(this.tb_newCustAddress_Validating);
             // 
             // tb_newCustName
             // 
-            this.tb_newCustName.Location = new System.Drawing.Point(152, 31);
+            this.tb_newCustName.Location = new System.Drawing.Point(152, 58);
             this.tb_newCustName.Name = "tb_newCustName";
             this.tb_newCustName.Size = new System.Drawing.Size(240, 23);
             this.tb_newCustName.TabIndex = 1;
+            this.tb_newCustName.Validating += new System.ComponentModel.CancelEventHandler(this.tb_newCustName_Validating);
             // 
             // lbl_newCustPhone
             // 
             this.lbl_newCustPhone.AutoSize = true;
-            this.lbl_newCustPhone.Location = new System.Drawing.Point(80, 418);
+            this.lbl_newCustPhone.Location = new System.Drawing.Point(87, 442);
             this.lbl_newCustPhone.Name = "lbl_newCustPhone";
             this.lbl_newCustPhone.Size = new System.Drawing.Size(41, 15);
             this.lbl_newCustPhone.TabIndex = 7;
@@ -196,7 +206,7 @@ namespace AppointmentScheduler_C969.Views
             // lbl_newCustAdd2
             // 
             this.lbl_newCustAdd2.AutoSize = true;
-            this.lbl_newCustAdd2.Location = new System.Drawing.Point(63, 199);
+            this.lbl_newCustAdd2.Location = new System.Drawing.Point(70, 222);
             this.lbl_newCustAdd2.Name = "lbl_newCustAdd2";
             this.lbl_newCustAdd2.Size = new System.Drawing.Size(58, 15);
             this.lbl_newCustAdd2.TabIndex = 6;
@@ -205,7 +215,7 @@ namespace AppointmentScheduler_C969.Views
             // lbl_newCustCountry
             // 
             this.lbl_newCustCountry.AutoSize = true;
-            this.lbl_newCustCountry.Location = new System.Drawing.Point(71, 351);
+            this.lbl_newCustCountry.Location = new System.Drawing.Point(78, 387);
             this.lbl_newCustCountry.Name = "lbl_newCustCountry";
             this.lbl_newCustCountry.Size = new System.Drawing.Size(50, 15);
             this.lbl_newCustCountry.TabIndex = 5;
@@ -214,7 +224,7 @@ namespace AppointmentScheduler_C969.Views
             // lbl_newCustZip
             // 
             this.lbl_newCustZip.AutoSize = true;
-            this.lbl_newCustZip.Location = new System.Drawing.Point(66, 248);
+            this.lbl_newCustZip.Location = new System.Drawing.Point(73, 277);
             this.lbl_newCustZip.Name = "lbl_newCustZip";
             this.lbl_newCustZip.Size = new System.Drawing.Size(55, 15);
             this.lbl_newCustZip.TabIndex = 4;
@@ -223,7 +233,7 @@ namespace AppointmentScheduler_C969.Views
             // lbl_newCustCity
             // 
             this.lbl_newCustCity.AutoSize = true;
-            this.lbl_newCustCity.Location = new System.Drawing.Point(93, 298);
+            this.lbl_newCustCity.Location = new System.Drawing.Point(100, 332);
             this.lbl_newCustCity.Name = "lbl_newCustCity";
             this.lbl_newCustCity.Size = new System.Drawing.Size(28, 15);
             this.lbl_newCustCity.TabIndex = 3;
@@ -232,7 +242,7 @@ namespace AppointmentScheduler_C969.Views
             // lbl_newCustAddress
             // 
             this.lbl_newCustAddress.AutoSize = true;
-            this.lbl_newCustAddress.Location = new System.Drawing.Point(72, 143);
+            this.lbl_newCustAddress.Location = new System.Drawing.Point(79, 167);
             this.lbl_newCustAddress.Name = "lbl_newCustAddress";
             this.lbl_newCustAddress.Size = new System.Drawing.Size(49, 15);
             this.lbl_newCustAddress.TabIndex = 2;
@@ -241,7 +251,7 @@ namespace AppointmentScheduler_C969.Views
             // lbl_active
             // 
             this.lbl_active.AutoSize = true;
-            this.lbl_active.Location = new System.Drawing.Point(81, 87);
+            this.lbl_active.Location = new System.Drawing.Point(88, 114);
             this.lbl_active.Name = "lbl_active";
             this.lbl_active.Size = new System.Drawing.Size(40, 15);
             this.lbl_active.TabIndex = 1;
@@ -250,11 +260,27 @@ namespace AppointmentScheduler_C969.Views
             // lbl_custName
             // 
             this.lbl_custName.AutoSize = true;
-            this.lbl_custName.Location = new System.Drawing.Point(5, 34);
+            this.lbl_custName.Location = new System.Drawing.Point(12, 61);
             this.lbl_custName.Name = "lbl_custName";
             this.lbl_custName.Size = new System.Drawing.Size(116, 15);
             this.lbl_custName.TabIndex = 0;
             this.lbl_custName.Text = "Customer Full Name";
+            // 
+            // addCityNoteLabel
+            // 
+            this.addCityNoteLabel.AutoSize = true;
+            this.addCityNoteLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.addCityNoteLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addCityNoteLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.addCityNoteLabel.Location = new System.Drawing.Point(28, 355);
+            this.addCityNoteLabel.Name = "addCityNoteLabel";
+            this.addCityNoteLabel.Size = new System.Drawing.Size(353, 17);
+            this.addCityNoteLabel.TabIndex = 23;
+            this.addCityNoteLabel.Text = "If your city is not listed, click \'Add\' button to add your city/country.";
+            // 
+            // errPr_addCustomer
+            // 
+            this.errPr_addCustomer.ContainerControl = this;
             // 
             // AddCustomer
             // 
@@ -267,6 +293,7 @@ namespace AppointmentScheduler_C969.Views
             this.Text = "AddCustomer";
             this.gb_addCustomerForm.ResumeLayout(false);
             this.gb_addCustomerForm.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errPr_addCustomer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -293,5 +320,7 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Label lbl_newCustCity;
         private System.Windows.Forms.Button btn_addCity;
         private System.Windows.Forms.TextBox tb_countryName;
+        private System.Windows.Forms.Label addCityNoteLabel;
+        private System.Windows.Forms.ErrorProvider errPr_addCustomer;
     }
 }
