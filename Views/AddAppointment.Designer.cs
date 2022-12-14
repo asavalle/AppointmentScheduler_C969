@@ -221,6 +221,7 @@ namespace AppointmentScheduler_C969.Views
             this.cb_startTime.Name = "cb_startTime";
             this.cb_startTime.Size = new System.Drawing.Size(108, 23);
             this.cb_startTime.TabIndex = 6;
+            this.cb_startTime.Validating += new System.ComponentModel.CancelEventHandler(this.cb_startTime_Validating);
             // 
             // dtp_createDate
             // 

@@ -136,5 +136,85 @@ namespace AppointmentScheduler_C969.Views
             //cb_modSTime.DataSource = Appointment.StartTimes;
             //cb_modETime.DataSource = Appointment.EndTimes;
         }
+
+        private void cb_modCustomer_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (cb_modCustomer.Text.Length == 0)
+            {
+                error = "A Customer Name must be selected.";
+                e.Cancel = true;
+            }
+            errPr_ModApts.SetError((Control)sender, error);
+        }
+
+        private void tb_modContact_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (tb_modContact.Text.Length == 0)
+            {
+                error = "A Customer contact must be entered.";
+                e.Cancel = true;
+            }
+            errPr_ModApts.SetError((Control)sender, error);
+        }
+
+        private void tb_modTitle_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (tb_modTitle.Text.Length == 0)
+            {
+                error = "Please enter an appoitnment Title.";
+                e.Cancel = true;
+            }
+            errPr_ModApts.SetError((Control)sender, error);
+        }
+
+        private void cb_modAptType_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (cb_modAptType.Text.Length == 0)
+            {
+                error = "An appointment Type must be selected.";
+                e.Cancel = true;
+            }
+            errPr_ModApts.SetError((Control)sender, error);
+        }
+
+        private void dtp_modDate_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (dtp_modDate.Value.Date < DateTime.Now.Date || dtp_modDate.Value == null)
+            {
+                error = "Please use the dropdown to select a date greater than or equal to today's date.";
+                e.Cancel = true;
+            }
+            errPr_ModApts.SetError((Control)sender, error);
+        }
+
+        private void cb_modETime_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            var startTime = DateTime.Parse(cb_modSTime.Text);
+            var endTime = DateTime.Parse(cb_modETime.Text);
+
+            if (startTime > endTime)
+            {
+                error = "Start Time cannot be after End Time.";
+                e.Cancel = true;
+            }
+            errPr_ModApts.SetError((Control)sender, error);
+        }
+
+        private void cb_modSTime_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (cb_modSTime.Text.Length == 0)
+            {
+                error = "An appoitnment Start Time must be selected.";
+                e.Cancel = true;
+            }
+            errPr_ModApts.SetError((Control)sender, error);
+        }
     }
 }

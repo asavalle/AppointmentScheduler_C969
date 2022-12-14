@@ -98,6 +98,7 @@ namespace AppointmentScheduler_C969.Views
 
         }
 
+        //Validating methods
         private void cb_customer_Validating(object sender, CancelEventArgs e)
         {
             string error = null;
@@ -161,7 +162,18 @@ namespace AppointmentScheduler_C969.Views
 
             if (startTime > endTime)
             {
-                error = "Start time cannot be after end time.";
+                error = "Start Time cannot be after End Time.";
+                e.Cancel = true;
+            }
+            errPr_appts.SetError((Control)sender, error);
+        }
+
+        private void cb_startTime_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (cb_startTime.Text.Length ==0)
+            {
+                error = "An appoitnment Start Time must be selected.";
                 e.Cancel = true;
             }
             errPr_appts.SetError((Control)sender, error);
