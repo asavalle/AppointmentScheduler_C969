@@ -1,7 +1,10 @@
-﻿using System;
+﻿using AppointmentScheduler_C969.Views;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing.Printing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -30,45 +33,157 @@ namespace AppointmentScheduler_C969.Models
         Dictionary<string, int> AptTypeCounts = new Dictionary< string, int>();
         private static string UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 
-        private static string filePath = $@"c:\Users\{UserName.Split('\\')[1].ToString()}\Downloads\";
+        private static string filePath = $@"c:\Users\{UserName.Split('\\')[1].ToString()}\Downloads\Reports\";
 
 
-        public static void CreateFile(List<string> ReportList)
-        {
+        public static void AppointmentTypesByMonth() { }
 
-            SaveFileDialog saveDiag = new SaveFileDialog();
-            saveDiag.DefaultExt = "*.txt";
-            saveDiag.Filter = "txt files (*.txt)|*.txt";
-            saveDiag.Title = "Save Report";
+        //public static void CreateFile(List<string> ReportList)
+        //{
 
-            DirectoryInfo di;
-            string path =filePath;
+        //    SaveFileDialog saveDiag = new SaveFileDialog();
+        //    saveDiag.DefaultExt = "*.txt";
+        //    saveDiag.Filter = "txt files (*.txt)|*.txt";
+        //    saveDiag.Title = "Save Report";
+
+        //    DirectoryInfo di;
+        //    string path =filePath;
                                 
-            if (saveDiag.ShowDialog() == DialogResult.OK)
+        //    if (saveDiag.ShowDialog() == DialogResult.OK)
+        //    {
+        //        path = saveDiag.FileName;
+        //        di = new DirectoryInfo(path);
+        //    }
+        //    try
+        //    {
+        //        using (StreamWriter sw = File.CreateText(path))
+        //        {
+
+        //            foreach (string s in ReportList)
+        //            {
+
+        //                sw.WriteLine(s);
+        //            }
+        //            sw.Close();
+        //        }
+        //    }
+        //    catch(Exception e)
+        //    {
+        //        MessageBox.Show(e.Message);
+        //    }
+     
+        //}
+
+
+
+       public static void LoginLogReport()
+        {
+            string fileName = $@"{filePath}login.txt";
+
+            //If directory doesn't exist, create 'Reports' directory and save login.txt inside
+            if (!File.Exists(fileName))
             {
-                path = saveDiag.FileName;
-                di = new DirectoryInfo(path);
-            }
-            try
-            {
-                using (StreamWriter sw = File.CreateText(path))
+                (new FileInfo(fileName)).Directory.Create(); //create directory if not existing
+                using (StreamWriter fileSW = File.AppendText(fileName))
                 {
+                    fileSW.WriteLine($"User {DataAccess.LoggedInUser} logged in on {DateTime.Now}");
+                    fileSW.Close();
 
-                    foreach (string s in ReportList)
-                    {
-
-                        sw.WriteLine(s);
-                    }
-                    sw.Close();
                 }
             }
-            catch(Exception e)
+            else //If directory does exist, then append to 'login.txt'.
             {
-                MessageBox.Show(e.Message);
+                using (StreamWriter fileSW = File.AppendText(fileName))
+                {
+                    fileSW.WriteLine($"User {DataAccess.LoggedInUser} logged in on {DateTime.Now}");
+                    fileSW.Close();
+
+                }
             }
-     
+            
         }
 
-       
+        public static string ViewUserSchedule()
+        {
+            string schedule = "";
+            string fileName = $@"{filePath}Consultant_Schedule.txt";
+            DataTable dt = Appointment.GetAppoitments();
+            DataTable ut = User.GetUsers();
+            
+            var numUsers = from user in ut.AsEnumerable()
+                           group user by user["userId"] into count
+                           select count;
+            int i = 1;
+            int userCount = numUsers.ToList().Count;
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
+
+            foreach (DataRow r in dt.Rows)
+            {
+               
+                while ( userCount >= i)
+                {
+                   var sorted = from appointments in dt.AsEnumerable()
+                                 where appointments.Field<int>("Consultant") == i
+                                 orderby appointments.Field<int>("appointmentId") ascending
+                                 select new
+                                 {
+                                     AppointmentId = appointments.Field<int>("appointmentId"),
+                                     CustomerName = appointments.Field<string>("customerName"),
+                                     Title = appointments.Field<string>("title"),
+                                     StartTime = appointments.Field<DateTime>("start"),
+                                     AptDate = appointments.Field<DateTime>("appointment_Date")
+                                 };
+
+
+
+
+
+                    using (StreamWriter sw = File.AppendText(fileName))
+                    {
+                        sw.WriteLine("==================================================");
+                        sw.WriteLine($"Schedule for User {i}:\n");
+                        sw.WriteLine("==================================================");
+
+                        foreach (var item in sorted)
+                        {
+                        
+                            sw.WriteLine(item);
+
+                            
+                        }
+                        sw.Close();
+                    }
+                        
+                    
+                    i++;
+                }
+
+
+            }
+           
+           
+            
+            schedule = File.ReadAllText(fileName);
+
+
+            return schedule;
+
+
+        }
+        public static string ViewLoginReport()
+        {
+            string fileName = $@"{filePath}login.txt";
+            string log = "";
+
+            if (File.Exists(fileName))
+            {
+              log = File.ReadAllText(fileName);
+              return log;
+            }
+            return log;
+        }
     }
 }

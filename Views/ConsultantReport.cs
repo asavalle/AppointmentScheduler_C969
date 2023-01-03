@@ -14,13 +14,14 @@ namespace AppointmentScheduler_C969.Views
         public ConsultantReport()
         {
             InitializeComponent();
+
+
         }
 
-        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        private void ConsultantReport_Load(object sender, EventArgs e)
         {
-            //e.Graphics.DrawString(Report., richTextBox1.Font, Brushes.Black, 100, 20);
-            //e.Graphics.PageUnit = GraphicsUnit.Inch;
-        }
+            tb_UserSchedule.Text = Report.ViewUserSchedule();
 
+        }
     }
 }

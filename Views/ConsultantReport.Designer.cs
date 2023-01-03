@@ -29,52 +29,38 @@ namespace AppointmentScheduler_C969.Views
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsultantReport));
-            this.printPreviewControl1 = new System.Windows.Forms.PrintPreviewControl();
-            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
-            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.tb_UserSchedule = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // printPreviewControl1
+            // tb_UserSchedule
             // 
-            this.printPreviewControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.printPreviewControl1.Location = new System.Drawing.Point(0, 0);
-            this.printPreviewControl1.Name = "printPreviewControl1";
-            this.printPreviewControl1.Size = new System.Drawing.Size(800, 783);
-            this.printPreviewControl1.TabIndex = 0;
-            // 
-            // printPreviewDialog1
-            // 
-            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog1.Enabled = true;
-            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
-            this.printPreviewDialog1.Name = "printPreviewDialog1";
-            this.printPreviewDialog1.Visible = false;
-            // 
-            // printDialog1
-            // 
-            this.printDialog1.UseEXDialog = true;
+            this.tb_UserSchedule.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_UserSchedule.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tb_UserSchedule.Location = new System.Drawing.Point(0, 0);
+            this.tb_UserSchedule.Multiline = true;
+            this.tb_UserSchedule.Name = "tb_UserSchedule";
+            this.tb_UserSchedule.ReadOnly = true;
+            this.tb_UserSchedule.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tb_UserSchedule.Size = new System.Drawing.Size(800, 783);
+            this.tb_UserSchedule.TabIndex = 0;
             // 
             // ConsultantReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 783);
-            this.Controls.Add(this.printPreviewControl1);
+            this.Controls.Add(this.tb_UserSchedule);
             this.Name = "ConsultantReport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ConsultantReport";
+            this.Load += new System.EventHandler(this.ConsultantReport_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PrintPreviewControl printPreviewControl1;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
-        private System.Drawing.Printing.PrintDocument printDocument1;
-        private System.Windows.Forms.PrintDialog printDialog1;
+        private System.Windows.Forms.TextBox tb_UserSchedule;
     }
 }

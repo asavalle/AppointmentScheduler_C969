@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
 using System.Threading;
+using AppointmentScheduler_C969.Models;
 
 namespace AppointmentScheduler_C969
 {
@@ -32,6 +33,7 @@ namespace AppointmentScheduler_C969
                 DialogResult = DialogResult.OK;
                 tb_UserName.Text = "";
                 tb_userPwd.Text = "";
+                Report.LoginLogReport();
             }
         }
 

@@ -346,11 +346,20 @@ namespace AppointmentScheduler_C969.Views
 
         private void btn_sheduleByUser_Click(object sender, EventArgs e)
         {
-            List<string> ListOfUsersApts = Appointment.GetAppointmentByUserId(); //creates list of users' appointments.
-            Report.CreateFile( ListOfUsersApts);
-          
+            //List<string> ListOfUsersApts = Appointment.GetAppointmentByUserId(); //creates list of users' appointments.
+            //Report.CreateFile( ListOfUsersApts);
 
-            
+            ConsultantReport CR = new ConsultantReport();
+            CR.Show();
+
+
+
+        }
+
+        private void btn_loginLogs_Click(object sender, EventArgs e)
+        {
+            var report = Report.ViewLoginReport();
+            tb_loginReport.Text = report;
         }
     }
 

@@ -50,6 +50,7 @@ namespace AppointmentScheduler_C969.Views
             this.lb_Customers = new System.Windows.Forms.Label();
             this.dgv_Customers = new System.Windows.Forms.DataGridView();
             this.tab_Tools = new System.Windows.Forms.TabPage();
+            this.tb_loginReport = new System.Windows.Forms.TextBox();
             this.lb_Users = new System.Windows.Forms.Label();
             this.dgv_Users = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -66,6 +67,7 @@ namespace AppointmentScheduler_C969.Views
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Logout = new System.Windows.Forms.Button();
             this.lb_user = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.dashTabControl.SuspendLayout();
             this.tab_Appointments.SuspendLayout();
             this.gb_filterAppointments.SuspendLayout();
@@ -367,6 +369,8 @@ namespace AppointmentScheduler_C969.Views
             // tab_Tools
             // 
             this.tab_Tools.BackColor = System.Drawing.Color.AliceBlue;
+            this.tab_Tools.Controls.Add(this.label3);
+            this.tab_Tools.Controls.Add(this.tb_loginReport);
             this.tab_Tools.Controls.Add(this.lb_Users);
             this.tab_Tools.Controls.Add(this.dgv_Users);
             this.tab_Tools.Controls.Add(this.groupBox2);
@@ -377,6 +381,16 @@ namespace AppointmentScheduler_C969.Views
             this.tab_Tools.Size = new System.Drawing.Size(1310, 721);
             this.tab_Tools.TabIndex = 3;
             this.tab_Tools.Text = "Tools";
+            // 
+            // tb_loginReport
+            // 
+            this.tb_loginReport.Location = new System.Drawing.Point(872, 45);
+            this.tb_loginReport.Multiline = true;
+            this.tb_loginReport.Name = "tb_loginReport";
+            this.tb_loginReport.ReadOnly = true;
+            this.tb_loginReport.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tb_loginReport.Size = new System.Drawing.Size(407, 326);
+            this.tb_loginReport.TabIndex = 7;
             // 
             // lb_Users
             // 
@@ -397,7 +411,7 @@ namespace AppointmentScheduler_C969.Views
             this.dgv_Users.RowHeadersVisible = false;
             this.dgv_Users.RowTemplate.Height = 25;
             this.dgv_Users.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Users.Size = new System.Drawing.Size(856, 326);
+            this.dgv_Users.Size = new System.Drawing.Size(589, 326);
             this.dgv_Users.TabIndex = 5;
             // 
             // groupBox2
@@ -451,9 +465,9 @@ namespace AppointmentScheduler_C969.Views
             this.gb_Reports.Controls.Add(this.btn_aptTypesMonth);
             this.gb_Reports.Controls.Add(this.btn_sheduleByUser);
             this.gb_Reports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gb_Reports.Location = new System.Drawing.Point(13, 388);
+            this.gb_Reports.Location = new System.Drawing.Point(277, 388);
             this.gb_Reports.Name = "gb_Reports";
-            this.gb_Reports.Size = new System.Drawing.Size(1120, 157);
+            this.gb_Reports.Size = new System.Drawing.Size(1003, 157);
             this.gb_Reports.TabIndex = 3;
             this.gb_Reports.TabStop = false;
             this.gb_Reports.Text = "Reports";
@@ -462,7 +476,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(852, 51);
+            this.label6.Location = new System.Drawing.Point(789, 51);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(176, 18);
             this.label6.TabIndex = 6;
@@ -470,18 +484,19 @@ namespace AppointmentScheduler_C969.Views
             // 
             // btn_loginLogs
             // 
-            this.btn_loginLogs.Location = new System.Drawing.Point(892, 85);
+            this.btn_loginLogs.Location = new System.Drawing.Point(829, 85);
             this.btn_loginLogs.Name = "btn_loginLogs";
             this.btn_loginLogs.Size = new System.Drawing.Size(103, 41);
             this.btn_loginLogs.TabIndex = 5;
             this.btn_loginLogs.Text = "Report";
             this.btn_loginLogs.UseVisualStyleBackColor = true;
+            this.btn_loginLogs.Click += new System.EventHandler(this.btn_loginLogs_Click);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(445, 51);
+            this.label5.Location = new System.Drawing.Point(403, 51);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(247, 18);
             this.label5.TabIndex = 4;
@@ -508,7 +523,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             // btn_sheduleByUser
             // 
-            this.btn_sheduleByUser.Location = new System.Drawing.Point(517, 85);
+            this.btn_sheduleByUser.Location = new System.Drawing.Point(466, 85);
             this.btn_sheduleByUser.Name = "btn_sheduleByUser";
             this.btn_sheduleByUser.Size = new System.Drawing.Size(103, 41);
             this.btn_sheduleByUser.TabIndex = 2;
@@ -551,6 +566,15 @@ namespace AppointmentScheduler_C969.Views
             this.lb_user.Size = new System.Drawing.Size(98, 15);
             this.lb_user.TabIndex = 3;
             this.lb_user.Text = "logged in user";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(872, 24);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(106, 14);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "User Sign In Log ";
             // 
             // Dashboard
             // 
@@ -646,5 +670,7 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Button btn_delAddress;
         private System.Windows.Forms.DataGridView dgv_addresses;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tb_loginReport;
+        private System.Windows.Forms.Label label3;
     }
 }

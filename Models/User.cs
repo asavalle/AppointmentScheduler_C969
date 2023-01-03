@@ -36,7 +36,7 @@ namespace AppointmentScheduler_C969.Models
             try
             {
 
-                using (var getAptCmd = new MySqlCommand("SELECT * FROM client_schedule.user", DataAccess.conn))
+                using (var getAptCmd = new MySqlCommand("SELECT userId, userName, active,createDate FROM client_schedule.user", DataAccess.conn))
                 {
                     MySqlDataReader reader = getAptCmd.ExecuteReader();
                     usersTable.Load(reader);
