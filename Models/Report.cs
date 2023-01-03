@@ -33,7 +33,7 @@ namespace AppointmentScheduler_C969.Models
         private static string filePath = $@"c:\Users\{UserName.Split('\\')[1].ToString()}\Downloads\";
 
 
-        public static void CreateFile(List<string> ConsultantSchedule)
+        public static void CreateFile(List<string> ReportList)
         {
 
             SaveFileDialog saveDiag = new SaveFileDialog();
@@ -43,9 +43,7 @@ namespace AppointmentScheduler_C969.Models
 
             DirectoryInfo di;
             string path =filePath;
-           
-           
-            
+                                
             if (saveDiag.ShowDialog() == DialogResult.OK)
             {
                 path = saveDiag.FileName;
@@ -56,7 +54,7 @@ namespace AppointmentScheduler_C969.Models
                 using (StreamWriter sw = File.CreateText(path))
                 {
 
-                    foreach (string s in ConsultantSchedule)
+                    foreach (string s in ReportList)
                     {
 
                         sw.WriteLine(s);
@@ -68,39 +66,9 @@ namespace AppointmentScheduler_C969.Models
             {
                 MessageBox.Show(e.Message);
             }
-
-
-
-            //var fullUserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-            //var userName = fullUserName.Split('\\');
-            //string file = $@"c:\Users\{userName[1]}\Desktop\{fileName}";
-            //FileInfo fInfo = new FileInfo(file);
-
-
-            // Check if file already exists. If yes, delete it.     
-            //if (fInfo.Exists)
-            //{
-            //    fInfo.Delete();
-            //}
-            //using (StreamWriter sw = fInfo.CreateText())
-            //{
-
-            //    foreach (string s in ConsultantSchedule)
-            //    {
-            //        sw.WriteLine(s);
-            //    }
-            //    sw.Close();
-
-            //}
+     
         }
 
-        //public static void PrintReport()
-        //{
-        //    PrintDialog prntDiag = new PrintDialog();
-        //    PrintDocument printDoc = new PrintDocument();
-
-
-
-        //}
+       
     }
 }
