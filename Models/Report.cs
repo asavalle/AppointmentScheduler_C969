@@ -79,7 +79,7 @@ namespace AppointmentScheduler_C969.Models
        public static void LoginLogReport()
         {
             string fileName = $@"{filePath}login.txt";
-
+            string file = "";
             //If directory doesn't exist, create 'Reports' directory and save login.txt inside
             if (!File.Exists(fileName))
             {
@@ -93,12 +93,22 @@ namespace AppointmentScheduler_C969.Models
             }
             else //If directory does exist, then append to 'login.txt'.
             {
-                using (StreamWriter fileSW = File.AppendText(fileName))
-                {
+                
+                //Read in entire file.
+                StreamReader sr = new StreamReader(fileName);
+                
+                    file = sr.ReadToEnd();
+                    sr.Close();
+                
+                //Add new line, Then write read file to existing file
+                StreamWriter fileSW = new StreamWriter(fileName);
+                
+                    
                     fileSW.WriteLine($"User {DataAccess.LoggedInUser} logged in on {DateTime.Now}");
+                    fileSW.Write(file);
                     fileSW.Close();
 
-                }
+                
             }
             
         }
