@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -125,7 +127,12 @@ namespace AppointmentScheduler_C969.Views
 
             }
         }
-
+        public void ReloadAppointments()
+        {
+            selectedRow = null;
+            dgv_Appointments.DataSource = Appointment.GetAppoitments();
+            dgv_Appointments.Sort(dgv_Appointments.Columns["appointmentId"], System.ComponentModel.ListSortDirection.Ascending);
+        }
 
         private void btn_AddApt_Click(object sender, EventArgs e)
         {
@@ -158,12 +165,7 @@ namespace AppointmentScheduler_C969.Views
             }
 
         }
-        public void ReloadAppointments()
-        {
-            selectedRow = null;
-            dgv_Appointments.DataSource = Appointment.GetAppoitments();
-            dgv_Appointments.Sort(dgv_Appointments.Columns["appointmentId"], System.ComponentModel.ListSortDirection.Ascending);
-        }
+       
        
         //Sort Appointments by current month
         private void btn_showByMonth_Click(object sender, EventArgs e)
@@ -281,7 +283,7 @@ namespace AppointmentScheduler_C969.Views
 
 
         /*************************
-         * *******Addresses*******
+         *********Addresses*******
          ************************/
         public void ReloadAddresses()
         {
@@ -341,6 +343,20 @@ namespace AppointmentScheduler_C969.Views
 
             }
         }
+
+        private void btn_sheduleByUser_Click(object sender, EventArgs e)
+        {
+            List<string> ListOfUsersApts = Appointment.GetAppointmentByUserId(); //creates list of users' appointments.
+            Report.CreateFile( ListOfUsersApts);
+          
+
+            
+        }
     }
+
+
+        /*************************
+         *********Users***********
+         ************************/
 
 }

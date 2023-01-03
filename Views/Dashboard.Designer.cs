@@ -514,6 +514,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_sheduleByUser.TabIndex = 2;
             this.btn_sheduleByUser.Text = "Report";
             this.btn_sheduleByUser.UseVisualStyleBackColor = true;
+            this.btn_sheduleByUser.Click += new System.EventHandler(this.btn_sheduleByUser_Click);
             // 
             // label1
             // 

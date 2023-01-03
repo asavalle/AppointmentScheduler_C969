@@ -19,6 +19,7 @@ namespace AppointmentScheduler_C969.Models
         public DateTime lastUpdate { get; set; }
         public string lastUpdateBy { get; set; }
 
+        public static int CurrentUserId { get; set; }
 
         public User(string UserName, string Password, bool Active, string CreatedBy)
         {
@@ -70,6 +71,7 @@ namespace AppointmentScheduler_C969.Models
             int id = Convert.ToInt32(userId.GetValue(0));
             userId.Close();
 
+            CurrentUserId = id;
             return id;
         }
     }

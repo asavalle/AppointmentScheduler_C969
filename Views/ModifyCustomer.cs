@@ -25,6 +25,7 @@ namespace AppointmentScheduler_C969.Views
                 DataTable addressTable = Address.GetAddresses(); //creates a table of all addresses.
                 DataTable cityTable = City.GetCities(); //Creates a table of all cities.
 
+                //LAMBDA expressions used here to quickly select individual fields, as needed, using LINQ, rather than creating individual methods to select the required data.
                 var selectedAddr = addressTable.AsEnumerable().Where(x => x.Field<int>("addressId") == Customer.SelectedCustomerAddressId).FirstOrDefault();
                 var selectedCity = cityTable.AsEnumerable().Where(x => x.Field<int>("cityId") == Customer.SelectedCustomerCityId).FirstOrDefault();
                 var selectedCustomer = customersTable.AsEnumerable().Where(x => x.Field<int>("Customer_ID") == Customer.SelectedCustomerID).FirstOrDefault();

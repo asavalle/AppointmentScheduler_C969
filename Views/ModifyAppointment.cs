@@ -30,7 +30,7 @@ namespace AppointmentScheduler_C969.Views
             { 
                 //Convert Appointments DataTable to an Enumerable to be able to access fields.
                 DataTable aptTable = Appointment.GetAppoitments();
-                //Get selected appointment's ID
+                //LAMBDA expresssion used here to get the selected appointment's ID. This method is more efficient than creating a method to retrieve the selected appointment's ID.
                 var selectedApt = aptTable.AsEnumerable().Where(x => x.Field<int>("appointmentId") == Appointment.SelectedAppointmentId).FirstOrDefault();
             
             
@@ -91,9 +91,6 @@ namespace AppointmentScheduler_C969.Views
         {
             try
             {
-
-
-                //Date.BuildAppointmentDate(dtp_modDate.Value, cb_modSTime.SelectedItem.ToString(), cb_modETime.SelectedItem.ToString());
                 tempApptObj.AppointmentId = Appointment.SelectedAppointmentId;
                 tempApptObj.CustomerName = cb_modCustomer.SelectedItem.ToString();
                 tempApptObj.CustomerId = Customer.GetCustomerIdByName(tempApptObj.CustomerName);
@@ -127,15 +124,7 @@ namespace AppointmentScheduler_C969.Views
             this.Close();
         }
 
-        private void cb_modSTime_DropDown(object sender, EventArgs e)
-        {
-            //cb_modSTime.SelectedItem = "";
-            //cb_modETime.SelectedItem = "";
-
-            //Appointment.GenerateTimes(Convert.ToDateTime(tempApptObj.StartTime));
-            //cb_modSTime.DataSource = Appointment.StartTimes;
-            //cb_modETime.DataSource = Appointment.EndTimes;
-        }
+      
 
         private void cb_modCustomer_Validating(object sender, CancelEventArgs e)
         {

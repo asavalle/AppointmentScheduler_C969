@@ -20,6 +20,7 @@ namespace AppointmentScheduler_C969.Models
         public static DateTime SelectedAppointmentDateCreated { get; set; }
         public int AppointmentId { get; set; } //autoincrements on the database side
         public int CustomerId { get; set; }
+        public int UserId { get; set; }
         public string CustomerName { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -31,7 +32,7 @@ namespace AppointmentScheduler_C969.Models
         public static List<string> EndTimes { get; set; } = new List<string>();
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-       
+
         public DateTime CreateDate { get; set; }
         public string CreatedBy { get; set; }
         public DateTime LastUpdate { get; set; }
@@ -47,12 +48,12 @@ namespace AppointmentScheduler_C969.Models
             "Other"
         };
 
-
+        
 
         //new Appointment constructor
         public Appointment() { }
-        public Appointment(int customerId, string customerName, string title, string description, string location, string contact, string type, string url, DateTime start, 
-                            DateTime end, DateTime createDate,string createdBy, DateTime lastUpdate, string lastUpdateBy)
+        public Appointment(int customerId, string customerName, string title, string description, string location, string contact, string type, string url, DateTime start,
+                            DateTime end, DateTime createDate, string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
             this.CustomerId = customerId;
             this.CustomerName = customerName;
@@ -97,17 +98,27 @@ namespace AppointmentScheduler_C969.Models
         *************** Functions to Query Database ****************************
         ***********************************************************************/
         public static DataTable GetAppoitments()
-        {                
+        {
             DataTable aptTable = new DataTable();
-            if(DataAccess.conn.State is ConnectionState.Closed)
+            if (DataAccess.conn.State is ConnectionState.Closed)
             {
                 DataAccess.OpenConnection();
             }
             try
             {
 
-                var getAptCmd = new MySqlCommand("SELECT appointmentId, customer.customerName,appointment.title,appointment.description, appointment.contact, " +
-                    "appointment.type, appointment.start, appointment.end, appointment.start as appointment_Date,appointment.location, appointment.url " +
+                var getAptCmd = new MySqlCommand("SELECT appointmentId, " +
+                    "customer.customerName," +
+                    "appointment.userId as Consultant," +
+                    "appointment.title," +
+                    "appointment.description, " +
+                    "appointment.contact, " +
+                    "appointment.type, " +
+                    "appointment.start, " +
+                    "appointment.end, " +
+                    "appointment.start as appointment_Date," +
+                    "appointment.location, " +
+                    "appointment.url " +
                     "FROM client_schedule.appointment inner join customer where customer.customerId = appointment.customerId; ", DataAccess.conn);
 
 
@@ -120,11 +131,11 @@ namespace AppointmentScheduler_C969.Models
             {
                 MessageBox.Show(e.Message);
             }
-            
+
             return aptTable;
         }
-        
-       
+
+
         public static Appointment GetCurrentAppointment(int ID) {
 
             Appointment currentAppointment = new Appointment();
@@ -137,13 +148,13 @@ namespace AppointmentScheduler_C969.Models
                 using (var select_cmd = new MySqlCommand($"SELECT * FROM client_schedule.appointment WHERE appointmentId = {ID}", DataAccess.conn))
                 {
                     MySqlDataReader select = select_cmd.ExecuteReader();
-                    
+
                     while (select.Read())
                     {
 
 
                         currentAppointment.AppointmentId = select.GetFieldValue<int>("appointmentId");
-                        currentAppointment.CustomerId = select.GetFieldValue<int>("customerId");                        
+                        currentAppointment.CustomerId = select.GetFieldValue<int>("customerId");
                         currentAppointment.Contact = select.GetFieldValue<string>("contact");
                         currentAppointment.Title = select.GetFieldValue<string>("title");
                         currentAppointment.Type = select.GetFieldValue<string>("type");
@@ -160,19 +171,19 @@ namespace AppointmentScheduler_C969.Models
                     select.Close();
                     currentAppointment.CustomerName = Customer.GetCustomerNameById(currentAppointment.CustomerId);
                 }
-                    
+
                 DataAccess.CloseConnection();
             }
             catch (MySqlException err)
             {
                 MessageBox.Show(err.Message);
             }
-            
+
 
             return currentAppointment;
 
         }
-       
+
         public static DataTable GetAppointmensByWeek() {
 
             DataTable aptsByWeek = new DataTable();
@@ -236,6 +247,47 @@ namespace AppointmentScheduler_C969.Models
             return aptsByMonth;
         }
 
+        public static List<string> GetAppointmentByUserId()
+        {
+            
+            var currentUserId = User.GetUserId();
+
+            DataTable appointments = GetAppoitments();
+            Dictionary<string, string> ConsultantSchedule = new Dictionary<string, string>();
+            List<string> AppointmentsByUser = new List<string>();
+
+            foreach (DataRow row in appointments.Rows)
+            {
+               
+               foreach(var item in row.ItemArray)
+                {
+
+                    if (row.Field<int>("Consultant") == currentUserId)
+                    {
+                        
+                        AppointmentsByUser.Add(item.ToString());
+                    }
+                }     
+             
+            }
+            return AppointmentsByUser;
+        }
+        public static void GetAppointmentsByTypeAndMonth(string type)
+        {
+            //TODO: Write query to select NUMBER of appointment types by month.
+            /* i.e...
+                Febuary
+            10 - meeting
+            4 - interview
+            6 - quality
+             */
+
+            
+           
+
+
+
+        }
 
         /***********************************************************************
          *************** Functions Create/Update/Delete appointments ***********
@@ -333,6 +385,8 @@ namespace AppointmentScheduler_C969.Models
                 );
 
         }
+
+
 
 
     }

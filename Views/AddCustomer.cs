@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Views
@@ -158,19 +159,32 @@ namespace AppointmentScheduler_C969.Views
             errPr_addCustomer.SetError((Control)sender, error);
         }
 
-        private void tb_newCustAddress2_Validating(object sender, CancelEventArgs e)
-        {
+      
+        /*This code is not used due to zip codes being different in various locations. But I've included the code just as practice of 
+         regular expressions.*/
 
-        }
+        //private void tb_newCustZip_Validating(object sender, CancelEventArgs e)
+        //{
+        //    string error = null;
+        //    Regex pattern = new Regex(@"\d{4}[0-9]");
+        //    if (tb_newCustZip.Text.Length == 0 ||  !pattern.IsMatch(tb_newCustZip.Text)) 
+        //    {
+        //        error = "Please enter a zip code in proper format.";
+        //        e.Cancel = true;
+        //    }
+        //    errPr_addCustomer.SetError((Control)sender, error);
+        //}
 
-        private void tb_newCustZip_Validating(object sender, CancelEventArgs e)
-        {
-
-        }
 
         private void cb_citiesList_Validating(object sender, CancelEventArgs e)
         {
-            
+            string error = null;
+            if (cb_citiesList.Text.Length == 0)
+            {
+                error = "Please select a city.";
+                e.Cancel = true;
+            }
+            errPr_addCustomer.SetError((Control)sender, error);
         }
     }
 }

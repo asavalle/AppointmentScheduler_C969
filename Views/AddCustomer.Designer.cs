@@ -31,6 +31,7 @@ namespace AppointmentScheduler_C969.Views
         {
             this.components = new System.ComponentModel.Container();
             this.gb_addCustomerForm = new System.Windows.Forms.GroupBox();
+            this.addCityNoteLabel = new System.Windows.Forms.Label();
             this.tb_countryName = new System.Windows.Forms.TextBox();
             this.btn_addCity = new System.Windows.Forms.Button();
             this.cb_citiesList = new System.Windows.Forms.ComboBox();
@@ -50,7 +51,6 @@ namespace AppointmentScheduler_C969.Views
             this.lbl_newCustAddress = new System.Windows.Forms.Label();
             this.lbl_active = new System.Windows.Forms.Label();
             this.lbl_custName = new System.Windows.Forms.Label();
-            this.addCityNoteLabel = new System.Windows.Forms.Label();
             this.errPr_addCustomer = new System.Windows.Forms.ErrorProvider(this.components);
             this.gb_addCustomerForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errPr_addCustomer)).BeginInit();
@@ -85,6 +85,18 @@ namespace AppointmentScheduler_C969.Views
             this.gb_addCustomerForm.TabIndex = 0;
             this.gb_addCustomerForm.TabStop = false;
             this.gb_addCustomerForm.Text = "Add Customer";
+            // 
+            // addCityNoteLabel
+            // 
+            this.addCityNoteLabel.AutoSize = true;
+            this.addCityNoteLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.addCityNoteLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addCityNoteLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.addCityNoteLabel.Location = new System.Drawing.Point(28, 355);
+            this.addCityNoteLabel.Name = "addCityNoteLabel";
+            this.addCityNoteLabel.Size = new System.Drawing.Size(353, 17);
+            this.addCityNoteLabel.TabIndex = 23;
+            this.addCityNoteLabel.Text = "If your city is not listed, click \'Add\' button to add your city/country.";
             // 
             // tb_countryName
             // 
@@ -168,7 +180,6 @@ namespace AppointmentScheduler_C969.Views
             this.tb_newCustZip.Name = "tb_newCustZip";
             this.tb_newCustZip.Size = new System.Drawing.Size(93, 23);
             this.tb_newCustZip.TabIndex = 6;
-            this.tb_newCustZip.Validating += new System.ComponentModel.CancelEventHandler(this.tb_newCustZip_Validating);
             // 
             // tb_newCustAddress2
             // 
@@ -176,7 +187,6 @@ namespace AppointmentScheduler_C969.Views
             this.tb_newCustAddress2.Name = "tb_newCustAddress2";
             this.tb_newCustAddress2.Size = new System.Drawing.Size(240, 23);
             this.tb_newCustAddress2.TabIndex = 4;
-            this.tb_newCustAddress2.Validating += new System.ComponentModel.CancelEventHandler(this.tb_newCustAddress2_Validating);
             // 
             // tb_newCustAddress
             // 
@@ -265,18 +275,6 @@ namespace AppointmentScheduler_C969.Views
             this.lbl_custName.Size = new System.Drawing.Size(116, 15);
             this.lbl_custName.TabIndex = 0;
             this.lbl_custName.Text = "Customer Full Name";
-            // 
-            // addCityNoteLabel
-            // 
-            this.addCityNoteLabel.AutoSize = true;
-            this.addCityNoteLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.addCityNoteLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addCityNoteLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.addCityNoteLabel.Location = new System.Drawing.Point(28, 355);
-            this.addCityNoteLabel.Name = "addCityNoteLabel";
-            this.addCityNoteLabel.Size = new System.Drawing.Size(353, 17);
-            this.addCityNoteLabel.TabIndex = 23;
-            this.addCityNoteLabel.Text = "If your city is not listed, click \'Add\' button to add your city/country.";
             // 
             // errPr_addCustomer
             // 
