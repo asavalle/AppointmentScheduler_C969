@@ -144,6 +144,62 @@ namespace AppointmentScheduler_C969.Models
 
 
         }
+        public static string ViewUserSchedule(string name)
+        {
+            string schedule = "";
+            string fileName = $@"{filePath}Consultant_Schedule.txt";
+            DataTable dt = Appointment.GetAppoitments();
+            DataTable ut = User.GetUsers();
+
+            var numUsers = from user in ut.AsEnumerable()
+                           group user by user["userId"] into count
+                           select count;
+            int i = 1;
+            int userCount = numUsers.ToList().Count;
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
+          
+         
+                    var sorted = from appointments in dt.AsEnumerable()
+                                 where appointments.Field<int>("Consultant") == User.GetUserIDbyName(name)
+                                 orderby appointments.Field<int>("appointmentId") ascending
+                                 select new
+                                 {
+                                     AppointmentId = appointments.Field<int>("appointmentId"),
+                                     CustomerName = appointments.Field<string>("customerName"),
+                                     Title = appointments.Field<string>("title"),
+                                     StartTime = appointments.Field<DateTime>("start"),
+                                     AptDate = appointments.Field<DateTime>("appointment_Date")
+                                 };
+
+
+                    using (StreamWriter sw = File.AppendText(fileName))
+                    {
+                        sw.WriteLine("==================================================");
+                        sw.WriteLine($"Schedule for User '{name}':\n");
+                        sw.WriteLine("==================================================");
+
+                        foreach (var item in sorted)
+                        {
+
+                            sw.WriteLine(item);
+
+
+                        }
+                        sw.Close();
+                    }
+
+
+            schedule = File.ReadAllText(fileName);
+
+
+            return schedule;
+
+
+        }
+
         public static string ViewLoginReport()
         {
             string fileName = $@"{filePath}login.txt";
@@ -156,5 +212,7 @@ namespace AppointmentScheduler_C969.Models
             }
             return log;
         }
+
+
     }
 }

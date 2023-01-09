@@ -194,22 +194,7 @@ namespace AppointmentScheduler_C969.Models
             DataTable users = GetUsers();
             User.UserNames.Clear();
             try
-            {
-
-                //var names = from usr in users.AsEnumerable()
-                //                select new
-                //                {
-                //                    UserName = usr.Field<string>("userName")
-                //                };
-
-                //foreach (var item in names)
-                //    {
-
-                //        UserNames.Add(item.UserName);
-
-                //    }
-                //    
-
+            {                 
                 foreach (DataRow row in users.Rows)
                 {
 
