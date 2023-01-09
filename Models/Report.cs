@@ -36,45 +36,7 @@ namespace AppointmentScheduler_C969.Models
         private static string filePath = $@"c:\Users\{UserName.Split('\\')[1].ToString()}\Downloads\Reports\";
 
 
-        public static void AppointmentTypesByMonth() { }
-
-        //public static void CreateFile(List<string> ReportList)
-        //{
-
-        //    SaveFileDialog saveDiag = new SaveFileDialog();
-        //    saveDiag.DefaultExt = "*.txt";
-        //    saveDiag.Filter = "txt files (*.txt)|*.txt";
-        //    saveDiag.Title = "Save Report";
-
-        //    DirectoryInfo di;
-        //    string path =filePath;
-                                
-        //    if (saveDiag.ShowDialog() == DialogResult.OK)
-        //    {
-        //        path = saveDiag.FileName;
-        //        di = new DirectoryInfo(path);
-        //    }
-        //    try
-        //    {
-        //        using (StreamWriter sw = File.CreateText(path))
-        //        {
-
-        //            foreach (string s in ReportList)
-        //            {
-
-        //                sw.WriteLine(s);
-        //            }
-        //            sw.Close();
-        //        }
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        MessageBox.Show(e.Message);
-        //    }
-     
-        //}
-
-
+        public static void AppointmentTypesByMonth() { }    
 
        public static void LoginLogReport()
         {
@@ -129,7 +91,9 @@ namespace AppointmentScheduler_C969.Models
             {
                 File.Delete(fileName);
             }
-
+                         
+                
+            
             foreach (DataRow r in dt.Rows)
             {
                
@@ -147,14 +111,11 @@ namespace AppointmentScheduler_C969.Models
                                      AptDate = appointments.Field<DateTime>("appointment_Date")
                                  };
 
-
-
-
-
+                  
                     using (StreamWriter sw = File.AppendText(fileName))
                     {
                         sw.WriteLine("==================================================");
-                        sw.WriteLine($"Schedule for User {i}:\n");
+                        sw.WriteLine($"Schedule for User '{User.GetUserNameById(i)}':\n");
                         sw.WriteLine("==================================================");
 
                         foreach (var item in sorted)

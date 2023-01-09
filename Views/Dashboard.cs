@@ -361,6 +361,12 @@ namespace AppointmentScheduler_C969.Views
             var report = Report.ViewLoginReport();
             tb_loginReport.Text = report;
         }
+
+        private void btn_AddUser_Click(object sender, EventArgs e)
+        {
+            AddUser addUsr = new AddUser();
+            addUsr.ShowDialog();
+        }
     }
 
 

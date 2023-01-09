@@ -50,6 +50,7 @@ namespace AppointmentScheduler_C969.Views
             this.lb_Customers = new System.Windows.Forms.Label();
             this.dgv_Customers = new System.Windows.Forms.DataGridView();
             this.tab_Tools = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
             this.tb_loginReport = new System.Windows.Forms.TextBox();
             this.lb_Users = new System.Windows.Forms.Label();
             this.dgv_Users = new System.Windows.Forms.DataGridView();
@@ -58,6 +59,8 @@ namespace AppointmentScheduler_C969.Views
             this.button2 = new System.Windows.Forms.Button();
             this.btn_AddUser = new System.Windows.Forms.Button();
             this.gb_Reports = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.btn_loginLogs = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -67,7 +70,6 @@ namespace AppointmentScheduler_C969.Views
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Logout = new System.Windows.Forms.Button();
             this.lb_user = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.dashTabControl.SuspendLayout();
             this.tab_Appointments.SuspendLayout();
             this.gb_filterAppointments.SuspendLayout();
@@ -382,6 +384,15 @@ namespace AppointmentScheduler_C969.Views
             this.tab_Tools.TabIndex = 3;
             this.tab_Tools.Text = "Tools";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(872, 24);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(106, 14);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "User Sign In Log ";
+            // 
             // tb_loginReport
             // 
             this.tb_loginReport.Location = new System.Drawing.Point(872, 45);
@@ -454,10 +465,13 @@ namespace AppointmentScheduler_C969.Views
             this.btn_AddUser.TabIndex = 0;
             this.btn_AddUser.Text = "Add User";
             this.btn_AddUser.UseVisualStyleBackColor = true;
+            this.btn_AddUser.Click += new System.EventHandler(this.btn_AddUser_Click);
             // 
             // gb_Reports
             // 
             this.gb_Reports.BackColor = System.Drawing.Color.AliceBlue;
+            this.gb_Reports.Controls.Add(this.label7);
+            this.gb_Reports.Controls.Add(this.button1);
             this.gb_Reports.Controls.Add(this.label6);
             this.gb_Reports.Controls.Add(this.btn_loginLogs);
             this.gb_Reports.Controls.Add(this.label5);
@@ -471,6 +485,25 @@ namespace AppointmentScheduler_C969.Views
             this.gb_Reports.TabIndex = 3;
             this.gb_Reports.TabStop = false;
             this.gb_Reports.Text = "Reports";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(319, 51);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(197, 18);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "Schedule by Consultant";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(359, 85);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(103, 41);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Report";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -496,11 +529,11 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(403, 51);
+            this.label5.Location = new System.Drawing.Point(544, 51);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(247, 18);
+            this.label5.Size = new System.Drawing.Size(233, 18);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Schedule by User / Consultant";
+            this.label5.Text = "Schedule by Consultant (All)";
             // 
             // label4
             // 
@@ -523,7 +556,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             // btn_sheduleByUser
             // 
-            this.btn_sheduleByUser.Location = new System.Drawing.Point(466, 85);
+            this.btn_sheduleByUser.Location = new System.Drawing.Point(597, 85);
             this.btn_sheduleByUser.Name = "btn_sheduleByUser";
             this.btn_sheduleByUser.Size = new System.Drawing.Size(103, 41);
             this.btn_sheduleByUser.TabIndex = 2;
@@ -566,15 +599,6 @@ namespace AppointmentScheduler_C969.Views
             this.lb_user.Size = new System.Drawing.Size(98, 15);
             this.lb_user.TabIndex = 3;
             this.lb_user.Text = "logged in user";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(872, 24);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(106, 14);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "User Sign In Log ";
             // 
             // Dashboard
             // 
@@ -650,7 +674,6 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.TextBox textBox3;
         public System.Windows.Forms.Label lb_user;
         private System.Windows.Forms.TabPage tab_Tools;
-        private System.Windows.Forms.Button btn_sheduleByUser;
         private System.Windows.Forms.Button btn_aptTypesMonth;
         private System.Windows.Forms.Button btn_AddUser;
         private System.Windows.Forms.GroupBox gb_Reports;
@@ -672,5 +695,7 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tb_loginReport;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btn_sheduleByUser;
     }
 }

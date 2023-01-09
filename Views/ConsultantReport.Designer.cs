@@ -41,14 +41,14 @@ namespace AppointmentScheduler_C969.Views
             this.tb_UserSchedule.Name = "tb_UserSchedule";
             this.tb_UserSchedule.ReadOnly = true;
             this.tb_UserSchedule.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tb_UserSchedule.Size = new System.Drawing.Size(800, 783);
+            this.tb_UserSchedule.Size = new System.Drawing.Size(1412, 783);
             this.tb_UserSchedule.TabIndex = 0;
             // 
             // ConsultantReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 783);
+            this.ClientSize = new System.Drawing.Size(1412, 783);
             this.Controls.Add(this.tb_UserSchedule);
             this.Name = "ConsultantReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
