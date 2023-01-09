@@ -20,6 +20,7 @@ namespace AppointmentScheduler_C969.Models
         public string lastUpdateBy { get; set; }
 
         public static int CurrentUserId { get; set; }
+        public static List<string> UserNames { get; set; } = new List<string>();
 
         public User(string UserName, string Password, int Active, DateTime CreateDate, string CreatedBy, DateTime LastUdpate, string LastUpdateBy)
         {
@@ -159,6 +160,71 @@ namespace AppointmentScheduler_C969.Models
                 return null;
 
             }
+
+        }
+        public static int GetUserIDbyName(string name) 
+        {
+            DataTable users = GetUsers();
+            try
+            {
+                int id = -1;
+                var userId = from usr in users.AsEnumerable()
+                             where usr.Field<string>("userName") == name
+                             select new
+                             {
+                               userId = usr.Field<int>("userId")
+                             };
+
+                foreach(var item in userId)
+                {
+                    id = item.userId;
+                }
+                return id;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("User class error: " + ex.Message);
+                return -1;
+            }
+        }
+
+        public static void FillUserList()
+        {
+            DataTable users = GetUsers();
+            User.UserNames.Clear();
+            try
+            {
+
+                //var names = from usr in users.AsEnumerable()
+                //                select new
+                //                {
+                //                    UserName = usr.Field<string>("userName")
+                //                };
+
+                //foreach (var item in names)
+                //    {
+
+                //        UserNames.Add(item.UserName);
+
+                //    }
+                //    
+
+                foreach (DataRow row in users.Rows)
+                {
+
+                    UserNames.Add(row.Field<string>("userName"));
+
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+                
+            
+            
 
         }
     }

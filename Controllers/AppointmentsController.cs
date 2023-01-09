@@ -15,13 +15,14 @@ namespace AppointmentScheduler_C969.Controllers
     class AppointmentsController
     {
 
-        public static void CreateNewAppointment(string customerName, string title, string description, string location, string contact, string type, string url, DateTime start,
+        public static void CreateNewAppointment(string customerName, int userId, string title, string description, string location, string contact, string type, string url, DateTime start,
                             DateTime end, DateTime createDate, string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
             
 
             Appointment newAppt = new Appointment();
             newAppt.CustomerId = Customer.GetCustomerIdByName(customerName);
+            newAppt.UserId = userId;
             newAppt.CustomerName = customerName;
             newAppt.Title = title;
             newAppt.Description = description;

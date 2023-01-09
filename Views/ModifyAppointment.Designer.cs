@@ -31,6 +31,8 @@ namespace AppointmentScheduler_C969.Views
         {
             this.components = new System.ComponentModel.Container();
             this.gb_modAptForm = new System.Windows.Forms.GroupBox();
+            this.cb_userModApt = new System.Windows.Forms.ComboBox();
+            this.lb_modAptUser = new System.Windows.Forms.Label();
             this.cb_modAptType = new System.Windows.Forms.ComboBox();
             this.lb_aptIdLabel = new System.Windows.Forms.Label();
             this.tb_aptID = new System.Windows.Forms.TextBox();
@@ -64,6 +66,8 @@ namespace AppointmentScheduler_C969.Views
             // gb_modAptForm
             // 
             this.gb_modAptForm.BackColor = System.Drawing.Color.AliceBlue;
+            this.gb_modAptForm.Controls.Add(this.cb_userModApt);
+            this.gb_modAptForm.Controls.Add(this.lb_modAptUser);
             this.gb_modAptForm.Controls.Add(this.cb_modAptType);
             this.gb_modAptForm.Controls.Add(this.lb_aptIdLabel);
             this.gb_modAptForm.Controls.Add(this.tb_aptID);
@@ -97,6 +101,24 @@ namespace AppointmentScheduler_C969.Views
             this.gb_modAptForm.TabStop = false;
             this.gb_modAptForm.Text = "Modify Appointment";
             // 
+            // cb_userModApt
+            // 
+            this.cb_userModApt.Enabled = false;
+            this.cb_userModApt.FormattingEnabled = true;
+            this.cb_userModApt.Location = new System.Drawing.Point(262, 45);
+            this.cb_userModApt.Name = "cb_userModApt";
+            this.cb_userModApt.Size = new System.Drawing.Size(121, 23);
+            this.cb_userModApt.TabIndex = 43;
+            // 
+            // lb_modAptUser
+            // 
+            this.lb_modAptUser.AutoSize = true;
+            this.lb_modAptUser.Location = new System.Drawing.Point(191, 48);
+            this.lb_modAptUser.Name = "lb_modAptUser";
+            this.lb_modAptUser.Size = new System.Drawing.Size(65, 15);
+            this.lb_modAptUser.TabIndex = 42;
+            this.lb_modAptUser.Text = "Consultant";
+            // 
             // cb_modAptType
             // 
             this.cb_modAptType.Enabled = false;
@@ -122,7 +144,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_aptID.Location = new System.Drawing.Point(116, 45);
             this.tb_aptID.Name = "tb_aptID";
             this.tb_aptID.ReadOnly = true;
-            this.tb_aptID.Size = new System.Drawing.Size(84, 23);
+            this.tb_aptID.Size = new System.Drawing.Size(48, 23);
             this.tb_aptID.TabIndex = 39;
             // 
             // linkLabel_modCancel
@@ -392,5 +414,7 @@ namespace AppointmentScheduler_C969.Views
         public System.Windows.Forms.TextBox tb_aptID;
         private System.Windows.Forms.ComboBox cb_modAptType;
         private System.Windows.Forms.ErrorProvider errPr_ModApts;
+        private System.Windows.Forms.ComboBox cb_userModApt;
+        private System.Windows.Forms.Label lb_modAptUser;
     }
 }

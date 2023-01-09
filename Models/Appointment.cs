@@ -48,14 +48,15 @@ namespace AppointmentScheduler_C969.Models
             "Other"
         };
 
-        
+        public string Consultant { get; set; } //selected consultant/user for appointment
 
         //new Appointment constructor
         public Appointment() { }
-        public Appointment(int customerId, string customerName, string title, string description, string location, string contact, string type, string url, DateTime start,
+        public Appointment(int customerId, int userId, string customerName, string title, string description, string location, string contact, string type, string url, DateTime start,
                             DateTime end, DateTime createDate, string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
             this.CustomerId = customerId;
+            this.UserId = userId;
             this.CustomerName = customerName;
             this.Title = title;
             this.Description = description;
@@ -155,6 +156,7 @@ namespace AppointmentScheduler_C969.Models
 
                         currentAppointment.AppointmentId = select.GetFieldValue<int>("appointmentId");
                         currentAppointment.CustomerId = select.GetFieldValue<int>("customerId");
+                        currentAppointment.UserId = select.GetFieldValue<int>("userId");
                         currentAppointment.Contact = select.GetFieldValue<string>("contact");
                         currentAppointment.Title = select.GetFieldValue<string>("title");
                         currentAppointment.Type = select.GetFieldValue<string>("type");
@@ -294,7 +296,7 @@ namespace AppointmentScheduler_C969.Models
          **********************************************************************/
         public static void InsertAppointmentRecord(Appointment apt)
         {
-            int userId = User.GetUserId();
+            //int userId = User.GetUserId();
             var formatSDate = apt.StartTime.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
             var formatEDate = apt.EndTime.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
             var formatCreateDate = apt.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
@@ -306,7 +308,7 @@ namespace AppointmentScheduler_C969.Models
             }
             try
             {
-                var insert_cmd = new MySqlCommand($"INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES({apt.CustomerId},{userId},'{apt.Title}','{apt.Description}','{apt.Location}','{apt.Contact}','{apt.Type}','{apt.URL}','{formatSDate}','{formatEDate}','{formatCreateDate}','{apt.CreatedBy}','{formatLastUpDate}','{apt.LastUpdateBy}')", DataAccess.conn);
+                var insert_cmd = new MySqlCommand($"INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES({apt.CustomerId},{apt.UserId},'{apt.Title}','{apt.Description}','{apt.Location}','{apt.Contact}','{apt.Type}','{apt.URL}','{formatSDate}','{formatEDate}','{formatCreateDate}','{apt.CreatedBy}','{formatLastUpDate}','{apt.LastUpdateBy}')", DataAccess.conn);
                 var insert = insert_cmd.ExecuteNonQuery();
             }
             catch (MySqlException ex)
@@ -358,7 +360,7 @@ namespace AppointmentScheduler_C969.Models
             }
             try
             {
-                var update_cmd = new MySqlCommand($"UPDATE client_schedule.appointment SET appointment.customerId = {apt.CustomerId}, appointment.title = '{apt.Title}', appointment.description= '{apt.Description}', appointment.contact = '{apt.Contact}', appointment.type = '{apt.Type}', appointment.start = '{formatSDate}', appointment.end = '{formatEDate}',appointment.createDate= '{formatCreateDate}', appointment.lastUpdate = '{formatLastUpDate}' WHERE appointment.appointmentId = {apt.AppointmentId}; ", DataAccess.conn);
+                var update_cmd = new MySqlCommand($"UPDATE client_schedule.appointment SET appointment.customerId = {apt.CustomerId}, userId = {apt.UserId}, appointment.title = '{apt.Title}', appointment.description= '{apt.Description}', appointment.contact = '{apt.Contact}', appointment.type = '{apt.Type}', appointment.start = '{formatSDate}', appointment.end = '{formatEDate}',appointment.createDate= '{formatCreateDate}', appointment.lastUpdate = '{formatLastUpDate}' WHERE appointment.appointmentId = {apt.AppointmentId}; ", DataAccess.conn);
                 var update = update_cmd.ExecuteNonQuery();
                 DataAccess.CloseConnection();
 
@@ -373,6 +375,7 @@ namespace AppointmentScheduler_C969.Models
             //pull selected data from database. Pass to controller.
             MessageBox.Show(
                 apt.CustomerName + "\n" +
+                apt.UserId + "\n" +
                 apt.Contact + "\n" +
                 apt.Title + "\n" +
                 apt.Type + "\n" +

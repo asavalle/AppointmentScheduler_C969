@@ -17,12 +17,13 @@ namespace AppointmentScheduler_C969.Views
         {
             InitializeComponent();
             Customer.GetCustomerList();
+            User.FillUserList();
             cb_startTime.Visible = false;
             cb_endTime.Visible = false;
             lb_startTime.Visible = false;
             lb_endTime.Visible = false;
             cb_customer.DataSource = Customer.Names;
-
+            cb_uesrAddApt.DataSource = User.UserNames;
             cb_aptType.DataSource = Appointment.AppointmentTypes;
         }
 
@@ -45,13 +46,26 @@ namespace AppointmentScheduler_C969.Views
                 if (dtp_createDate.Value != null && cb_startTime.SelectedValue != null && cb_endTime.SelectedValue != null)
                 {
                     Date.BuildAppointmentDate(dtp_createDate.Value, cb_startTime.SelectedItem.ToString(), cb_endTime.SelectedItem.ToString());
-                    AppointmentsController.CreateNewAppointment(cb_customer.SelectedItem.ToString(), tb_aptTitle.Text, tb_aptDesc.Text, tb_aptLocation.Text, tb_aptContact.Text, cb_aptType.Text,
-                                                            tb_aptURL.Text, Date.startTime, Date.endTime, DateTime.Now, DataAccess.LoggedInUser, DateTime.Now,
-                                                            DataAccess.LoggedInUser);
+                 
+                    AppointmentsController.CreateNewAppointment(
+                            cb_customer.SelectedItem.ToString(), 
+                            User.GetUserIDbyName(cb_uesrAddApt.Text), 
+                            tb_aptTitle.Text, tb_aptDesc.Text, 
+                            tb_aptLocation.Text, tb_aptContact.Text, 
+                            cb_aptType.Text,
+                            tb_aptURL.Text, 
+                            Date.startTime, 
+                            Date.endTime, 
+                            DateTime.Now, 
+                            DataAccess.LoggedInUser, 
+                            DateTime.Now,
+                            DataAccess.LoggedInUser);
+
                     this.Close();
                     Appointment.StartTimes.Clear();
                     Appointment.EndTimes.Clear();
                     cb_customer.DataBindings.Clear();
+                    cb_uesrAddApt.DataBindings.Clear();
                 }
                 else
                 {

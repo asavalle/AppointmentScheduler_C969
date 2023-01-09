@@ -19,8 +19,9 @@ namespace AppointmentScheduler_C969.Views
         public ModifyAppointment()
         {
             InitializeComponent();
-            
+            User.FillUserList();
             cb_modCustomer.DataSource = Customer.Names;
+            cb_userModApt.DataSource = User.UserNames;
 
         }
 
@@ -44,6 +45,7 @@ namespace AppointmentScheduler_C969.Views
 
                 //Populate form fields from selected row's data.
                 tb_aptID.Text = currentApt.AppointmentId.ToString();
+                cb_userModApt.Text = User.GetUserNameById(currentApt.UserId);
                 cb_modCustomer.SelectedItem = currentApt.CustomerName;
                 tb_modContact.Text = currentApt.Contact;
                 tb_modTitle.Text = currentApt.Title;
@@ -67,7 +69,7 @@ namespace AppointmentScheduler_C969.Views
 
         private void btn_editApt_Click(object sender, EventArgs e)
         {
-           
+
 
             //Set's all the child controls of the form to enabled
             foreach (Control c in this.gb_modAptForm.Controls)
@@ -94,6 +96,7 @@ namespace AppointmentScheduler_C969.Views
                 tempApptObj.AppointmentId = Appointment.SelectedAppointmentId;
                 tempApptObj.CustomerName = cb_modCustomer.SelectedItem.ToString();
                 tempApptObj.CustomerId = Customer.GetCustomerIdByName(tempApptObj.CustomerName);
+                tempApptObj.UserId = User.GetUserIDbyName(cb_userModApt.Text);
                 tempApptObj.Contact = tb_modContact.Text;
                 tempApptObj.Title = tb_modTitle.Text;
                 tempApptObj.Type = cb_modAptType.Text;
