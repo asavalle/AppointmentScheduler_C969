@@ -372,6 +372,11 @@ namespace AppointmentScheduler_C969.Views
             addUsr.ShowDialog();
         }
 
+        private void btn_aptTypesMonth_Click(object sender, EventArgs e)
+        {
+            AppointmentsByMonthType aptMoTyp = new AppointmentsByMonthType();
+            aptMoTyp.ShowDialog();
+        }
     }
 
 

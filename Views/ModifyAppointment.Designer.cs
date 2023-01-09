@@ -376,6 +376,7 @@ namespace AppointmentScheduler_C969.Views
             this.ClientSize = new System.Drawing.Size(434, 650);
             this.Controls.Add(this.gb_modAptForm);
             this.Name = "ModifyAppointment";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ModifyAppointment";
             this.Load += new System.EventHandler(this.ModifyAppointment_Load);
             this.gb_modAptForm.ResumeLayout(false);

@@ -530,6 +530,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_aptTypesMonth.TabIndex = 1;
             this.btn_aptTypesMonth.Text = "Report";
             this.btn_aptTypesMonth.UseVisualStyleBackColor = true;
+            this.btn_aptTypesMonth.Click += new System.EventHandler(this.btn_aptTypesMonth_Click);
             // 
             // btn_sheduleByUser
             // 

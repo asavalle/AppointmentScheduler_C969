@@ -47,6 +47,22 @@ namespace AppointmentScheduler_C969.Models
             "Consultation",
             "Other"
         };
+        public static Dictionary<int, string> Months = new Dictionary<int, string> 
+        {
+            { 01, "January" },
+            { 02, "Febuary" },
+            { 03, "March" },
+            { 04, "April" },
+            { 05, "May" },
+            { 06, "June" },
+            { 07, "July" },
+            { 08, "August" },
+            { 09, "September" },
+            { 10, "October" },
+            { 11, "November" },
+            { 12, "December" }
+
+        };
 
         public string Consultant { get; set; } //selected consultant/user for appointment
 

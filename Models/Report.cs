@@ -36,7 +36,51 @@ namespace AppointmentScheduler_C969.Models
         private static string filePath = $@"c:\Users\{UserName.Split('\\')[1].ToString()}\Downloads\Reports\";
 
 
-        public static void AppointmentTypesByMonth() { }    
+        public static string AppointmentTypesByMonth(int month, string type) 
+        {
+            string schedule = "";
+            string fileName = $@"{filePath}Appointments_By_Month_Type.txt";
+            DataTable at = Appointment.GetAppoitments();
+
+
+            
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
+
+            var sorted = from apts in at.AsEnumerable()
+                         where apts.Field<DateTime>("start").Month == month
+                         where apts.Field<string>("type") == type
+                         select new
+                         {
+                             AppointmentId = apts.Field<int>("appointmentId"),
+                             CustomerName = apts.Field<string>("customerName"),
+                             Title = apts.Field<string>("title"),
+                             Type = apts.Field<string>("type"),
+                             StartTime = apts.Field<DateTime>("start"),
+                             AptDate = apts.Field<DateTime>("appointment_Date")
+                         };
+            using (StreamWriter sw = File.AppendText(fileName))
+            {
+                sw.WriteLine("==================================================");
+                sw.WriteLine($"Schedule for '{Appointment.Months.GetValueOrDefault(month)}' and '{type}':\n");
+                sw.WriteLine("==================================================");
+
+                foreach (var item in sorted)
+                {
+
+                    sw.WriteLine(item);
+
+
+                }
+                sw.Close();
+            }
+            schedule = File.ReadAllText(fileName);
+
+
+            return schedule;
+        }    
 
        public static void LoginLogReport()
         {
