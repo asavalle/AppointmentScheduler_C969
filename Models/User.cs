@@ -22,6 +22,7 @@ namespace AppointmentScheduler_C969.Models
         public static int CurrentUserId { get; set; }
         public static List<string> UserNames { get; set; } = new List<string>();
 
+        public User() { }
         public User(string UserName, string Password, int Active, DateTime CreateDate, string CreatedBy, DateTime LastUdpate, string LastUpdateBy)
         {
             //creates a constructer with user provided data. Database will handle missing data
@@ -52,9 +53,27 @@ namespace AppointmentScheduler_C969.Models
                 MessageBox.Show("In User Class: " + ex.Message);
             }
         }
-        public static void UpdateUserRecord()
+        public static void UpdateUserRecord(User user)
         {
+            if (DataAccess.conn.State is ConnectionState.Closed)
+            {
+                DataAccess.OpenConnection();
+            }
+            try
+            {
+               
+                    var formatCreateDate = user.createDate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
+                    var formatLastUpDate = user.lastUpdate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
+                    var update_cmd = new MySqlCommand($"Update client_schedule.user SET userName = '{user.userName}', password = '{user.password}',active = '{user.active}',createDate = '{formatCreateDate}',createdBy = '{user.createdBy}',lastUpdate = '{formatLastUpDate}',lastUpdateBy= '{user.lastUpdateBy}' Where userId = {user.userID}", DataAccess.conn);
+                    var update = update_cmd.ExecuteNonQuery();
 
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("In User Class: " + ex.Message);
+            }
+
+            MessageBox.Show($"User {user.userName} has been updated.");
         }
         public static void DeleteUserRecord(int id)
         {
@@ -114,14 +133,14 @@ namespace AppointmentScheduler_C969.Models
             return usersTable;
         }
 
-        public static DataTable getAllUserInfo() {
+        public static DataTable GetAllUserInfo(int id) {
             //Add code to retrieve data from the database and add it to the list
 
             DataTable usrInfoTable = new DataTable();
             try
             {
 
-                using (var getUsrCmd = new MySqlCommand("SELECT userId, userName FROM client_schedule.user", DataAccess.conn))
+                using (var getUsrCmd = new MySqlCommand($"SELECT * FROM client_schedule.user WHERE userId = {id}", DataAccess.conn))
                 {
                     MySqlDataReader reader = getUsrCmd.ExecuteReader();
                     usrInfoTable.Load(reader);

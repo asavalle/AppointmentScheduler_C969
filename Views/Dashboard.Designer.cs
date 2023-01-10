@@ -57,7 +57,7 @@ namespace AppointmentScheduler_C969.Views
             this.dgv_Users = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btn_delUser = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btn_modUser = new System.Windows.Forms.Button();
             this.btn_AddUser = new System.Windows.Forms.Button();
             this.gb_Reports = new System.Windows.Forms.GroupBox();
             this.lb_aptsByCity = new System.Windows.Forms.Label();
@@ -442,7 +442,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.groupBox2.BackColor = System.Drawing.Color.AliceBlue;
             this.groupBox2.Controls.Add(this.btn_delUser);
-            this.groupBox2.Controls.Add(this.button2);
+            this.groupBox2.Controls.Add(this.btn_modUser);
             this.groupBox2.Controls.Add(this.btn_AddUser);
             this.groupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox2.Location = new System.Drawing.Point(7, 45);
@@ -462,14 +462,15 @@ namespace AppointmentScheduler_C969.Views
             this.btn_delUser.UseVisualStyleBackColor = true;
             this.btn_delUser.Click += new System.EventHandler(this.delUser_Click);
             // 
-            // button2
+            // btn_modUser
             // 
-            this.button2.Location = new System.Drawing.Point(55, 135);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(103, 41);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Modify User";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_modUser.Location = new System.Drawing.Point(55, 135);
+            this.btn_modUser.Name = "btn_modUser";
+            this.btn_modUser.Size = new System.Drawing.Size(103, 41);
+            this.btn_modUser.TabIndex = 1;
+            this.btn_modUser.Text = "Modify User";
+            this.btn_modUser.UseVisualStyleBackColor = true;
+            this.btn_modUser.Click += new System.EventHandler(this.btn_modUser_Click);
             // 
             // btn_AddUser
             // 
@@ -697,7 +698,7 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Button btn_loginLogs;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btn_delUser;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn_modUser;
         private System.Windows.Forms.DataGridView dgv_Users;
         private System.Windows.Forms.Label lb_Users;
         private System.Windows.Forms.Button btn_ModAppt;

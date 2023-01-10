@@ -22,6 +22,9 @@ namespace AppointmentScheduler_C969.Views
         public Dashboard()
         {
             InitializeComponent();
+            Customer.GetCustomerList();
+            CheckForUpcomingAppointments();
+
             lb_user.Text = DataAccess.LoggedInUser + " is logged in";
 
             bsAppointments.DataSource = Appointment.GetAppoitments();
@@ -35,8 +38,6 @@ namespace AppointmentScheduler_C969.Views
             dgv_Appointments.Columns["appointment_Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
 
 
-            CheckForUpcomingAppointments();
-
             dgv_Customers.DataSource = Customer.GetCustomers();
             dgv_Users.DataSource = User.GetUsers();
             dgv_Customers.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -49,7 +50,7 @@ namespace AppointmentScheduler_C969.Views
             dgv_Users.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgv_Users.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             DataAccess.CloseConnection();            
-            Customer.GetCustomerList();
+            
 
             dgv_addresses.DataSource = Address.GetAddresses();
             
@@ -371,6 +372,13 @@ namespace AppointmentScheduler_C969.Views
                 dgv_Users.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
         }
+        private void btn_AddUser_Click(object sender, EventArgs e)
+        {
+            AddUser addUsr = new AddUser();
+            addUsr.ShowDialog();
+        }
+
+
         private void delUser_Click(object sender, EventArgs e)
         {
             try
@@ -420,11 +428,6 @@ namespace AppointmentScheduler_C969.Views
               
         }
 
-        private void btn_AddUser_Click(object sender, EventArgs e)
-        {
-            AddUser addUsr = new AddUser();
-            addUsr.ShowDialog();
-        }
 
         /*************************
         *********Reports**********
@@ -442,7 +445,11 @@ namespace AppointmentScheduler_C969.Views
             aptsByCust.ShowDialog();
         }
 
-        
+        private void btn_modUser_Click(object sender, EventArgs e)
+        {
+            ModifyUser modUsr = new ModifyUser();
+            modUsr.ShowDialog();
+        }
     }
 
 

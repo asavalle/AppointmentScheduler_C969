@@ -32,7 +32,6 @@ namespace AppointmentScheduler_C969.Views
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ll_cancelUsrAdd = new System.Windows.Forms.LinkLabel();
             this.btn_AddUser = new System.Windows.Forms.Button();
-            this.lb_isUsrActive = new System.Windows.Forms.Label();
             this.cb_isUsrActive = new System.Windows.Forms.CheckBox();
             this.tb_userPass = new System.Windows.Forms.TextBox();
             this.tb_usrName = new System.Windows.Forms.TextBox();
@@ -46,7 +45,6 @@ namespace AppointmentScheduler_C969.Views
             this.groupBox1.BackColor = System.Drawing.Color.AliceBlue;
             this.groupBox1.Controls.Add(this.ll_cancelUsrAdd);
             this.groupBox1.Controls.Add(this.btn_AddUser);
-            this.groupBox1.Controls.Add(this.lb_isUsrActive);
             this.groupBox1.Controls.Add(this.cb_isUsrActive);
             this.groupBox1.Controls.Add(this.tb_userPass);
             this.groupBox1.Controls.Add(this.tb_usrName);
@@ -85,23 +83,14 @@ namespace AppointmentScheduler_C969.Views
             this.btn_AddUser.UseVisualStyleBackColor = false;
             this.btn_AddUser.Click += new System.EventHandler(this.btn_AddUser_Click);
             // 
-            // lb_isUsrActive
-            // 
-            this.lb_isUsrActive.AutoSize = true;
-            this.lb_isUsrActive.Location = new System.Drawing.Point(83, 198);
-            this.lb_isUsrActive.Name = "lb_isUsrActive";
-            this.lb_isUsrActive.Size = new System.Drawing.Size(48, 15);
-            this.lb_isUsrActive.TabIndex = 6;
-            this.lb_isUsrActive.Text = "Active ?";
-            // 
             // cb_isUsrActive
             // 
             this.cb_isUsrActive.AutoSize = true;
             this.cb_isUsrActive.Location = new System.Drawing.Point(190, 197);
             this.cb_isUsrActive.Name = "cb_isUsrActive";
-            this.cb_isUsrActive.Size = new System.Drawing.Size(83, 19);
+            this.cb_isUsrActive.Size = new System.Drawing.Size(67, 19);
             this.cb_isUsrActive.TabIndex = 5;
-            this.cb_isUsrActive.Text = "checkBox1";
+            this.cb_isUsrActive.Text = "Active ?";
             this.cb_isUsrActive.UseVisualStyleBackColor = true;
             // 
             // tb_userPass
@@ -154,7 +143,6 @@ namespace AppointmentScheduler_C969.Views
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label lb_isUsrActive;
         private System.Windows.Forms.CheckBox cb_isUsrActive;
         private System.Windows.Forms.TextBox tb_userPass;
         private System.Windows.Forms.TextBox tb_usrName;

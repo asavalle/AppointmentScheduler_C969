@@ -13,9 +13,9 @@ namespace AppointmentScheduler_C969.Controllers
             User.InsertUserRecord(user);
         }
 
-        public static void ModifyUser()
+        public static void ModifyUser(User user)
         {
-            User.UpdateUserRecord();
+            User.UpdateUserRecord(user);
         }
 
         public static void DeleteUser(int userId)
