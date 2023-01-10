@@ -56,12 +56,40 @@ namespace AppointmentScheduler_C969.Models
         {
 
         }
-        public static void DeleteUserRecord()
+        public static void DeleteUserRecord(int id)
         {
-
+            if (DataAccess.conn.State is ConnectionState.Closed)
+            {
+                DataAccess.OpenConnection();
+            }
+            try
+            {
+                
+                var del_cmd = new MySqlCommand($"DELETE FROM user WHERE userId = {id}", DataAccess.conn);
+                var del = del_cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("In User Class: " + ex.Message);
+            }
         }
 
+        public static bool IsActive(string userName)
+        {
+            DataTable users = GetUsers();
 
+            var isActive = from usr in users.AsEnumerable()
+                           where usr.Field<string>("userName") == userName
+                           select new { active = usr.Field<SByte>("active") };
+            foreach(var item in isActive)
+            {
+                if(item.active == 1)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         //Function to populate Users table from database
         public static DataTable GetUsers()
@@ -70,7 +98,7 @@ namespace AppointmentScheduler_C969.Models
             try
             {
 
-                using (var getAptCmd = new MySqlCommand("SELECT userId, userName, active,createDate FROM client_schedule.user", DataAccess.conn))
+                using (var getAptCmd = new MySqlCommand("SELECT userId, userName,password, active,createDate FROM client_schedule.user", DataAccess.conn))
                 {
                     MySqlDataReader reader = getAptCmd.ExecuteReader();
                     usersTable.Load(reader);

@@ -50,15 +50,18 @@ namespace AppointmentScheduler_C969.Views
             this.lb_Customers = new System.Windows.Forms.Label();
             this.dgv_Customers = new System.Windows.Forms.DataGridView();
             this.tab_Tools = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tb_loginReport = new System.Windows.Forms.TextBox();
             this.lb_Users = new System.Windows.Forms.Label();
             this.dgv_Users = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btn_delUser = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btn_AddUser = new System.Windows.Forms.Button();
             this.gb_Reports = new System.Windows.Forms.GroupBox();
+            this.lb_aptsByCity = new System.Windows.Forms.Label();
+            this.btn_aptsByCity = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.btn_loginLogs = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -369,6 +372,7 @@ namespace AppointmentScheduler_C969.Views
             // tab_Tools
             // 
             this.tab_Tools.BackColor = System.Drawing.Color.AliceBlue;
+            this.tab_Tools.Controls.Add(this.label7);
             this.tab_Tools.Controls.Add(this.label3);
             this.tab_Tools.Controls.Add(this.tb_loginReport);
             this.tab_Tools.Controls.Add(this.lb_Users);
@@ -381,6 +385,16 @@ namespace AppointmentScheduler_C969.Views
             this.tab_Tools.Size = new System.Drawing.Size(1310, 721);
             this.tab_Tools.TabIndex = 3;
             this.tab_Tools.Text = "Tools";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(938, 374);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(268, 14);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Note: Log file saved to c:\\Downloads\\Reports";
             // 
             // label3
             // 
@@ -422,11 +436,12 @@ namespace AppointmentScheduler_C969.Views
             this.dgv_Users.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_Users.Size = new System.Drawing.Size(589, 326);
             this.dgv_Users.TabIndex = 5;
+            this.dgv_Users.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Users_CellClick);
             // 
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.AliceBlue;
-            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.btn_delUser);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.btn_AddUser);
             this.groupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -437,14 +452,15 @@ namespace AppointmentScheduler_C969.Views
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "User / Consultant Management";
             // 
-            // button3
+            // btn_delUser
             // 
-            this.button3.Location = new System.Drawing.Point(55, 211);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(103, 41);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Delete User";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_delUser.Location = new System.Drawing.Point(55, 211);
+            this.btn_delUser.Name = "btn_delUser";
+            this.btn_delUser.Size = new System.Drawing.Size(103, 41);
+            this.btn_delUser.TabIndex = 2;
+            this.btn_delUser.Text = "Delete User";
+            this.btn_delUser.UseVisualStyleBackColor = true;
+            this.btn_delUser.Click += new System.EventHandler(this.delUser_Click);
             // 
             // button2
             // 
@@ -468,6 +484,8 @@ namespace AppointmentScheduler_C969.Views
             // gb_Reports
             // 
             this.gb_Reports.BackColor = System.Drawing.Color.AliceBlue;
+            this.gb_Reports.Controls.Add(this.lb_aptsByCity);
+            this.gb_Reports.Controls.Add(this.btn_aptsByCity);
             this.gb_Reports.Controls.Add(this.label6);
             this.gb_Reports.Controls.Add(this.btn_loginLogs);
             this.gb_Reports.Controls.Add(this.label5);
@@ -482,11 +500,31 @@ namespace AppointmentScheduler_C969.Views
             this.gb_Reports.TabStop = false;
             this.gb_Reports.Text = "Reports";
             // 
+            // lb_aptsByCity
+            // 
+            this.lb_aptsByCity.AutoSize = true;
+            this.lb_aptsByCity.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lb_aptsByCity.Location = new System.Drawing.Point(279, 51);
+            this.lb_aptsByCity.Name = "lb_aptsByCity";
+            this.lb_aptsByCity.Size = new System.Drawing.Size(215, 18);
+            this.lb_aptsByCity.TabIndex = 8;
+            this.lb_aptsByCity.Text = "Appointment by Customer";
+            // 
+            // btn_aptsByCity
+            // 
+            this.btn_aptsByCity.Location = new System.Drawing.Point(321, 85);
+            this.btn_aptsByCity.Name = "btn_aptsByCity";
+            this.btn_aptsByCity.Size = new System.Drawing.Size(103, 41);
+            this.btn_aptsByCity.TabIndex = 7;
+            this.btn_aptsByCity.Text = "Report";
+            this.btn_aptsByCity.UseVisualStyleBackColor = true;
+            this.btn_aptsByCity.Click += new System.EventHandler(this.btn_aptsByCity_Click);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(788, 51);
+            this.label6.Location = new System.Drawing.Point(787, 51);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(176, 18);
             this.label6.TabIndex = 6;
@@ -506,7 +544,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(420, 51);
+            this.label5.Location = new System.Drawing.Point(524, 51);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(233, 18);
             this.label5.TabIndex = 4;
@@ -516,7 +554,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(47, 51);
+            this.label4.Location = new System.Drawing.Point(11, 51);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(238, 18);
             this.label4.TabIndex = 3;
@@ -524,7 +562,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             // btn_aptTypesMonth
             // 
-            this.btn_aptTypesMonth.Location = new System.Drawing.Point(103, 85);
+            this.btn_aptTypesMonth.Location = new System.Drawing.Point(67, 85);
             this.btn_aptTypesMonth.Name = "btn_aptTypesMonth";
             this.btn_aptTypesMonth.Size = new System.Drawing.Size(103, 41);
             this.btn_aptTypesMonth.TabIndex = 1;
@@ -534,7 +572,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             // btn_sheduleByUser
             // 
-            this.btn_sheduleByUser.Location = new System.Drawing.Point(466, 85);
+            this.btn_sheduleByUser.Location = new System.Drawing.Point(575, 85);
             this.btn_sheduleByUser.Name = "btn_sheduleByUser";
             this.btn_sheduleByUser.Size = new System.Drawing.Size(103, 41);
             this.btn_sheduleByUser.TabIndex = 2;
@@ -658,7 +696,7 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btn_loginLogs;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btn_delUser;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridView dgv_Users;
         private System.Windows.Forms.Label lb_Users;
@@ -673,5 +711,8 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.TextBox tb_loginReport;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btn_sheduleByUser;
+        private System.Windows.Forms.Label lb_aptsByCity;
+        private System.Windows.Forms.Button btn_aptsByCity;
+        private System.Windows.Forms.Label label7;
     }
 }

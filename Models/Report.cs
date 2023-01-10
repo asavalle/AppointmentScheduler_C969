@@ -118,7 +118,42 @@ namespace AppointmentScheduler_C969.Models
             }
             
         }
+        public static void FailedLoginLogReport(string name)
+        {
+            string fileName = $@"{filePath}login.txt";
+            string file = "";
+            //If directory doesn't exist, create 'Reports' directory and save login.txt inside
+            if (!File.Exists(fileName))
+            {
+                (new FileInfo(fileName)).Directory.Create(); //create directory if not existing
+                using (StreamWriter fileSW = File.AppendText(fileName))
+                {
+                    fileSW.WriteLine($"User {name} failed to log in on {DateTime.Now}. ");
+                    fileSW.Close();
 
+                }
+            }
+            else //If directory does exist, then append to 'login.txt'.
+            {
+
+                //Read in entire file.
+                StreamReader sr = new StreamReader(fileName);
+
+                file = sr.ReadToEnd();
+                sr.Close();
+
+                //Add new line, Then write read file to existing file
+                StreamWriter fileSW = new StreamWriter(fileName);
+
+
+                fileSW.WriteLine($"User {name} failed to log in on {DateTime.Now}. ");
+                fileSW.Write(file);
+                fileSW.Close();
+
+
+            }
+
+        }
         public static string ViewUserSchedule()
         {
             string schedule = "";
@@ -257,6 +292,54 @@ namespace AppointmentScheduler_C969.Models
             return log;
         }
 
+        public static string ViewAppointmentsByCustomer(string custName)
+        {
+            string report = "";
+            string fileName = $@"{filePath}AppointmentsByCustomer_Report.txt";
+            DataTable ct = Customer.GetCustomers();
+            DataTable at = Appointment.GetAppoitments();
+           
 
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
+
+
+            var sorted = from apt in at.AsEnumerable()
+                         where apt.Field<string>("customerName") == custName
+                         orderby apt.Field<int>("appointmentId") ascending
+                         select new
+                         {
+                             AppointmentId = apt.Field<int>("appointmentId"),
+                             CustomerName = apt.Field<string>("customerName"),
+                             Title = apt.Field<string>("title"),
+                             StartTime = apt.Field<DateTime>("start"),
+                             AptDate = apt.Field<DateTime>("appointment_Date")
+                         };
+
+
+            using (StreamWriter sw = File.AppendText(fileName))
+            {
+                sw.WriteLine("==================================================");
+                sw.WriteLine($"Appointments for '{custName}':\n");
+                sw.WriteLine("==================================================");
+
+                foreach (var item in sorted)
+                {
+
+                    sw.WriteLine(item);
+
+                }
+                sw.Close();
+            }
+
+
+            report = File.ReadAllText(fileName);
+
+
+            return report;
+
+        }
     }
 }

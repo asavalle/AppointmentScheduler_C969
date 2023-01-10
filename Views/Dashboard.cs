@@ -63,6 +63,7 @@ namespace AppointmentScheduler_C969.Views
             ReloadAppointments();
             ReloadCustomers();
             ReloadAddresses();
+            ReloadUsers();
             ConvertToLocalTime();
         }
         private void ConvertToLocalTime()
@@ -131,7 +132,7 @@ namespace AppointmentScheduler_C969.Views
         {
             selectedRow = null;
             dgv_Appointments.DataSource = Appointment.GetAppoitments();
-            dgv_Appointments.Sort(dgv_Appointments.Columns["appointmentId"], System.ComponentModel.ListSortDirection.Ascending);
+            dgv_Appointments.Sort(dgv_Appointments.Columns["appointmentId"], ListSortDirection.Ascending);
         }
 
         private void btn_AddApt_Click(object sender, EventArgs e)
@@ -289,7 +290,7 @@ namespace AppointmentScheduler_C969.Views
         {
             dgv_addresses.DataSource = null;
             dgv_addresses.DataSource = Address.GetAddresses();
-            //dgv_addresses.Refresh();
+            dgv_addresses.Refresh();
             for (int i = 0; i < dgv_addresses.Columns.Count; i++)
             {
                 dgv_addresses.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -345,15 +346,9 @@ namespace AppointmentScheduler_C969.Views
         }
 
         private void btn_sheduleByUser_Click(object sender, EventArgs e)
-        {
-            //List<string> ListOfUsersApts = Appointment.GetAppointmentByUserId(); //creates list of users' appointments.
-            //Report.CreateFile( ListOfUsersApts);
-
+        {            
             ConsultantReport CR = new ConsultantReport();
             CR.Show();
-
-
-
         }
 
         private void btn_loginLogs_Click(object sender, EventArgs e)
@@ -366,17 +361,88 @@ namespace AppointmentScheduler_C969.Views
         /*************************
         *********Users***********
         ************************/
+        public void ReloadUsers()
+        {
+            dgv_Users.DataSource = null;
+            dgv_Users.DataSource = User.GetUsers();
+
+            for (int i = 0; i < dgv_Users.Columns.Count; i++)
+            {
+                dgv_Users.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+        }
+        private void delUser_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                bool userFound = false;
+                //verify user is not associated with an appointment
+                foreach (DataGridViewRow row in dgv_Appointments.Rows)
+                {
+                    if (Convert.ToInt32(row.Cells[2].Value) == User.CurrentUserId)
+                    {
+                        userFound = true;
+                        MessageBox.Show($"User {userFound} has appointment record {row.Cells[0].Value} associated with it and cannot be deleted. Delete the appointment record before proceeding.");
+                    }
+
+                }
+                if (!userFound)
+                {
+                    var userToDelete = User.CurrentUserId;
+
+                    DialogResult confirmDelete = MessageBox.Show($"Do you want to delete user?", "Confirm Delete", MessageBoxButtons.YesNo);
+                    if (confirmDelete == DialogResult.Yes)
+                    {
+                        var usrName = User.GetUserNameById(userToDelete);
+                        UsersController.DeleteUser(userToDelete);
+
+                        MessageBox.Show($"User {usrName} deleted");
+
+                    }
+
+                }
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+        }
+        private void dgv_Users_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+           
+                var selectedRow = dgv_Users.SelectedRows;
+
+                foreach(DataGridViewRow row in selectedRow)
+                {
+                    User.CurrentUserId = Convert.ToInt32(row.Cells[0].Value);
+                }
+              
+        }
+
         private void btn_AddUser_Click(object sender, EventArgs e)
         {
             AddUser addUsr = new AddUser();
             addUsr.ShowDialog();
         }
 
+        /*************************
+        *********Reports**********
+        *************************/
+
         private void btn_aptTypesMonth_Click(object sender, EventArgs e)
         {
             AppointmentsByMonthType aptMoTyp = new AppointmentsByMonthType();
             aptMoTyp.ShowDialog();
         }
+
+        private void btn_aptsByCity_Click(object sender, EventArgs e)
+        {
+            AppointmentsByCustomer aptsByCust = new AppointmentsByCustomer();
+            aptsByCust.ShowDialog();
+        }
+
+        
     }
 
 

@@ -26,7 +26,6 @@ namespace AppointmentScheduler_C969.Views
         {
             var month = cb_months.SelectedValue;
             var type = cb_aptTypes.Text;
-            //MessageBox.Show(month.ToString() + type.ToString());
 
             tb_aptsByMonthType.Text = Report.AppointmentTypesByMonth((int)month, type);
         }

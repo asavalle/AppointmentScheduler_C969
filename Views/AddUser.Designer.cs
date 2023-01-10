@@ -143,6 +143,7 @@ namespace AppointmentScheduler_C969.Views
             this.ClientSize = new System.Drawing.Size(544, 354);
             this.Controls.Add(this.groupBox1);
             this.Name = "AddUser";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddUser";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

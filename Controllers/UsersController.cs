@@ -18,9 +18,9 @@ namespace AppointmentScheduler_C969.Controllers
             User.UpdateUserRecord();
         }
 
-        public static void DeleteUser()
+        public static void DeleteUser(int userId)
         {
-            User.DeleteUserRecord();
+            User.DeleteUserRecord(userId);
         }
     }
 }
