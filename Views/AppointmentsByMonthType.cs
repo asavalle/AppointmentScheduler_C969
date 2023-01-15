@@ -29,5 +29,10 @@ namespace AppointmentScheduler_C969.Views
 
             tb_aptsByMonthType.Text = Report.AppointmentTypesByMonth((int)month, type);
         }
+
+        private void btn_clearReport_Click(object sender, EventArgs e)
+        {
+            tb_aptsByMonthType.Clear();
+        }
     }
 }

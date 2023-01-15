@@ -23,7 +23,7 @@ namespace AppointmentScheduler_C969.Views
             lb_startTime.Visible = false;
             lb_endTime.Visible = false;
             cb_customer.DataSource = Customer.Names;
-            cb_uesrAddApt.DataSource = User.UserNames;
+            cb_userAddApt.DataSource = User.UserNames;
             cb_aptType.DataSource = Appointment.AppointmentTypes;
         }
 
@@ -46,26 +46,38 @@ namespace AppointmentScheduler_C969.Views
                 if (dtp_createDate.Value != null && cb_startTime.SelectedValue != null && cb_endTime.SelectedValue != null)
                 {
                     Date.BuildAppointmentDate(dtp_createDate.Value, cb_startTime.SelectedItem.ToString(), cb_endTime.SelectedItem.ToString());
-                 
-                    AppointmentsController.CreateNewAppointment(
-                            cb_customer.SelectedItem.ToString(), 
-                            User.GetUserIDbyName(cb_uesrAddApt.Text), 
-                            tb_aptTitle.Text, tb_aptDesc.Text, 
-                            tb_aptLocation.Text, tb_aptContact.Text, 
+                    bool isOverlapping = Appointment.IsAppointmentOverlapping(User.GetUserIDbyName(cb_userAddApt.Text), Date.startTime);
+
+                    if (!isOverlapping)
+                    {
+                        AppointmentsController.CreateNewAppointment(
+                            cb_customer.SelectedItem.ToString(),
+                            User.GetUserIDbyName(cb_userAddApt.Text),
+                            tb_aptTitle.Text, tb_aptDesc.Text,
+                            tb_aptLocation.Text, tb_aptContact.Text,
                             cb_aptType.Text,
-                            tb_aptURL.Text, 
-                            Date.startTime, 
-                            Date.endTime, 
-                            DateTime.Now, 
-                            DataAccess.LoggedInUser, 
+                            tb_aptURL.Text,
+                            Date.startTime,
+                            Date.endTime,
+                            DateTime.Now,
+                            DataAccess.LoggedInUser,
                             DateTime.Now,
                             DataAccess.LoggedInUser);
 
-                    this.Close();
-                    Appointment.StartTimes.Clear();
-                    Appointment.EndTimes.Clear();
-                    cb_customer.DataBindings.Clear();
-                    cb_uesrAddApt.DataBindings.Clear();
+                        this.Close();
+                        Appointment.StartTimes.Clear();
+                        Appointment.EndTimes.Clear();
+                        cb_customer.DataBindings.Clear();
+                        cb_userAddApt.DataBindings.Clear();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("The selected date of this appointment overlaps with another appointment for the selected Consultant / User)", "Appointment Overlap Warning!");
+                    }
+                    
+
+                    
                 }
                 else
                 {
@@ -79,10 +91,6 @@ namespace AppointmentScheduler_C969.Views
             {
                 MessageBox.Show(nullEx.Message);
             }
-
-            
-            
-
 
         }
 
@@ -102,13 +110,22 @@ namespace AppointmentScheduler_C969.Views
             var date = Convert.ToDateTime(dtp_createDate.Value.ToShortDateString());
 
             Appointment.GenerateTimes(date);
+            if(date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
+            {
+                lb_DayOfWkWarning.Visible = true;
+            }
+            else
+            {
+                lb_DayOfWkWarning.Visible = false;
 
-            cb_startTime.DataSource = Appointment.StartTimes;
-            cb_endTime.DataSource = Appointment.EndTimes;
-            lb_startTime.Visible = true;
-            lb_endTime.Visible = true;
-            cb_startTime.Visible = true;
-            cb_endTime.Visible = true;
+                cb_startTime.DataSource = Appointment.StartTimes;
+                cb_endTime.DataSource = Appointment.EndTimes;
+                lb_startTime.Visible = true;
+                lb_endTime.Visible = true;
+                cb_startTime.Visible = true;
+                cb_endTime.Visible = true;
+            }
+            
 
         }
 

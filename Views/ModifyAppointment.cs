@@ -30,7 +30,7 @@ namespace AppointmentScheduler_C969.Views
             try
             { 
                 //Convert Appointments DataTable to an Enumerable to be able to access fields.
-                DataTable aptTable = Appointment.GetAppoitments();
+                DataTable aptTable = Appointment.GetAppointments();
                 //LAMBDA expresssion used here to get the selected appointment's ID. This method is more efficient than creating a method to retrieve the selected appointment's ID.
                 var selectedApt = aptTable.AsEnumerable().Where(x => x.Field<int>("appointmentId") == Appointment.SelectedAppointmentId).FirstOrDefault();
             
@@ -78,8 +78,8 @@ namespace AppointmentScheduler_C969.Views
             }
            
             btn_Save.Visible = true;
-
             
+
         }
 
         private void linkLabel_modCancel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -88,43 +88,83 @@ namespace AppointmentScheduler_C969.Views
             Appointment.EndTimes.Clear();
             this.Close();
         }
+        private void dtp_modDate_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Appointment.SelectedAppointmentDateCreated = dtp_modDate.Value;
+                if (Appointment.SelectedAppointmentDateCreated.DayOfWeek == DayOfWeek.Saturday || Appointment.SelectedAppointmentDateCreated.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    lb_DayOfWkWarningMod.Visible = true;
+                    cb_modSTime.Visible = false;
+                    cb_modETime.Visible = false;
+                }
+                else
+                {
+                    lb_DayOfWkWarningMod.Visible = false;
+                    cb_modSTime.Visible = true;
+                    cb_modETime.Visible = true;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
+        }
         private void btn_Save_Click(object sender, EventArgs e)
         {
             try
             {
-                tempApptObj.AppointmentId = Appointment.SelectedAppointmentId;
-                tempApptObj.CustomerName = cb_modCustomer.SelectedItem.ToString();
-                tempApptObj.CustomerId = Customer.GetCustomerIdByName(tempApptObj.CustomerName);
-                tempApptObj.UserId = User.GetUserIDbyName(cb_userModApt.Text);
-                tempApptObj.Contact = tb_modContact.Text;
-                tempApptObj.Title = tb_modTitle.Text;
-                tempApptObj.Type = cb_modAptType.Text;
-                tempApptObj.Description = tb_modDescription.Text;
-                tempApptObj.CreateDate = Appointment.SelectedAppointmentDateCreated;
-                tempApptObj.LastUpdate = DateTime.Now;
-                tempApptObj.StartTime = Convert.ToDateTime(cb_modSTime.SelectedValue);
-                tempApptObj.EndTime = Convert.ToDateTime(cb_modETime.SelectedValue);
-                tempApptObj.Location = tb_modLocation.Text;
-                tempApptObj.URL = tb_modURL.Text;
-            }
-            catch(Exception err)
+                Date.BuildAppointmentDate(dtp_modDate.Value, cb_modSTime.SelectedItem.ToString(), cb_modETime.SelectedItem.ToString());
+
+                bool isOverlapping = Appointment.IsAppointmentOverlapping(User.GetUserIDbyName(cb_userModApt.Text), Date.startTime);
+
+
+                if (!isOverlapping)
+                {
+
+                    tempApptObj.AppointmentId = Appointment.SelectedAppointmentId;
+                    tempApptObj.CustomerName = cb_modCustomer.SelectedItem.ToString();
+                    tempApptObj.CustomerId = Customer.GetCustomerIdByName(tempApptObj.CustomerName);
+                    tempApptObj.UserId = User.GetUserIDbyName(cb_userModApt.Text);
+                    tempApptObj.Contact = tb_modContact.Text;
+                    tempApptObj.Title = tb_modTitle.Text;
+                    tempApptObj.Type = cb_modAptType.Text;
+                    tempApptObj.Description = tb_modDescription.Text;
+                    tempApptObj.CreateDate = Appointment.SelectedAppointmentDateCreated;
+                    tempApptObj.LastUpdate = DateTime.Now;
+                    tempApptObj.StartTime = Date.startTime;
+                    tempApptObj.EndTime = Date.endTime;
+                    tempApptObj.Location = tb_modLocation.Text;
+                    tempApptObj.URL = tb_modURL.Text;
+
+
+
+                    AppointmentsController.ModifyAppointment(tempApptObj);
+                    foreach (Control c in this.gb_modAptForm.Controls)
+                    {
+                        c.Enabled = false;
+                    }
+
+
+                    Appointment.StartTimes.Clear();
+                    Appointment.EndTimes.Clear();
+
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("The selected date of this appointment overlaps with another appointment for the selected Consultant / User)", "Appointment Overlap Warning!");
+
+                }
+
+            }            
+            catch (Exception err)
             {
                 MessageBox.Show(err.Message);
             }
 
-
-            AppointmentsController.ModifyAppointment(tempApptObj);
-            foreach (Control c in this.gb_modAptForm.Controls)
-            {
-                c.Enabled = false;
-            }
-
-
-            Appointment.StartTimes.Clear();
-            Appointment.EndTimes.Clear();
-
-            this.Close();
         }
 
       
@@ -208,5 +248,7 @@ namespace AppointmentScheduler_C969.Views
             }
             errPr_ModApts.SetError((Control)sender, error);
         }
+
+      
     }
 }

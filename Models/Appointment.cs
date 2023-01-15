@@ -108,13 +108,13 @@ namespace AppointmentScheduler_C969.Models
             }
 
         }
-
+      
 
 
         /***********************************************************************
         *************** Functions to Query Database ****************************
         ***********************************************************************/
-        public static DataTable GetAppoitments()
+        public static DataTable GetAppointments()
         {
             DataTable aptTable = new DataTable();
             if (DataAccess.conn.State is ConnectionState.Closed)
@@ -270,7 +270,7 @@ namespace AppointmentScheduler_C969.Models
             
             var currentUserId = User.GetUserId();
 
-            DataTable appointments = GetAppoitments();
+            DataTable appointments = GetAppointments();
             Dictionary<string, string> ConsultantSchedule = new Dictionary<string, string>();
             List<string> AppointmentsByUser = new List<string>();
 
@@ -290,29 +290,13 @@ namespace AppointmentScheduler_C969.Models
             }
             return AppointmentsByUser;
         }
-        public static void GetAppointmentsByTypeAndMonth(string type)
-        {
-            //TODO: Write query to select NUMBER of appointment types by month.
-            /* i.e...
-                Febuary
-            10 - meeting
-            4 - interview
-            6 - quality
-             */
-
-            
-           
-
-
-
-        }
+        
 
         /***********************************************************************
          *************** Functions Create/Update/Delete appointments ***********
          **********************************************************************/
         public static void InsertAppointmentRecord(Appointment apt)
         {
-            //int userId = User.GetUserId();
             var formatSDate = apt.StartTime.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
             var formatEDate = apt.EndTime.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
             var formatCreateDate = apt.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
@@ -386,9 +370,7 @@ namespace AppointmentScheduler_C969.Models
                 MessageBox.Show(exsql.Message);
             }
 
-
-
-            //pull selected data from database. Pass to controller.
+          
             MessageBox.Show(
                 apt.CustomerName + "\n" +
                 apt.UserId + "\n" +
@@ -405,7 +387,40 @@ namespace AppointmentScheduler_C969.Models
 
         }
 
+        public static bool IsAppointmentOverlapping(int userId, DateTime newAptStart)
+        {
+            bool isOverlapping = false;
+            DataTable allAppointments = GetAppointments();
+            //Filter appointments by userId
+            var usersAppointments = from usr in allAppointments.AsEnumerable()
+                                    where usr.Field<int>("Consultant") == userId
+                                    select new
+                                    {
+                                        appointmentId = usr.Field<int>("appointmentId"),
+                                        userID = usr.Field<int>("Consultant"),
+                                        startTime = usr.Field<DateTime>("start"),
+                                        endTime = usr.Field<DateTime>("end"),
+                                    };
+            //Iterate over each user's appointments, and if the new appointment start time falls inbetween another appointment's time slot,
+            //then 'isOverlapping' is true.
+            foreach(var item in usersAppointments)
+            {
+                if(item.userID == userId)
+                {
+                    if (newAptStart >= item.startTime.ToLocalTime() && newAptStart <= item.endTime.ToLocalTime())
+                    {
+                        isOverlapping= true;
+                        return isOverlapping;
+                    
+                    }
+                }
+                
+               
+            }
 
+            return isOverlapping;
+
+        }
 
 
     }

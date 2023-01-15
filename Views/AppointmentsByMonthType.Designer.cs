@@ -111,6 +111,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_clearReport.TabIndex = 6;
             this.btn_clearReport.Text = "Clear";
             this.btn_clearReport.UseVisualStyleBackColor = false;
+            this.btn_clearReport.Click += new System.EventHandler(this.btn_clearReport_Click);
             // 
             // AppointmentsByMonthType
             // 

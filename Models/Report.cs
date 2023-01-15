@@ -40,7 +40,7 @@ namespace AppointmentScheduler_C969.Models
         {
             string schedule = "";
             string fileName = $@"{filePath}Appointments_By_Month_Type.txt";
-            DataTable at = Appointment.GetAppoitments();
+            DataTable at = Appointment.GetAppointments();
 
 
             
@@ -158,7 +158,7 @@ namespace AppointmentScheduler_C969.Models
         {
             string schedule = "";
             string fileName = $@"{filePath}Consultant_Schedule.txt";
-            DataTable dt = Appointment.GetAppoitments();
+            DataTable dt = Appointment.GetAppointments();
             DataTable ut = User.GetUsers();
             
             var numUsers = from user in ut.AsEnumerable()
@@ -227,7 +227,7 @@ namespace AppointmentScheduler_C969.Models
         {
             string schedule = "";
             string fileName = $@"{filePath}Consultant_Schedule.txt";
-            DataTable dt = Appointment.GetAppoitments();
+            DataTable dt = Appointment.GetAppointments();
             DataTable ut = User.GetUsers();
 
             var numUsers = from user in ut.AsEnumerable()
@@ -297,7 +297,7 @@ namespace AppointmentScheduler_C969.Models
             string report = "";
             string fileName = $@"{filePath}AppointmentsByCustomer_Report.txt";
             DataTable ct = Customer.GetCustomers();
-            DataTable at = Appointment.GetAppoitments();
+            DataTable at = Appointment.GetAppointments();
            
 
             if (File.Exists(fileName))

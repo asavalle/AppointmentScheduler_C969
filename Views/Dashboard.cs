@@ -27,7 +27,7 @@ namespace AppointmentScheduler_C969.Views
 
             lb_user.Text = DataAccess.LoggedInUser + " is logged in";
 
-            bsAppointments.DataSource = Appointment.GetAppoitments();
+            bsAppointments.DataSource = Appointment.GetAppointments();
             dgv_Appointments.DataSource = bsAppointments;
             dgv_Appointments.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dgv_Appointments.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -93,7 +93,7 @@ namespace AppointmentScheduler_C969.Views
             DateTime aptTime = new DateTime();
             DateTime aptDate = new DateTime();
 
-            foreach(DataRow row in Appointment.GetAppoitments().Rows) 
+            foreach(DataRow row in Appointment.GetAppointments().Rows) 
             {
 
                 aptTime = row.Field<DateTime>("start").ToLocalTime();
@@ -132,7 +132,7 @@ namespace AppointmentScheduler_C969.Views
         public void ReloadAppointments()
         {
             selectedRow = null;
-            dgv_Appointments.DataSource = Appointment.GetAppoitments();
+            dgv_Appointments.DataSource = Appointment.GetAppointments();
             dgv_Appointments.Sort(dgv_Appointments.Columns["appointmentId"], ListSortDirection.Ascending);
         }
 
@@ -186,7 +186,7 @@ namespace AppointmentScheduler_C969.Views
         }
         private void btn_showAll_Click(object sender, EventArgs e)
         {
-            dgv_Appointments.DataSource = Appointment.GetAppoitments();
+            dgv_Appointments.DataSource = Appointment.GetAppointments();
 
         }
 
