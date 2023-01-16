@@ -172,8 +172,17 @@ namespace AppointmentScheduler_C969.Views
         //Sort Appointments by current month
         private void btn_showByMonth_Click(object sender, EventArgs e)
         {
+            DataTable byMonth = Appointment.GetAppointments();
 
-            dgv_Appointments.DataSource = Appointment.GetAppointmentsByMonth(); ;
+            IEnumerable<DataRow> sorted = from apt in byMonth.AsEnumerable()
+                                          where apt.Field<DateTime>("start").Month == DateTime.Now.Month
+                                          select apt;
+
+
+            byMonth = sorted.CopyToDataTable<DataRow>();
+
+            dgv_Appointments.DataSource = byMonth  ;
+            ConvertToLocalTime();
 
         }
 
@@ -181,13 +190,14 @@ namespace AppointmentScheduler_C969.Views
         private void btn_showByWeek_Click(object sender, EventArgs e)
         {                     
            
-            dgv_Appointments.DataSource = Appointment.GetAppointmensByWeek(); 
- 
+            dgv_Appointments.DataSource = Appointment.GetAppointmensByWeek();
+            ConvertToLocalTime();
+
         }
         private void btn_showAll_Click(object sender, EventArgs e)
         {
             dgv_Appointments.DataSource = Appointment.GetAppointments();
-
+            ConvertToLocalTime();
         }
 
 
