@@ -117,6 +117,7 @@ namespace AppointmentScheduler_C969.Models
         public static DataTable GetAppointments()
         {
             DataTable aptTable = new DataTable();
+
             if (DataAccess.conn.State is ConnectionState.Closed)
             {
                 DataAccess.OpenConnection();
@@ -143,6 +144,9 @@ namespace AppointmentScheduler_C969.Models
 
                 sqlAdp.Fill(aptTable);
 
+               
+
+               
             }
             catch (Exception e)
             {
@@ -297,8 +301,8 @@ namespace AppointmentScheduler_C969.Models
          **********************************************************************/
         public static void InsertAppointmentRecord(Appointment apt)
         {
-            var formatSDate = apt.StartTime.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
-            var formatEDate = apt.EndTime.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
+            DateTime formatSDate = apt.StartTime.ToUniversalTime();
+            DateTime formatEDate = apt.EndTime.ToUniversalTime();
             var formatCreateDate = apt.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
             var formatLastUpDate = apt.LastUpdate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
 
@@ -348,8 +352,8 @@ namespace AppointmentScheduler_C969.Models
         public static void UpdateAppointmentRecord(Appointment apt)
         {
             int userId = User.GetUserId();
-            var formatSDate = apt.StartTime.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
-            var formatEDate = apt.EndTime.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
+            DateTime formatSDate = apt.StartTime.ToUniversalTime();
+            DateTime formatEDate = apt.EndTime.ToUniversalTime();
             var formatCreateDate = apt.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
             var formatLastUpDate = apt.LastUpdate.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
             var now = DateTime.Now;
@@ -379,7 +383,8 @@ namespace AppointmentScheduler_C969.Models
                 apt.Type + "\n" +
                 apt.Description + "\n" +
                 apt.CreateDate + "\n" +
-                apt.StartTime + "\n" +
+                apt.StartTime + " - local\n" +
+                apt.StartTime.ToUniversalTime() + "- UTC \n"+
                 apt.EndTime + "\n" +
                 apt.Location + "\n" +
                 apt.URL + "\n"
