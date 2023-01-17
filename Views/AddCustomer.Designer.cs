@@ -110,7 +110,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_addCity.BackColor = System.Drawing.Color.Lavender;
             this.btn_addCity.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_addCity.Location = new System.Drawing.Point(292, 329);
+            this.btn_addCity.Location = new System.Drawing.Point(314, 329);
             this.btn_addCity.Name = "btn_addCity";
             this.btn_addCity.Size = new System.Drawing.Size(39, 23);
             this.btn_addCity.TabIndex = 7;

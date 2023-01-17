@@ -267,6 +267,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             // dtp_createDate
             // 
+            this.dtp_createDate.CustomFormat = "\"YYYY-MM-dd\"";
             this.dtp_createDate.Location = new System.Drawing.Point(118, 377);
             this.dtp_createDate.Name = "dtp_createDate";
             this.dtp_createDate.Size = new System.Drawing.Size(246, 23);

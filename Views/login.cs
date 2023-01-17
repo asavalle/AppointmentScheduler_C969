@@ -34,7 +34,7 @@ namespace AppointmentScheduler_C969
                 tb_UserName.Text = "";
                 tb_userPwd.Text = "";
                 Report.LoginLogReport();
-            }
+                            }
         }
 
         private void btn_cancelLogin_Click(object sender, EventArgs e)

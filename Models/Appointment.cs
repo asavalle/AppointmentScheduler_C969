@@ -306,8 +306,8 @@ namespace AppointmentScheduler_C969.Models
         {
             DateTime formatSDate = apt.StartTime.ToUniversalTime();
             DateTime formatEDate = apt.EndTime.ToUniversalTime();
-            var formatCreateDate = apt.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
-            var formatLastUpDate = apt.LastUpdate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
+            var formatCreateDate = apt.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
+            var formatLastUpDate = apt.LastUpdate.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
 
             if (DataAccess.conn.State is ConnectionState.Closed)
             {
@@ -315,7 +315,7 @@ namespace AppointmentScheduler_C969.Models
             }
             try
             {
-                var insert_cmd = new MySqlCommand($"INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES({apt.CustomerId},{apt.UserId},'{apt.Title}','{apt.Description}','{apt.Location}','{apt.Contact}','{apt.Type}','{apt.URL}','{formatSDate.ToString("yyyy-MM-dd hh:mm:ss")}','{formatEDate.ToString("yyyy-MM-dd hh:mm:ss")}','{formatCreateDate}','{apt.CreatedBy}','{formatLastUpDate}','{apt.LastUpdateBy}')", DataAccess.conn);
+                var insert_cmd = new MySqlCommand($"INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES({apt.CustomerId},{apt.UserId},'{apt.Title}','{apt.Description}','{apt.Location}','{apt.Contact}','{apt.Type}','{apt.URL}','{formatSDate.ToString("yyyy-MM-dd HH:mm:ss")}','{formatEDate.ToString("yyyy-MM-dd HH:mm:ss")}','{formatCreateDate}','{apt.CreatedBy}','{formatLastUpDate}','{apt.LastUpdateBy}')", DataAccess.conn);
                 var insert = insert_cmd.ExecuteNonQuery();
             }
             catch (MySqlException ex)
@@ -354,7 +354,6 @@ namespace AppointmentScheduler_C969.Models
 
         public static void UpdateAppointmentRecord(Appointment apt)
         {
-            int userId = User.GetUserId();
             DateTime formatSDate = apt.StartTime.ToUniversalTime();
             DateTime formatEDate = apt.EndTime.ToUniversalTime();
             var formatCreateDate = apt.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
@@ -367,7 +366,7 @@ namespace AppointmentScheduler_C969.Models
             }
             try
             {
-                var update_cmd = new MySqlCommand($"UPDATE client_schedule.appointment SET appointment.customerId = {apt.CustomerId}, userId = {apt.UserId}, appointment.title = '{apt.Title}', appointment.description= '{apt.Description}', appointment.contact = '{apt.Contact}', appointment.type = '{apt.Type}', appointment.start = '{formatSDate}', appointment.end = '{formatEDate}',appointment.createDate= '{formatCreateDate}', appointment.lastUpdate = '{formatLastUpDate}' WHERE appointment.appointmentId = {apt.AppointmentId}; ", DataAccess.conn);
+                var update_cmd = new MySqlCommand($"UPDATE client_schedule.appointment SET appointment.customerId = {apt.CustomerId}, userId = {apt.UserId}, appointment.title = '{apt.Title}', appointment.description= '{apt.Description}', appointment.contact = '{apt.Contact}', appointment.type = '{apt.Type}', appointment.start = '{formatSDate.ToString("yyyy-MM-dd HH:mm:ss")}', appointment.end = '{formatEDate.ToString("yyyy-MM-dd HH:mm:ss")}',appointment.createDate= '{formatCreateDate}', appointment.lastUpdate = '{formatLastUpDate}' WHERE appointment.appointmentId = {apt.AppointmentId}; ", DataAccess.conn);
                 var update = update_cmd.ExecuteNonQuery();
                 DataAccess.CloseConnection();
 

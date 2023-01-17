@@ -52,6 +52,9 @@ namespace AppointmentScheduler_C969.Views
             City.dtCities.Clear();
             City.UpdateListOfCities();
 
+
+            MessageBox.Show("New City added.");
+
             this.Close();
         }
 
@@ -66,8 +69,11 @@ namespace AppointmentScheduler_C969.Views
             lb_addNewCntry.Visible = false;
             tb_addNewCntry.Visible = false;
             btn_createNewCntry.Visible = false;
+
+            MessageBox.Show("New Country added.");
+
         }
 
-       
+
     }
 }

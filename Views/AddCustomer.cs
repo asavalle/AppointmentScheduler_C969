@@ -33,7 +33,8 @@ namespace AppointmentScheduler_C969.Views
             cb_citiesList.DataSource = City.dtCities;
             cb_citiesList.DisplayMember = "city";
             cb_citiesList.ValueMember = "city";
-            
+            cb_citiesList.SelectedValue = "";
+
 
         }
 
@@ -61,7 +62,7 @@ namespace AppointmentScheduler_C969.Views
                 Address newAddress = new Address(tb_newCustAddress.Text,
                                            tb_newCustAddress2.Text,
                                            selectedCityId,
-                                           Convert.ToInt32(tb_newCustZip.Text),
+                                           tb_newCustZip.Text,
                                            tb_newCustPhone.Text,
                                            DateTime.Now,
                                            DataAccess.LoggedInUser,
@@ -77,21 +78,26 @@ namespace AppointmentScheduler_C969.Views
                                             DateTime.Now,
                                             DataAccess.LoggedInUser);
                 CustomersController.CreateCustomer(newCust);
-              
+
+
+                MessageBox.Show("The following Customer information was added: \n" +
+                               "Customer Name: " + tb_newCustName.Text + "\n" +
+                               "City" + City.GetCityIdFromName(cb_citiesList.SelectedItem.ToString()) + "\n" +
+                               "Active? " + activeStatus + "\n" +
+                               "Created Date:" + DateTime.Now.ToUniversalTime() + "\n" +
+                               "Created By:" + DataAccess.LoggedInUser + "\n" +
+                               "Last Updated Date: " + DateTime.Now.ToUniversalTime() + "\n" +
+                               "Last Updated By: " + DataAccess.LoggedInUser);
+
+
+
             }
             catch(Exception x)
             {
                 MessageBox.Show("There was an error: " + x.Message);
             }
 
-            MessageBox.Show("The following Customer information was added: \n" +
-                                "Customer Name: " + tb_newCustName.Text + "\n" +
-                                "City" + City.GetCityIdFromName(cb_citiesList.SelectedItem.ToString()) + "\n" +
-                                "Active? " + activeStatus + "\n" +
-                                "Created Date:" + DateTime.Now.ToUniversalTime() + "\n" +
-                                "Created By:" + DataAccess.LoggedInUser + "\n" +
-                                "Last Updated Date: " + DateTime.Now.ToUniversalTime() + "\n" +
-                                "Last Updated By: " + DataAccess.LoggedInUser);
+           
 
             this.Close();
         }

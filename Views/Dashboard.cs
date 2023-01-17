@@ -24,11 +24,12 @@ namespace AppointmentScheduler_C969.Views
             InitializeComponent();
             Customer.GetCustomerList();
             CheckForUpcomingAppointments();
-
+            
             lb_user.Text = DataAccess.LoggedInUser + " is logged in";
 
-            bsAppointments.DataSource = Appointment.GetAppointments();
-            dgv_Appointments.DataSource = bsAppointments;
+            dgv_Appointments.DataSource = Appointment.GetAppointments();
+
+
             dgv_Appointments.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dgv_Appointments.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgv_Appointments.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -37,6 +38,7 @@ namespace AppointmentScheduler_C969.Views
             dgv_Appointments.Columns["end"].DefaultCellStyle.Format = "hh:mm tt";
             dgv_Appointments.Columns["appointment_Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
 
+            ConvertToLocalTime();
 
             dgv_Customers.DataSource = Customer.GetCustomers();
             dgv_Users.DataSource = User.GetUsers();
@@ -65,25 +67,24 @@ namespace AppointmentScheduler_C969.Views
             ReloadCustomers();
             ReloadAddresses();
             ReloadUsers();
-            ConvertToLocalTime();
         }
         private void ConvertToLocalTime()
         {
-            for (int index = 0; index < dgv_Appointments.Rows.Count; index++)
-            {
-                foreach (DataGridViewCell cell in dgv_Appointments.Rows[index].Cells)
+            
+                foreach (DataGridViewRow row in dgv_Appointments.Rows)
                 {
-                    if (cell.Value is DateTime time)
+                    foreach(DataGridViewCell cell in row.Cells)
+                {     
+                    var type = cell.Value.GetType();
+                    
+                    if (cell.Value.GetType() == typeof(DateTime))
                     {
-                        cell.Value = time.ToLocalTime();
-                    }
-                    else
-                    {
-                        continue;
+                        cell.Value = Convert.ToDateTime(cell.Value).ToLocalTime();
                     }
                 }
-
             }
+
+
         }
 
         private void CheckForUpcomingAppointments()
@@ -203,9 +204,16 @@ namespace AppointmentScheduler_C969.Views
             dgv_Customers.DataSource = null;
             dgv_Customers.DataSource = Customer.GetCustomers();
             //dgv_Customers.Refresh();
-            for (int i = 0; i < dgv_Customers.Columns.Count; i++)
+            if (dgv_Customers.DataSource != null)
             {
+                dgv_Customers.Sort(dgv_Customers.Columns["Customer_Id"], ListSortDirection.Ascending);
+
+                for (int i = 0; i < dgv_Customers.Columns.Count; i++)
+                {
                 dgv_Customers.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                
+
+                }
 
             }
         }
@@ -275,6 +283,8 @@ namespace AppointmentScheduler_C969.Views
                     {
                         Address.DeleteCustomerAddress(Customer.SelectedCustomerAddressId);
                     }
+
+                    ReloadAddresses();
                 }
 
             }
@@ -295,10 +305,10 @@ namespace AppointmentScheduler_C969.Views
         {
             dgv_addresses.DataSource = null;
             dgv_addresses.DataSource = Address.GetAddresses();
-            dgv_addresses.Refresh();
             for (int i = 0; i < dgv_addresses.Columns.Count; i++)
             {
                 dgv_addresses.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgv_addresses.Sort(dgv_addresses.Columns["addressId"], ListSortDirection.Ascending);
             }
         }
 
@@ -326,7 +336,7 @@ namespace AppointmentScheduler_C969.Views
                     if (confirmDelete == DialogResult.Yes)
                     {
                         Address.DeleteCustomerAddress(Address.SelectedAddressID);
-
+                        ReloadAddresses();
                         MessageBox.Show($"Address deleted");
 
                     }
