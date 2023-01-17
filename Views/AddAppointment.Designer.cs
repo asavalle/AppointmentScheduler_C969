@@ -102,11 +102,11 @@ namespace AppointmentScheduler_C969.Views
             this.lb_DayOfWkWarning.AutoSize = true;
             this.lb_DayOfWkWarning.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lb_DayOfWkWarning.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lb_DayOfWkWarning.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lb_DayOfWkWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lb_DayOfWkWarning.ForeColor = System.Drawing.Color.Red;
             this.lb_DayOfWkWarning.Location = new System.Drawing.Point(6, 462);
             this.lb_DayOfWkWarning.Name = "lb_DayOfWkWarning";
-            this.lb_DayOfWkWarning.Size = new System.Drawing.Size(403, 20);
+            this.lb_DayOfWkWarning.Size = new System.Drawing.Size(361, 22);
             this.lb_DayOfWkWarning.TabIndex = 30;
             this.lb_DayOfWkWarning.Text = "Please select a date between Monday and Friday.";
             this.lb_DayOfWkWarning.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -118,7 +118,8 @@ namespace AppointmentScheduler_C969.Views
             this.cb_userAddApt.Location = new System.Drawing.Point(120, 74);
             this.cb_userAddApt.Name = "cb_userAddApt";
             this.cb_userAddApt.Size = new System.Drawing.Size(244, 23);
-            this.cb_userAddApt.TabIndex = 29;
+            this.cb_userAddApt.TabIndex = 2;
+            this.cb_userAddApt.Validating += new System.ComponentModel.CancelEventHandler(this.cb_userAddApt_Validating);
             // 
             // label1
             // 
@@ -132,6 +133,7 @@ namespace AppointmentScheduler_C969.Views
             // cb_aptType
             // 
             this.cb_aptType.FormattingEnabled = true;
+            this.cb_aptType.ItemHeight = 15;
             this.cb_aptType.Location = new System.Drawing.Point(120, 211);
             this.cb_aptType.Name = "cb_aptType";
             this.cb_aptType.Size = new System.Drawing.Size(181, 23);
@@ -143,11 +145,11 @@ namespace AppointmentScheduler_C969.Views
             this.linkLabel_cancel.AutoSize = true;
             this.linkLabel_cancel.BackColor = System.Drawing.SystemColors.Control;
             this.linkLabel_cancel.DisabledLinkColor = System.Drawing.Color.Red;
-            this.linkLabel_cancel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.linkLabel_cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.linkLabel_cancel.LinkColor = System.Drawing.Color.Red;
             this.linkLabel_cancel.Location = new System.Drawing.Point(341, 595);
             this.linkLabel_cancel.Name = "linkLabel_cancel";
-            this.linkLabel_cancel.Size = new System.Drawing.Size(64, 18);
+            this.linkLabel_cancel.Size = new System.Drawing.Size(58, 20);
             this.linkLabel_cancel.TabIndex = 11;
             this.linkLabel_cancel.TabStop = true;
             this.linkLabel_cancel.Text = "Cancel";
@@ -167,7 +169,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_aptContact.Location = new System.Drawing.Point(120, 115);
             this.tb_aptContact.Name = "tb_aptContact";
             this.tb_aptContact.Size = new System.Drawing.Size(244, 23);
-            this.tb_aptContact.TabIndex = 2;
+            this.tb_aptContact.TabIndex = 3;
             this.tb_aptContact.Validating += new System.ComponentModel.CancelEventHandler(this.tb_aptContact_Validating);
             // 
             // lb_aptURL
@@ -184,7 +186,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_aptURL.Location = new System.Drawing.Point(118, 531);
             this.tb_aptURL.Name = "tb_aptURL";
             this.tb_aptURL.Size = new System.Drawing.Size(246, 23);
-            this.tb_aptURL.TabIndex = 9;
+            this.tb_aptURL.TabIndex = 11;
             // 
             // lb_aptLocation
             // 
@@ -200,7 +202,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_aptLocation.Location = new System.Drawing.Point(118, 495);
             this.tb_aptLocation.Name = "tb_aptLocation";
             this.tb_aptLocation.Size = new System.Drawing.Size(246, 23);
-            this.tb_aptLocation.TabIndex = 8;
+            this.tb_aptLocation.TabIndex = 10;
             // 
             // lb_aptType
             // 
@@ -215,7 +217,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_Create.BackColor = System.Drawing.Color.LightBlue;
             this.btn_Create.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_Create.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_Create.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_Create.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btn_Create.Location = new System.Drawing.Point(7, 586);
             this.btn_Create.Name = "btn_Create";
@@ -228,6 +230,7 @@ namespace AppointmentScheduler_C969.Views
             // cb_endTime
             // 
             this.cb_endTime.FormattingEnabled = true;
+            this.cb_endTime.ItemHeight = 15;
             this.cb_endTime.Location = new System.Drawing.Point(256, 436);
             this.cb_endTime.Name = "cb_endTime";
             this.cb_endTime.Size = new System.Drawing.Size(108, 23);
@@ -255,6 +258,7 @@ namespace AppointmentScheduler_C969.Views
             // cb_startTime
             // 
             this.cb_startTime.FormattingEnabled = true;
+            this.cb_startTime.ItemHeight = 15;
             this.cb_startTime.Location = new System.Drawing.Point(118, 436);
             this.cb_startTime.Name = "cb_startTime";
             this.cb_startTime.Size = new System.Drawing.Size(108, 23);
@@ -266,7 +270,7 @@ namespace AppointmentScheduler_C969.Views
             this.dtp_createDate.Location = new System.Drawing.Point(118, 377);
             this.dtp_createDate.Name = "dtp_createDate";
             this.dtp_createDate.Size = new System.Drawing.Size(246, 23);
-            this.dtp_createDate.TabIndex = 6;
+            this.dtp_createDate.TabIndex = 7;
             this.dtp_createDate.ValueChanged += new System.EventHandler(this.dtp_createDate_ValueChanged);
             this.dtp_createDate.Validating += new System.ComponentModel.CancelEventHandler(this.dtp_createDate_Validating);
             // 
@@ -323,14 +327,14 @@ namespace AppointmentScheduler_C969.Views
             this.tb_aptDesc.Multiline = true;
             this.tb_aptDesc.Name = "tb_aptDesc";
             this.tb_aptDesc.Size = new System.Drawing.Size(246, 115);
-            this.tb_aptDesc.TabIndex = 5;
+            this.tb_aptDesc.TabIndex = 6;
             // 
             // tb_aptTitle
             // 
             this.tb_aptTitle.Location = new System.Drawing.Point(118, 158);
             this.tb_aptTitle.Name = "tb_aptTitle";
             this.tb_aptTitle.Size = new System.Drawing.Size(246, 23);
-            this.tb_aptTitle.TabIndex = 3;
+            this.tb_aptTitle.TabIndex = 4;
             this.tb_aptTitle.Validating += new System.ComponentModel.CancelEventHandler(this.tb_aptTitle_Validating);
             // 
             // errPr_appts

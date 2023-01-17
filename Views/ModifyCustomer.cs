@@ -117,5 +117,63 @@ namespace AppointmentScheduler_C969.Views
         {
 
         }
+
+
+
+        /* VALIDATING*/
+        private void tb_custName_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (tb_custName.Text.Length == 0 || tb_custName.Text == " ")
+            {
+                error = "Please enter a name.";
+                e.Cancel = true;
+            }
+            errPr_ModCust.SetError((Control)sender, error);
+        }
+
+        private void tb_custAddr1_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (tb_custAddr1.Text.Length == 0 || tb_custAddr1.Text == " ")
+            {
+                error = "Please enter an address.";
+                e.Cancel = true;
+            }
+            errPr_ModCust.SetError((Control)sender, error);
+        }
+
+        private void cb_modCustCityList_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (cb_modCustCityList.Text.Length == 0 || cb_modCustCityList.Text == " ")
+            {
+                error = "Please select a city.";
+                e.Cancel = true;
+            }
+            errPr_ModCust.SetError((Control)sender, error);
+        }
+
+        private void tb_postCode_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (tb_postCode.Text.Length == 0 || tb_postCode.Text == " ")
+            {
+                error = "Please enter a zip code.";
+                e.Cancel = true;
+            }
+            errPr_ModCust.SetError((Control)sender, error);
+        }
+
+        private void tb_phoneNum_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (tb_phoneNum.Text.Length == 0 || tb_phoneNum.Text == " ")
+            {
+                error = "Please enter a phone number.";
+                e.Cancel = true;
+            }
+            errPr_ModCust.SetError((Control)sender, error);
+        }
     }
 }

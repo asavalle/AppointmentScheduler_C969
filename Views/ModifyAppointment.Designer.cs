@@ -107,11 +107,11 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.lb_DayOfWkWarningMod.AutoSize = true;
             this.lb_DayOfWkWarningMod.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lb_DayOfWkWarningMod.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lb_DayOfWkWarningMod.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lb_DayOfWkWarningMod.ForeColor = System.Drawing.Color.Red;
             this.lb_DayOfWkWarningMod.Location = new System.Drawing.Point(14, 478);
             this.lb_DayOfWkWarningMod.Name = "lb_DayOfWkWarningMod";
-            this.lb_DayOfWkWarningMod.Size = new System.Drawing.Size(396, 20);
+            this.lb_DayOfWkWarningMod.Size = new System.Drawing.Size(354, 22);
             this.lb_DayOfWkWarningMod.TabIndex = 44;
             this.lb_DayOfWkWarningMod.Text = "Please select a day between Monday and Friday.";
             this.lb_DayOfWkWarningMod.Visible = false;
@@ -123,7 +123,7 @@ namespace AppointmentScheduler_C969.Views
             this.cb_userModApt.Location = new System.Drawing.Point(262, 45);
             this.cb_userModApt.Name = "cb_userModApt";
             this.cb_userModApt.Size = new System.Drawing.Size(121, 23);
-            this.cb_userModApt.TabIndex = 43;
+            this.cb_userModApt.TabIndex = 1;
             // 
             // lb_modAptUser
             // 
@@ -138,6 +138,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.cb_modAptType.Enabled = false;
             this.cb_modAptType.FormattingEnabled = true;
+            this.cb_modAptType.ItemHeight = 15;
             this.cb_modAptType.Location = new System.Drawing.Point(116, 216);
             this.cb_modAptType.Name = "cb_modAptType";
             this.cb_modAptType.Size = new System.Drawing.Size(172, 23);
@@ -167,11 +168,11 @@ namespace AppointmentScheduler_C969.Views
             this.linkLabel_modCancel.AutoSize = true;
             this.linkLabel_modCancel.BackColor = System.Drawing.SystemColors.Control;
             this.linkLabel_modCancel.DisabledLinkColor = System.Drawing.Color.Red;
-            this.linkLabel_modCancel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.linkLabel_modCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.linkLabel_modCancel.LinkColor = System.Drawing.Color.Red;
             this.linkLabel_modCancel.Location = new System.Drawing.Point(341, 605);
             this.linkLabel_modCancel.Name = "linkLabel_modCancel";
-            this.linkLabel_modCancel.Size = new System.Drawing.Size(64, 18);
+            this.linkLabel_modCancel.Size = new System.Drawing.Size(58, 20);
             this.linkLabel_modCancel.TabIndex = 38;
             this.linkLabel_modCancel.TabStop = true;
             this.linkLabel_modCancel.Text = "Cancel";
@@ -181,7 +182,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_Save.BackColor = System.Drawing.Color.LightBlue;
             this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_Save.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_Save.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btn_Save.Location = new System.Drawing.Point(116, 586);
             this.btn_Save.Name = "btn_Save";
@@ -196,7 +197,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_editApt.BackColor = System.Drawing.Color.LightBlue;
             this.btn_editApt.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_editApt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_editApt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_editApt.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btn_editApt.Location = new System.Drawing.Point(6, 586);
             this.btn_editApt.Name = "btn_editApt";
@@ -302,7 +303,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_modURL.Location = new System.Drawing.Point(116, 543);
             this.tb_modURL.Name = "tb_modURL";
             this.tb_modURL.Size = new System.Drawing.Size(246, 23);
-            this.tb_modURL.TabIndex = 9;
+            this.tb_modURL.TabIndex = 11;
             // 
             // tb_modLocation
             // 
@@ -310,7 +311,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_modLocation.Location = new System.Drawing.Point(116, 505);
             this.tb_modLocation.Name = "tb_modLocation";
             this.tb_modLocation.Size = new System.Drawing.Size(246, 23);
-            this.tb_modLocation.TabIndex = 8;
+            this.tb_modLocation.TabIndex = 10;
             // 
             // cb_modETime
             // 
@@ -319,7 +320,7 @@ namespace AppointmentScheduler_C969.Views
             this.cb_modETime.Location = new System.Drawing.Point(254, 452);
             this.cb_modETime.Name = "cb_modETime";
             this.cb_modETime.Size = new System.Drawing.Size(108, 23);
-            this.cb_modETime.TabIndex = 7;
+            this.cb_modETime.TabIndex = 9;
             this.cb_modETime.Validating += new System.ComponentModel.CancelEventHandler(this.cb_modETime_Validating);
             // 
             // cb_modSTime
@@ -329,7 +330,7 @@ namespace AppointmentScheduler_C969.Views
             this.cb_modSTime.Location = new System.Drawing.Point(116, 452);
             this.cb_modSTime.Name = "cb_modSTime";
             this.cb_modSTime.Size = new System.Drawing.Size(108, 23);
-            this.cb_modSTime.TabIndex = 6;
+            this.cb_modSTime.TabIndex = 8;
             this.cb_modSTime.Validating += new System.ComponentModel.CancelEventHandler(this.cb_modSTime_Validating);
             // 
             // dtp_modDate
@@ -339,7 +340,7 @@ namespace AppointmentScheduler_C969.Views
             this.dtp_modDate.Location = new System.Drawing.Point(116, 395);
             this.dtp_modDate.Name = "dtp_modDate";
             this.dtp_modDate.Size = new System.Drawing.Size(246, 23);
-            this.dtp_modDate.TabIndex = 5;
+            this.dtp_modDate.TabIndex = 7;
             this.dtp_modDate.ValueChanged += new System.EventHandler(this.dtp_modDate_ValueChanged);
             this.dtp_modDate.Validating += new System.ComponentModel.CancelEventHandler(this.dtp_modDate_Validating);
             // 
@@ -350,7 +351,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_modDescription.Multiline = true;
             this.tb_modDescription.Name = "tb_modDescription";
             this.tb_modDescription.Size = new System.Drawing.Size(246, 115);
-            this.tb_modDescription.TabIndex = 4;
+            this.tb_modDescription.TabIndex = 6;
             // 
             // tb_modTitle
             // 
@@ -358,7 +359,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_modTitle.Location = new System.Drawing.Point(116, 168);
             this.tb_modTitle.Name = "tb_modTitle";
             this.tb_modTitle.Size = new System.Drawing.Size(246, 23);
-            this.tb_modTitle.TabIndex = 2;
+            this.tb_modTitle.TabIndex = 4;
             this.tb_modTitle.Validating += new System.ComponentModel.CancelEventHandler(this.tb_modTitle_Validating);
             // 
             // tb_modContact
@@ -367,7 +368,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_modContact.Location = new System.Drawing.Point(116, 127);
             this.tb_modContact.Name = "tb_modContact";
             this.tb_modContact.Size = new System.Drawing.Size(246, 23);
-            this.tb_modContact.TabIndex = 1;
+            this.tb_modContact.TabIndex = 3;
             this.tb_modContact.Validating += new System.ComponentModel.CancelEventHandler(this.tb_modContact_Validating);
             // 
             // cb_modCustomer
@@ -378,7 +379,7 @@ namespace AppointmentScheduler_C969.Views
             this.cb_modCustomer.Name = "cb_modCustomer";
             this.cb_modCustomer.Size = new System.Drawing.Size(246, 23);
             this.cb_modCustomer.Sorted = true;
-            this.cb_modCustomer.TabIndex = 0;
+            this.cb_modCustomer.TabIndex = 2;
             this.cb_modCustomer.Validating += new System.ComponentModel.CancelEventHandler(this.cb_modCustomer_Validating);
             // 
             // errPr_ModApts

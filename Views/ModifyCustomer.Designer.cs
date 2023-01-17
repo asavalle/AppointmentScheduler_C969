@@ -29,6 +29,7 @@ namespace AppointmentScheduler_C969.Views
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gb_ModCustomer = new System.Windows.Forms.GroupBox();
             this.ll_modCustCancel = new System.Windows.Forms.LinkLabel();
             this.btn_editModCust = new System.Windows.Forms.Button();
@@ -52,9 +53,11 @@ namespace AppointmentScheduler_C969.Views
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.errPr_ModCust = new System.Windows.Forms.ErrorProvider(this.components);
             this.gb_ModCustomer.SuspendLayout();
             this.gb_updateName.SuspendLayout();
             this.gb_updateAddr.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errPr_ModCust)).BeginInit();
             this.SuspendLayout();
             // 
             // gb_ModCustomer
@@ -76,11 +79,11 @@ namespace AppointmentScheduler_C969.Views
             this.ll_modCustCancel.AutoSize = true;
             this.ll_modCustCancel.BackColor = System.Drawing.SystemColors.Control;
             this.ll_modCustCancel.DisabledLinkColor = System.Drawing.Color.Red;
-            this.ll_modCustCancel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ll_modCustCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ll_modCustCancel.LinkColor = System.Drawing.Color.Red;
             this.ll_modCustCancel.Location = new System.Drawing.Point(341, 605);
             this.ll_modCustCancel.Name = "ll_modCustCancel";
-            this.ll_modCustCancel.Size = new System.Drawing.Size(64, 18);
+            this.ll_modCustCancel.Size = new System.Drawing.Size(58, 20);
             this.ll_modCustCancel.TabIndex = 39;
             this.ll_modCustCancel.TabStop = true;
             this.ll_modCustCancel.Text = "Cancel";
@@ -90,7 +93,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_editModCust.BackColor = System.Drawing.Color.LightBlue;
             this.btn_editModCust.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_editModCust.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_editModCust.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_editModCust.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btn_editModCust.Location = new System.Drawing.Point(6, 586);
             this.btn_editModCust.Name = "btn_editModCust";
@@ -130,7 +133,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_updateName.BackColor = System.Drawing.Color.LightBlue;
             this.btn_updateName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_updateName.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_updateName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_updateName.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btn_updateName.Location = new System.Drawing.Point(318, 66);
             this.btn_updateName.Name = "btn_updateName";
@@ -148,6 +151,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_custName.Name = "tb_custName";
             this.tb_custName.Size = new System.Drawing.Size(276, 23);
             this.tb_custName.TabIndex = 1;
+            this.tb_custName.Validating += new System.ComponentModel.CancelEventHandler(this.tb_custName_Validating);
             // 
             // lb_custName
             // 
@@ -204,7 +208,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_updateAddr.BackColor = System.Drawing.Color.LightBlue;
             this.btn_updateAddr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_updateAddr.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_updateAddr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_updateAddr.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btn_updateAddr.Location = new System.Drawing.Point(318, 369);
             this.btn_updateAddr.Name = "btn_updateAddr";
@@ -219,7 +223,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_modCustomerAddCity.BackColor = System.Drawing.Color.LightBlue;
             this.btn_modCustomerAddCity.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_modCustomerAddCity.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_modCustomerAddCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_modCustomerAddCity.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btn_modCustomerAddCity.Location = new System.Drawing.Point(284, 154);
             this.btn_modCustomerAddCity.Name = "btn_modCustomerAddCity";
@@ -238,8 +242,9 @@ namespace AppointmentScheduler_C969.Views
             this.cb_modCustCityList.Location = new System.Drawing.Point(95, 154);
             this.cb_modCustCityList.Name = "cb_modCustCityList";
             this.cb_modCustCityList.Size = new System.Drawing.Size(165, 23);
-            this.cb_modCustCityList.TabIndex = 11;
+            this.cb_modCustCityList.TabIndex = 6;
             this.cb_modCustCityList.SelectedIndexChanged += new System.EventHandler(this.cb_modCustCityList_SelectedIndexChanged);
+            this.cb_modCustCityList.Validating += new System.ComponentModel.CancelEventHandler(this.cb_modCustCityList_Validating);
             // 
             // tb_phoneNum
             // 
@@ -248,6 +253,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_phoneNum.Name = "tb_phoneNum";
             this.tb_phoneNum.Size = new System.Drawing.Size(165, 23);
             this.tb_phoneNum.TabIndex = 9;
+            this.tb_phoneNum.Validating += new System.ComponentModel.CancelEventHandler(this.tb_phoneNum_Validating);
             // 
             // tb_postCode
             // 
@@ -256,6 +262,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_postCode.Name = "tb_postCode";
             this.tb_postCode.Size = new System.Drawing.Size(100, 23);
             this.tb_postCode.TabIndex = 8;
+            this.tb_postCode.Validating += new System.ComponentModel.CancelEventHandler(this.tb_postCode_Validating);
             // 
             // tb_custAddr2
             // 
@@ -272,6 +279,7 @@ namespace AppointmentScheduler_C969.Views
             this.tb_custAddr1.Name = "tb_custAddr1";
             this.tb_custAddr1.Size = new System.Drawing.Size(242, 23);
             this.tb_custAddr1.TabIndex = 4;
+            this.tb_custAddr1.Validating += new System.ComponentModel.CancelEventHandler(this.tb_custAddr1_Validating);
             // 
             // label6
             // 
@@ -287,9 +295,9 @@ namespace AppointmentScheduler_C969.Views
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(6, 271);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 15);
+            this.label5.Size = new System.Drawing.Size(55, 15);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Postal Code";
+            this.label5.Text = "Zip Code";
             // 
             // label4
             // 
@@ -318,6 +326,10 @@ namespace AppointmentScheduler_C969.Views
             this.label2.TabIndex = 1;
             this.label2.Text = "Address";
             // 
+            // errPr_ModCust
+            // 
+            this.errPr_ModCust.ContainerControl = this;
+            // 
             // ModifyCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -333,6 +345,7 @@ namespace AppointmentScheduler_C969.Views
             this.gb_updateName.PerformLayout();
             this.gb_updateAddr.ResumeLayout(false);
             this.gb_updateAddr.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errPr_ModCust)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -365,5 +378,6 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Button btn_updateName;
         private System.Windows.Forms.Button btn_updateAddr;
         private System.Windows.Forms.CheckBox chk_ActiveUser;
+        private System.Windows.Forms.ErrorProvider errPr_ModCust;
     }
 }

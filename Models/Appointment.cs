@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -124,6 +125,7 @@ namespace AppointmentScheduler_C969.Models
             }
             try
             {
+                TimeZoneInfo currentTZone = TimeZoneInfo.Local;
 
                 var getAptCmd = new MySqlCommand("SELECT appointmentId, " +
                     "customer.customerName," +
@@ -133,7 +135,7 @@ namespace AppointmentScheduler_C969.Models
                     "appointment.contact, " +
                     "appointment.type, " +
                     "appointment.start, " +
-                    "appointment.end, " +
+                    "appointment.end," +
                     "appointment.start as appointment_Date," +
                     "appointment.location, " +
                     "appointment.url " +
@@ -142,6 +144,7 @@ namespace AppointmentScheduler_C969.Models
 
                 MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getAptCmd);
 
+              
                 sqlAdp.Fill(aptTable);
 
                
@@ -181,11 +184,11 @@ namespace AppointmentScheduler_C969.Models
                         currentAppointment.Title = select.GetFieldValue<string>("title");
                         currentAppointment.Type = select.GetFieldValue<string>("type");
                         currentAppointment.Description = select.GetFieldValue<string>("description");
-                        currentAppointment.CreateDate = select.GetFieldValue<DateTime>("createDate");
-                        currentAppointment.StartTime = select.GetFieldValue<DateTime>("start");
-                        currentAppointment.EndTime = select.GetFieldValue<DateTime>("end");
+                        currentAppointment.CreateDate = select.GetFieldValue<DateTime>("createDate").ToLocalTime();
+                        currentAppointment.StartTime = select.GetFieldValue<DateTime>("start").ToLocalTime();
+                        currentAppointment.EndTime = select.GetFieldValue<DateTime>("end").ToLocalTime();
                         currentAppointment.CreatedBy = select.GetFieldValue<string>("createdBy");
-                        currentAppointment.LastUpdate = select.GetFieldValue<DateTime>("lastUpdate");
+                        currentAppointment.LastUpdate = select.GetFieldValue<DateTime>("lastUpdate").ToLocalTime();
                         currentAppointment.LastUpdateBy = select.GetFieldValue<string>("lastUpdateBy");
                         currentAppointment.URL = select.GetFieldValue<string>("url");
                     }
@@ -238,36 +241,36 @@ namespace AppointmentScheduler_C969.Models
 
         }
 
-        //public static DataTable GetAppointmentsByMonth()
-        //{
-        //    DataTable aptsByMonth = new DataTable();
-        //    if (DataAccess.conn.State is ConnectionState.Closed)
-        //    {
-        //        DataAccess.OpenConnection();
-        //    }
-        //    try
-        //    {
+        public static DataTable GetAppointmentsByMonth()
+        {
+            DataTable aptsByMonth = new DataTable();
+            if (DataAccess.conn.State is ConnectionState.Closed)
+            {
+                DataAccess.OpenConnection();
+            }
+            try
+            {
 
-        //        var getMonthAptsCmd = new MySqlCommand(
-        //            "SELECT appointment.appointmentId, customer.customerName, appointment.title, " +
-        //            "appointment.description, appointment.contact, appointment.location, appointment.type, " +
-        //            "appointment.start, appointment.end,appointment.start as appointment_Date, appointment.url " +
-        //            "FROM client_schedule.appointment, client_schedule.customer " +
-        //            "WHERE MONTH(start) = MONTH(now()) and appointment.customerId = customer.customerId; ", DataAccess.conn);
+                var getMonthAptsCmd = new MySqlCommand(
+                    "SELECT appointment.appointmentId, customer.customerName, appointment.title, " +
+                    "appointment.description, appointment.contact, appointment.location, appointment.type, " +
+                    "appointment.start, appointment.end,appointment.start as appointment_Date, appointment.url " +
+                    "FROM client_schedule.appointment, client_schedule.customer " +
+                    "WHERE MONTH(start) = MONTH(now()) and appointment.customerId = customer.customerId; ", DataAccess.conn);
 
 
-        //        MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getMonthAptsCmd);
+                MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getMonthAptsCmd);
 
-        //        sqlAdp.Fill(aptsByMonth);
+                sqlAdp.Fill(aptsByMonth);
 
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        MessageBox.Show(e.Message);
-        //    }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
 
-        //    return aptsByMonth;
-        //}
+            return aptsByMonth;
+        }
 
         public static List<string> GetAppointmentByUserId()
         {
@@ -312,7 +315,7 @@ namespace AppointmentScheduler_C969.Models
             }
             try
             {
-                var insert_cmd = new MySqlCommand($"INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES({apt.CustomerId},{apt.UserId},'{apt.Title}','{apt.Description}','{apt.Location}','{apt.Contact}','{apt.Type}','{apt.URL}','{formatSDate}','{formatEDate}','{formatCreateDate}','{apt.CreatedBy}','{formatLastUpDate}','{apt.LastUpdateBy}')", DataAccess.conn);
+                var insert_cmd = new MySqlCommand($"INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES({apt.CustomerId},{apt.UserId},'{apt.Title}','{apt.Description}','{apt.Location}','{apt.Contact}','{apt.Type}','{apt.URL}','{formatSDate.ToString("yyyy-MM-dd hh:mm:ss")}','{formatEDate.ToString("yyyy-MM-dd hh:mm:ss")}','{formatCreateDate}','{apt.CreatedBy}','{formatLastUpDate}','{apt.LastUpdateBy}')", DataAccess.conn);
                 var insert = insert_cmd.ExecuteNonQuery();
             }
             catch (MySqlException ex)

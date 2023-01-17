@@ -52,8 +52,8 @@ namespace AppointmentScheduler_C969.Views
                 cb_modAptType.Text = currentApt.Type;
                 tb_modDescription.Text = currentApt.Description;
                 dtp_modDate.Value = currentApt.CreateDate;
-                cb_modSTime.SelectedItem = currentApt.StartTime.ToLocalTime().ToShortTimeString();
-                cb_modETime.SelectedItem = currentApt.EndTime.ToLocalTime().ToShortTimeString();
+                cb_modSTime.Text = currentApt.StartTime.ToShortTimeString();
+                cb_modETime.Text = currentApt.EndTime.ToShortTimeString();
                 tb_modLocation.Text = currentApt.Location;
                 tb_modURL.Text = currentApt.URL;
 

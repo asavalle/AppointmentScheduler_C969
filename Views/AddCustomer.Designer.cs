@@ -113,7 +113,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_addCity.Location = new System.Drawing.Point(292, 329);
             this.btn_addCity.Name = "btn_addCity";
             this.btn_addCity.Size = new System.Drawing.Size(39, 23);
-            this.btn_addCity.TabIndex = 21;
+            this.btn_addCity.TabIndex = 7;
             this.btn_addCity.Text = "Add";
             this.btn_addCity.UseVisualStyleBackColor = false;
             this.btn_addCity.Click += new System.EventHandler(this.btn_addCity_Click);
@@ -124,7 +124,7 @@ namespace AppointmentScheduler_C969.Views
             this.cb_citiesList.Location = new System.Drawing.Point(149, 329);
             this.cb_citiesList.Name = "cb_citiesList";
             this.cb_citiesList.Size = new System.Drawing.Size(137, 23);
-            this.cb_citiesList.TabIndex = 19;
+            this.cb_citiesList.TabIndex = 6;
             this.cb_citiesList.SelectedIndexChanged += new System.EventHandler(this.cb_citiesList_SelectedIndexChanged);
             this.cb_citiesList.Validating += new System.ComponentModel.CancelEventHandler(this.cb_citiesList_Validating);
             // 
@@ -134,7 +134,7 @@ namespace AppointmentScheduler_C969.Views
             this.cb_newActiveCust.Location = new System.Drawing.Point(152, 113);
             this.cb_newActiveCust.Name = "cb_newActiveCust";
             this.cb_newActiveCust.Size = new System.Drawing.Size(48, 19);
-            this.cb_newActiveCust.TabIndex = 18;
+            this.cb_newActiveCust.TabIndex = 2;
             this.cb_newActiveCust.Text = "True";
             this.cb_newActiveCust.UseVisualStyleBackColor = true;
             // 
@@ -143,11 +143,11 @@ namespace AppointmentScheduler_C969.Views
             this.linkLabel_cancel.AutoSize = true;
             this.linkLabel_cancel.BackColor = System.Drawing.SystemColors.Control;
             this.linkLabel_cancel.DisabledLinkColor = System.Drawing.Color.Red;
-            this.linkLabel_cancel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.linkLabel_cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.linkLabel_cancel.LinkColor = System.Drawing.Color.Red;
             this.linkLabel_cancel.Location = new System.Drawing.Point(341, 595);
             this.linkLabel_cancel.Name = "linkLabel_cancel";
-            this.linkLabel_cancel.Size = new System.Drawing.Size(64, 18);
+            this.linkLabel_cancel.Size = new System.Drawing.Size(58, 20);
             this.linkLabel_cancel.TabIndex = 17;
             this.linkLabel_cancel.TabStop = true;
             this.linkLabel_cancel.Text = "Cancel";
@@ -157,7 +157,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_CreateCustomer.BackColor = System.Drawing.Color.LightBlue;
             this.btn_CreateCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_CreateCustomer.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_CreateCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_CreateCustomer.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btn_CreateCustomer.Location = new System.Drawing.Point(6, 586);
             this.btn_CreateCustomer.Name = "btn_CreateCustomer";
@@ -173,13 +173,15 @@ namespace AppointmentScheduler_C969.Views
             this.tb_newCustPhone.Name = "tb_newCustPhone";
             this.tb_newCustPhone.Size = new System.Drawing.Size(240, 23);
             this.tb_newCustPhone.TabIndex = 8;
+            this.tb_newCustPhone.Validating += new System.ComponentModel.CancelEventHandler(this.tb_newCustPhone_Validating);
             // 
             // tb_newCustZip
             // 
             this.tb_newCustZip.Location = new System.Drawing.Point(152, 274);
             this.tb_newCustZip.Name = "tb_newCustZip";
             this.tb_newCustZip.Size = new System.Drawing.Size(93, 23);
-            this.tb_newCustZip.TabIndex = 6;
+            this.tb_newCustZip.TabIndex = 5;
+            this.tb_newCustZip.Validating += new System.ComponentModel.CancelEventHandler(this.tb_newCustZip_Validating);
             // 
             // tb_newCustAddress2
             // 

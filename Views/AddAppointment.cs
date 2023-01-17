@@ -43,7 +43,7 @@ namespace AppointmentScheduler_C969.Views
                         return;
                     }
                 }
-                if (dtp_createDate.Value != null && cb_startTime.SelectedValue != null && cb_endTime.SelectedValue != null)
+                if (cb_startTime.SelectedValue != null && cb_endTime.SelectedValue != null)
                 {
                     Date.BuildAppointmentDate(dtp_createDate.Value, cb_startTime.SelectedItem.ToString(), cb_endTime.SelectedItem.ToString());
                     bool isOverlapping = Appointment.IsAppointmentOverlapping(User.GetUserIDbyName(cb_userAddApt.Text), Date.startTime);
@@ -133,18 +133,27 @@ namespace AppointmentScheduler_C969.Views
         private void cb_customer_Validating(object sender, CancelEventArgs e)
         {
             string error = null;
-            if (cb_customer.Text.Length == 0)
+            if (cb_customer.Text.Length == 0 || cb_customer.Text == " ")
             {
                 error = "Please enter a name";
                 e.Cancel = true;
             }
             errPr_appts.SetError((Control)sender, error);
         }
-
+        private void cb_userAddApt_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (cb_userAddApt.Text.Length == 0 || cb_userAddApt.Text == " ")
+            {
+                error = "Please select a Consultant / User";
+                e.Cancel = true;
+            }
+            errPr_appts.SetError((Control)sender, error);
+        }
         private void tb_aptContact_Validating(object sender, CancelEventArgs e)
         {
             string error = null;
-            if (tb_aptContact.Text.Length == 0)
+            if (tb_aptContact.Text.Length == 0 || tb_aptContact.Text == " ")
             {
                 error = "Please enter contact information.";
                 e.Cancel = true;
@@ -155,7 +164,7 @@ namespace AppointmentScheduler_C969.Views
         private void tb_aptTitle_Validating(object sender, CancelEventArgs e)
         {
             string error = null;
-            if (tb_aptTitle.Text.Length == 0)
+            if (tb_aptTitle.Text.Length == 0 || tb_aptTitle.Text == " ")
             {
                 error = "Please enter a appointment Title.";
                 e.Cancel = true;
@@ -166,7 +175,7 @@ namespace AppointmentScheduler_C969.Views
         private void cb_aptType_Validating(object sender, CancelEventArgs e)
         {
             string error = null;
-            if (cb_aptType.Text.Length == 0)
+            if (cb_aptType.Text.Length == 0 || cb_aptType.Text == " ")
             {
                 error = "Please select an appointment Type.";
                 e.Cancel = true;
@@ -177,7 +186,7 @@ namespace AppointmentScheduler_C969.Views
         private void dtp_createDate_Validating(object sender, CancelEventArgs e)
         {
             string error = null;
-            if(dtp_createDate.Value.Date < DateTime.Now.Date || dtp_createDate.Value == null)
+            if(dtp_createDate.Value.Date < DateTime.Now.Date )
             {
                 error = "Please use the dropdown to select a date greater than or equal to today's date.";
                 e.Cancel = true;
@@ -188,26 +197,39 @@ namespace AppointmentScheduler_C969.Views
         private void cb_endTime_Validating(object sender, CancelEventArgs e)
         {
             string error = null;
-            var startTime = DateTime.Parse(cb_startTime.Text);
-            var endTime = DateTime.Parse(cb_endTime.Text);
+            if (cb_endTime.Text != " ")
+            {
+                var startTime = DateTime.Parse(cb_startTime.Text);
+                var endTime = DateTime.Parse(cb_endTime.Text);
 
-            if (startTime > endTime)
+                if (startTime > endTime)
+                {
+                    error = "Start Time cannot be after End Time.";
+                    e.Cancel = true;
+                }
+
+                errPr_appts.SetError((Control)sender, error);
+
+            }
+            else
             {
                 error = "Start Time cannot be after End Time.";
                 e.Cancel = true;
-            }
-            errPr_appts.SetError((Control)sender, error);
-        }
+                errPr_appts.SetError((Control)sender, error);
 
-        private void cb_startTime_Validating(object sender, CancelEventArgs e)
+            }
+        }
+            private void cb_startTime_Validating(object sender, CancelEventArgs e)
         {
             string error = null;
-            if (cb_startTime.Text.Length ==0)
+            if (cb_startTime.Text.Length == 0 || cb_startTime.Text == " ")
             {
                 error = "An appoitnment Start Time must be selected.";
                 e.Cancel = true;
             }
             errPr_appts.SetError((Control)sender, error);
         }
+
+        
     }
 }

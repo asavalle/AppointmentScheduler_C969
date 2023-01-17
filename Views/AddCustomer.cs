@@ -140,7 +140,7 @@ namespace AppointmentScheduler_C969.Views
         private void tb_newCustName_Validating(object sender, CancelEventArgs e)
         {
             string error = null;
-            if (tb_newCustName.Text.Length == 0)
+            if (tb_newCustName.Text.Length == 0 || tb_newCustName.Text == " ")
             {
                 error = "Please enter a name";
                 e.Cancel = true;
@@ -151,7 +151,7 @@ namespace AppointmentScheduler_C969.Views
         private void tb_newCustAddress_Validating(object sender, CancelEventArgs e)
         {
             string error = null;
-            if (tb_newCustAddress.Text.Length == 0)
+            if (tb_newCustAddress.Text.Length == 0 || tb_newCustAddress.Text == " ")
             {
                 error = "Please enter an address for customer.";
                 e.Cancel = true;
@@ -179,9 +179,31 @@ namespace AppointmentScheduler_C969.Views
         private void cb_citiesList_Validating(object sender, CancelEventArgs e)
         {
             string error = null;
-            if (cb_citiesList.Text.Length == 0)
+            if (cb_citiesList.Text.Length == 0 || cb_citiesList.Text == " ")
             {
                 error = "Please select a city.";
+                e.Cancel = true;
+            }
+            errPr_addCustomer.SetError((Control)sender, error);
+        }
+
+        private void tb_newCustPhone_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (tb_newCustPhone.Text.Length == 0 || tb_newCustPhone.Text == " ")
+            {
+                error = "Please enter a phone number.";
+                e.Cancel = true;
+            }
+            errPr_addCustomer.SetError((Control)sender, error);
+        }
+
+        private void tb_newCustZip_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (tb_newCustZip.Text.Length == 0 || tb_newCustZip.Text == " ")
+            {
+                error = "Please enter a zip code.";
                 e.Cancel = true;
             }
             errPr_addCustomer.SetError((Control)sender, error);
