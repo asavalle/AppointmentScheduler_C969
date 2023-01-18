@@ -3,8 +3,10 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -46,6 +48,7 @@ namespace AppointmentScheduler_C969.Models
             "Quality",
             "Standard",
             "Consultation",
+            "Scrum",
             "Other"
         };
         public static Dictionary<int, string> Months = new Dictionary<int, string> 
@@ -393,8 +396,8 @@ namespace AppointmentScheduler_C969.Models
                 );
 
         }
-
-        public static bool IsAppointmentOverlapping(int userId, DateTime newAptStart)
+        //Test overlapping for NEW appointments
+        public static bool IsAppointmentOverlapping(int userId, DateTime newAptStart, DateTime newAptEnd)
         {
             bool isOverlapping = false;
             DataTable allAppointments = GetAppointments();
@@ -405,20 +408,32 @@ namespace AppointmentScheduler_C969.Models
                                     {
                                         appointmentId = usr.Field<int>("appointmentId"),
                                         userID = usr.Field<int>("Consultant"),
-                                        startTime = usr.Field<DateTime>("start"),
-                                        endTime = usr.Field<DateTime>("end"),
+                                        startTime = usr.Field<DateTime>("start").ToLocalTime(),
+                                        endTime = usr.Field<DateTime>("end").ToLocalTime(),
                                     };
             //Iterate over each user's appointments, and if the new appointment start time falls inbetween another appointment's time slot,
             //then 'isOverlapping' is true.
             foreach(var item in usersAppointments)
             {
-                if(item.userID == userId)
-                {
-                    if (newAptStart >= item.startTime.ToLocalTime() && newAptStart <= item.endTime.ToLocalTime())
+                
+                var start24 = newAptStart.ToString("yyyy-MM-dd HH:mm:ss");
+                var end24 = newAptEnd.ToString("yyyy-MM-dd HH:mm:ss");
+                var itemStart24 = item.startTime.ToString("yyyy-MM-dd HH:mm:ss");
+                var itemEnd24 = item.endTime.ToString("yyyy-MM-dd HH:mm:ss");
+
+
+                if (item.userID == userId)
+                {                                       //new start falls between                                              new end falls between
+                    if ( DateTime.Parse(start24) >= DateTime.Parse(itemStart24) && DateTime.Parse(start24) <= DateTime.Parse(itemEnd24)  ||  DateTime.Parse(end24) >= DateTime.Parse(itemStart24) && DateTime.Parse(end24) <= DateTime.Parse(itemEnd24) )  
                     {
                         isOverlapping= true;
                         return isOverlapping;
                     
+                    }
+                    else if( DateTime.Parse(start24) <= DateTime.Parse(itemStart24) && DateTime.Parse(end24) >= DateTime.Parse(itemEnd24) )
+                    {
+                        isOverlapping = true;
+                        return isOverlapping;
                     }
                 }
                 
@@ -427,6 +442,54 @@ namespace AppointmentScheduler_C969.Models
 
             return isOverlapping;
 
+        }
+
+     
+        public static bool IsModAppointmentOverlapping(Appointment current, int userId, DateTime newAptStart, DateTime newAptEnd)
+        {
+            bool isOverlapping = false;
+            DataTable allAppointments = GetAppointments();
+            //Filter appointments by userId
+            var usersAppointments = from usr in allAppointments.AsEnumerable()
+                                    where usr.Field<int>("Consultant") == userId
+                                    select new
+                                    {
+                                        appointmentId = usr.Field<int>("appointmentId"),
+                                        userID = usr.Field<int>("Consultant"),
+                                        startTime = usr.Field<DateTime>("start").ToLocalTime(),
+                                        endTime = usr.Field<DateTime>("end").ToLocalTime(),
+                                    };
+
+
+            foreach (var item in usersAppointments)
+            {
+
+                var start24 = current.StartTime.ToString("yyyy-MM-dd HH:mm:ss");
+                var end24 = current.EndTime.ToString("yyyy-MM-dd HH:mm:ss");
+                var itemStart24 = item.startTime.ToString("yyyy-MM-dd HH:mm:ss");
+                var itemEnd24 = item.endTime.ToString("yyyy-MM-dd HH:mm:ss");
+
+
+                if (item.userID == userId && current.AppointmentId != item.appointmentId)
+                {                          
+
+                    //new start falls between                                              new end falls between
+                    if (DateTime.Parse(start24) >= DateTime.Parse(itemStart24) && DateTime.Parse(start24) <= DateTime.Parse(itemEnd24) || DateTime.Parse(end24) >= DateTime.Parse(itemStart24) && DateTime.Parse(end24) <= DateTime.Parse(itemEnd24))
+                    {
+                        isOverlapping = true;
+                        return isOverlapping;
+
+                    }
+                    else if (DateTime.Parse(start24) <= DateTime.Parse(itemStart24) && DateTime.Parse(end24) >= DateTime.Parse(itemEnd24))
+                    {
+                        isOverlapping = true;
+                        return isOverlapping;
+                    }
+                }
+
+
+            }
+            return isOverlapping;
         }
 
 

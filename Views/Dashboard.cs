@@ -391,7 +391,11 @@ namespace AppointmentScheduler_C969.Views
             AddUser addUsr = new AddUser();
             addUsr.ShowDialog();
         }
-
+        private void btn_modUser_Click(object sender, EventArgs e)
+        {
+            ModifyUser modUsr = new ModifyUser();
+            modUsr.ShowDialog();
+        }
 
         private void delUser_Click(object sender, EventArgs e)
         {
@@ -450,20 +454,16 @@ namespace AppointmentScheduler_C969.Views
         private void btn_aptTypesMonth_Click(object sender, EventArgs e)
         {
             AppointmentsByMonthType aptMoTyp = new AppointmentsByMonthType();
-            aptMoTyp.ShowDialog();
+            aptMoTyp.Show();
         }
 
-        private void btn_aptsByCity_Click(object sender, EventArgs e)
+        private void btn_aptsByCustomer_Click(object sender, EventArgs e)
         {
             AppointmentsByCustomer aptsByCust = new AppointmentsByCustomer();
-            aptsByCust.ShowDialog();
+            aptsByCust.Show();
         }
 
-        private void btn_modUser_Click(object sender, EventArgs e)
-        {
-            ModifyUser modUsr = new ModifyUser();
-            modUsr.ShowDialog();
-        }
+       
     }
 
 

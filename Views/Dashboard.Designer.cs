@@ -61,7 +61,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_AddUser = new System.Windows.Forms.Button();
             this.gb_Reports = new System.Windows.Forms.GroupBox();
             this.lb_aptsByCity = new System.Windows.Forms.Label();
-            this.btn_aptsByCity = new System.Windows.Forms.Button();
+            this.btn_aptsByCustomer = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.btn_loginLogs = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -89,7 +89,7 @@ namespace AppointmentScheduler_C969.Views
             this.dashTabControl.Controls.Add(this.tab_Appointments);
             this.dashTabControl.Controls.Add(this.tab_Customers);
             this.dashTabControl.Controls.Add(this.tab_Tools);
-            this.dashTabControl.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dashTabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.dashTabControl.Location = new System.Drawing.Point(2, 67);
             this.dashTabControl.Name = "dashTabControl";
             this.dashTabControl.SelectedIndex = 0;
@@ -105,10 +105,10 @@ namespace AppointmentScheduler_C969.Views
             this.tab_Appointments.Controls.Add(this.lb_Appointments);
             this.tab_Appointments.Controls.Add(this.dgv_Appointments);
             this.tab_Appointments.Controls.Add(this.btn_DelApt);
-            this.tab_Appointments.Location = new System.Drawing.Point(4, 23);
+            this.tab_Appointments.Location = new System.Drawing.Point(4, 24);
             this.tab_Appointments.Name = "tab_Appointments";
             this.tab_Appointments.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Appointments.Size = new System.Drawing.Size(1310, 721);
+            this.tab_Appointments.Size = new System.Drawing.Size(1310, 720);
             this.tab_Appointments.TabIndex = 0;
             this.tab_Appointments.Text = "Appointments";
             // 
@@ -116,7 +116,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_ModAppt.BackColor = System.Drawing.Color.LightBlue;
             this.btn_ModAppt.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_ModAppt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_ModAppt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_ModAppt.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btn_ModAppt.Location = new System.Drawing.Point(1132, 594);
             this.btn_ModAppt.Name = "btn_ModAppt";
@@ -130,7 +130,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_AddApt.BackColor = System.Drawing.Color.LightBlue;
             this.btn_AddApt.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_AddApt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_AddApt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_AddApt.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btn_AddApt.Location = new System.Drawing.Point(1043, 594);
             this.btn_AddApt.Name = "btn_AddApt";
@@ -158,7 +158,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_showAll.BackColor = System.Drawing.Color.LightBlue;
             this.btn_showAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btn_showAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_showAll.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_showAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_showAll.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btn_showAll.Location = new System.Drawing.Point(6, 31);
             this.btn_showAll.Name = "btn_showAll";
@@ -172,7 +172,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_showByWeek.BackColor = System.Drawing.Color.LightBlue;
             this.btn_showByWeek.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_showByWeek.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_showByWeek.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_showByWeek.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btn_showByWeek.Location = new System.Drawing.Point(186, 31);
             this.btn_showByWeek.Name = "btn_showByWeek";
@@ -187,7 +187,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_showByMonth.BackColor = System.Drawing.Color.LightBlue;
             this.btn_showByMonth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btn_showByMonth.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_showByMonth.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_showByMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_showByMonth.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btn_showByMonth.Location = new System.Drawing.Point(96, 31);
             this.btn_showByMonth.Name = "btn_showByMonth";
@@ -202,7 +202,7 @@ namespace AppointmentScheduler_C969.Views
             this.lb_Appointments.AutoSize = true;
             this.lb_Appointments.Location = new System.Drawing.Point(7, 60);
             this.lb_Appointments.Name = "lb_Appointments";
-            this.lb_Appointments.Size = new System.Drawing.Size(154, 14);
+            this.lb_Appointments.Size = new System.Drawing.Size(144, 15);
             this.lb_Appointments.TabIndex = 6;
             this.lb_Appointments.Text = "Appointments Scheduled";
             // 
@@ -229,7 +229,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_DelApt.BackColor = System.Drawing.Color.Red;
             this.btn_DelApt.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_DelApt.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_DelApt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_DelApt.ForeColor = System.Drawing.Color.AliceBlue;
             this.btn_DelApt.Location = new System.Drawing.Point(1221, 594);
             this.btn_DelApt.Name = "btn_DelApt";
@@ -250,10 +250,10 @@ namespace AppointmentScheduler_C969.Views
             this.tab_Customers.Controls.Add(this.btn_AddCustomer);
             this.tab_Customers.Controls.Add(this.lb_Customers);
             this.tab_Customers.Controls.Add(this.dgv_Customers);
-            this.tab_Customers.Location = new System.Drawing.Point(4, 23);
+            this.tab_Customers.Location = new System.Drawing.Point(4, 24);
             this.tab_Customers.Name = "tab_Customers";
             this.tab_Customers.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Customers.Size = new System.Drawing.Size(1310, 721);
+            this.tab_Customers.Size = new System.Drawing.Size(1310, 720);
             this.tab_Customers.TabIndex = 2;
             this.tab_Customers.Text = "Customers";
             // 
@@ -261,7 +261,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_delAddress.BackColor = System.Drawing.Color.Red;
             this.btn_delAddress.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_delAddress.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_delAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_delAddress.ForeColor = System.Drawing.Color.AliceBlue;
             this.btn_delAddress.Location = new System.Drawing.Point(1221, 672);
             this.btn_delAddress.Name = "btn_delAddress";
@@ -292,10 +292,10 @@ namespace AppointmentScheduler_C969.Views
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(7, 371);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(127, 15);
+            this.label2.Size = new System.Drawing.Size(118, 16);
             this.label2.TabIndex = 13;
             this.label2.Text = "Customer Address";
             // 
@@ -303,7 +303,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_DelCustomer.BackColor = System.Drawing.Color.Red;
             this.btn_DelCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_DelCustomer.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_DelCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_DelCustomer.ForeColor = System.Drawing.Color.AliceBlue;
             this.btn_DelCustomer.Location = new System.Drawing.Point(1224, 304);
             this.btn_DelCustomer.Name = "btn_DelCustomer";
@@ -317,7 +317,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_ModCustomer.BackColor = System.Drawing.Color.LightBlue;
             this.btn_ModCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_ModCustomer.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_ModCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_ModCustomer.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btn_ModCustomer.Location = new System.Drawing.Point(1135, 304);
             this.btn_ModCustomer.Name = "btn_ModCustomer";
@@ -331,7 +331,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.btn_AddCustomer.BackColor = System.Drawing.Color.LightBlue;
             this.btn_AddCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_AddCustomer.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_AddCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_AddCustomer.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btn_AddCustomer.Location = new System.Drawing.Point(1046, 304);
             this.btn_AddCustomer.Name = "btn_AddCustomer";
@@ -344,10 +344,10 @@ namespace AppointmentScheduler_C969.Views
             // lb_Customers
             // 
             this.lb_Customers.AutoSize = true;
-            this.lb_Customers.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lb_Customers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lb_Customers.Location = new System.Drawing.Point(7, 3);
             this.lb_Customers.Name = "lb_Customers";
-            this.lb_Customers.Size = new System.Drawing.Size(78, 15);
+            this.lb_Customers.Size = new System.Drawing.Size(71, 16);
             this.lb_Customers.TabIndex = 3;
             this.lb_Customers.Text = "Customers";
             // 
@@ -379,20 +379,20 @@ namespace AppointmentScheduler_C969.Views
             this.tab_Tools.Controls.Add(this.dgv_Users);
             this.tab_Tools.Controls.Add(this.groupBox2);
             this.tab_Tools.Controls.Add(this.gb_Reports);
-            this.tab_Tools.Location = new System.Drawing.Point(4, 23);
+            this.tab_Tools.Location = new System.Drawing.Point(4, 24);
             this.tab_Tools.Name = "tab_Tools";
             this.tab_Tools.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Tools.Size = new System.Drawing.Size(1310, 721);
+            this.tab_Tools.Size = new System.Drawing.Size(1310, 720);
             this.tab_Tools.TabIndex = 3;
             this.tab_Tools.Text = "Tools";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.label7.Location = new System.Drawing.Point(938, 374);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(268, 14);
+            this.label7.Size = new System.Drawing.Size(250, 15);
             this.label7.TabIndex = 9;
             this.label7.Text = "Note: Log file saved to c:\\Downloads\\Reports";
             // 
@@ -401,7 +401,7 @@ namespace AppointmentScheduler_C969.Views
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(872, 24);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(106, 14);
+            this.label3.Size = new System.Drawing.Size(101, 15);
             this.label3.TabIndex = 8;
             this.label3.Text = "User Sign In Log ";
             // 
@@ -420,7 +420,7 @@ namespace AppointmentScheduler_C969.Views
             this.lb_Users.AutoSize = true;
             this.lb_Users.Location = new System.Drawing.Point(277, 24);
             this.lb_Users.Name = "lb_Users";
-            this.lb_Users.Size = new System.Drawing.Size(120, 14);
+            this.lb_Users.Size = new System.Drawing.Size(112, 15);
             this.lb_Users.TabIndex = 6;
             this.lb_Users.Text = "Users / Consultants";
             // 
@@ -486,7 +486,7 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.gb_Reports.BackColor = System.Drawing.Color.AliceBlue;
             this.gb_Reports.Controls.Add(this.lb_aptsByCity);
-            this.gb_Reports.Controls.Add(this.btn_aptsByCity);
+            this.gb_Reports.Controls.Add(this.btn_aptsByCustomer);
             this.gb_Reports.Controls.Add(this.label6);
             this.gb_Reports.Controls.Add(this.btn_loginLogs);
             this.gb_Reports.Controls.Add(this.label5);
@@ -504,30 +504,30 @@ namespace AppointmentScheduler_C969.Views
             // lb_aptsByCity
             // 
             this.lb_aptsByCity.AutoSize = true;
-            this.lb_aptsByCity.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lb_aptsByCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lb_aptsByCity.Location = new System.Drawing.Point(279, 51);
             this.lb_aptsByCity.Name = "lb_aptsByCity";
-            this.lb_aptsByCity.Size = new System.Drawing.Size(215, 18);
+            this.lb_aptsByCity.Size = new System.Drawing.Size(193, 20);
             this.lb_aptsByCity.TabIndex = 8;
             this.lb_aptsByCity.Text = "Appointment by Customer";
             // 
-            // btn_aptsByCity
+            // btn_aptsByCustomer
             // 
-            this.btn_aptsByCity.Location = new System.Drawing.Point(321, 85);
-            this.btn_aptsByCity.Name = "btn_aptsByCity";
-            this.btn_aptsByCity.Size = new System.Drawing.Size(103, 41);
-            this.btn_aptsByCity.TabIndex = 7;
-            this.btn_aptsByCity.Text = "Report";
-            this.btn_aptsByCity.UseVisualStyleBackColor = true;
-            this.btn_aptsByCity.Click += new System.EventHandler(this.btn_aptsByCity_Click);
+            this.btn_aptsByCustomer.Location = new System.Drawing.Point(321, 85);
+            this.btn_aptsByCustomer.Name = "btn_aptsByCustomer";
+            this.btn_aptsByCustomer.Size = new System.Drawing.Size(103, 41);
+            this.btn_aptsByCustomer.TabIndex = 7;
+            this.btn_aptsByCustomer.Text = "Report";
+            this.btn_aptsByCustomer.UseVisualStyleBackColor = true;
+            this.btn_aptsByCustomer.Click += new System.EventHandler(this.btn_aptsByCustomer_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label6.Location = new System.Drawing.Point(787, 51);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(176, 18);
+            this.label6.Size = new System.Drawing.Size(159, 20);
             this.label6.TabIndex = 6;
             this.label6.Text = "Login Report by User";
             // 
@@ -544,20 +544,20 @@ namespace AppointmentScheduler_C969.Views
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label5.Location = new System.Drawing.Point(524, 51);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(233, 18);
+            this.label5.Size = new System.Drawing.Size(208, 20);
             this.label5.TabIndex = 4;
             this.label5.Text = "Schedule by Consultant (All)";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label4.Location = new System.Drawing.Point(11, 51);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(238, 18);
+            this.label4.Size = new System.Drawing.Size(215, 20);
             this.label4.TabIndex = 3;
             this.label4.Text = "Appointment Types by Month";
             // 
@@ -585,17 +585,17 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.label1.AutoSize = true;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.label1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.AliceBlue;
             this.label1.Location = new System.Drawing.Point(13, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(284, 28);
+            this.label1.Size = new System.Drawing.Size(264, 29);
             this.label1.TabIndex = 1;
             this.label1.Text = "Appointment Scheduler";
             // 
             // btn_Logout
             // 
-            this.btn_Logout.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btn_Logout.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_Logout.Location = new System.Drawing.Point(1235, 12);
             this.btn_Logout.Name = "btn_Logout";
             this.btn_Logout.Size = new System.Drawing.Size(75, 23);
@@ -608,12 +608,12 @@ namespace AppointmentScheduler_C969.Views
             // 
             this.lb_user.AutoSize = true;
             this.lb_user.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lb_user.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lb_user.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lb_user.ForeColor = System.Drawing.Color.DarkOrange;
             this.lb_user.Location = new System.Drawing.Point(1114, 67);
             this.lb_user.Name = "lb_user";
             this.lb_user.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lb_user.Size = new System.Drawing.Size(98, 15);
+            this.lb_user.Size = new System.Drawing.Size(92, 16);
             this.lb_user.TabIndex = 3;
             this.lb_user.Text = "logged in user";
             // 
@@ -713,7 +713,7 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btn_sheduleByUser;
         private System.Windows.Forms.Label lb_aptsByCity;
-        private System.Windows.Forms.Button btn_aptsByCity;
+        private System.Windows.Forms.Button btn_aptsByCustomer;
         private System.Windows.Forms.Label label7;
     }
 }
