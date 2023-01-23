@@ -444,7 +444,7 @@ namespace AppointmentScheduler_C969.Models
 
         }
 
-     
+     //TODO: Doesn't Work When Date is changed. Need to FIX
         public static bool IsModAppointmentOverlapping(Appointment current, int userId, DateTime newAptStart, DateTime newAptEnd)
         {
             bool isOverlapping = false;
