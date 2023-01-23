@@ -218,10 +218,7 @@ namespace AppointmentScheduler_C969.Models
 
             DataTable appointments = GetAppointments();
             DataTable aptsByWeek = new DataTable();
-            //if (DataAccess.conn.State is ConnectionState.Closed)
-            //{
-            //    DataAccess.OpenConnection();
-            //}
+           
             try
             {
 
@@ -232,17 +229,7 @@ namespace AppointmentScheduler_C969.Models
 
                 aptsByWeek = filteredByWeek.CopyToDataTable<DataRow>();
 
-                //var getWeekAptsCmd = new MySqlCommand(
-                //    "SELECT appointment.appointmentId, customer.customerName, appointment.title, " +
-                //    "appointment.description, appointment.contact, appointment.location, appointment.type, " +
-                //    "appointment.start, appointment.end,appointment.start as appointment_Date, appointment.url " +
-                //    "FROM client_schedule.appointment, client_schedule.customer " +
-                //    "where yearweek(start, 0) = yearweek(curdate(), 0) and appointment.customerId = customer.customerId; ", DataAccess.conn);
-
-
-                //MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getWeekAptsCmd);
-
-                //sqlAdp.Fill(aptsByWeek);
+                
                 return aptsByWeek;
 
             }
@@ -263,7 +250,8 @@ namespace AppointmentScheduler_C969.Models
             try
             {
                 IEnumerable<DataRow> filteredByMonth = from apts in appointments.AsEnumerable()
-                                  where apts.Field<DateTime>("appointment_Date").Month == DateTime.Now.Month
+                                  where apts.Field<DateTime>("appointment_Date").Month == DateTime.Now.Month 
+                                  where apts.Field<DateTime>("appointment_Date").Year == DateTime.Now.Year
                                   select apts;
 
                 aptsByMonth = filteredByMonth.CopyToDataTable<DataRow>();
