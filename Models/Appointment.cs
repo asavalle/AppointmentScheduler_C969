@@ -396,7 +396,7 @@ namespace AppointmentScheduler_C969.Models
                 );
 
         }
-        //Test overlapping for NEW appointments
+        //Test overlapping for NEW appointments. WORKS!!!
         public static bool IsAppointmentOverlapping(int userId, DateTime newAptStart, DateTime newAptEnd)
         {
             bool isOverlapping = false;
@@ -444,11 +444,11 @@ namespace AppointmentScheduler_C969.Models
 
         }
 
-     //TODO: Doesn't Work When Date is changed. Need to FIX
         public static bool IsModAppointmentOverlapping(Appointment current, int userId, DateTime newAptStart, DateTime newAptEnd)
         {
             bool isOverlapping = false;
             DataTable allAppointments = GetAppointments();
+
             //Filter appointments by userId
             var usersAppointments = from usr in allAppointments.AsEnumerable()
                                     where usr.Field<int>("Consultant") == userId
@@ -464,8 +464,8 @@ namespace AppointmentScheduler_C969.Models
             foreach (var item in usersAppointments)
             {
 
-                var start24 = current.StartTime.ToString("yyyy-MM-dd HH:mm:ss");
-                var end24 = current.EndTime.ToString("yyyy-MM-dd HH:mm:ss");
+                var start24 = newAptStart.ToString("yyyy-MM-dd HH:mm:ss");
+                var end24 = newAptEnd.ToString("yyyy-MM-dd HH:mm:ss");
                 var itemStart24 = item.startTime.ToString("yyyy-MM-dd HH:mm:ss");
                 var itemEnd24 = item.endTime.ToString("yyyy-MM-dd HH:mm:ss");
 
