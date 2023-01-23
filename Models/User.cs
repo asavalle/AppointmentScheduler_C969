@@ -62,10 +62,10 @@ namespace AppointmentScheduler_C969.Models
             try
             {
                
-                    var formatCreateDate = user.createDate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
-                    var formatLastUpDate = user.lastUpdate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
-                    var update_cmd = new MySqlCommand($"Update client_schedule.user SET userName = '{user.userName}', password = '{user.password}',active = '{user.active}',createDate = '{formatCreateDate}',createdBy = '{user.createdBy}',lastUpdate = '{formatLastUpDate}',lastUpdateBy= '{user.lastUpdateBy}' Where userId = {user.userID}", DataAccess.conn);
-                    var update = update_cmd.ExecuteNonQuery();
+                var formatCreateDate = user.createDate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
+                var formatLastUpDate = user.lastUpdate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
+                var update_cmd = new MySqlCommand($"Update client_schedule.user SET userName = '{user.userName}', password = '{user.password}',active = '{user.active}',createDate = '{formatCreateDate}',createdBy = '{user.createdBy}',lastUpdate = '{formatLastUpDate}',lastUpdateBy= '{user.lastUpdateBy}' Where userId = {user.userID}", DataAccess.conn);
+                var update = update_cmd.ExecuteNonQuery();
 
             }
             catch (MySqlException ex)

@@ -174,7 +174,11 @@ namespace AppointmentScheduler_C969.Views
         //Sort Appointments by current month
         private void btn_showByMonth_Click(object sender, EventArgs e)
         {
-            DataTable byMonth = Appointment.GetAppointmentsByMonth();
+            dgv_Appointments.DataSource = Appointment.GetAppointmentsByMonth();
+            dgv_Appointments.Sort(dgv_Appointments.Columns["appointmentId"], ListSortDirection.Ascending);
+
+            lb_currentView.Text = "Currently viewing appointments this month.";
+            lb_currentView.Visible = true;
 
            
             ConvertToLocalTime();
@@ -186,12 +190,23 @@ namespace AppointmentScheduler_C969.Views
         {                     
            
             dgv_Appointments.DataSource = Appointment.GetAppointmensByWeek();
+            dgv_Appointments.Sort(dgv_Appointments.Columns["appointmentId"], ListSortDirection.Ascending);
+
+            lb_currentView.Text = "Currently viewing appointments this week.";
+            lb_currentView.Visible = true;
+
             ConvertToLocalTime();
 
         }
         private void btn_showAll_Click(object sender, EventArgs e)
         {
             dgv_Appointments.DataSource = Appointment.GetAppointments();
+            dgv_Appointments.Sort(dgv_Appointments.Columns["appointmentId"], ListSortDirection.Ascending);
+
+            lb_currentView.Text = "Currently viewing all appointments.";
+            lb_currentView.Visible = true;
+
+
             ConvertToLocalTime();
         }
 

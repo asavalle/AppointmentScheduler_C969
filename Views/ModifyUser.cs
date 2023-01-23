@@ -58,6 +58,7 @@ namespace AppointmentScheduler_C969.Views
                     c.Enabled = true;
                 }
                 btn_modSaveUser.Visible = true;
+                btn_updatePass.Visible = true;
                 
             }
         }
@@ -94,7 +95,7 @@ namespace AppointmentScheduler_C969.Views
                 var isChecked = (cb_modActive.Checked == true) ? 1 : 0;
                 updatedUserInfo.userID = item.userId;
                 updatedUserInfo.userName = tb_modUsrName.Text;
-                updatedUserInfo.password = tb_modNewPass.Text;
+                updatedUserInfo.password = tb_usrNewPass.Text;
                 updatedUserInfo.active = isChecked;
                 updatedUserInfo.createDate = item.createDate;
                 updatedUserInfo.createdBy = item.createdBy;
@@ -105,6 +106,23 @@ namespace AppointmentScheduler_C969.Views
             //pass temporary User object to the controller.
             UsersController.ModifyUser(updatedUserInfo);
             this.Close();
+        }
+
+        private void btn_updatePass_Click(object sender, EventArgs e)
+        {
+            lbl_newPass.Visible = true;
+            tb_usrNewPass.Visible = true;
+        }
+
+        private void tb_usrNewPass_Validating(object sender, CancelEventArgs e)
+        {
+            string error = null;
+            if (tb_usrNewPass.Text.Length == 0 || tb_usrNewPass.Text == " ")
+            {
+                error = "Password cannot be blank. Please enter a password.";
+                e.Cancel = true;
+            }
+            errPr_modUser.SetError((Control)sender, error);
         }
     }
 }

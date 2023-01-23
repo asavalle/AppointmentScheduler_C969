@@ -212,67 +212,70 @@ namespace AppointmentScheduler_C969.Models
 
         }
 
-        public static DataTable GetAppointmensByWeek() {
+        public static DataTable GetAppointmensByWeek() 
+        {
 
+            DataTable appointments = GetAppointments();
             DataTable aptsByWeek = new DataTable();
-            if (DataAccess.conn.State is ConnectionState.Closed)
-            {
-                DataAccess.OpenConnection();
-            }
+            //if (DataAccess.conn.State is ConnectionState.Closed)
+            //{
+            //    DataAccess.OpenConnection();
+            //}
             try
             {
 
-                var getWeekAptsCmd = new MySqlCommand(
-                    "SELECT appointment.appointmentId, customer.customerName, appointment.title, " +
-                    "appointment.description, appointment.contact, appointment.location, appointment.type, " +
-                    "appointment.start, appointment.end,appointment.start as appointment_Date, appointment.url " +
-                    "FROM client_schedule.appointment, client_schedule.customer " +
-                    "where yearweek(start, 0) = yearweek(curdate(), 0) and appointment.customerId = customer.customerId; ", DataAccess.conn);
+                IEnumerable<DataRow> filteredByWeek = from apts in appointments.AsEnumerable()
+                                                       where Date.GetStartOfWeek(apts.Field<DateTime>("appointment_Date"), DayOfWeek.Sunday) == Date.GetStartOfWeek(DateTime.Now,DayOfWeek.Sunday)
+                                                       select apts;
 
 
-                MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getWeekAptsCmd);
+                aptsByWeek = filteredByWeek.CopyToDataTable<DataRow>();
 
-                sqlAdp.Fill(aptsByWeek);
+                //var getWeekAptsCmd = new MySqlCommand(
+                //    "SELECT appointment.appointmentId, customer.customerName, appointment.title, " +
+                //    "appointment.description, appointment.contact, appointment.location, appointment.type, " +
+                //    "appointment.start, appointment.end,appointment.start as appointment_Date, appointment.url " +
+                //    "FROM client_schedule.appointment, client_schedule.customer " +
+                //    "where yearweek(start, 0) = yearweek(curdate(), 0) and appointment.customerId = customer.customerId; ", DataAccess.conn);
+
+
+                //MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getWeekAptsCmd);
+
+                //sqlAdp.Fill(aptsByWeek);
+                return aptsByWeek;
 
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
+                return null;
+
             }
 
-            return aptsByWeek;
 
         }
 
         public static DataTable GetAppointmentsByMonth()
         {
+            DataTable appointments = GetAppointments(); 
             DataTable aptsByMonth = new DataTable();
-            if (DataAccess.conn.State is ConnectionState.Closed)
-            {
-                DataAccess.OpenConnection();
-            }
             try
             {
+                IEnumerable<DataRow> filteredByMonth = from apts in appointments.AsEnumerable()
+                                  where apts.Field<DateTime>("appointment_Date").Month == DateTime.Now.Month
+                                  select apts;
 
-                var getMonthAptsCmd = new MySqlCommand(
-                    "SELECT appointment.appointmentId, customer.customerName, appointment.title, " +
-                    "appointment.description, appointment.contact, appointment.location, appointment.type, " +
-                    "appointment.start, appointment.end,appointment.start as appointment_Date, appointment.url " +
-                    "FROM client_schedule.appointment, client_schedule.customer " +
-                    "WHERE MONTH(start) = MONTH(now()) and appointment.customerId = customer.customerId; ", DataAccess.conn);
+                aptsByMonth = filteredByMonth.CopyToDataTable<DataRow>();
 
-
-                MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getMonthAptsCmd);
-
-                sqlAdp.Fill(aptsByMonth);
+                return aptsByMonth;
 
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
+                return null; 
             }
 
-            return aptsByMonth;
         }
 
         public static List<string> GetAppointmentByUserId()

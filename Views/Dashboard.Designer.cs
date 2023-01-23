@@ -31,6 +31,7 @@ namespace AppointmentScheduler_C969.Views
         {
             this.dashTabControl = new System.Windows.Forms.TabControl();
             this.tab_Appointments = new System.Windows.Forms.TabPage();
+            this.lb_currentView = new System.Windows.Forms.Label();
             this.btn_ModAppt = new System.Windows.Forms.Button();
             this.btn_AddApt = new System.Windows.Forms.Button();
             this.gb_filterAppointments = new System.Windows.Forms.GroupBox();
@@ -99,6 +100,7 @@ namespace AppointmentScheduler_C969.Views
             // tab_Appointments
             // 
             this.tab_Appointments.BackColor = System.Drawing.Color.AliceBlue;
+            this.tab_Appointments.Controls.Add(this.lb_currentView);
             this.tab_Appointments.Controls.Add(this.btn_ModAppt);
             this.tab_Appointments.Controls.Add(this.btn_AddApt);
             this.tab_Appointments.Controls.Add(this.gb_filterAppointments);
@@ -111,6 +113,19 @@ namespace AppointmentScheduler_C969.Views
             this.tab_Appointments.Size = new System.Drawing.Size(1310, 720);
             this.tab_Appointments.TabIndex = 0;
             this.tab_Appointments.Text = "Appointments";
+            // 
+            // lb_currentView
+            // 
+            this.lb_currentView.AutoSize = true;
+            this.lb_currentView.BackColor = System.Drawing.Color.Transparent;
+            this.lb_currentView.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.lb_currentView.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lb_currentView.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lb_currentView.Location = new System.Drawing.Point(420, 7);
+            this.lb_currentView.Name = "lb_currentView";
+            this.lb_currentView.Size = new System.Drawing.Size(363, 24);
+            this.lb_currentView.TabIndex = 4;
+            this.lb_currentView.Text = "Currently viewing all appointments.";
             // 
             // btn_ModAppt
             // 
@@ -715,5 +730,6 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Label lb_aptsByCity;
         private System.Windows.Forms.Button btn_aptsByCustomer;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lb_currentView;
     }
 }
