@@ -137,7 +137,7 @@ namespace AppointmentScheduler_C969.Views
             this.cb_aptType.Location = new System.Drawing.Point(120, 211);
             this.cb_aptType.Name = "cb_aptType";
             this.cb_aptType.Size = new System.Drawing.Size(181, 23);
-            this.cb_aptType.TabIndex = 27;
+            this.cb_aptType.TabIndex = 5;
             this.cb_aptType.Validating += new System.ComponentModel.CancelEventHandler(this.cb_aptType_Validating);
             // 
             // linkLabel_cancel
@@ -234,7 +234,7 @@ namespace AppointmentScheduler_C969.Views
             this.cb_endTime.Location = new System.Drawing.Point(256, 436);
             this.cb_endTime.Name = "cb_endTime";
             this.cb_endTime.Size = new System.Drawing.Size(108, 23);
-            this.cb_endTime.TabIndex = 7;
+            this.cb_endTime.TabIndex = 9;
             this.cb_endTime.Validating += new System.ComponentModel.CancelEventHandler(this.cb_endTime_Validating);
             // 
             // lb_endTime
@@ -262,7 +262,7 @@ namespace AppointmentScheduler_C969.Views
             this.cb_startTime.Location = new System.Drawing.Point(118, 436);
             this.cb_startTime.Name = "cb_startTime";
             this.cb_startTime.Size = new System.Drawing.Size(108, 23);
-            this.cb_startTime.TabIndex = 6;
+            this.cb_startTime.TabIndex = 8;
             this.cb_startTime.Validating += new System.ComponentModel.CancelEventHandler(this.cb_startTime_Validating);
             // 
             // dtp_createDate

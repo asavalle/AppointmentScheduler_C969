@@ -49,6 +49,7 @@ namespace AppointmentScheduler_C969.Models
             "Standard",
             "Consultation",
             "Scrum",
+            "Presentation",
             "Other"
         };
         public static Dictionary<int, string> Months = new Dictionary<int, string> 
