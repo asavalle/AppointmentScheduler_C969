@@ -9,22 +9,22 @@ namespace AppointmentScheduler_C969.Models
         public static DateTime startTime = new DateTime();
         public static DateTime endTime = new DateTime();
 
-        public static void BuildAppointmentDate(DateTime aDate, string start, string end)
-        {
-            /*Creates a new DateTime object, assigns it the value from the DateTimePicker control. Then it takes that new object and assigns
-             * it to the aptData variable and applies the ToShortDateString method to grab only the date portion. 
-             * After that, the Start and End times are retrieved from the appropriate combobox and then appeneded to the aptData to create a complete
-             * start and end date/time variable. Lastly, those variables are parsed into new DateTime objects.
-             */
-            DateTime date = new DateTime();
+        public TimeZoneInfo timeZone = TimeZoneInfo.Local;
 
-            date = aDate;
-            var aptData = date.ToShortDateString();
-            string startT = start;
-            string endT = end;
-            var startDateTime = aptData + " " + startT.ToString();
-            var endDateTime = aptData + " " + endT.ToString();
-            startTime = DateTime.Parse(startDateTime);
+        public static void BuildAppointmentDate(DateTime aDate, string start, string end)
+        {            
+
+            //format selected Date value (aDate), parse to DateTime object, then convert to short date string
+            var newAptDate = DateTime.Parse(aDate.ToString("yyyy-MM-dd hh:mm:ss")).ToShortDateString(); 
+            string startT = start; //selected start time from combobox
+            string endT = end; //selected end time from combobox
+
+            //create a new Date string combining the formatted date with the time
+            var startDateTime = newAptDate + " " + startT.ToString(); 
+            var endDateTime = newAptDate + " " + endT.ToString(); 
+            
+            //Parse newly built date string to a DateTime object and convert to UTC before passing to DB
+            startTime = DateTime.Parse(startDateTime); 
             endTime = DateTime.Parse(endDateTime);
         }
 

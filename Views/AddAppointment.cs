@@ -46,7 +46,7 @@ namespace AppointmentScheduler_C969.Views
                 if (cb_startTime.SelectedValue != null && cb_endTime.SelectedValue != null)
                 {
                     Date.BuildAppointmentDate(dtp_createDate.Value, cb_startTime.SelectedItem.ToString(), cb_endTime.SelectedItem.ToString());
-                    bool isOverlapping = Appointment.IsAppointmentOverlapping(User.GetUserIDbyName(cb_userAddApt.Text), Date.startTime);
+                    bool isOverlapping = Appointment.IsAppointmentOverlapping(User.GetUserIDbyName(cb_userAddApt.Text), Date.startTime, Date.endTime);
 
                     if (!isOverlapping)
                     {

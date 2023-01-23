@@ -118,7 +118,7 @@ namespace AppointmentScheduler_C969.Views
             {
                 Date.BuildAppointmentDate(dtp_modDate.Value, cb_modSTime.SelectedItem.ToString(), cb_modETime.SelectedItem.ToString());
 
-                bool isOverlapping = Appointment.IsAppointmentOverlapping(User.GetUserIDbyName(cb_userModApt.Text), Date.startTime);
+                bool isOverlapping = Appointment.IsModAppointmentOverlapping(Appointment.GetCurrentAppointment(Appointment.SelectedAppointmentId),User.GetUserIDbyName(cb_userModApt.Text), Date.startTime, Date.endTime);
 
 
                 if (!isOverlapping)

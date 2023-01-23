@@ -3,8 +3,10 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -46,6 +48,8 @@ namespace AppointmentScheduler_C969.Models
             "Quality",
             "Standard",
             "Consultation",
+            "Scrum",
+            "Presentation",
             "Other"
         };
         public static Dictionary<int, string> Months = new Dictionary<int, string> 
@@ -209,67 +213,70 @@ namespace AppointmentScheduler_C969.Models
 
         }
 
-        public static DataTable GetAppointmensByWeek() {
+        public static DataTable GetAppointmensByWeek() 
+        {
 
+            DataTable appointments = GetAppointments();
             DataTable aptsByWeek = new DataTable();
-            if (DataAccess.conn.State is ConnectionState.Closed)
-            {
-                DataAccess.OpenConnection();
-            }
+            //if (DataAccess.conn.State is ConnectionState.Closed)
+            //{
+            //    DataAccess.OpenConnection();
+            //}
             try
             {
 
-                var getWeekAptsCmd = new MySqlCommand(
-                    "SELECT appointment.appointmentId, customer.customerName, appointment.title, " +
-                    "appointment.description, appointment.contact, appointment.location, appointment.type, " +
-                    "appointment.start, appointment.end,appointment.start as appointment_Date, appointment.url " +
-                    "FROM client_schedule.appointment, client_schedule.customer " +
-                    "where yearweek(start, 0) = yearweek(curdate(), 0) and appointment.customerId = customer.customerId; ", DataAccess.conn);
+                IEnumerable<DataRow> filteredByWeek = from apts in appointments.AsEnumerable()
+                                                       where Date.GetStartOfWeek(apts.Field<DateTime>("appointment_Date"), DayOfWeek.Sunday) == Date.GetStartOfWeek(DateTime.Now,DayOfWeek.Sunday)
+                                                       select apts;
 
 
-                MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getWeekAptsCmd);
+                aptsByWeek = filteredByWeek.CopyToDataTable<DataRow>();
 
-                sqlAdp.Fill(aptsByWeek);
+                //var getWeekAptsCmd = new MySqlCommand(
+                //    "SELECT appointment.appointmentId, customer.customerName, appointment.title, " +
+                //    "appointment.description, appointment.contact, appointment.location, appointment.type, " +
+                //    "appointment.start, appointment.end,appointment.start as appointment_Date, appointment.url " +
+                //    "FROM client_schedule.appointment, client_schedule.customer " +
+                //    "where yearweek(start, 0) = yearweek(curdate(), 0) and appointment.customerId = customer.customerId; ", DataAccess.conn);
+
+
+                //MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getWeekAptsCmd);
+
+                //sqlAdp.Fill(aptsByWeek);
+                return aptsByWeek;
 
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
+                return null;
+
             }
 
-            return aptsByWeek;
 
         }
 
         public static DataTable GetAppointmentsByMonth()
         {
+            DataTable appointments = GetAppointments(); 
             DataTable aptsByMonth = new DataTable();
-            if (DataAccess.conn.State is ConnectionState.Closed)
-            {
-                DataAccess.OpenConnection();
-            }
             try
             {
+                IEnumerable<DataRow> filteredByMonth = from apts in appointments.AsEnumerable()
+                                  where apts.Field<DateTime>("appointment_Date").Month == DateTime.Now.Month
+                                  select apts;
 
-                var getMonthAptsCmd = new MySqlCommand(
-                    "SELECT appointment.appointmentId, customer.customerName, appointment.title, " +
-                    "appointment.description, appointment.contact, appointment.location, appointment.type, " +
-                    "appointment.start, appointment.end,appointment.start as appointment_Date, appointment.url " +
-                    "FROM client_schedule.appointment, client_schedule.customer " +
-                    "WHERE MONTH(start) = MONTH(now()) and appointment.customerId = customer.customerId; ", DataAccess.conn);
+                aptsByMonth = filteredByMonth.CopyToDataTable<DataRow>();
 
-
-                MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getMonthAptsCmd);
-
-                sqlAdp.Fill(aptsByMonth);
+                return aptsByMonth;
 
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
+                return null; 
             }
 
-            return aptsByMonth;
         }
 
         public static List<string> GetAppointmentByUserId()
@@ -306,8 +313,8 @@ namespace AppointmentScheduler_C969.Models
         {
             DateTime formatSDate = apt.StartTime.ToUniversalTime();
             DateTime formatEDate = apt.EndTime.ToUniversalTime();
-            var formatCreateDate = apt.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
-            var formatLastUpDate = apt.LastUpdate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
+            var formatCreateDate = apt.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
+            var formatLastUpDate = apt.LastUpdate.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
 
             if (DataAccess.conn.State is ConnectionState.Closed)
             {
@@ -315,7 +322,7 @@ namespace AppointmentScheduler_C969.Models
             }
             try
             {
-                var insert_cmd = new MySqlCommand($"INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES({apt.CustomerId},{apt.UserId},'{apt.Title}','{apt.Description}','{apt.Location}','{apt.Contact}','{apt.Type}','{apt.URL}','{formatSDate.ToString("yyyy-MM-dd hh:mm:ss")}','{formatEDate.ToString("yyyy-MM-dd hh:mm:ss")}','{formatCreateDate}','{apt.CreatedBy}','{formatLastUpDate}','{apt.LastUpdateBy}')", DataAccess.conn);
+                var insert_cmd = new MySqlCommand($"INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES({apt.CustomerId},{apt.UserId},'{apt.Title}','{apt.Description}','{apt.Location}','{apt.Contact}','{apt.Type}','{apt.URL}','{formatSDate.ToString("yyyy-MM-dd HH:mm:ss")}','{formatEDate.ToString("yyyy-MM-dd HH:mm:ss")}','{formatCreateDate}','{apt.CreatedBy}','{formatLastUpDate}','{apt.LastUpdateBy}')", DataAccess.conn);
                 var insert = insert_cmd.ExecuteNonQuery();
             }
             catch (MySqlException ex)
@@ -354,7 +361,6 @@ namespace AppointmentScheduler_C969.Models
 
         public static void UpdateAppointmentRecord(Appointment apt)
         {
-            int userId = User.GetUserId();
             DateTime formatSDate = apt.StartTime.ToUniversalTime();
             DateTime formatEDate = apt.EndTime.ToUniversalTime();
             var formatCreateDate = apt.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
@@ -367,7 +373,7 @@ namespace AppointmentScheduler_C969.Models
             }
             try
             {
-                var update_cmd = new MySqlCommand($"UPDATE client_schedule.appointment SET appointment.customerId = {apt.CustomerId}, userId = {apt.UserId}, appointment.title = '{apt.Title}', appointment.description= '{apt.Description}', appointment.contact = '{apt.Contact}', appointment.type = '{apt.Type}', appointment.start = '{formatSDate}', appointment.end = '{formatEDate}',appointment.createDate= '{formatCreateDate}', appointment.lastUpdate = '{formatLastUpDate}' WHERE appointment.appointmentId = {apt.AppointmentId}; ", DataAccess.conn);
+                var update_cmd = new MySqlCommand($"UPDATE client_schedule.appointment SET appointment.customerId = {apt.CustomerId}, userId = {apt.UserId}, appointment.title = '{apt.Title}', appointment.description= '{apt.Description}', appointment.contact = '{apt.Contact}', appointment.type = '{apt.Type}', appointment.start = '{formatSDate.ToString("yyyy-MM-dd HH:mm:ss")}', appointment.end = '{formatEDate.ToString("yyyy-MM-dd HH:mm:ss")}',appointment.createDate= '{formatCreateDate}', appointment.lastUpdate = '{formatLastUpDate}' WHERE appointment.appointmentId = {apt.AppointmentId}; ", DataAccess.conn);
                 var update = update_cmd.ExecuteNonQuery();
                 DataAccess.CloseConnection();
 
@@ -394,8 +400,8 @@ namespace AppointmentScheduler_C969.Models
                 );
 
         }
-
-        public static bool IsAppointmentOverlapping(int userId, DateTime newAptStart)
+        //Test overlapping for NEW appointments. WORKS!!!
+        public static bool IsAppointmentOverlapping(int userId, DateTime newAptStart, DateTime newAptEnd)
         {
             bool isOverlapping = false;
             DataTable allAppointments = GetAppointments();
@@ -406,20 +412,32 @@ namespace AppointmentScheduler_C969.Models
                                     {
                                         appointmentId = usr.Field<int>("appointmentId"),
                                         userID = usr.Field<int>("Consultant"),
-                                        startTime = usr.Field<DateTime>("start"),
-                                        endTime = usr.Field<DateTime>("end"),
+                                        startTime = usr.Field<DateTime>("start").ToLocalTime(),
+                                        endTime = usr.Field<DateTime>("end").ToLocalTime(),
                                     };
             //Iterate over each user's appointments, and if the new appointment start time falls inbetween another appointment's time slot,
             //then 'isOverlapping' is true.
             foreach(var item in usersAppointments)
             {
-                if(item.userID == userId)
-                {
-                    if (newAptStart >= item.startTime.ToLocalTime() && newAptStart <= item.endTime.ToLocalTime())
+                
+                var start24 = newAptStart.ToString("yyyy-MM-dd HH:mm:ss");
+                var end24 = newAptEnd.ToString("yyyy-MM-dd HH:mm:ss");
+                var itemStart24 = item.startTime.ToString("yyyy-MM-dd HH:mm:ss");
+                var itemEnd24 = item.endTime.ToString("yyyy-MM-dd HH:mm:ss");
+
+
+                if (item.userID == userId)
+                {                                       //new start falls between                                              new end falls between
+                    if ( DateTime.Parse(start24) >= DateTime.Parse(itemStart24) && DateTime.Parse(start24) <= DateTime.Parse(itemEnd24)  ||  DateTime.Parse(end24) >= DateTime.Parse(itemStart24) && DateTime.Parse(end24) <= DateTime.Parse(itemEnd24) )  
                     {
                         isOverlapping= true;
                         return isOverlapping;
                     
+                    }
+                    else if( DateTime.Parse(start24) <= DateTime.Parse(itemStart24) && DateTime.Parse(end24) >= DateTime.Parse(itemEnd24) )
+                    {
+                        isOverlapping = true;
+                        return isOverlapping;
                     }
                 }
                 
@@ -428,6 +446,54 @@ namespace AppointmentScheduler_C969.Models
 
             return isOverlapping;
 
+        }
+
+        public static bool IsModAppointmentOverlapping(Appointment current, int userId, DateTime newAptStart, DateTime newAptEnd)
+        {
+            bool isOverlapping = false;
+            DataTable allAppointments = GetAppointments();
+
+            //Filter appointments by userId
+            var usersAppointments = from usr in allAppointments.AsEnumerable()
+                                    where usr.Field<int>("Consultant") == userId
+                                    select new
+                                    {
+                                        appointmentId = usr.Field<int>("appointmentId"),
+                                        userID = usr.Field<int>("Consultant"),
+                                        startTime = usr.Field<DateTime>("start").ToLocalTime(),
+                                        endTime = usr.Field<DateTime>("end").ToLocalTime(),
+                                    };
+
+
+            foreach (var item in usersAppointments)
+            {
+
+                var start24 = newAptStart.ToString("yyyy-MM-dd HH:mm:ss");
+                var end24 = newAptEnd.ToString("yyyy-MM-dd HH:mm:ss");
+                var itemStart24 = item.startTime.ToString("yyyy-MM-dd HH:mm:ss");
+                var itemEnd24 = item.endTime.ToString("yyyy-MM-dd HH:mm:ss");
+
+
+                if (item.userID == userId && current.AppointmentId != item.appointmentId)
+                {                          
+
+                    //new start falls between                                              new end falls between
+                    if (DateTime.Parse(start24) >= DateTime.Parse(itemStart24) && DateTime.Parse(start24) <= DateTime.Parse(itemEnd24) || DateTime.Parse(end24) >= DateTime.Parse(itemStart24) && DateTime.Parse(end24) <= DateTime.Parse(itemEnd24))
+                    {
+                        isOverlapping = true;
+                        return isOverlapping;
+
+                    }
+                    else if (DateTime.Parse(start24) <= DateTime.Parse(itemStart24) && DateTime.Parse(end24) >= DateTime.Parse(itemEnd24))
+                    {
+                        isOverlapping = true;
+                        return isOverlapping;
+                    }
+                }
+
+
+            }
+            return isOverlapping;
         }
 
 

@@ -90,7 +90,7 @@ namespace AppointmentScheduler_C969.Views
         {
             CustomersController.ModifyCustomerName(tb_custName.Text);
             Customer.UpdateActiveCustomerRecord(chk_ActiveUser.Checked);
-           DialogResult updated = MessageBox.Show($"Customer's name has been updated to {tb_custName.Text}. Would you like exit?","Continue Updating?",MessageBoxButtons.YesNo);
+           DialogResult updated = MessageBox.Show($"Customer's name has been updated to {tb_custName.Text} and Active status to {chk_ActiveUser.CheckState}. Would you like exit?","Continue Updating?",MessageBoxButtons.YesNo);
             if (updated == DialogResult.Yes)
             {
                 this.Close();
