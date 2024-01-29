@@ -1,12 +1,9 @@
 ﻿using AppointmentScheduler_C969.Controllers;
 using AppointmentScheduler_C969.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Views
@@ -28,17 +25,17 @@ namespace AppointmentScheduler_C969.Views
         private void ModifyAppointment_Load(object sender, EventArgs e)
         {
             try
-            { 
+            {
                 //Convert Appointments DataTable to an Enumerable to be able to access fields.
                 DataTable aptTable = Appointment.GetAppointments();
                 //LAMBDA expresssion used here to get the selected appointment's ID. This method is more efficient than creating a method to retrieve the selected appointment's ID.
                 var selectedApt = aptTable.AsEnumerable().Where(x => x.Field<int>("appointmentId") == Appointment.SelectedAppointmentId).FirstOrDefault();
-            
-            
+
+
                 //Pass ID to the GetCurrentAppointment method to retreive all the values from the DB.
                 Appointment currentApt = Appointment.GetCurrentAppointment(selectedApt.Field<int>("appointmentId"));
 
-               Appointment.GenerateTimes(Convert.ToDateTime(currentApt.StartTime.ToShortDateString()));
+                Appointment.GenerateTimes(Convert.ToDateTime(currentApt.StartTime.ToShortDateString()));
                 cb_modSTime.DataSource = Appointment.StartTimes;
                 cb_modETime.DataSource = Appointment.EndTimes;
                 cb_modAptType.DataSource = Appointment.AppointmentTypes;
@@ -64,7 +61,7 @@ namespace AppointmentScheduler_C969.Views
                 MessageBox.Show("A row must be selected.");
                 this.Close();
             }
-            
+
         }
 
         private void btn_editApt_Click(object sender, EventArgs e)
@@ -76,9 +73,9 @@ namespace AppointmentScheduler_C969.Views
             {
                 c.Enabled = true;
             }
-           
+
             btn_Save.Visible = true;
-            
+
 
         }
 
@@ -106,7 +103,7 @@ namespace AppointmentScheduler_C969.Views
                     cb_modETime.Visible = true;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -118,7 +115,7 @@ namespace AppointmentScheduler_C969.Views
             {
                 Date.BuildAppointmentDate(dtp_modDate.Value, cb_modSTime.SelectedItem.ToString(), cb_modETime.SelectedItem.ToString());
 
-                bool isOverlapping = Appointment.IsModAppointmentOverlapping(Appointment.GetCurrentAppointment(Appointment.SelectedAppointmentId),User.GetUserIDbyName(cb_userModApt.Text), Date.startTime, Date.endTime);
+                bool isOverlapping = Appointment.IsModAppointmentOverlapping(Appointment.GetCurrentAppointment(Appointment.SelectedAppointmentId), User.GetUserIDbyName(cb_userModApt.Text), Date.startTime, Date.endTime);
 
 
                 if (!isOverlapping)
@@ -155,11 +152,11 @@ namespace AppointmentScheduler_C969.Views
                 }
                 else
                 {
-                    MessageBox.Show("The selected date of this appointment overlaps with another appointment for the selected Consultant / User)", "Appointment Overlap Warning!");
+                    MessageBox.Show("The selected date of this appointment overlaps with another appointment for the selected Doctor)", "Appointment Overlap Warning!");
 
                 }
 
-            }            
+            }
             catch (Exception err)
             {
                 MessageBox.Show(err.Message);
@@ -167,7 +164,7 @@ namespace AppointmentScheduler_C969.Views
 
         }
 
-      
+
 
         private void cb_modCustomer_Validating(object sender, CancelEventArgs e)
         {
@@ -249,6 +246,6 @@ namespace AppointmentScheduler_C969.Views
             errPr_ModApts.SetError((Control)sender, error);
         }
 
-      
+
     }
 }

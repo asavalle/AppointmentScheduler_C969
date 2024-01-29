@@ -1,16 +1,6 @@
-﻿using AppointmentScheduler_C969.Views;
+﻿using AppointmentScheduler_C969.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Globalization;
-using System.Threading;
-using AppointmentScheduler_C969.Models;
 
 namespace AppointmentScheduler_C969
 {
@@ -29,12 +19,12 @@ namespace AppointmentScheduler_C969
             string password = tb_userPwd.Text.ToString();
             DataAccess.Login(uname, password);
             if (DataAccess.loginSuccessful)
-            {                
+            {
                 DialogResult = DialogResult.OK;
                 tb_UserName.Text = "";
                 tb_userPwd.Text = "";
                 Report.LoginLogReport();
-                            }
+            }
         }
 
         private void btn_cancelLogin_Click(object sender, EventArgs e)
@@ -43,6 +33,6 @@ namespace AppointmentScheduler_C969
             this.Close();
         }
 
-       
+
     }
 }

@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Models
@@ -18,7 +17,7 @@ namespace AppointmentScheduler_C969.Models
         public static int SelectedCustomerID { get; set; }
         public static int SelectedCustomerAddressId { get; set; }
         public static int SelectedCustomerCityId { get; set; }
-        public static string SelectedCustomerName = GetCustomerNameById(SelectedCustomerID); 
+        public static string SelectedCustomerName = GetCustomerNameById(SelectedCustomerID);
 
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
@@ -77,7 +76,7 @@ namespace AppointmentScheduler_C969.Models
         }
 
 
-        public static void InsertCustomerRecord(Customer cust) 
+        public static void InsertCustomerRecord(Customer cust)
         {
             if (DataAccess.conn.State is ConnectionState.Closed)
             {
@@ -98,7 +97,7 @@ namespace AppointmentScheduler_C969.Models
         }
 
 
-        public static void DeleteCustomerRecord(int custId) 
+        public static void DeleteCustomerRecord(int custId)
         {
             if (DataAccess.conn.State is ConnectionState.Closed)
             {
@@ -108,7 +107,7 @@ namespace AppointmentScheduler_C969.Models
             {
                 using var delCust_cmd = new MySqlCommand($"DELETE FROM customer WHERE customerId = {custId}", DataAccess.conn);
                 var update = delCust_cmd.ExecuteNonQuery();
-                
+
             }
             catch (MySqlException e)
             {
@@ -116,11 +115,11 @@ namespace AppointmentScheduler_C969.Models
             }
         }
 
-        public static void UpdateActiveCustomerRecord(bool activeStatus) 
+        public static void UpdateActiveCustomerRecord(bool activeStatus)
         {
 
             int checkedActiveStatus = 0;
-            if(activeStatus == true)
+            if (activeStatus == true)
             {
                 checkedActiveStatus = 1;
             }
@@ -144,7 +143,7 @@ namespace AppointmentScheduler_C969.Models
             }
         }
 
-        public static void UpdateCustomerName(string name) 
+        public static void UpdateCustomerName(string name)
         {
             if (DataAccess.conn.State is ConnectionState.Closed)
             {
@@ -160,7 +159,7 @@ namespace AppointmentScheduler_C969.Models
                 MessageBox.Show(e.Message);
             }
         }
-        public static void UpdateCustomerAddress(string address, string address2,string city, string zip, string phone)
+        public static void UpdateCustomerAddress(string address, string address2, string city, string zip, string phone)
         {
             int newCityId = City.GetCityIdFromName(city);
 
@@ -184,36 +183,36 @@ namespace AppointmentScheduler_C969.Models
             int id = -1;
             if (DataAccess.conn.State is ConnectionState.Closed)
             {
-                DataAccess.OpenConnection();          
+                DataAccess.OpenConnection();
             }
-            
-           
-                using (var getId_cmd = new MySqlCommand($"select customerId from client_schedule.customer where customerName = '{name}'", DataAccess.conn)) 
-                {
-                    MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getId_cmd);
-                
-                
-                    MySqlDataReader custId = getId_cmd.ExecuteReader();
-                    while (custId.Read())
-                    {
-                        id = Convert.ToInt32(custId.GetValue(0));
-                    }
-                    
-                    custId.Close();
-                }
-                                
-                
-                DataAccess.CloseConnection();
-           
 
-            
+
+            using (var getId_cmd = new MySqlCommand($"select customerId from client_schedule.customer where customerName = '{name}'", DataAccess.conn))
+            {
+                MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getId_cmd);
+
+
+                MySqlDataReader custId = getId_cmd.ExecuteReader();
+                while (custId.Read())
+                {
+                    id = Convert.ToInt32(custId.GetValue(0));
+                }
+
+                custId.Close();
+            }
+
+
+            DataAccess.CloseConnection();
+
+
+
             return id;
 
         }
 
         public static string GetCustomerNameById(int id)
         {
-            string name ="";
+            string name = "";
             if (DataAccess.conn.State is ConnectionState.Closed)
             {
                 DataAccess.OpenConnection();
@@ -225,16 +224,16 @@ namespace AppointmentScheduler_C969.Models
                 {
                     name = custName.GetString(0);
                 }
-                
+
                 custName.Close();
-             DataAccess.CloseConnection();
-            
+                DataAccess.CloseConnection();
+
             }
-            
+
             return name;
 
-            
-           
+
+
         }
 
         public static void GetCustomerList()

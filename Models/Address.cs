@@ -1,8 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Models
@@ -25,7 +23,7 @@ namespace AppointmentScheduler_C969.Models
 
         public Address() { }
 
-        public Address(string address, string address2, int cityId, string zip, string phone,DateTime createDate, string createdBy, DateTime lastUpdate, string lastUpdateBy)
+        public Address(string address, string address2, int cityId, string zip, string phone, DateTime createDate, string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
 
             this.StreetAddress = address;
@@ -65,7 +63,7 @@ namespace AppointmentScheduler_C969.Models
             return addrTable;
         }
 
-        public static void InsertAddressRecord(Address newAddress) 
+        public static void InsertAddressRecord(Address newAddress)
         {
             if (DataAccess.conn.State is ConnectionState.Closed)
             {
@@ -79,12 +77,12 @@ namespace AppointmentScheduler_C969.Models
                 var insert_cmd = new MySqlCommand($"INSERT INTO client_schedule.address VALUES(null,'{newAddress.StreetAddress}','{newAddress.StreetAddress2}','{newAddress.CityId}','{newAddress.PostalCode}','{newAddress.Phone}','{formatCreateDate}','{newAddress.CreatedBy}','{formatLastUpDate}','{newAddress.LastUpdateBy}')", DataAccess.conn);
                 var insert = insert_cmd.ExecuteNonQuery();
                 LastInsertedId = (int)insert_cmd.LastInsertedId;
-                
+
 
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show("In Address Class: "+ ex.Message);
+                MessageBox.Show("In Address Class: " + ex.Message);
             }
 
 
@@ -105,7 +103,7 @@ namespace AppointmentScheduler_C969.Models
                 adrId.Close();
                 return id;
             }
-            catch(MySqlException myEx)
+            catch (MySqlException myEx)
             {
                 MessageBox.Show(myEx.Message);
             }

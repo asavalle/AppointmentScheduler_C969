@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AppointmentScheduler_C969.Controllers;
+using AppointmentScheduler_C969.Models;
+using System;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using AppointmentScheduler_C969.Controllers;
-using AppointmentScheduler_C969.Models;
 
 namespace AppointmentScheduler_C969.Views
 {
@@ -24,7 +18,7 @@ namespace AppointmentScheduler_C969.Views
             InitializeComponent();
             Customer.GetCustomerList();
             CheckForUpcomingAppointments();
-            
+
             lb_user.Text = DataAccess.LoggedInUser + " is logged in";
 
             dgv_Appointments.DataSource = Appointment.GetAppointments();
@@ -51,18 +45,18 @@ namespace AppointmentScheduler_C969.Views
             dgv_Users.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgv_Users.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgv_Users.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            DataAccess.CloseConnection();            
-            
+            DataAccess.CloseConnection();
+
 
             dgv_addresses.DataSource = Address.GetAddresses();
-            
+
         }
-        
-       
+
+
 
         private void Dashboard_Activated(object sender, EventArgs e)
         {
-            
+
             ReloadAppointments();
             ReloadCustomers();
             ReloadAddresses();
@@ -70,13 +64,13 @@ namespace AppointmentScheduler_C969.Views
         }
         private void ConvertToLocalTime()
         {
-            
-                foreach (DataGridViewRow row in dgv_Appointments.Rows)
+
+            foreach (DataGridViewRow row in dgv_Appointments.Rows)
+            {
+                foreach (DataGridViewCell cell in row.Cells)
                 {
-                    foreach(DataGridViewCell cell in row.Cells)
-                {     
                     var type = cell.Value.GetType();
-                    
+
                     if (cell.Value.GetType() == typeof(DateTime))
                     {
                         cell.Value = Convert.ToDateTime(cell.Value).ToLocalTime();
@@ -94,7 +88,7 @@ namespace AppointmentScheduler_C969.Views
             DateTime aptTime = new DateTime();
             DateTime aptDate = new DateTime();
 
-            foreach(DataRow row in Appointment.GetAppointments().Rows) 
+            foreach (DataRow row in Appointment.GetAppointments().Rows)
             {
 
                 aptTime = row.Field<DateTime>("start").ToLocalTime();
@@ -104,7 +98,7 @@ namespace AppointmentScheduler_C969.Views
                 {
                     if (aptTime >= currentTime && aptTime <= currentTime.AddMinutes(15)) //Determine if the apt time is between current time and current time plus 15 mins.
                     {
-                        MessageBox.Show($"Appointment {row.Field<int>("appointmentId")} is upcoming at : " + aptTime.ToLocalTime()+ $" for {DataAccess.LoggedInUser}","Alert!" );
+                        MessageBox.Show($"Appointment {row.Field<int>("appointmentId")} is upcoming at : " + aptTime.ToLocalTime() + $" for {DataAccess.LoggedInUser}", "Alert!");
 
                     }
                 }
@@ -143,9 +137,11 @@ namespace AppointmentScheduler_C969.Views
             AddAppointment newAppointment = new AddAppointment();
             newAppointment.ShowDialog();
         }
+
+ 
         private void btn_DelApt_Click(object sender, EventArgs e)
         {
-            if(selectedRow != null)
+            if (selectedRow != null)
             {
                 AppointmentsController.DeleteAppointment(selectedRow);
 
@@ -158,9 +154,10 @@ namespace AppointmentScheduler_C969.Views
         }
         private void btn_ModAppt_Click(object sender, EventArgs e)
         {
-            if(selectedRow != null) { 
+            if (selectedRow != null)
+            {
                 ModifyAppointment modifyApt = new ModifyAppointment();
-                modifyApt.ShowDialog();           
+                modifyApt.ShowDialog();
 
             }
             else
@@ -169,8 +166,8 @@ namespace AppointmentScheduler_C969.Views
             }
 
         }
-       
-       
+
+
         //Sort Appointments by current month
         private void btn_showByMonth_Click(object sender, EventArgs e)
         {
@@ -180,15 +177,15 @@ namespace AppointmentScheduler_C969.Views
             lb_currentView.Text = "Currently viewing appointments this month.";
             lb_currentView.Visible = true;
 
-           
+
             ConvertToLocalTime();
 
         }
 
         //Sort Appointments by current week
         private void btn_showByWeek_Click(object sender, EventArgs e)
-        {                     
-           
+        {
+
             dgv_Appointments.DataSource = Appointment.GetAppointmensByWeek();
             dgv_Appointments.Sort(dgv_Appointments.Columns["appointmentId"], ListSortDirection.Ascending);
 
@@ -225,8 +222,8 @@ namespace AppointmentScheduler_C969.Views
 
                 for (int i = 0; i < dgv_Customers.Columns.Count; i++)
                 {
-                dgv_Customers.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                
+                    dgv_Customers.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
 
                 }
 
@@ -235,7 +232,7 @@ namespace AppointmentScheduler_C969.Views
         private void dgv_Customers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             selectedRow = dgv_Customers.SelectedRows;
-            foreach(DataGridViewRow row in selectedRow)
+            foreach (DataGridViewRow row in selectedRow)
             {
                 Customer.SelectedCustomerID = Convert.ToInt32(row.Cells[0].Value);
                 Customer.SelectedCustomerAddressId = Address.GetAddressIdFromCustomerId(Customer.SelectedCustomerID);
@@ -257,7 +254,7 @@ namespace AppointmentScheduler_C969.Views
                 ModifyCustomer modCust = new ModifyCustomer();
                 modCust.ShowDialog();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Dashboard: " + ex.Message);
             }
@@ -279,7 +276,7 @@ namespace AppointmentScheduler_C969.Views
                         appointmentFound = true;
                         MessageBox.Show($"This customer has an associated appointment, ID {row.Cells[0].Value}, and cannot be deleted. \n" +
                             $"Please delete associated appointment before proceeding.");
-                    }                    
+                    }
 
                 }
                 if (!appointmentFound)
@@ -294,7 +291,7 @@ namespace AppointmentScheduler_C969.Views
 
                     }
                     DialogResult deleteAddress = MessageBox.Show($"Would you like to delete {custNameToDelete}'s address from the system?", "Delete Address?", MessageBoxButtons.YesNo);
-                    if(deleteAddress == DialogResult.Yes)
+                    if (deleteAddress == DialogResult.Yes)
                     {
                         Address.DeleteCustomerAddress(Customer.SelectedCustomerAddressId);
                     }
@@ -305,7 +302,7 @@ namespace AppointmentScheduler_C969.Views
             }
             catch
             {
-                
+
             }
         }
 
@@ -359,7 +356,7 @@ namespace AppointmentScheduler_C969.Views
                 }
 
             }
-            catch(Exception err)
+            catch (Exception err)
             {
                 MessageBox.Show(err.Message);
             }
@@ -375,10 +372,10 @@ namespace AppointmentScheduler_C969.Views
             }
         }
 
-        private void btn_sheduleByUser_Click(object sender, EventArgs e)
-        {            
-            ConsultantReport CR = new ConsultantReport();
-            CR.Show();
+        private void btn_scheduleByUser_Click(object sender, EventArgs e)
+        {
+            DoctorReport DR = new DoctorReport();
+            DR.Show();
         }
 
         private void btn_loginLogs_Click(object sender, EventArgs e)
@@ -389,7 +386,7 @@ namespace AppointmentScheduler_C969.Views
 
 
         /*************************
-        *********Users***********
+        *********Users (Doctors)***********
         ************************/
         public void ReloadUsers()
         {
@@ -406,6 +403,9 @@ namespace AppointmentScheduler_C969.Views
             AddUser addUsr = new AddUser();
             addUsr.ShowDialog();
         }
+
+        
+
         private void btn_modUser_Click(object sender, EventArgs e)
         {
             ModifyUser modUsr = new ModifyUser();
@@ -451,14 +451,14 @@ namespace AppointmentScheduler_C969.Views
         }
         private void dgv_Users_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-           
-                var selectedRow = dgv_Users.SelectedRows;
 
-                foreach(DataGridViewRow row in selectedRow)
-                {
-                    User.CurrentUserId = Convert.ToInt32(row.Cells[0].Value);
-                }
-              
+            var selectedRow = dgv_Users.SelectedRows;
+
+            foreach (DataGridViewRow row in selectedRow)
+            {
+                User.CurrentUserId = Convert.ToInt32(row.Cells[0].Value);
+            }
+
         }
 
 
@@ -478,7 +478,40 @@ namespace AppointmentScheduler_C969.Views
             aptsByCust.Show();
         }
 
-       
+
+
+
+        /************************
+         ****** Search  *********
+         ************************/
+
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            String doctor = tb_searchByDoc.Text;
+            String patient = tb_searchByPatient.Text;
+
+            if ((doctor != null || doctor != "") && (patient == null || patient == ""))
+            {
+                dgv_Appointments.DataSource = null;
+                dgv_Appointments.DataSource = Appointment.GetAppointmentsByDoctor(doctor);
+                lb_currentView.Text = $"Currently viewing appointments for Doctor {doctor}.";
+                lb_currentView.Visible = true;
+            }
+            else
+            {
+                dgv_Appointments.DataSource = null;
+                dgv_Appointments.DataSource = Appointment.GetAppointmentsByPatient(patient);
+                lb_currentView.Text = $"Currently viewing appointments for patient {patient}.";
+                lb_currentView.Visible = true;
+            }
+        }
+
+
+
+
+
+
     }
 
 

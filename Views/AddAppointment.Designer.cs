@@ -124,11 +124,11 @@ namespace AppointmentScheduler_C969.Views
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 77);
+            this.label1.Location = new System.Drawing.Point(63, 77);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 15);
+            this.label1.Size = new System.Drawing.Size(43, 15);
             this.label1.TabIndex = 28;
-            this.label1.Text = "Consultant (user)";
+            this.label1.Text = "Doctor";
             // 
             // cb_aptType
             // 

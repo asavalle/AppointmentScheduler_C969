@@ -1,13 +1,8 @@
-﻿using AppointmentScheduler_C969.Views;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Windows.Forms;
 
 
@@ -27,7 +22,7 @@ namespace AppointmentScheduler_C969.Models
         public string CustomerName { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Location { get; set; }
+        //public string Location { get; set; }
         public string Contact { get; set; }
         public string Type { get; set; }
         public string URL { get; set; }
@@ -42,17 +37,15 @@ namespace AppointmentScheduler_C969.Models
         public string LastUpdateBy { get; set; }
         public static List<string> AppointmentTypes = new List<string>
         {
-            "Meeting",
-            "Interview",
-            "Review",
-            "Quality",
-            "Standard",
             "Consultation",
-            "Scrum",
-            "Presentation",
-            "Other"
+            "Follow-Up",
+            "New Patient",
+            "TeleHealth",
+            "Standard Check-Up",
+            "Yearly Check-Up"
+
         };
-        public static Dictionary<int, string> Months = new Dictionary<int, string> 
+        public static Dictionary<int, string> Months = new Dictionary<int, string>
         {
             { 01, "January" },
             { 02, "Febuary" },
@@ -69,7 +62,7 @@ namespace AppointmentScheduler_C969.Models
 
         };
 
-        public string Consultant { get; set; } //selected consultant/user for appointment
+        public string Doctor { get; set; } //selected doctor for appointment
 
         //new Appointment constructor
         public Appointment() { }
@@ -84,7 +77,7 @@ namespace AppointmentScheduler_C969.Models
             this.Location = location;
             this.Contact = contact;
             this.Type = type;
-            this.URL = url;
+            //this.URL = url;
             this.StartTime = start;
             this.EndTime = end;
             this.CreateDate = createDate;
@@ -113,7 +106,7 @@ namespace AppointmentScheduler_C969.Models
             }
 
         }
-      
+
 
 
         /***********************************************************************
@@ -132,8 +125,8 @@ namespace AppointmentScheduler_C969.Models
                 TimeZoneInfo currentTZone = TimeZoneInfo.Local;
 
                 var getAptCmd = new MySqlCommand("SELECT appointmentId, " +
-                    "customer.customerName," +
-                    "appointment.userId as Consultant," +
+                    "customer.customerName as Patient," +
+                    "appointment.userId as Doctor," +
                     "appointment.title," +
                     "appointment.description, " +
                     "appointment.contact, " +
@@ -148,12 +141,12 @@ namespace AppointmentScheduler_C969.Models
 
                 MySqlDataAdapter sqlAdp = new MySqlDataAdapter(getAptCmd);
 
-              
+
                 sqlAdp.Fill(aptTable);
 
-               
 
-               
+
+
             }
             catch (Exception e)
             {
@@ -164,7 +157,8 @@ namespace AppointmentScheduler_C969.Models
         }
 
 
-        public static Appointment GetCurrentAppointment(int ID) {
+        public static Appointment GetCurrentAppointment(int ID)
+        {
 
             Appointment currentAppointment = new Appointment();
             if (DataAccess.conn.State is ConnectionState.Closed)
@@ -213,23 +207,24 @@ namespace AppointmentScheduler_C969.Models
 
         }
 
-        public static DataTable GetAppointmensByWeek() 
+        public static DataTable GetAppointmensByWeek()
         {
 
             DataTable appointments = GetAppointments();
             DataTable aptsByWeek = new DataTable();
-           
+
             try
             {
 
                 IEnumerable<DataRow> filteredByWeek = from apts in appointments.AsEnumerable()
-                                                       where Date.GetStartOfWeek(apts.Field<DateTime>("appointment_Date"), DayOfWeek.Sunday) == Date.GetStartOfWeek(DateTime.Now,DayOfWeek.Sunday)
-                                                       select apts;
+                                                      where Date.GetStartOfWeek(apts.Field<DateTime>("appointment_Date"),
+                                                           DayOfWeek.Sunday) == Date.GetStartOfWeek(DateTime.Now, DayOfWeek.Sunday)
+                                                      select apts;
 
 
                 aptsByWeek = filteredByWeek.CopyToDataTable<DataRow>();
 
-                
+
                 return aptsByWeek;
 
             }
@@ -245,14 +240,14 @@ namespace AppointmentScheduler_C969.Models
 
         public static DataTable GetAppointmentsByMonth()
         {
-            DataTable appointments = GetAppointments(); 
+            DataTable appointments = GetAppointments();
             DataTable aptsByMonth = new DataTable();
             try
             {
                 IEnumerable<DataRow> filteredByMonth = from apts in appointments.AsEnumerable()
-                                  where apts.Field<DateTime>("appointment_Date").Month == DateTime.Now.Month 
-                                  where apts.Field<DateTime>("appointment_Date").Year == DateTime.Now.Year
-                                  select apts;
+                                                       where apts.Field<DateTime>("appointment_Date").Month == DateTime.Now.Month
+                                                       where apts.Field<DateTime>("appointment_Date").Year == DateTime.Now.Year
+                                                       select apts;
 
                 aptsByMonth = filteredByMonth.CopyToDataTable<DataRow>();
 
@@ -262,37 +257,92 @@ namespace AppointmentScheduler_C969.Models
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
-                return null; 
+                return null;
             }
 
         }
 
-        public static List<string> GetAppointmentByUserId()
+        public static List<string> GetAppointmentByDoctorId()
         {
-            
             var currentUserId = User.GetUserId();
 
             DataTable appointments = GetAppointments();
-            Dictionary<string, string> ConsultantSchedule = new Dictionary<string, string>();
             List<string> AppointmentsByUser = new List<string>();
 
             foreach (DataRow row in appointments.Rows)
             {
-               
-               foreach(var item in row.ItemArray)
+                foreach (var item in row.ItemArray)
                 {
-
-                    if (row.Field<int>("Consultant") == currentUserId)
+                    if (row.Field<int>("userId") == currentUserId)
                     {
-                        
                         AppointmentsByUser.Add(item.ToString());
                     }
-                }     
-             
+                }
             }
             return AppointmentsByUser;
         }
-        
+
+      
+        //Override method for search function by string name
+        public static DataTable GetAppointmentsByDoctorId(int id)
+        {
+            DataTable appointments = GetAppointments();
+            DataTable aptsByDocId = new DataTable();
+            try
+            {
+                IEnumerable<DataRow> filteredByDocId = from apts in appointments.AsEnumerable()
+                                                       where apts.Field<int>("Doctor") == id
+                                                       select apts;
+
+                aptsByDocId = filteredByDocId.CopyToDataTable<DataRow>();
+
+                return aptsByDocId;
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return null;
+            }
+        }
+
+        public static DataTable GetAppointmentByPatientName(string name)
+        {
+            DataTable appointments = GetAppointments();
+            DataTable aptsByPatientId = new DataTable();
+            try
+            {
+                IEnumerable<DataRow> filteredByPatientId = from apts in appointments.AsEnumerable()
+                                                       where apts.Field<string>("Patient") == name
+                                                       select apts;
+
+                aptsByPatientId = filteredByPatientId.CopyToDataTable<DataRow>();
+
+                return aptsByPatientId;
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return null;
+            }
+        }
+
+        public static DataTable GetAppointmentsByDoctor(string name)
+        {
+            //Convert name to id
+            int DoctorId = User.GetUserIDbyName(name);
+
+            //return appointments where doctor id matches 
+
+            return Appointment.GetAppointmentsByDoctorId(DoctorId);
+        }
+
+        public static DataTable GetAppointmentsByPatient(string name)
+        {           
+            //return appointments where patient id matches
+            return Appointment.GetAppointmentByPatientName(name);
+        }
 
         /***********************************************************************
          *************** Functions Create/Update/Delete appointments ***********
@@ -371,7 +421,7 @@ namespace AppointmentScheduler_C969.Models
                 MessageBox.Show(exsql.Message);
             }
 
-          
+
             MessageBox.Show(
                 apt.CustomerName + "\n" +
                 apt.UserId + "\n" +
@@ -381,7 +431,7 @@ namespace AppointmentScheduler_C969.Models
                 apt.Description + "\n" +
                 apt.CreateDate + "\n" +
                 apt.StartTime + " - local\n" +
-                apt.StartTime.ToUniversalTime() + "- UTC \n"+
+                apt.StartTime.ToUniversalTime() + "- UTC \n" +
                 apt.EndTime + "\n" +
                 apt.Location + "\n" +
                 apt.URL + "\n"
@@ -395,19 +445,19 @@ namespace AppointmentScheduler_C969.Models
             DataTable allAppointments = GetAppointments();
             //Filter appointments by userId
             var usersAppointments = from usr in allAppointments.AsEnumerable()
-                                    where usr.Field<int>("Consultant") == userId
+                                    where usr.Field<int>("Doctor") == userId
                                     select new
                                     {
                                         appointmentId = usr.Field<int>("appointmentId"),
-                                        userID = usr.Field<int>("Consultant"),
+                                        userID = usr.Field<int>("Doctor"),
                                         startTime = usr.Field<DateTime>("start").ToLocalTime(),
                                         endTime = usr.Field<DateTime>("end").ToLocalTime(),
                                     };
             //Iterate over each user's appointments, and if the new appointment start time falls inbetween another appointment's time slot,
             //then 'isOverlapping' is true.
-            foreach(var item in usersAppointments)
+            foreach (var item in usersAppointments)
             {
-                
+
                 var start24 = newAptStart.ToString("yyyy-MM-dd HH:mm:ss");
                 var end24 = newAptEnd.ToString("yyyy-MM-dd HH:mm:ss");
                 var itemStart24 = item.startTime.ToString("yyyy-MM-dd HH:mm:ss");
@@ -416,20 +466,20 @@ namespace AppointmentScheduler_C969.Models
 
                 if (item.userID == userId)
                 {                                       //new start falls between                                              new end falls between
-                    if ( DateTime.Parse(start24) >= DateTime.Parse(itemStart24) && DateTime.Parse(start24) <= DateTime.Parse(itemEnd24)  ||  DateTime.Parse(end24) >= DateTime.Parse(itemStart24) && DateTime.Parse(end24) <= DateTime.Parse(itemEnd24) )  
+                    if (DateTime.Parse(start24) >= DateTime.Parse(itemStart24) && DateTime.Parse(start24) <= DateTime.Parse(itemEnd24) || DateTime.Parse(end24) >= DateTime.Parse(itemStart24) && DateTime.Parse(end24) <= DateTime.Parse(itemEnd24))
                     {
-                        isOverlapping= true;
+                        isOverlapping = true;
                         return isOverlapping;
-                    
+
                     }
-                    else if( DateTime.Parse(start24) <= DateTime.Parse(itemStart24) && DateTime.Parse(end24) >= DateTime.Parse(itemEnd24) )
+                    else if (DateTime.Parse(start24) <= DateTime.Parse(itemStart24) && DateTime.Parse(end24) >= DateTime.Parse(itemEnd24))
                     {
                         isOverlapping = true;
                         return isOverlapping;
                     }
                 }
-                
-               
+
+
             }
 
             return isOverlapping;
@@ -443,11 +493,11 @@ namespace AppointmentScheduler_C969.Models
 
             //Filter appointments by userId
             var usersAppointments = from usr in allAppointments.AsEnumerable()
-                                    where usr.Field<int>("Consultant") == userId
+                                    where usr.Field<int>("Doctor") == userId
                                     select new
                                     {
                                         appointmentId = usr.Field<int>("appointmentId"),
-                                        userID = usr.Field<int>("Consultant"),
+                                        userID = usr.Field<int>("Doctor"),
                                         startTime = usr.Field<DateTime>("start").ToLocalTime(),
                                         endTime = usr.Field<DateTime>("end").ToLocalTime(),
                                     };
@@ -463,7 +513,7 @@ namespace AppointmentScheduler_C969.Models
 
 
                 if (item.userID == userId && current.AppointmentId != item.appointmentId)
-                {                          
+                {
 
                     //new start falls between                                              new end falls between
                     if (DateTime.Parse(start24) >= DateTime.Parse(itemStart24) && DateTime.Parse(start24) <= DateTime.Parse(itemEnd24) || DateTime.Parse(end24) >= DateTime.Parse(itemStart24) && DateTime.Parse(end24) <= DateTime.Parse(itemEnd24))

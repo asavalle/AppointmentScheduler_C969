@@ -55,7 +55,7 @@ namespace AppointmentScheduler_C969.Views
             this.groupBox1.Size = new System.Drawing.Size(520, 330);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Add User/Consultant";
+            this.groupBox1.Text = "Add Doctor";
             // 
             // ll_cancelUsrAdd
             // 

@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Models
@@ -19,8 +17,8 @@ namespace AppointmentScheduler_C969.Models
         public string LastUpdateBy { get; set; }
         public static List<string> listOfCountries { get; set; } = new List<string>();
 
-        public Country(){ }
-        public Country( string countryName, DateTime createdDate, string createdBy, DateTime lastUpdate, string lastUpdateBy)
+        public Country() { }
+        public Country(string countryName, DateTime createdDate, string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
             this.CountryName = countryName;
             this.CreateDate = createdDate;
@@ -38,7 +36,7 @@ namespace AppointmentScheduler_C969.Models
                 DataAccess.OpenConnection();
             }
             try
-            { 
+            {
 
                 var formatCreateDate = country.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
                 var formatLastUpDate = country.LastUpdate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
@@ -78,7 +76,7 @@ namespace AppointmentScheduler_C969.Models
                 listOfCountries.Add(row.Field<string>("country"));
             }
 
-            
+
 
         }
 
@@ -90,7 +88,7 @@ namespace AppointmentScheduler_C969.Models
             }
             try
             {
-                var selectCmd = new MySqlCommand($"SELECT countryId FROM client_schedule.country WHERE country = '{countryName}';",DataAccess.conn);
+                var selectCmd = new MySqlCommand($"SELECT countryId FROM client_schedule.country WHERE country = '{countryName}';", DataAccess.conn);
                 MySqlDataReader select = selectCmd.ExecuteReader();
 
                 int id = -1;

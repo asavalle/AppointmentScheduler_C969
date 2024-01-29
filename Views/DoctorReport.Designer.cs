@@ -1,7 +1,7 @@
 ﻿
 namespace AppointmentScheduler_C969.Views
 {
-    partial class ConsultantReport
+    partial class DoctorReport
     {
         /// <summary>
         /// Required designer variable.
@@ -79,7 +79,7 @@ namespace AppointmentScheduler_C969.Views
             this.lb_usr.Name = "lb_usr";
             this.lb_usr.Size = new System.Drawing.Size(99, 15);
             this.lb_usr.TabIndex = 3;
-            this.lb_usr.Text = "Consultant (User)";
+            this.lb_usr.Text = "Doctor (User)";
             // 
             // btn_usrReportDisplay
             // 
@@ -109,7 +109,7 @@ namespace AppointmentScheduler_C969.Views
             this.btn_clearReport.UseVisualStyleBackColor = false;
             this.btn_clearReport.Click += new System.EventHandler(this.btn_clearReport_Click);
             // 
-            // ConsultantReport
+            // DoctorReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -120,10 +120,10 @@ namespace AppointmentScheduler_C969.Views
             this.Controls.Add(this.cb_reportUsrSelect);
             this.Controls.Add(this.btn_showAll);
             this.Controls.Add(this.tb_UserSchedule);
-            this.Name = "ConsultantReport";
+            this.Name = "DoctorReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ConsultantReport";
-            this.Load += new System.EventHandler(this.ConsultantReport_Load);
+            this.Text = "DoctorReport";
+            this.Load += new System.EventHandler(this.DoctorReport_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

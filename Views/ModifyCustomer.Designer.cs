@@ -368,10 +368,8 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox tb_countryName;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btn_editModCust;
         private System.Windows.Forms.LinkLabel ll_modCustCancel;
         private System.Windows.Forms.Button tb_updateName;

@@ -128,11 +128,11 @@ namespace AppointmentScheduler_C969.Views
             // lb_modAptUser
             // 
             this.lb_modAptUser.AutoSize = true;
-            this.lb_modAptUser.Location = new System.Drawing.Point(191, 48);
+            this.lb_modAptUser.Location = new System.Drawing.Point(213, 48);
             this.lb_modAptUser.Name = "lb_modAptUser";
-            this.lb_modAptUser.Size = new System.Drawing.Size(65, 15);
+            this.lb_modAptUser.Size = new System.Drawing.Size(43, 15);
             this.lb_modAptUser.TabIndex = 42;
-            this.lb_modAptUser.Text = "Consultant";
+            this.lb_modAptUser.Text = "Doctor";
             // 
             // cb_modAptType
             // 

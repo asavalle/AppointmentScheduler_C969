@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
+﻿using AppointmentScheduler_C969.Models;
 using MySql.Data.MySqlClient;
-using AppointmentScheduler_C969.Views;
-using System.Globalization;
-using System.Data;
+using System;
 using System.Configuration;
-using AppointmentScheduler_C969.Models;
+using System.Data;
+using System.Globalization;
+using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969
 {
@@ -26,17 +23,17 @@ namespace AppointmentScheduler_C969
         {
             try
             {
-                using(var cnn = new MySqlConnection(dbConnStr))
+                using (var cnn = new MySqlConnection(dbConnStr))
                 {
-                    if(DataAccess.conn.State is ConnectionState.Closed)
+                    if (DataAccess.conn.State is ConnectionState.Closed)
                     {
-                         conn.Open();
+                        conn.Open();
 
                     }
                 }
-                
+
             }
-            catch(MySqlException err) 
+            catch (MySqlException err)
             {
                 MessageBox.Show(err.Message);
             }
@@ -46,7 +43,7 @@ namespace AppointmentScheduler_C969
             try
             {
                 using (var cnn = new MySqlConnection(dbConnStr))
-                {                   
+                {
                     cnn.Close();
                 }
             }
@@ -75,45 +72,45 @@ namespace AppointmentScheduler_C969
                     using var pass_cmd = new MySqlCommand($"select password from client_schedule.user WHERE userName = '{userName}';", conn);
                     string uname = uname_cmd.ExecuteScalar().ToString();
                     string pass = pass_cmd.ExecuteScalar().ToString();
-                    
-                        //compare entered username and password to database values
-                        if (userName == uname.ToString() && password == pass.ToString())
-                        {
-                            if (User.IsActive(uname))
-                            {
-                                LoggedInUser = uname;
-                                loginSuccessful = true;
-                            }
-                            else 
-                            {
-                                Report.FailedLoginLogReport(uname);
-                                MessageBox.Show($"{uname} is not currently active and cannot access the system.");
-                            }
 
+                    //compare entered username and password to database values
+                    if (userName == uname.ToString() && password == pass.ToString())
+                    {
+                        if (User.IsActive(uname))
+                        {
+                            LoggedInUser = uname;
+                            loginSuccessful = true;
                         }
                         else
                         {
-                            if (CultureInfo.CurrentCulture.Name == "en-US")
-                            {
-                                MessageBox.Show("Username or Password does not match.");
-                                Report.FailedLoginLogReport(uname);
+                            Report.FailedLoginLogReport(uname);
+                            MessageBox.Show($"{uname} is not currently active and cannot access the system.");
+                        }
 
-                                CloseConnection();
+                    }
+                    else
+                    {
+                        if (CultureInfo.CurrentCulture.Name == "en-US")
+                        {
+                            MessageBox.Show("Username or Password does not match.");
+                            Report.FailedLoginLogReport(uname);
 
-                            }
-                            else if (CultureInfo.CurrentCulture.Name == "es-ES")
-                            {
-                                Report.FailedLoginLogReport(uname);
-                                MessageBox.Show("El nombre de usuario o la contraseña no coinciden.");
-                                
-                                CloseConnection();
-
-                            }
-                            loginSuccessful = false;
+                            CloseConnection();
 
                         }
-                        
-                    
+                        else if (CultureInfo.CurrentCulture.Name == "es-ES")
+                        {
+                            Report.FailedLoginLogReport(uname);
+                            MessageBox.Show("El nombre de usuario o la contraseña no coinciden.");
+
+                            CloseConnection();
+
+                        }
+                        loginSuccessful = false;
+
+                    }
+
+
                 }
                 else
                 {
@@ -129,7 +126,7 @@ namespace AppointmentScheduler_C969
 
                     }
                 }
-                
+
             }
             catch (Exception e)
             {
@@ -141,7 +138,7 @@ namespace AppointmentScheduler_C969
             }
         }
 
-        
+
 
 
 

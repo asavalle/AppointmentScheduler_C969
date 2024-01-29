@@ -31,6 +31,12 @@ namespace AppointmentScheduler_C969.Views
         {
             this.dashTabControl = new System.Windows.Forms.TabControl();
             this.tab_Appointments = new System.Windows.Forms.TabPage();
+            this.btn_search = new System.Windows.Forms.Button();
+            this.tb_searchByDoc = new System.Windows.Forms.TextBox();
+            this.tb_searchByPatient = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.lb_currentView = new System.Windows.Forms.Label();
             this.btn_ModAppt = new System.Windows.Forms.Button();
             this.btn_AddApt = new System.Windows.Forms.Button();
@@ -100,6 +106,12 @@ namespace AppointmentScheduler_C969.Views
             // tab_Appointments
             // 
             this.tab_Appointments.BackColor = System.Drawing.Color.AliceBlue;
+            this.tab_Appointments.Controls.Add(this.btn_search);
+            this.tab_Appointments.Controls.Add(this.tb_searchByDoc);
+            this.tab_Appointments.Controls.Add(this.tb_searchByPatient);
+            this.tab_Appointments.Controls.Add(this.label10);
+            this.tab_Appointments.Controls.Add(this.label9);
+            this.tab_Appointments.Controls.Add(this.label8);
             this.tab_Appointments.Controls.Add(this.lb_currentView);
             this.tab_Appointments.Controls.Add(this.btn_ModAppt);
             this.tab_Appointments.Controls.Add(this.btn_AddApt);
@@ -114,16 +126,69 @@ namespace AppointmentScheduler_C969.Views
             this.tab_Appointments.TabIndex = 0;
             this.tab_Appointments.Text = "Appointments";
             // 
+            // btn_search
+            // 
+            this.btn_search.Location = new System.Drawing.Point(907, 42);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(75, 23);
+            this.btn_search.TabIndex = 16;
+            this.btn_search.Text = "Search";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
+            // tb_searchByDoc
+            // 
+            this.tb_searchByDoc.Location = new System.Drawing.Point(733, 42);
+            this.tb_searchByDoc.Name = "tb_searchByDoc";
+            this.tb_searchByDoc.Size = new System.Drawing.Size(152, 21);
+            this.tb_searchByDoc.TabIndex = 15;
+            // 
+            // tb_searchByPatient
+            // 
+            this.tb_searchByPatient.Location = new System.Drawing.Point(498, 42);
+            this.tb_searchByPatient.Name = "tb_searchByPatient";
+            this.tb_searchByPatient.Size = new System.Drawing.Size(163, 21);
+            this.tb_searchByPatient.TabIndex = 14;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label10.Location = new System.Drawing.Point(733, 9);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(134, 20);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "Search By Doctor";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(684, 36);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(25, 15);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "OR";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(498, 9);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(136, 20);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "Search By Patient";
+            // 
             // lb_currentView
             // 
             this.lb_currentView.AutoSize = true;
             this.lb_currentView.BackColor = System.Drawing.Color.Transparent;
             this.lb_currentView.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.lb_currentView.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lb_currentView.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lb_currentView.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lb_currentView.Location = new System.Drawing.Point(420, 7);
+            this.lb_currentView.Location = new System.Drawing.Point(10, 7);
             this.lb_currentView.Name = "lb_currentView";
-            this.lb_currentView.Size = new System.Drawing.Size(363, 24);
+            this.lb_currentView.Size = new System.Drawing.Size(277, 19);
             this.lb_currentView.TabIndex = 4;
             this.lb_currentView.Text = "Currently viewing all appointments.";
             // 
@@ -594,7 +659,6 @@ namespace AppointmentScheduler_C969.Views
             this.btn_sheduleByUser.TabIndex = 2;
             this.btn_sheduleByUser.Text = "Report";
             this.btn_sheduleByUser.UseVisualStyleBackColor = true;
-            this.btn_sheduleByUser.Click += new System.EventHandler(this.btn_sheduleByUser_Click);
             // 
             // label1
             // 
@@ -731,5 +795,11 @@ namespace AppointmentScheduler_C969.Views
         private System.Windows.Forms.Button btn_aptsByCustomer;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lb_currentView;
+        private System.Windows.Forms.TextBox tb_searchByDoc;
+        private System.Windows.Forms.TextBox tb_searchByPatient;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btn_search;
     }
 }

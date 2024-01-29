@@ -1,7 +1,4 @@
 ﻿using AppointmentScheduler_C969.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Controllers
@@ -16,7 +13,7 @@ namespace AppointmentScheduler_C969.Controllers
     {
 
 
-        public static void CreateCustomer(Customer customer) 
+        public static void CreateCustomer(Customer customer)
         {
             Customer.InsertCustomerRecord(customer);
         }
@@ -38,18 +35,18 @@ namespace AppointmentScheduler_C969.Controllers
         }
 
 
-        public static void DeleteCustomer(DataGridViewSelectedRowCollection selectedRow) 
-        { 
-        
+        public static void DeleteCustomer(DataGridViewSelectedRowCollection selectedRow)
+        {
+
         }
 
         public static void ModifyCustomerName(string name)
         {
             Customer.UpdateCustomerName(name);
         }
-        public static void ModifyCustomerAddress(string address, string address2, string city, string zip, string phone) 
+        public static void ModifyCustomerAddress(string address, string address2, string city, string zip, string phone)
         {
-            Customer.UpdateCustomerAddress( address,  address2,  city,  zip,  phone);
+            Customer.UpdateCustomerAddress(address, address2, city, zip, phone);
         }
 
     }

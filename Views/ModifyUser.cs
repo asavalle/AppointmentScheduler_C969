@@ -1,18 +1,15 @@
 ﻿using AppointmentScheduler_C969.Controllers;
 using AppointmentScheduler_C969.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Views
 {
     public partial class ModifyUser : Form
     {
-        
+
         public ModifyUser()
         {
             InitializeComponent();
@@ -26,14 +23,14 @@ namespace AppointmentScheduler_C969.Views
             DataTable ut = User.GetAllUserInfo(selectedUserId); //grab all the selected user's information.
             //create a filtered list of just the selected user's information
             var filtered = from usr in ut.AsEnumerable()
-                         where usr.Field<int>("userId") == selectedUserId
-                         select new
-                         {
-                             userName = usr.Field<string>("userName"),
-                             password = usr.Field<string>("password"),
-                             active = usr.Field<sbyte>("active"),
-                             
-                         };
+                           where usr.Field<int>("userId") == selectedUserId
+                           select new
+                           {
+                               userName = usr.Field<string>("userName"),
+                               password = usr.Field<string>("password"),
+                               active = usr.Field<sbyte>("active"),
+
+                           };
 
             //iterate through each field of the filtered user information and assign the values to form.
             foreach (var item in filtered)
@@ -41,9 +38,9 @@ namespace AppointmentScheduler_C969.Views
                 var isChecked = (item.active == 1) ? true : false;
 
                 tb_modUsrName.Text = item.userName;
-                tb_modUsrPass.Text = item.password  ;
+                tb_modUsrPass.Text = item.password;
                 cb_modActive.Checked = isChecked;
-               
+
             }
 
 
@@ -51,7 +48,7 @@ namespace AppointmentScheduler_C969.Views
 
         private void btn_modEditUser_Click(object sender, EventArgs e)
         {
-            foreach(Control c in this.gb_modUser.Controls)
+            foreach (Control c in this.gb_modUser.Controls)
             {
                 if (!c.Enabled)
                 {
@@ -59,7 +56,7 @@ namespace AppointmentScheduler_C969.Views
                 }
                 btn_modSaveUser.Visible = true;
                 btn_updatePass.Visible = true;
-                
+
             }
         }
 

@@ -1,29 +1,24 @@
 ﻿using AppointmentScheduler_C969.Controllers;
 using AppointmentScheduler_C969.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Views
 {
-            /*
-             * This form takes user input data and separately breaks down the information into the separate 
-             * objects for database input.
-             * Starting with the country information to establish the countryId.
-             */
+    /*
+     * This form takes user input data and separately breaks down the information into the separate 
+     * objects for database input.
+     * Starting with the country information to establish the countryId.
+     */
     public partial class AddCustomer : Form
     {
 
         Customer newCustomer = new Customer();
         Address newCustAddress = new Address();
-        
+
         public AddCustomer()
-        {           
+        {
 
             InitializeComponent();
             City.UpdateListOfCities();
@@ -92,32 +87,32 @@ namespace AppointmentScheduler_C969.Views
 
 
             }
-            catch(Exception x)
+            catch (Exception x)
             {
                 MessageBox.Show("There was an error: " + x.Message);
             }
 
-           
+
 
             this.Close();
         }
 
         private void cb_newActiveCust_CheckedChanged(object sender, EventArgs e)
         {
-            if(cb_newActiveCust.Checked == false) { cb_newActiveCust.Checked = true; }
+            if (cb_newActiveCust.Checked == false) { cb_newActiveCust.Checked = true; }
             else { cb_newActiveCust.Checked = false; }
         }
 
         private void btn_addCity_Click(object sender, EventArgs e)
         {
             try
-            {                
-                AddCity city = new AddCity();                                
+            {
+                AddCity city = new AddCity();
                 city.ShowDialog();
-                
-                
+
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -127,7 +122,7 @@ namespace AppointmentScheduler_C969.Views
 
         private void cb_citiesList_SelectedIndexChanged(object sender, EventArgs e)
         {
-           if(cb_citiesList.Text != null)
+            if (cb_citiesList.Text != null)
             {
                 tb_countryName.Text = Country.GetCountryNameFromCity(cb_citiesList.Text.ToString());
 
@@ -165,7 +160,7 @@ namespace AppointmentScheduler_C969.Views
             errPr_addCustomer.SetError((Control)sender, error);
         }
 
-      
+
         /*This code is not used due to zip codes being different in various locations. But I've included the code just as practice of 
          regular expressions.*/
 

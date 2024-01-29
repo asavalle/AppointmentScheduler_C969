@@ -1,12 +1,9 @@
 ﻿using AppointmentScheduler_C969.Controllers;
 using AppointmentScheduler_C969.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Views
@@ -34,9 +31,9 @@ namespace AppointmentScheduler_C969.Views
                 cb_modCustCityList.ValueMember = "city";
                 chk_ActiveUser.Checked = selectedCustomer.Field<bool>("active");
                 tb_custName.Text = Customer.GetCustomerNameById(Customer.SelectedCustomerID);
-                
-                   
-     
+
+
+
 
                 tb_custAddr1.Text = selectedAddr.Field<string>("address");
                 tb_custAddr2.Text = selectedAddr.Field<string>("address2");
@@ -46,7 +43,7 @@ namespace AppointmentScheduler_C969.Views
                 tb_phoneNum.Text = selectedCustomer.Field<string>("phone");
 
             }
-            catch(ArgumentNullException n)
+            catch (ArgumentNullException n)
             {
                 MessageBox.Show("Please select a row.");
                 this.Close();
@@ -64,13 +61,13 @@ namespace AppointmentScheduler_C969.Views
 
         private void btn_editModCust_Click(object sender, EventArgs e)
         {
-            foreach(Control con in gb_updateAddr.Controls)
+            foreach (Control con in gb_updateAddr.Controls)
             {
-                if(con is TextBox)
+                if (con is TextBox)
                 {
                     con.Enabled = true;
                 }
-                
+
             }
             tb_custName.Enabled = true;
             cb_modCustCityList.Enabled = true;
@@ -90,7 +87,7 @@ namespace AppointmentScheduler_C969.Views
         {
             CustomersController.ModifyCustomerName(tb_custName.Text);
             Customer.UpdateActiveCustomerRecord(chk_ActiveUser.Checked);
-           DialogResult updated = MessageBox.Show($"Customer's name has been updated to {tb_custName.Text} and Active status to {chk_ActiveUser.CheckState}. Would you like exit?","Continue Updating?",MessageBoxButtons.YesNo);
+            DialogResult updated = MessageBox.Show($"Customer's name has been updated to {tb_custName.Text} and Active status to {chk_ActiveUser.CheckState}. Would you like exit?", "Continue Updating?", MessageBoxButtons.YesNo);
             if (updated == DialogResult.Yes)
             {
                 this.Close();

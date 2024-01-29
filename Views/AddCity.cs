@@ -1,12 +1,6 @@
 ﻿using AppointmentScheduler_C969.Controllers;
 using AppointmentScheduler_C969.Models;
-using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Views
@@ -16,7 +10,7 @@ namespace AppointmentScheduler_C969.Views
         public AddCity()
         {
             InitializeComponent();
-            
+
 
         }
         private void AddCity_Load(object sender, EventArgs e)

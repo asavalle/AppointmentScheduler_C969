@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AppointmentScheduler_C969.Views;
-using AppointmentScheduler_C969.Models;
+﻿using AppointmentScheduler_C969.Models;
+using System;
 using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Controllers
@@ -18,7 +15,7 @@ namespace AppointmentScheduler_C969.Controllers
         public static void CreateNewAppointment(string customerName, int userId, string title, string description, string location, string contact, string type, string url, DateTime start,
                             DateTime end, DateTime createDate, string createdBy, DateTime lastUpdate, string lastUpdateBy)
         {
-            
+
 
             Appointment newAppt = new Appointment();
             newAppt.CustomerId = Customer.GetCustomerIdByName(customerName);
@@ -53,21 +50,21 @@ namespace AppointmentScheduler_C969.Controllers
                             newAppt.CreateDate + "\n CreatedBy: " +
                             newAppt.CreatedBy + "\n LastUpdate: " +
                             newAppt.LastUpdate + "\n LastUpdatedBy:     " +
-                            newAppt.LastUpdateBy, "Appointment Created") ;           
+                            newAppt.LastUpdateBy, "Appointment Created");
         }
 
         public static void DeleteAppointment(DataGridViewSelectedRowCollection row)
         {
 
-            int appointmentIDValue =-1;
-            
-            foreach(DataGridViewRow r in row)
+            int appointmentIDValue = -1;
+
+            foreach (DataGridViewRow r in row)
             {
                 appointmentIDValue = Convert.ToInt32(r.Cells[0].Value);
             }
             Appointment.DeleteAppointmentRecord(appointmentIDValue);
 
-          
+
         }
 
         public static void ModifyAppointment(Appointment updatedApt)

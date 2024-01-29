@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Models
@@ -10,7 +9,7 @@ namespace AppointmentScheduler_C969.Models
     class User
     {
         //property names match the column values in the client_schedule MySQL database user table.
-        public int userID { get; set; } 
+        public int userID { get; set; }
         public string userName { get; set; }
         public string password { get; set; }
         public int active { get; set; }
@@ -61,7 +60,7 @@ namespace AppointmentScheduler_C969.Models
             }
             try
             {
-               
+
                 var formatCreateDate = user.createDate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
                 var formatLastUpDate = user.lastUpdate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
                 var update_cmd = new MySqlCommand($"Update client_schedule.user SET userName = '{user.userName}', password = '{user.password}',active = '{user.active}',createDate = '{formatCreateDate}',createdBy = '{user.createdBy}',lastUpdate = '{formatLastUpDate}',lastUpdateBy= '{user.lastUpdateBy}' Where userId = {user.userID}", DataAccess.conn);
@@ -83,7 +82,7 @@ namespace AppointmentScheduler_C969.Models
             }
             try
             {
-                
+
                 var del_cmd = new MySqlCommand($"DELETE FROM user WHERE userId = {id}", DataAccess.conn);
                 var del = del_cmd.ExecuteNonQuery();
             }
@@ -100,9 +99,9 @@ namespace AppointmentScheduler_C969.Models
             var isActive = from usr in users.AsEnumerable()
                            where usr.Field<string>("userName") == userName
                            select new { active = usr.Field<SByte>("active") };
-            foreach(var item in isActive)
+            foreach (var item in isActive)
             {
-                if(item.active == 1)
+                if (item.active == 1)
                 {
                     return true;
                 }
@@ -133,7 +132,8 @@ namespace AppointmentScheduler_C969.Models
             return usersTable;
         }
 
-        public static DataTable GetAllUserInfo(int id) {
+        public static DataTable GetAllUserInfo(int id)
+        {
             //Add code to retrieve data from the database and add it to the list
 
             DataTable usrInfoTable = new DataTable();
@@ -153,7 +153,7 @@ namespace AppointmentScheduler_C969.Models
                 MessageBox.Show(e.Message);
             }
 
-          
+
             return usrInfoTable;
         }
 
@@ -201,7 +201,7 @@ namespace AppointmentScheduler_C969.Models
                 return name;
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message);
                 return null;
@@ -209,7 +209,7 @@ namespace AppointmentScheduler_C969.Models
             }
 
         }
-        public static int GetUserIDbyName(string name) 
+        public static int GetUserIDbyName(string name)
         {
             DataTable users = GetUsers();
             try
@@ -219,10 +219,10 @@ namespace AppointmentScheduler_C969.Models
                              where usr.Field<string>("userName") == name
                              select new
                              {
-                               userId = usr.Field<int>("userId")
+                                 userId = usr.Field<int>("userId")
                              };
 
-                foreach(var item in userId)
+                foreach (var item in userId)
                 {
                     id = item.userId;
                 }
@@ -241,7 +241,7 @@ namespace AppointmentScheduler_C969.Models
             DataTable users = GetUsers();
             User.UserNames.Clear();
             try
-            {                 
+            {
                 foreach (DataRow row in users.Rows)
                 {
 
@@ -249,14 +249,14 @@ namespace AppointmentScheduler_C969.Models
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
-                
-            
-            
+
+
+
 
         }
     }

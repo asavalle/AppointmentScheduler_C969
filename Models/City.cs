@@ -1,9 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Models
@@ -21,9 +18,9 @@ namespace AppointmentScheduler_C969.Models
 
         //public static BindingList<City> listOfCities { get; set; } = new BindingList<City>();
         public static DataTable dtCities = new DataTable();
-        public City() {  }
+        public City() { }
 
-        public City(int id, string cName, int countryId,DateTime createDate, string createdBy, DateTime lastUpdate, string lastUpdatedBy)
+        public City(int id, string cName, int countryId, DateTime createDate, string createdBy, DateTime lastUpdate, string lastUpdatedBy)
         {
             this.CityId = id;
             this.CityName = cName;
@@ -33,8 +30,8 @@ namespace AppointmentScheduler_C969.Models
             this.LastUpdate = lastUpdate;
             this.LastUpdateBy = lastUpdatedBy;
         }
-        
-        public static void UpdateListOfCities() 
+
+        public static void UpdateListOfCities()
         {
             dtCities.Clear();
             try
@@ -54,7 +51,7 @@ namespace AppointmentScheduler_C969.Models
                 MessageBox.Show(e.Message);
             }
 
-          
+
         }
 
         public static DataTable GetCities()
@@ -82,7 +79,7 @@ namespace AppointmentScheduler_C969.Models
             return cityTable;
         }
 
-        public static void InsertCityRecord(City city) 
+        public static void InsertCityRecord(City city)
         {
             //TODO: Query database for existing record. If not existing, insert record.
 
@@ -92,7 +89,7 @@ namespace AppointmentScheduler_C969.Models
             }
             try
             {
-               
+
                 var formatCreateDate = city.CreateDate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
                 var formatLastUpDate = city.LastUpdate.ToUniversalTime().ToString("yyyy-MM-dd hh:mm:ss");
 

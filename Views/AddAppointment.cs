@@ -1,18 +1,14 @@
 ﻿using AppointmentScheduler_C969.Controllers;
 using AppointmentScheduler_C969.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AppointmentScheduler_C969.Views
 {
     public partial class AddAppointment : Form
     {
-        
+
         public AddAppointment()
         {
             InitializeComponent();
@@ -73,11 +69,11 @@ namespace AppointmentScheduler_C969.Views
                     }
                     else
                     {
-                        MessageBox.Show("The selected date of this appointment overlaps with another appointment for the selected Consultant / User)", "Appointment Overlap Warning!");
+                        MessageBox.Show("The selected date of this appointment overlaps with another appointment for the selected Doctor)", "Appointment Overlap Warning!");
                     }
-                    
 
-                    
+
+
                 }
                 else
                 {
@@ -94,9 +90,9 @@ namespace AppointmentScheduler_C969.Views
 
         }
 
-       
-        
-        
+
+
+
 
         private void linkLabel_cancel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -110,7 +106,7 @@ namespace AppointmentScheduler_C969.Views
             var date = Convert.ToDateTime(dtp_createDate.Value.ToShortDateString());
 
             Appointment.GenerateTimes(date);
-            if(date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
+            if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
             {
                 lb_DayOfWkWarning.Visible = true;
             }
@@ -125,7 +121,7 @@ namespace AppointmentScheduler_C969.Views
                 cb_startTime.Visible = true;
                 cb_endTime.Visible = true;
             }
-            
+
 
         }
 
@@ -145,7 +141,7 @@ namespace AppointmentScheduler_C969.Views
             string error = null;
             if (cb_userAddApt.Text.Length == 0 || cb_userAddApt.Text == " ")
             {
-                error = "Please select a Consultant / User";
+                error = "Please select a Doctor";
                 e.Cancel = true;
             }
             errPr_appts.SetError((Control)sender, error);
@@ -186,7 +182,7 @@ namespace AppointmentScheduler_C969.Views
         private void dtp_createDate_Validating(object sender, CancelEventArgs e)
         {
             string error = null;
-            if(dtp_createDate.Value.Date < DateTime.Now.Date )
+            if (dtp_createDate.Value.Date < DateTime.Now.Date)
             {
                 error = "Please use the dropdown to select a date greater than or equal to today's date.";
                 e.Cancel = true;
@@ -219,7 +215,7 @@ namespace AppointmentScheduler_C969.Views
 
             }
         }
-            private void cb_startTime_Validating(object sender, CancelEventArgs e)
+        private void cb_startTime_Validating(object sender, CancelEventArgs e)
         {
             string error = null;
             if (cb_startTime.Text.Length == 0 || cb_startTime.Text == " ")
@@ -230,6 +226,6 @@ namespace AppointmentScheduler_C969.Views
             errPr_appts.SetError((Control)sender, error);
         }
 
-        
+
     }
 }
